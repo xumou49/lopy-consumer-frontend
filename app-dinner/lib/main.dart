@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: const Center(
         child: Text(
-          'Home',
+          'Hallow from YL!',
           style: TextStyle(fontSize: 50),
         ),
       ),
