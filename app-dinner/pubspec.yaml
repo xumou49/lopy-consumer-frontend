@@ -47,7 +47,7 @@ dependencies:
   equatable: ^2.0.5
   oktoast: ^3.3.1
   awesome_dio_interceptor: ^0.0.2+4
-  auto_route: ^5.0.4
+  auto_route: ^7.2.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -58,13 +58,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-  auto_route_generator: ^5.0.3
+  auto_route_generator: ^7.1.1
   retrofit_generator: ^4.1.2
   floor_generator: ^1.4.1
   build_runner: ^2.3.3

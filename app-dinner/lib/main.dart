@@ -1,4 +1,4 @@
-import 'package:Lopy/src/config/themes/app_theme.dart';
+import 'package:Lopy/src/config/routers/app_router.dart';
 import 'package:flutter/material.dart';
 import 'src/locator.dart';
 
@@ -7,7 +7,7 @@ void main() async {
 
   await initializeDependencies();
 
-  runApp(const MyApp());
+  runApp(const LopyApp());
 }
 
 class LopyApp extends StatelessWidget {
@@ -15,10 +15,17 @@ class LopyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: AppTheme.light,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    AppRouter appRouter = AppRouter();
+    return MaterialApp.router(
+      routerConfig: appRouter.config(),
+      title: 'Lopy',
+      theme: ThemeData(
+        colorScheme:
+        // ColorScheme.fromSeed(seedColor: const Color.fromRGBO(243, 129, 129, 1)),
+        ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
+
+        useMaterial3: true,
+      ),
     );
   }
 }
@@ -32,10 +39,12 @@ class MyApp extends StatelessWidget {
       title: 'Lopy',
       theme: ThemeData(
         colorScheme:
+            // ColorScheme.fromSeed(seedColor: const Color.fromRGBO(243, 129, 129, 1)),
             ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
+        
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Lopy'),
+      home: const MyHomePage(title: 'lopy',),
     );
   }
 }
@@ -68,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: const Center(
         child: Text(
           'Home',
-          style: TextStyle(fontSize: 50),
+          style: TextStyle(fontSize: 50, color: Color.fromRGBO(243, 129, 129, 1)),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
