@@ -21,9 +21,8 @@ class LopyApp extends StatelessWidget {
       title: 'Lopy',
       theme: ThemeData(
         colorScheme:
-        // ColorScheme.fromSeed(seedColor: const Color.fromRGBO(243, 129, 129, 1)),
-        ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
-
+            // ColorScheme.fromSeed(seedColor: const Color.fromRGBO(243, 129, 129, 1)),
+            ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
         useMaterial3: true,
       ),
     );
@@ -41,10 +40,11 @@ class MyApp extends StatelessWidget {
         colorScheme:
             // ColorScheme.fromSeed(seedColor: const Color.fromRGBO(243, 129, 129, 1)),
             ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
-        
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'lopy',),
+      home: const MyHomePage(
+        title: 'lopy',
+      ),
     );
   }
 }
@@ -77,7 +77,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: const Center(
         child: Text(
           'Home',
-          style: TextStyle(fontSize: 50, color: Color.fromRGBO(243, 129, 129, 1)),
+          style:
+              TextStyle(fontSize: 50, color: Color.fromRGBO(243, 129, 129, 1)),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
