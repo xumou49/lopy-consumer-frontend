@@ -41,6 +41,17 @@ class AppRouter extends $AppRouter {
     ),
   ];
 
+  static final paymentMethodRoute = [
+    AutoRoute(
+      page: PaymentMethodNavigationView.page,
+      children: [
+        AutoRoute(page: PaymentMethodView.page, initial: true),
+        AutoRoute(page: NewPaymentMethodView.page),
+        AutoRoute(page: SetUpPaymentMethodView.page),
+      ],
+    ),
+  ];
+
   @override
   List<AutoRoute> get routes => [
         /// routes go here
@@ -78,13 +89,35 @@ class AppRouter extends $AppRouter {
               AutoRoute(
                 page: ScanNavigationView.page,
                 children: [
-                  AutoRoute(page: ScanView.page, initial: true),
+                  ...[AutoRoute(page: ScanView.page, initial: true)],
+                  ...restaurantAndOrderingRoute,
                 ],
               ),
               AutoRoute(
                 page: ProfileNavigationView.page,
                 children: [
-                  AutoRoute(page: ProfileView.page, initial: true),
+                  ...[AutoRoute(page: ProfileView.page, initial: true)],
+                  ...paymentMethodRoute,
+                  ...[
+                    AutoRoute(
+                      page: SettingNavigationView.page,
+                      children: [
+                        AutoRoute(page: SettingView.page, initial: true),
+                      ],
+                    ),
+                    AutoRoute(
+                      page: PrivacyPolicyNavigationView.page,
+                      children: [
+                        AutoRoute(page: PrivacyPolicyView.page, initial: true),
+                      ],
+                    ),
+                    AutoRoute(
+                      page: HelpNavigationView.page,
+                      children: [
+                        AutoRoute(page: HelpView.page, initial: true),
+                      ],
+                    ),
+                  ]
                 ],
               ),
             ],

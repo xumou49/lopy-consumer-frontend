@@ -1,5 +1,9 @@
 import 'package:Lopy/src/config/routers/app_router.dart';
+import 'package:Lopy/src/domain/repositories/api_repository.dart';
+import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_list_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oktoast/oktoast.dart';
 import 'src/locator.dart';
 
 void main() async {
@@ -16,14 +20,37 @@ class LopyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppRouter appRouter = AppRouter();
-    return MaterialApp.router(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => RestaurantListCubit(
+            locator<ApiRepository>(),
+          )..getRestaurantList(),
+        )
+      ],
+      child: OKToast(
+        child: MaterialApp.router(
+          // routerConfig: appRouter.config(),
+          routerDelegate: appRouter.delegate(),
+          routeInformationParser: appRouter.defaultRouteParser(),
+          title: 'Lopy',
+          theme: ThemeData(
+            colorScheme:
+                // ColorScheme.fromSeed(seedColor: const Color.fromRGBO(243, 129, 129, 1)),
+                ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
+            useMaterial3: true,
+          ),
+        ),
+      ),
+    );
+
+    MaterialApp.router(
       routerConfig: appRouter.config(),
       title: 'Lopy',
       theme: ThemeData(
         colorScheme:
-        // ColorScheme.fromSeed(seedColor: const Color.fromRGBO(243, 129, 129, 1)),
-        ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
-
+            // ColorScheme.fromSeed(seedColor: const Color.fromRGBO(243, 129, 129, 1)),
+            ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
         useMaterial3: true,
       ),
     );
@@ -41,10 +68,11 @@ class MyApp extends StatelessWidget {
         colorScheme:
             // ColorScheme.fromSeed(seedColor: const Color.fromRGBO(243, 129, 129, 1)),
             ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
-        
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'lopy',),
+      home: const MyHomePage(
+        title: 'lopy',
+      ),
     );
   }
 }
@@ -77,7 +105,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: const Center(
         child: Text(
           'Home',
-          style: TextStyle(fontSize: 50, color: Color.fromRGBO(243, 129, 129, 1)),
+          style:
+              TextStyle(fontSize: 50, color: Color.fromRGBO(243, 129, 129, 1)),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
