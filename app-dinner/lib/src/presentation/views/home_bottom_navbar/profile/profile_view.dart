@@ -1,8 +1,36 @@
+import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-
+import 'package:Lopy/src/presentation/widgets/profile/profile_avatar_widget.dart';
 import '../../../../config/routers/app_router.gr.dart';
+import '../../../widgets/profile/profile_settings_widget.dart';
 
+@RoutePage()
+class ProfileView extends StatelessWidget {
+  const ProfileView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color.fromRGBO(243, 129, 129, 1),
+          title: const Text("Profile"),
+        ),
+        body: Container(
+          color: Colors.white,
+          child: ListView(
+            children: const <Widget>[
+              PlaceholderWidget(height: 20,),
+              AvatarWidget(),
+              PlaceholderWidget(height: 30,),
+              ProfileSettingsWidget(),
+            ],
+          ),
+        ));
+  }
+}
+
+/*
 @RoutePage()
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -46,3 +74,4 @@ class ProfileView extends StatelessWidget {
     );
   }
 }
+ */

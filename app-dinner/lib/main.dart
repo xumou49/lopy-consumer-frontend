@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
 import 'src/locator.dart';
+import 'package:get_it/get_it.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,10 +17,9 @@ void main() async {
 
 class LopyApp extends StatelessWidget {
   const LopyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    AppRouter appRouter = AppRouter();
+    final AppRouter appRouter = GetIt.I.get<AppRouter>();
     return MultiBlocProvider(
       providers: [
         BlocProvider(
