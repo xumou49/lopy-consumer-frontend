@@ -19,13 +19,15 @@ class _StartAppAnimationViewState extends State<StartAppAnimationView> {
   }
 
   _navigateAfterDelay() {
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 1), () {
       bool isUserLoggedIn = true;
-      context.router.replaceAll([
-        isUserLoggedIn
-            ? const HomeNavigationView()
-            : const LoginNavigationView()
-      ]);
+      if (mounted) {
+        context.router.replaceAll([
+          isUserLoggedIn
+              ? const HomeNavigationView()
+              : const LoginNavigationView()
+        ]);
+      }
     });
   }
 
