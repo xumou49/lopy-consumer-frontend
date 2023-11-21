@@ -35,9 +35,9 @@ class LopyApp extends StatelessWidget {
           routeInformationParser: appRouter.defaultRouteParser(),
           title: 'Lopy',
           theme: ThemeData(
-            colorScheme:
+            // colorScheme:
                 // ColorScheme.fromSeed(seedColor: const Color.fromRGBO(243, 129, 129, 1)),
-                ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
+                // ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
             useMaterial3: true,
           ),
         ),

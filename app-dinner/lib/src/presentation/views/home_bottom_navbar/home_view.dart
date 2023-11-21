@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-
+import 'package:ionicons/ionicons.dart';
 import '../../../config/routers/app_router.gr.dart';
 
 @RoutePage()
@@ -25,26 +25,26 @@ class HomeView extends StatelessWidget {
             onTap: (value) {
               tabRouter.setActiveIndex(value);
             },
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: const Color.fromRGBO(243, 129, 129, 1), // Pink color for selected items
+            unselectedItemColor: Colors.grey.shade600, // Grey color for unselected items
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                  color: Color.fromRGBO(243, 129, 129, 1),
-                ),
+                icon: Icon(Ionicons.compass),
                 label: "Discover",
               ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.message,
-                      color: Color.fromRGBO(243, 129, 129, 1)),
-                  label: "Orders"),
+                icon: Icon(Ionicons.list),
+                label: "Orders",
+              ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.scanner,
-                      color: Color.fromRGBO(243, 129, 129, 1)),
-                  label: "Scan"),
+                icon: Icon(Ionicons.scan),
+                label: "Scan",
+              ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.person,
-                      color: Color.fromRGBO(243, 129, 129, 1)),
-                  label: "Me"),
+                icon: Icon(Ionicons.person),
+                label: "Me",
+              ),
             ],
           ),
         );

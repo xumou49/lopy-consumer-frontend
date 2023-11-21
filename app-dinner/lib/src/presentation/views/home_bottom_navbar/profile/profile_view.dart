@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:Lopy/src/presentation/widgets/profile/profile_avatar_widget.dart';
 import '../../../../config/routers/app_router.gr.dart';
+import '../../../widgets/common/appbar_widget.dart';
 import '../../../widgets/profile/profile_settings_widget.dart';
 
 @RoutePage()
@@ -12,17 +13,18 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(243, 129, 129, 1),
-          title: const Text("Profile"),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: const Color.fromRGBO(243, 129, 129, 1),
+        //   title: const Text("Profile"),
+        // ),
+        appBar: const GradientAppBar(title:"Profile",),
         body: Container(
           color: Colors.white,
           child: ListView(
             children: const <Widget>[
               PlaceholderWidget(height: 20,),
               AvatarWidget(),
-              PlaceholderWidget(height: 30,),
+              PlaceholderWidget(height: 20,),
               ProfileSettingsWidget(),
             ],
           ),
