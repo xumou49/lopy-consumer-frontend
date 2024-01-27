@@ -20,7 +20,7 @@ class _StartAppAnimationViewState extends State<StartAppAnimationView> {
 
   _navigateAfterDelay() {
     Future.delayed(const Duration(seconds: 1), () {
-      bool isUserLoggedIn = true;
+      bool isUserLoggedIn = false;
       if (mounted) {
         context.router.replaceAll([
           isUserLoggedIn
