@@ -1,6 +1,8 @@
+import 'package:Lopy/firebase_options.dart';
 import 'package:Lopy/src/config/routers/app_router.dart';
 import 'package:Lopy/src/domain/repositories/api_repository.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_list_cubit.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
@@ -37,8 +39,8 @@ class LopyApp extends StatelessWidget {
           title: 'Lopy',
           theme: ThemeData(
             // colorScheme:
-                // ColorScheme.fromSeed(seedColor: const Color.fromRGBO(243, 129, 129, 1)),
-                // ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
+            // ColorScheme.fromSeed(seedColor: const Color.fromRGBO(243, 129, 129, 1)),
+            // ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
             useMaterial3: true,
           ),
         ),

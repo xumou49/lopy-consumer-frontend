@@ -38,7 +38,7 @@ dependencies:
   retrofit: ^3.3.0
   dio: ^4.0.6
 
-  # State Management
+  # State Management (separation of biz logic from presentation layer)
   flutter_bloc: ^8.1.2
 
   # Others
@@ -50,6 +50,11 @@ dependencies:
   awesome_dio_interceptor: ^0.0.2+4
   auto_route: ^7.2.0
   flutter_markdown: ^0.6.18
+
+  # 3rd party login
+  firebase_auth: ^4.16.0
+  firebase_core: ^2.24.2
+  google_sign_in: ^6.1.6
 
 
   # The following adds the Cupertino Icons font to your application.
