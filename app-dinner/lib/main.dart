@@ -17,6 +17,7 @@ void main() async {
 
 class LopyApp extends StatelessWidget {
   const LopyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     final AppRouter appRouter = GetIt.I.get<AppRouter>();
