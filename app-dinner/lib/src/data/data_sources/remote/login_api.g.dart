@@ -21,13 +21,14 @@ class _LoginApi implements LoginApi {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<RestaurantsResponse>> googleLogin() async {
+  Future<HttpResponse<LoginResponse>> googleLogin(loginRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(loginRequest?.toMap() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<RestaurantsResponse>>(Options(
+        _setStreamType<HttpResponse<LoginResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -39,19 +40,20 @@ class _LoginApi implements LoginApi {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RestaurantsResponse.fromMap(_result.data!);
+    final value = LoginResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<RestaurantsResponse>> appleLogin() async {
+  Future<HttpResponse<LoginResponse>> appleLogin(loginRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(loginRequest?.toMap() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<RestaurantsResponse>>(Options(
+        _setStreamType<HttpResponse<LoginResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -63,19 +65,20 @@ class _LoginApi implements LoginApi {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RestaurantsResponse.fromMap(_result.data!);
+    final value = LoginResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<RestaurantsResponse>> phoneLogin() async {
+  Future<HttpResponse<LoginResponse>> phoneLogin(loginRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(loginRequest?.toMap() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<RestaurantsResponse>>(Options(
+        _setStreamType<HttpResponse<LoginResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -87,7 +90,7 @@ class _LoginApi implements LoginApi {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RestaurantsResponse.fromMap(_result.data!);
+    final value = LoginResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

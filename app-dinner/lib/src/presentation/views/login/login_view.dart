@@ -1,10 +1,12 @@
+import 'package:Lopy/src/config/routers/app_router.gr.dart';
+import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/login/login_state.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:Lopy/src/presentation/widgets/login/login_button.dart';
 import 'package:Lopy/src/presentation/widgets/login/login_method_divider.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class LoginView extends StatefulWidget {
@@ -15,22 +17,33 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final String iosPlatformClientId =
-      "296683188665-v76n9m79o953rp2gppa7qm9c7gc0jd29.apps.googleusercontent.com";
-
-  late FirebaseAuth _auth;
-
-  late GoogleSignIn _googleSignIn = _googleSignIn = GoogleSignIn(scopes: [
-    "email",
-    "https://www.googleapis.com/auth/contacts.readonly",
-  ], clientId: iosPlatformClientId);
-
   @override
   void initState() {
     super.initState();
-    _auth = FirebaseAuth.instance;
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<LoginCubit, LoginState>(
+        listener: (context, state) {
+          if (state is LoginSuccess) {
+            context.router.push(const HomeNavigationView());
+          } else {
+            print("fail to login");
+          }
+        },
+        child: View());
+  }
+}
+
+class View extends StatefulWidget {
+  const View({super.key});
+
+  @override
+  State<View> createState() => _ViewState();
+}
+
+class _ViewState extends State<View> {
   Widget _getLogo() {
     return Container(
       width: 316,
@@ -53,55 +66,6 @@ class _LoginViewState extends State<LoginView> {
         ));
   }
 
-  void _googleSignInHandler() async {
-    print("click google sign-in");
-    try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) {
-        print("fail to do google sign-in");
-        return;
-      }
-      // the authentication should be carried out in backend, as long as accessToken is obtained, send request to backend
-      // no need to bother the idToken, as it is meant to be consumed by client application
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-      print("access Token: ${googleAuth.accessToken}");
-    } catch (e) {
-      print("exception from firebase sdk, ${e.toString()}");
-    }
-  }
-
-  void _verifyGoogleSignIdToken(GoogleSignInAuthentication googleAuth) async {
-    final AuthCredential authCredential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-    final User? firebaseUser =
-        (await _auth.signInWithCredential(authCredential)).user;
-    if (firebaseUser == null) {
-      // log and return
-      print("fail to get firebase user");
-      return;
-    }
-    // check if user info is not empty
-    if (firebaseUser.email == null) {
-      print("user email is not found ...");
-      return;
-    }
-    if (firebaseUser.displayName == null) {
-      print("user name is not found ...");
-      return;
-    }
-    if (firebaseUser.isAnonymous) {
-      print("user is anonymous ...");
-      return;
-    }
-    IdTokenResult idTokenResult = await firebaseUser.getIdTokenResult();
-    // setState(() {
-    //   _googleIdToken = idTokenResult.token;
-    // });
-    print(authCredential.accessToken);
-    print(idTokenResult.token);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,12 +86,14 @@ class _LoginViewState extends State<LoginView> {
       // login button
       LoginButton(
           "Sign in with Google", "lib/src/assets/images/google_login_logo.png",
-          onTap: _googleSignInHandler),
+          onTap: () {
+        context.read<LoginCubit>().googleLogin();
+      }),
       const SizedBox(height: 24),
       LoginButton(
           "Sign in with Apple", "lib/src/assets/images/apple_login_logo.png",
           onTap: () {
-        print("click apple login");
+        context.read<LoginCubit>().appleLogin();
       }, textColor: Colors.white, backgroundColor: Colors.black),
       const SizedBox(height: 40),
       const LoginMethodDivider(),
@@ -136,7 +102,7 @@ class _LoginViewState extends State<LoginView> {
         "Sign in with Phone Number",
         "lib/src/assets/images/phone_login_logo.png",
         onTap: () {
-          print("click phone login");
+          context.read<LoginCubit>().phoneLogin();
         },
       ),
     ]))));
