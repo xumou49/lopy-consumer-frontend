@@ -1,6 +1,10 @@
+import 'package:Lopy/firebase_options.dart';
 import 'package:Lopy/src/config/routers/app_router.dart';
 import 'package:Lopy/src/domain/repositories/api_repository.dart';
+import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
+import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_list_cubit.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
@@ -27,7 +31,10 @@ class LopyApp extends StatelessWidget {
           create: (context) => RestaurantListCubit(
             locator<ApiRepository>(),
           )..getRestaurantList(),
-        )
+        ),
+        BlocProvider(
+            create: (context) => LoginCubit(
+                locator<ApiRepository>(), locator<FirebaseRepository>()))
       ],
       child: OKToast(
         child: MaterialApp.router(
@@ -37,12 +44,32 @@ class LopyApp extends StatelessWidget {
           title: 'Lopy',
           theme: ThemeData(
             // colorScheme:
-                // ColorScheme.fromSeed(seedColor: const Color.fromRGBO(243, 129, 129, 1)),
-                // ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
+            // ColorScheme.fromSeed(seedColor: const Color.fromRGBO(243, 129, 129, 1)),
+            // ColorScheme.fromSeed(seedColor: Colors.pinkAccent.shade700),
             useMaterial3: true,
           ),
         ),
       ),
     );
+  }
+}
+
+class SimpleBlocObserver extends BlocObserver {
+  @override
+  void onEvent(Bloc bloc, Object? event) {
+    super.onEvent(bloc, event);
+    print(event);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    print(transition);
+  }
+
+  @override
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    print(error);
+    super.onError(bloc, error, stackTrace);
   }
 }

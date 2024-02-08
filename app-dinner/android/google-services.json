@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "296683188665",
+    "project_id": "lopy-2f6e9",
+    "storage_bucket": "lopy-2f6e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296683188665:android:8a368875021a8c86da4668",
+        "android_client_info": {
+          "package_name": "com.lopy.food"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "296683188665-5edn1lc3d2cj8k7vq37co2slitnog0ra.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lopy.food",
+            "certificate_hash": "52fb7cb204445d90f8343a6b5d216b01d12fa513"
+          }
+        },
+        {
+          "client_id": "296683188665-cf0dtfn47vt7fd20hab00qgea0dp989a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC_F7BlNtBCz80XCm0OMJ5dpzmmvj6dR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "296683188665-cf0dtfn47vt7fd20hab00qgea0dp989a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "296683188665-8ka65neeonitf9g0qemnd92lmajskdho.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lopy.food.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

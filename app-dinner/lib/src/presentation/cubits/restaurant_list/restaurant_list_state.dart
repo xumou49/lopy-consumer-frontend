@@ -17,7 +17,6 @@ abstract class RestaurantListState extends Equatable {
 
 class RestaurantListLoading extends RestaurantListState {
   const RestaurantListLoading();
-
 }
 
 class RestaurantListSuccess extends RestaurantListState {
@@ -27,4 +26,3 @@ class RestaurantListSuccess extends RestaurantListState {
 class RestaurantListFailed extends RestaurantListState {
   const RestaurantListFailed({super.error});
 }
-

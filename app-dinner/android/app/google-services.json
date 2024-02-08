@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "296683188665",
+    "project_id": "lopy-2f6e9",
+    "storage_bucket": "lopy-2f6e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296683188665:android:8a368875021a8c86da4668",
+        "android_client_info": {
+          "package_name": "com.lopy.food"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC_F7BlNtBCz80XCm0OMJ5dpzmmvj6dR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
