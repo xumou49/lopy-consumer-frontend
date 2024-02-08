@@ -676,11 +676,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = com.lopy.dinner;
-=======
 				PRODUCT_BUNDLE_IDENTIFIER = com.lopy.food;
->>>>>>> main
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
