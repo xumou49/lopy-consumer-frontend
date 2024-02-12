@@ -1,5 +1,4 @@
 import 'package:Lopy/src/domain/models/requests/login_request.dart';
-import 'package:Lopy/src/domain/models/responses/login_response.dart';
 import 'package:Lopy/src/domain/repositories/api_repository.dart';
 import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
 import 'package:Lopy/src/presentation/cubits/base/base_cubit.dart';

@@ -1,15 +1,15 @@
-import 'package:Lopy/firebase_options.dart';
 import 'package:Lopy/src/config/routers/app_router.dart';
 import 'package:Lopy/src/domain/repositories/api_repository.dart';
 import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
 import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_list_cubit.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oktoast/oktoast.dart';
-import 'src/locator.dart';
 import 'package:get_it/get_it.dart';
+import 'package:oktoast/oktoast.dart';
+
+import 'src/locator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +34,9 @@ class LopyApp extends StatelessWidget {
         ),
         BlocProvider(
             create: (context) => LoginCubit(
-                locator<ApiRepository>(), locator<FirebaseRepository>()))
+                locator<ApiRepository>(), locator<FirebaseRepository>())),
+        BlocProvider(
+            create: (context) => OrderListCubit(locator<ApiRepository>()))
       ],
       child: OKToast(
         child: MaterialApp.router(
@@ -54,6 +56,7 @@ class LopyApp extends StatelessWidget {
   }
 }
 
+// for testing purpose, to see the transition changes of bloc
 class SimpleBlocObserver extends BlocObserver {
   @override
   void onEvent(Bloc bloc, Object? event) {

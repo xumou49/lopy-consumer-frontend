@@ -1,4 +1,6 @@
+import 'package:Lopy/src/config/routers/app_router.dart';
 import 'package:Lopy/src/data/data_sources/remote/login_api.dart';
+import 'package:Lopy/src/data/data_sources/remote/orders_api.dart';
 import 'package:Lopy/src/data/repositories/firebase_repository_impl.dart';
 import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
 import 'package:awesome_dio_interceptor/awesome_dio_interceptor.dart';
@@ -6,7 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
-import 'package:Lopy/src/config/routers/app_router.dart';
+
 import '../firebase_options.dart';
 import 'data/data_sources/remote/restaurants_api.dart';
 import 'data/repositories/api_repository_impl.dart';
@@ -22,17 +24,22 @@ Future<void> initializeDependencies() async {
   locator.registerSingleton<Dio>(dio);
 
   // register apis here
-  locator.registerSingleton<RestaurantsApi>(
-    RestaurantsApi(locator<Dio>()),
-  );
-
   locator.registerSingleton<LoginApi>(
     LoginApi(locator<Dio>()),
   );
 
+  locator.registerSingleton<RestaurantsApi>(
+    RestaurantsApi(locator<Dio>()),
+  );
+
+  locator.registerSingleton<OrdersApi>(
+    OrdersApi(locator<Dio>()),
+  );
+
   // register api repo here (must be called after all apis has initialised)
   locator.registerSingleton<ApiRepository>(
-    ApiRepositoryImpl(locator<RestaurantsApi>(), locator<LoginApi>()),
+    ApiRepositoryImpl(
+        locator<LoginApi>(), locator<RestaurantsApi>(), locator<OrdersApi>()),
   );
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
