@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import '../restaurant.dart';
 
 class LoginResponse extends Equatable {
   final String token;

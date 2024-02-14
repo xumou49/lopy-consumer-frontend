@@ -3,7 +3,6 @@ import 'package:Lopy/src/domain/models/responses/login_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../../utils/constants/strings.dart';
-import '../../../domain/models/responses/restaurants_response.dart';
 
 part 'login_api.g.dart';
 

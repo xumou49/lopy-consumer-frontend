@@ -3,7 +3,6 @@ import 'package:Lopy/src/presentation/widgets/discover/promotion_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../config/routers/app_router.gr.dart';
 import '../../../widgets/common/appbar_widget.dart';
 import '../../../widgets/common/placeholder_widget.dart';
 import '../../../widgets/discover/favourite_widget.dart';

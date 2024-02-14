@@ -7,8 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../domain/models/restaurant.dart';
-import '../../../domain/repositories/api_repository.dart';
-import '../../../locator.dart';
 import '../../widgets/restaurant_widget.dart';
 
 @RoutePage()

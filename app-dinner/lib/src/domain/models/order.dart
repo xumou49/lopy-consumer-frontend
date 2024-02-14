@@ -8,6 +8,7 @@ class Order extends Equatable {
   final String? restaurantName;
   final num? restaurantId;
   final int? status;
+  final double? totalCost;
   final double? taxes;
   final double? discounts;
   final String? completeDate;
@@ -17,6 +18,7 @@ class Order extends Equatable {
       this.restaurantName,
       this.restaurantId,
       this.status,
+      this.totalCost,
       this.taxes,
       this.discounts,
       this.completeDate});
@@ -30,6 +32,7 @@ class Order extends Equatable {
       'restaurantName': restaurantName,
       'restaurantId': restaurantId,
       'status': status,
+      "totalCost": totalCost,
       'taxes': taxes,
       'discounts': discounts,
       'completeDate': completeDate,
@@ -42,6 +45,7 @@ class Order extends Equatable {
       restaurantName: map['restaurantName'] as String,
       restaurantId: map['restaurantId'] as num,
       status: map['status'] as int,
+      totalCost: map['totalCost'] as double,
       taxes: map['taxes'] as double,
       discounts: map['discounts'] as double,
       completeDate: map['completeDate'] as String,
@@ -54,6 +58,7 @@ class Order extends Equatable {
       restaurantName: json['restaurantName'],
       restaurantId: json['restaurantId'],
       status: json['status'],
+      totalCost: json['totalCost'],
       taxes: json['taxes'],
       discounts: json['discounts'],
       completeDate: json['completeDate'],
