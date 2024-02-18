@@ -6,6 +6,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'order_detail_view.dart';
+
 @RoutePage()
 class OrdersView extends StatelessWidget {
   const OrdersView({super.key});
@@ -20,7 +22,7 @@ class OrdersView extends StatelessWidget {
               if (state is OrderListSuccess && state.orders.isNotEmpty) {
                 return _OrdersView(orders: state.orders);
               }
-              return Text("Order Data Is Empty");
+              return const Text("Order Data Is Empty");
             }));
   }
 }
@@ -34,6 +36,21 @@ class _OrdersView extends StatefulWidget {
 }
 
 class _OrdersViewState extends State<_OrdersView> {
+  Function() showOrderItemDetailDialog() {
+    return () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => const Dialog(
+              surfaceTintColor: Colors.transparent,
+              backgroundColor: Colors.white,
+              child: Padding(
+                  padding: EdgeInsets.fromLTRB(10, 50, 10, 0),
+                  child: SizedBox(
+                    height: 600,
+                    child: OrdersDetailView(),
+                  )),
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
     var len = MediaQuery.of(context).size.width - 20;
@@ -42,12 +59,12 @@ class _OrdersViewState extends State<_OrdersView> {
     List<Widget> orderCards = [];
     for (var e in widget.orders) {
       orderCards.add(OrderCard(
-        restaurantId: e.restaurantId,
-        restaurantName: e.restaurantName,
-        totalPrice: e.totalCost,
-        completeDate: e.completeDate,
-        status: e.status,
-      ));
+          restaurantId: e.restaurantId,
+          restaurantName: e.restaurantName,
+          totalPrice: e.totalCost,
+          completeDate: e.completeDate,
+          status: e.status,
+          onTap: showOrderItemDetailDialog()));
     }
     return Align(
         alignment: Alignment.center,

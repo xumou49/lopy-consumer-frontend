@@ -8,10 +8,12 @@ class OrderCard extends StatelessWidget {
   final double? totalPrice;
   final String? completeDate;
   final int? status;
+  final Function() onTap;
 
   const OrderCard(
       {Key? key,
       required this.status,
+      required this.onTap,
       this.restaurantId,
       this.restaurantName,
       this.totalPrice,
@@ -69,9 +71,7 @@ class OrderCard extends StatelessWidget {
       ),
       child: InkWell(
         splashColor: Colors.blue.withAlpha(30),
-        onTap: () {
-          debugPrint('Card tapped.');
-        },
+        onTap: onTap,
         child: Container(
             padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
             width: double.infinity,
