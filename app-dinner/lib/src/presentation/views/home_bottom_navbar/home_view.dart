@@ -8,7 +8,10 @@ import '../../../config/routers/app_router.gr.dart';
 
 @RoutePage()
 class HomeView extends StatelessWidget {
+  final int _discoverNavBtn = 0;
   final int _orderNavBtn = 1;
+  final int _scanNavBtn = 2;
+  final int _profileNavBtn = 3;
 
   const HomeView({super.key});
 

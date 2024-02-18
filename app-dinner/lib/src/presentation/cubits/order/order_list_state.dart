@@ -20,7 +20,7 @@ class OrderListLoading extends OrderListState {
 }
 
 class OrderListSuccess extends OrderListState {
-  const OrderListSuccess({super.orders, super.isData});
+  const OrderListSuccess({super.orders, super.isData, super.error});
 }
 
 class OrderListFailed extends OrderListState {

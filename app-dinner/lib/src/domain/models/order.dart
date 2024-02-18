@@ -24,7 +24,7 @@ class Order extends Equatable {
       this.completeDate});
 
   @override
-  List<Object?> get props => [id, restaurantId, taxes];
+  List<Object?> get props => [id, restaurantId, status];
 
   Map<String, dynamic> toMap() {
     return {
