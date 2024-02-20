@@ -24,7 +24,6 @@ class OrderListCubit extends BaseCubit<OrderListState, List<Order>> {
               searchPage: PageRequest(page: page, pageSize: pageSize)));
       if (response is DataSuccess) {
         final orders = response.data!.orders;
-        data.addAll(orders);
         emit(OrderListSuccess(orders: orders, isData: true));
       } else if (response is DataFailed) {
         emit(OrderListFailed(error: response.error));

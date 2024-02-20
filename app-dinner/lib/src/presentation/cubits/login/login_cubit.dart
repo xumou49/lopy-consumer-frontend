@@ -37,12 +37,12 @@ class LoginCubit extends BaseCubit<LoginState, String> {
 
   /// not implemented yet, simply emit the success event
   Future<void> appleLogin() async {
-    var uuid = Uuid();
+    var uuid = const Uuid();
     emit(LoginSuccess(token: uuid.v1()));
   }
 
   Future<void> phoneLogin() async {
-    var uuid = Uuid();
+    var uuid = const Uuid();
     emit(LoginSuccess(token: uuid.v1()));
   }
 }

@@ -32,7 +32,7 @@ class _LoginViewState extends State<LoginView> {
             print("fail to login");
           }
         },
-        child: View());
+        child: const View());
   }
 }
 
