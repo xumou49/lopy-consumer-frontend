@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i37;
+import 'package:flutter/cupertino.dart' as _i38;
 import 'package:Lopy/src/presentation/views/cart/cart_item_view.dart' as _i1;
 import 'package:Lopy/src/presentation/views/cart/cart_list_view.dart' as _i2;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/discover/discover_view.dart'
@@ -228,9 +229,14 @@ abstract class $AppRouter extends _i37.RootStackRouter {
       );
     },
     RestaurantListView.name: (routeData) {
+      final args = routeData.argsAs<RestaurantListViewArgs>(
+          orElse: () => const RestaurantListViewArgs());
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i25.RestaurantListView(),
+        child: _i25.RestaurantListView(
+          key: args.key,
+          cuisine: args.cuisine,
+        ),
       );
     },
     RestaurantMenuItemView.name: (routeData) {
@@ -640,16 +646,40 @@ class RestaurantDetailView extends _i37.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i25.RestaurantListView]
-class RestaurantListView extends _i37.PageRouteInfo<void> {
-  const RestaurantListView({List<_i37.PageRouteInfo>? children})
-      : super(
+class RestaurantListView extends _i37.PageRouteInfo<RestaurantListViewArgs> {
+  RestaurantListView({
+    _i38.Key? key,
+    String cuisine = "",
+    List<_i37.PageRouteInfo>? children,
+  }) : super(
           RestaurantListView.name,
+          args: RestaurantListViewArgs(
+            key: key,
+            cuisine: cuisine,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'RestaurantListView';
 
-  static const _i37.PageInfo<void> page = _i37.PageInfo<void>(name);
+  static const _i37.PageInfo<RestaurantListViewArgs> page =
+      _i37.PageInfo<RestaurantListViewArgs>(name);
+}
+
+class RestaurantListViewArgs {
+  const RestaurantListViewArgs({
+    this.key,
+    this.cuisine = "",
+  });
+
+  final _i38.Key? key;
+
+  final String cuisine;
+
+  @override
+  String toString() {
+    return 'RestaurantListViewArgs{key: $key, cuisine: $cuisine}';
+  }
 }
 
 /// generated route for

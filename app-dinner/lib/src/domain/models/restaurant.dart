@@ -5,17 +5,23 @@ import 'package:floor/floor.dart';
 class Restaurant extends Equatable {
   @PrimaryKey(autoGenerate: true)
   final int? id;
-  final String? name;
+  final String name;
   final String? address;
-  final String? cuisine;
-  final double? rating;
+  final String? labels;
+  final String? operatingHours;
+  final String? contactDetails;
+  final String imageUrl;
+  final String rating;
 
   const Restaurant({
     this.id,
-    this.name,
+    required this.name,
     this.address,
-    this.cuisine,
-    this.rating,
+    this.labels,
+    this.operatingHours,
+    this.contactDetails,
+    required this.imageUrl,
+    required this.rating,
   });
 
   @override
@@ -27,7 +33,10 @@ class Restaurant extends Equatable {
       'id': id,
       'name': name,
       'address': address,
-      'cuisine': cuisine,
+      'labels': labels,
+      'operatingHours': operatingHours,
+      'contactDetails': contactDetails,
+      'imageUrl': imageUrl,
       'rating': rating,
     };
   }
@@ -37,17 +46,23 @@ class Restaurant extends Equatable {
       id: map['id'] as int,
       name: map['name'] as String,
       address: map['address'] as String,
-      cuisine: map['cuisine'] as String,
-      rating: map['rating'] as double,
+      labels: map['labels'] as String,
+      operatingHours: map['operatingHours'] as String,
+      contactDetails: map['contactDetails'] as String,
+      imageUrl: map['imageUrl'] as String,
+      rating: map['rating'] as String,
     );
   }
 
   factory Restaurant.fromJson(Map<String, dynamic> json) {
     return Restaurant(
-      cuisine: json['cuisine'],
+      labels: json['cuisine'],
       address: json['location'],
       name: json['name'],
-      rating: json['rating'].toDouble(),
+      operatingHours: json['operatingHours'],
+      contactDetails: json['contactDetails'],
+      imageUrl: json['imageUrl'],
+      rating: json['rating'],
     );
   }
 }

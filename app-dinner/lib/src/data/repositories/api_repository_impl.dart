@@ -24,7 +24,7 @@ class ApiRepositoryImpl extends BaseApiRepository implements ApiRepository {
     required RestaurantListRequest request,
   }) {
     return getStateOf<RestaurantsResponse>(
-      request: () => _restaurantsApi.getRestaurants(),
+      request: () => _restaurantsApi.getRestaurants(request),
     );
   }
 

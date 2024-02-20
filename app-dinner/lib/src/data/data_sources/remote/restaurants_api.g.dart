@@ -21,20 +21,26 @@ class _RestaurantsApi implements RestaurantsApi {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<RestaurantsResponse>> getRestaurants() async {
+  Future<HttpResponse<RestaurantsResponse>> getRestaurants(
+    request, {
+    contentType = 'application/json',
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': contentType};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
+    _data.addAll(request?.toMap() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<RestaurantsResponse>>(Options(
-      method: 'GET',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: contentType,
     )
             .compose(
               _dio.options,
-              '/restaurants',
+              '/restaurant/list',
               queryParameters: queryParameters,
               data: _data,
             )

@@ -23,3 +23,5 @@ Used for the code generation of api request, the output file format is `xxxx_api
 Example of source api request refer to `lib/src/data/data_sources/remote/restaurants_api.dart`
 - dart: `dart pub run build_runner build` 
 - flutter: `flutter pub run build_runner build`
+- flutter pub run build_runner build --delete-conflicting-outputs
+- --no-enable-impeller

@@ -9,46 +9,43 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../domain/models/restaurant.dart';
 import '../../../domain/repositories/api_repository.dart';
 import '../../../locator.dart';
+import '../../cubits/restaurant_list/restaurant_cuisine_cubit.dart';
+import '../../widgets/common/appbar_widget.dart';
+import '../../widgets/discover/restaurants_widget.dart';
 import '../../widgets/restaurant_widget.dart';
 
 @RoutePage()
 class RestaurantListView extends HookWidget {
-  const RestaurantListView({Key? key}) : super(key: key);
+  final String cuisine;
+  const RestaurantListView({Key? key, this.cuisine = ""}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final remoteRestaurantCubit = BlocProvider.of<RestaurantListCubit>(context);
+    final remoteRestaurantCuisineCubit = BlocProvider.of<RestaurantCuisineCubit>(context);
     final scrollController = useScrollController();
-
     useEffect(() {
-      scrollController.onScrollEndsListener(() {
-        remoteRestaurantCubit.getRestaurantList();
-      });
+      remoteRestaurantCuisineCubit.getRestaurantList(cuisine: cuisine);
+      // scrollController.onScrollEndsListener(() {
+      //   remoteRestaurantCuisineCubit.getRestaurantList();
+      // });
       return scrollController.dispose;
     }, const []);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(243, 129, 129, 1),
-        title: const Text("Restaurants"),
-      ),
-      body: BlocBuilder<RestaurantListCubit, RestaurantListState>(
+      appBar: const GradientAppBar(title:"Restaurants",),
+      body: BlocBuilder<RestaurantCuisineCubit, RestaurantCuisineState>(
         builder: (_, state) {
           switch (state.runtimeType) {
-            case RestaurantListLoading:
+            case RestaurantCuisineLoading:
               return const Center(
                 child: CupertinoActivityIndicator(),
               );
-            case RestaurantListFailed:
+            case RestaurantCuisineFailed:
               return const Center(
                 child: Icon(Icons.refresh),
               );
-            case RestaurantListSuccess:
-              return _buildRestaurantList(
-                scrollController,
-                state.restaurants,
-                state.isData,
-              );
+            case RestaurantCuisineSuccess:
+              return RestaurantsWidget(state.restaurants);
             default:
               return const SizedBox();
           }
@@ -82,6 +79,78 @@ class RestaurantListView extends HookWidget {
     );
   }
 }
+
+// @RoutePage()
+// class RestaurantListView extends HookWidget {
+//   const RestaurantListView({Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final remoteRestaurantCubit = BlocProvider.of<RestaurantListCubit>(context);
+//     final scrollController = useScrollController();
+//
+//     useEffect(() {
+//       scrollController.onScrollEndsListener(() {
+//         remoteRestaurantCubit.getRestaurantList();
+//       });
+//       return scrollController.dispose;
+//     }, const []);
+//
+//     return Scaffold(
+//       appBar: AppBar(
+//         backgroundColor: const Color.fromRGBO(243, 129, 129, 1),
+//         title: const Text("Restaurants"),
+//       ),
+//       body: BlocBuilder<RestaurantListCubit, RestaurantListState>(
+//         builder: (_, state) {
+//           switch (state.runtimeType) {
+//             case RestaurantListLoading:
+//               return const Center(
+//                 child: CupertinoActivityIndicator(),
+//               );
+//             case RestaurantListFailed:
+//               return const Center(
+//                 child: Icon(Icons.refresh),
+//               );
+//             case RestaurantListSuccess:
+//               return _buildRestaurantList(
+//                 scrollController,
+//                 state.restaurants,
+//                 state.isData,
+//               );
+//             default:
+//               return const SizedBox();
+//           }
+//         },
+//       ),
+//     );
+//   }
+//
+//   Widget _buildRestaurantList(
+//       ScrollController scrollController,
+//       List<Restaurant> restaurant,
+//       bool isData,
+//       ) {
+//     return CustomScrollView(
+//       controller: scrollController,
+//       slivers: [
+//         SliverList(
+//           delegate: SliverChildBuilderDelegate(
+//                 (context, index) => RestaurantWidget(restaurant: restaurant[index]),
+//             childCount: restaurant.length,
+//           ),
+//         ),
+//         if (!isData)
+//           const SliverToBoxAdapter(
+//             child: Padding(
+//               padding: EdgeInsets.only(top: 14, bottom: 32),
+//               child: CupertinoActivityIndicator(),
+//             ),
+//           )
+//       ],
+//     );
+//   }
+// }
 // class RestaurantListView extends StatelessWidget {
 //   const RestaurantListView({super.key});
 //

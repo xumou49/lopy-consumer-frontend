@@ -22,23 +22,23 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
     Widget appBarTitle = title != null && title!.isNotEmpty
         ? Text(title!)
         : TextField(
-            decoration: InputDecoration(
-              hintText: 'Search restaurant...',
-              prefixIcon: Icon(Icons.search, color: Colors.pink.shade100),
-              // border: const OutlineInputBorder(),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide: BorderSide(color: Colors.pink.shade100),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide: BorderSide(color: Colors.pink.shade200),
-              ),
-              filled: true,
-              fillColor: Colors.white,
-              contentPadding: const EdgeInsets.all(8),
-            ),
-          );
+        decoration: InputDecoration(
+        hintText: 'Search restaurant...',
+        prefixIcon: Icon(Icons.search, color: Colors.pink.shade100),
+        // border: const OutlineInputBorder(),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.pink.shade100),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.pink.shade200),
+        ),
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: const EdgeInsets.all(8),
+      ),
+    );
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(

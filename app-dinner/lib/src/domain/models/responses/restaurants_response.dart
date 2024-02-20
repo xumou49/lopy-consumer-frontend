@@ -2,9 +2,14 @@ import 'package:equatable/equatable.dart';
 import '../restaurant.dart';
 
 class RestaurantsResponse extends Equatable {
+  final String msg;
+  final int code;
   final List<Restaurant> restaurants;
 
+
   const RestaurantsResponse({
+    required this.msg,
+    required this.code,
     required this.restaurants,
   });
 
@@ -21,6 +26,8 @@ class RestaurantsResponse extends Equatable {
               (x) => Restaurant.fromJson(x as Map<String, dynamic>),
         ),
       ),
+      msg: (map['msg'] ?? '') as String,
+      code: (map['code'] ?? 0)  as int,
     );
   }
 
