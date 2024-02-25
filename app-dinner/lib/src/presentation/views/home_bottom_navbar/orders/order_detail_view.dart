@@ -39,7 +39,7 @@ class _View extends StatelessWidget {
         const SizedBox(height: 15),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [OrderDetailText("Order ID: ${order.id}")],
+          children: [OrderDetailText("Order ID: ${order.uid}")],
         ),
         const SizedBox(height: 15),
         const Divider(),
