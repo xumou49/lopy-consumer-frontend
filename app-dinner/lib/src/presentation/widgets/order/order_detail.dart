@@ -52,7 +52,7 @@ class OrderDetailItem extends StatelessWidget {
 }
 
 class _TableRow extends StatelessWidget {
-  final List<OrderDetailText> textList;
+  final List<Widget> textList;
   const _TableRow(this.textList, {Key? key}) : super(key: key);
 
   @override
@@ -60,8 +60,11 @@ class _TableRow extends StatelessWidget {
     return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: textList
-            .map((e) => Container(
-                padding: const EdgeInsets.fromLTRB(24, 12, 24, 12), child: e))
+            .map((e) => Expanded(
+                flex: 1,
+                child: Container(
+                    padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
+                    child: e)))
             .toList());
   }
 }
@@ -81,7 +84,6 @@ class OrderDetailText extends StatelessWidget {
           fontSize: fontSize,
           fontFamily: 'Montserrat',
           fontWeight: FontWeight.w400,
-          height: 0.16,
         ));
   }
 }

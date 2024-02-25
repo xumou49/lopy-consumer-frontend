@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'orders_api.dart';
+part of 'order_items_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'orders_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _OrdersApi implements OrdersApi {
-  _OrdersApi(
+class _OrderItemsApi implements OrderItemsApi {
+  _OrderItemsApi(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,51 +21,53 @@ class _OrdersApi implements OrdersApi {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<OrderListResponse>> getOrderList(orderListRequest) async {
+  Future<HttpResponse<OrderItemListResponse>> getOrderItemList(
+      orderListRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(orderListRequest?.toMap() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<OrderListResponse>>(Options(
+        _setStreamType<HttpResponse<OrderItemListResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/order/list',
+              '/order-item/list',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = OrderListResponse.fromMap(_result.data!);
+    final value = OrderItemListResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<OrderListResponse>> getOrderPage(orderListRequest) async {
+  Future<HttpResponse<OrderItemListResponse>> getOrderItemPage(
+      orderListRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(orderListRequest?.toMap() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<OrderListResponse>>(Options(
+        _setStreamType<HttpResponse<OrderItemListResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/order/page',
+              '/order-item/page',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = OrderListResponse.fromMap(_result.data!);
+    final value = OrderItemListResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

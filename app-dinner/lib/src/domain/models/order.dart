@@ -5,6 +5,7 @@ import 'package:floor/floor.dart';
 class Order extends Equatable {
   @PrimaryKey(autoGenerate: true)
   final num? id;
+  final String? uid;
   final String? restaurantName;
   final num? restaurantId;
   final int? status;
@@ -15,6 +16,7 @@ class Order extends Equatable {
 
   const Order(
       {this.id,
+      this.uid,
       this.restaurantName,
       this.restaurantId,
       this.status,
@@ -29,6 +31,7 @@ class Order extends Equatable {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'uid': uid,
       'restaurantName': restaurantName,
       'restaurantId': restaurantId,
       'status': status,
@@ -42,6 +45,7 @@ class Order extends Equatable {
   factory Order.fromMap(Map<String, dynamic> map) {
     return Order(
       id: map['id'] as num,
+      uid: map['uid'] as String,
       restaurantName: map['restaurantName'] as String,
       restaurantId: map['restaurantId'] as num,
       status: map['status'] as int,
@@ -55,6 +59,7 @@ class Order extends Equatable {
   factory Order.fromJson(Map<String, dynamic> json) {
     return Order(
       id: json['id'],
+      uid: json['uid'],
       restaurantName: json['restaurantName'],
       restaurantId: json['restaurantId'],
       status: json['status'],

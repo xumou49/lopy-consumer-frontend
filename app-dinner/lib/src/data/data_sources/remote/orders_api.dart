@@ -12,10 +12,10 @@ abstract class OrdersApi {
   factory OrdersApi(Dio dio, {String baseUrl}) = _OrdersApi;
 
   @POST('/order/list')
-  Future<HttpResponse<OrderResponse>> getOrderList(
+  Future<HttpResponse<OrderListResponse>> getOrderList(
       @Body() OrderListRequest orderListRequest);
 
   @POST('/order/page')
-  Future<HttpResponse<OrderResponse>> getOrderPage(
+  Future<HttpResponse<OrderListResponse>> getOrderPage(
       @Body() OrderListRequest orderListRequest);
 }
