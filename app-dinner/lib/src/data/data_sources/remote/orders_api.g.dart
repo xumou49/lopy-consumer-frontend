@@ -21,14 +21,14 @@ class _OrdersApi implements OrdersApi {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<OrderResponse>> getOrderList(orderListRequest) async {
+  Future<HttpResponse<OrderListResponse>> getOrderList(orderListRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(orderListRequest?.toMap() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<OrderResponse>>(Options(
+        _setStreamType<HttpResponse<OrderListResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -40,20 +40,20 @@ class _OrdersApi implements OrdersApi {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = OrderResponse.fromMap(_result.data!);
+    final value = OrderListResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<OrderResponse>> getOrderPage(orderListRequest) async {
+  Future<HttpResponse<OrderListResponse>> getOrderPage(orderListRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(orderListRequest?.toMap() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<OrderResponse>>(Options(
+        _setStreamType<HttpResponse<OrderListResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -65,7 +65,7 @@ class _OrdersApi implements OrdersApi {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = OrderResponse.fromMap(_result.data!);
+    final value = OrderListResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

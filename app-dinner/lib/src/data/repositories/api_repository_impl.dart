@@ -29,9 +29,9 @@ class ApiRepositoryImpl extends BaseApiRepository implements ApiRepository {
   }
 
   @override
-  Future<DataState<OrderResponse>> getOrderList(
+  Future<DataState<OrderListResponse>> getOrderList(
       {required OrderListRequest request}) {
-    return getStateOf<OrderResponse>(
+    return getStateOf<OrderListResponse>(
       request: () => _ordersApi.getOrderList(request),
     );
   }

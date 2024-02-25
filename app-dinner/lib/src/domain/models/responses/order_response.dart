@@ -1,10 +1,10 @@
 import 'package:Lopy/src/domain/models/order.dart';
 import 'package:equatable/equatable.dart';
 
-class OrderResponse extends Equatable {
+class OrderListResponse extends Equatable {
   final List<Order> orders;
 
-  const OrderResponse({
+  const OrderListResponse({
     required this.orders,
   });
 
@@ -14,8 +14,8 @@ class OrderResponse extends Equatable {
     };
   }
 
-  factory OrderResponse.fromMap(Map<String, dynamic> map) {
-    return OrderResponse(
+  factory OrderListResponse.fromMap(Map<String, dynamic> map) {
+    return OrderListResponse(
         orders: List<Order>.from(map['data'].map<Order>(
       (x) => Order.fromJson(x as Map<String, dynamic>),
     )));

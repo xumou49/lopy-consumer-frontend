@@ -11,7 +11,7 @@ abstract class ApiRepository {
     required RestaurantListRequest request,
   });
 
-  Future<DataState<OrderResponse>> getOrderList({
+  Future<DataState<OrderListResponse>> getOrderList({
     required OrderListRequest request,
   });
 
