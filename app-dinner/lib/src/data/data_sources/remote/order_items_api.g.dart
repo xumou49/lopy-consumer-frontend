@@ -21,7 +21,7 @@ class _OrderItemsApi implements OrderItemsApi {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<OrderItemListResponse>> getOrderList(
+  Future<HttpResponse<OrderItemListResponse>> getOrderItemList(
       orderListRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -47,7 +47,7 @@ class _OrderItemsApi implements OrderItemsApi {
   }
 
   @override
-  Future<HttpResponse<OrderItemListResponse>> getOrderPage(
+  Future<HttpResponse<OrderItemListResponse>> getOrderItemPage(
       orderListRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

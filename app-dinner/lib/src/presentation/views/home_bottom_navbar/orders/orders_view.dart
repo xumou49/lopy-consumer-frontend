@@ -1,4 +1,5 @@
 import 'package:Lopy/src/domain/models/order.dart';
+import 'package:Lopy/src/presentation/cubits/order/order_item_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/appbar_widget.dart';
 import 'package:Lopy/src/presentation/widgets/order/order_card.dart';
@@ -64,7 +65,11 @@ class _OrdersViewState extends State<_OrdersView> {
           totalPrice: e.totalCost,
           completeDate: e.completeDate,
           status: e.status,
-          onTap: showOrderItemDetailDialog()));
+          onTap: () {
+            // send the event to fetch the data & show the dialog for order details
+            context.read<OrderItemListCubit>().getOrderItemList(e);
+            showOrderItemDetailDialog().call();
+          }));
     }
     return Align(
         alignment: Alignment.center,

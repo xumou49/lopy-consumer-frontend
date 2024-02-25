@@ -1,4 +1,4 @@
-import 'package:Lopy/src/domain/models/requests/order_request.dart';
+import 'package:Lopy/src/domain/models/requests/order_item_request.dart';
 import 'package:Lopy/src/domain/models/responses/order_item_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -12,10 +12,10 @@ abstract class OrderItemsApi {
   factory OrderItemsApi(Dio dio, {String baseUrl}) = _OrderItemsApi;
 
   @POST('/order-item/list')
-  Future<HttpResponse<OrderItemListResponse>> getOrderList(
+  Future<HttpResponse<OrderItemListResponse>> getOrderItemList(
       @Body() OrderItemListRequest orderListRequest);
 
   @POST('/order-item/page')
-  Future<HttpResponse<OrderItemListResponse>> getOrderPage(
+  Future<HttpResponse<OrderItemListResponse>> getOrderItemPage(
       @Body() OrderItemListRequest orderListRequest);
 }

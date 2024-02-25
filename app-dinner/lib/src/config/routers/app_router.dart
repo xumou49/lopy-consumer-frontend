@@ -83,7 +83,6 @@ class AppRouter extends $AppRouter {
                 page: OrderNavigationView.page,
                 children: [
                   AutoRoute(page: OrdersView.page, initial: true),
-                  AutoRoute(page: OrderDetailView.page),
                 ],
               ),
               AutoRoute(

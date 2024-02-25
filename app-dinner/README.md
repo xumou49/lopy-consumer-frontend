@@ -23,3 +23,9 @@ Used for the code generation of api request, the output file format is `xxxx_api
 Example of source api request refer to `lib/src/data/data_sources/remote/restaurants_api.dart`
 - dart: `dart pub run build_runner build` 
 - flutter: `flutter pub run build_runner build`
+
+### AutoRoute Command
+
+Used for the code generation of route component, the output file is `xxx_gr.dart`
+- `flutter packages pub run build_runner build`
+- `flutter packages pub run build_runner watch` (watch the editing of file system and do the hot reload)
