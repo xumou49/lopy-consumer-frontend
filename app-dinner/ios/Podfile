@@ -30,6 +30,7 @@ flutter_ios_podfile_setup
 use_modular_headers!
 
 target 'Runner' do
+  use_frameworks!           #Required by qr_code_scanner
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
   target 'RunnerTests' do
     inherit! :search_paths
