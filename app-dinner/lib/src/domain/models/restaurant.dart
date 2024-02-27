@@ -6,16 +6,16 @@ class Restaurant extends Equatable {
   @PrimaryKey(autoGenerate: true)
   final int? id;
   final String? name;
-  final String? address;
-  final String? cuisine;
-  final double? rating;
+  // final String? address;
+  // final String? cuisine;
+  // final double? rating;
 
   const Restaurant({
     this.id,
     this.name,
-    this.address,
-    this.cuisine,
-    this.rating,
+    // this.address,
+    // this.cuisine,
+    // this.rating,
   });
 
   @override
@@ -26,9 +26,9 @@ class Restaurant extends Equatable {
     return {
       'id': id,
       'name': name,
-      'address': address,
-      'cuisine': cuisine,
-      'rating': rating,
+      // 'address': address,
+      // 'cuisine': cuisine,
+      // 'rating': rating,
     };
   }
 
@@ -36,18 +36,19 @@ class Restaurant extends Equatable {
     return Restaurant(
       id: map['id'] as int,
       name: map['name'] as String,
-      address: map['address'] as String,
-      cuisine: map['cuisine'] as String,
-      rating: map['rating'] as double,
+      // address: map['address'] as String,
+      // cuisine: map['cuisine'] as String,
+      // rating: map['rating'] as double,
     );
   }
 
   factory Restaurant.fromJson(Map<String, dynamic> json) {
     return Restaurant(
-      cuisine: json['cuisine'],
-      address: json['location'],
+      // cuisine: json['cuisine'],
+      // address: json['location'],
+      id: json['id'],
       name: json['name'],
-      rating: json['rating'].toDouble(),
+      // rating: json['rating'].toDouble(),
     );
   }
 }

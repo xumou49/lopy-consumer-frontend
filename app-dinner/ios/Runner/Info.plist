@@ -56,10 +56,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-<<<<<<< HEAD
 	<key>NSCameraUsageDescription</key>
 	<string>To scan QR code, please grant camera access</string>
-=======
->>>>>>> main
 </dict>
 </plist>

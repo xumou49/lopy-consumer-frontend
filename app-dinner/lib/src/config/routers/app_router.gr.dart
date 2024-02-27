@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i37;
+import 'package:flutter/cupertino.dart' as _i38;
 import 'package:Lopy/src/presentation/views/cart/cart_item_view.dart' as _i1;
 import 'package:Lopy/src/presentation/views/cart/cart_list_view.dart' as _i2;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/discover/discover_view.dart'
@@ -222,9 +223,13 @@ abstract class $AppRouter extends _i37.RootStackRouter {
       );
     },
     RestaurantDetailView.name: (routeData) {
+      final args = routeData.argsAs<RestaurantDetailViewArgs>();
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i24.RestaurantDetailView(),
+        child: _i24.RestaurantDetailView(
+          key: args.key,
+          restaurantId: args.restaurantId,
+        ),
       );
     },
     RestaurantListView.name: (routeData) {
@@ -626,16 +631,41 @@ class ProfileView extends _i37.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i24.RestaurantDetailView]
-class RestaurantDetailView extends _i37.PageRouteInfo<void> {
-  const RestaurantDetailView({List<_i37.PageRouteInfo>? children})
-      : super(
+class RestaurantDetailView
+    extends _i37.PageRouteInfo<RestaurantDetailViewArgs> {
+  RestaurantDetailView({
+    _i38.Key? key,
+    required int restaurantId,
+    List<_i37.PageRouteInfo>? children,
+  }) : super(
           RestaurantDetailView.name,
+          args: RestaurantDetailViewArgs(
+            key: key,
+            restaurantId: restaurantId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'RestaurantDetailView';
 
-  static const _i37.PageInfo<void> page = _i37.PageInfo<void>(name);
+  static const _i37.PageInfo<RestaurantDetailViewArgs> page =
+      _i37.PageInfo<RestaurantDetailViewArgs>(name);
+}
+
+class RestaurantDetailViewArgs {
+  const RestaurantDetailViewArgs({
+    this.key,
+    required this.restaurantId,
+  });
+
+  final _i38.Key? key;
+
+  final int restaurantId;
+
+  @override
+  String toString() {
+    return 'RestaurantDetailViewArgs{key: $key, restaurantId: $restaurantId}';
+  }
 }
 
 /// generated route for

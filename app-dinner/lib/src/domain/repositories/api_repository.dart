@@ -1,5 +1,7 @@
+import 'package:Lopy/src/domain/models/requests/RestaurantInfoRequest.dart';
 import 'package:Lopy/src/domain/models/requests/login_request.dart';
 import 'package:Lopy/src/domain/models/responses/login_response.dart';
+import 'package:Lopy/src/domain/models/responses/restaurant_info_response.dart';
 
 import '../../utils/resources/data_state.dart';
 import '../models/responses/restaurants_response.dart';
@@ -16,5 +18,9 @@ abstract class ApiRepository {
 
   Future<DataState<LoginResponse>> phoneLogin({
     required LoginRequest request,
+  });
+
+  Future<DataState<RestaurantInfoResponse>> getRestaurantInfo({
+    required RestaurantInfoRequest request,
   });
 }

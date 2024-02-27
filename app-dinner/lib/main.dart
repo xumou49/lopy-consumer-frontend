@@ -3,6 +3,7 @@ import 'package:Lopy/src/config/routers/app_router.dart';
 import 'package:Lopy/src/domain/repositories/api_repository.dart';
 import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
 import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/restaurant_info/restaurant_info_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_list_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,12 @@ class LopyApp extends StatelessWidget {
         ),
         BlocProvider(
             create: (context) => LoginCubit(
-                locator<ApiRepository>(), locator<FirebaseRepository>()))
+                locator<ApiRepository>(), locator<FirebaseRepository>())),
+        BlocProvider(
+          create: (context) => RestaurantInfoCubit(
+            locator<ApiRepository>(),
+          ),
+        ),
       ],
       child: OKToast(
         child: MaterialApp.router(

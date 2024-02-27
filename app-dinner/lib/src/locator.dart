@@ -1,4 +1,5 @@
 import 'package:Lopy/src/data/data_sources/remote/login_api.dart';
+import 'package:Lopy/src/data/data_sources/remote/restaurant_info_api.dart';
 import 'package:Lopy/src/data/repositories/firebase_repository_impl.dart';
 import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
 import 'package:awesome_dio_interceptor/awesome_dio_interceptor.dart';
@@ -30,9 +31,14 @@ Future<void> initializeDependencies() async {
     LoginApi(locator<Dio>()),
   );
 
+  locator.registerSingleton<RestaurantInfoApi>(
+    RestaurantInfoApi(locator<Dio>()),
+  );
+
   // register api repo here (must be called after all apis has initialised)
   locator.registerSingleton<ApiRepository>(
-    ApiRepositoryImpl(locator<RestaurantsApi>(), locator<LoginApi>()),
+    ApiRepositoryImpl(locator<RestaurantsApi>(), locator<LoginApi>(),
+        locator<RestaurantInfoApi>()),
   );
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
