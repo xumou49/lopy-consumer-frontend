@@ -1,10 +1,14 @@
-import 'package:Lopy/src/config/routers/app_router.gr.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
+import '../../../../config/routers/app_router.gr.dart';
+import '../../../cubits/restaurant_info/restaurant_info_cubit.dart';
+
 @RoutePage()
-class ScanView extends StatelessWidget {
+class ScanView extends HookWidget {
   const ScanView({super.key});
 
   @override
@@ -16,22 +20,15 @@ class ScanView extends StatelessWidget {
       width: 200,
       height: 200,
     );
-    String overlayText = "Scan Your QR Code";
+    final String overlayText = "Scan Your QR Code";
 
     void onBarcodeDetect(BarcodeCapture barcodeCapture) {
       final barcode = barcodeCapture.barcodes.last;
       cameraController.stop();
-      AutoRouter.of(context).push(const RestaurantDetailView());
+      // print(barcode.rawValue.toString());
+      context.router.push(
+          RestaurantDetailView(restaurantId: int.parse(barcode.rawValue!)));
       cameraController.start();
-      // setState(() {
-      //     barcode.rawValue ??
-      //     'Barcode has no displayable value';
-      // });
-
-      // final List<Barcode> barcodes = barcodeCapture.barcodes;
-      // for (final barcode in barcodes) {
-      //   debugPrint('Barcode found! ${barcode.rawValue}');
-      // }
     }
 
     return Scaffold(
