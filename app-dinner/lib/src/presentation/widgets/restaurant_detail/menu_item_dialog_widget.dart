@@ -1,6 +1,8 @@
+import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../common/button_widget.dart';
+import '../common/text_widget.dart';
 import 'number_counter_widget.dart';
 
 class MenuItemDialogWidget extends StatelessWidget {
@@ -57,60 +59,46 @@ class MenuItemDialogWidget extends StatelessWidget {
                   const Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text(
-                          'MenuItem Name',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(fontSize: 14),
-                        ),
-                      ),
+                          child: TextWidget(
+                        text: 'MenuItem Name',
+                        fontSize: 14,
+                      )),
                       Expanded(
-                        child: Text(' 4.8 (1000+)',
-                            textAlign: TextAlign.end,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: 'Montserrat',
-                            )),
-                      ),
+                          child: TextWidget(
+                        text: 'S\$10.00',
+                        textAlign: TextAlign.end,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500
+                      )),
                     ],
                   ),
                   const Divider(thickness: 0.3),
                   const Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text(
-                          'MenuItem Detail Description',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'Montserrat',
-                          ),
-                        ),
-                      ),
+                          child: TextWidget(
+                              text: 'MenuItem Detail Description',
+                              fontSize: 14)),
                     ],
                   ),
-                  SizedBox(height: 10.0),
+                  const PlaceholderWidget(height: 5.0),
                   const Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text(
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vulputate ut magna at lacinia. Etiam a ligula nec lectus vulputate cursus. Morbi vitae commodo magna. ',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'Montserrat',
-                          ),
-                        ),
-                      ),
+                          child: TextWidget(
+                              text:
+                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vulputate ut magna at lacinia. Etiam a ligula nec lectus vulputate cursus. Morbi vitae commodo magna. ',
+                              fontSize: 14)),
                     ],
                   ),
-                  const SizedBox(height: 10.0),
+                  const PlaceholderWidget(height: 10.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       CounterStep(min: 1, max: 10, valueChanged: (int value) {})
                     ],
                   ),
-                  const SizedBox(height: 20.0),
+                  const PlaceholderWidget(height: 20.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[

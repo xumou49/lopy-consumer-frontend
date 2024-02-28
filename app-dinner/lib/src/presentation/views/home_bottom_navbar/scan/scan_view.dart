@@ -31,6 +31,15 @@ class ScanView extends HookWidget {
       cameraController.start();
     }
 
+    useEffect(() {
+      //test
+      context.router.push(RestaurantDetailView(restaurantId: 2));
+    }, const []);
+
+    if (context.mounted) {
+      print("mounted");
+    }
+
     return Scaffold(
         body: Stack(fit: StackFit.expand, children: [
       MobileScanner(

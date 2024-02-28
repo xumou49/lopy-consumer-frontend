@@ -1,5 +1,6 @@
 import 'package:Lopy/src/config/routers/app_router.gr.dart';
 import 'package:Lopy/src/presentation/widgets/common/button_widget.dart';
+import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/new_payment_textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -38,7 +39,7 @@ class NewPaymentMethodView extends StatelessWidget {
                         Expanded(
                             child: NewPaymentTextFieldWidget(
                                 title: "EXPIRE DATE", placeholder: "MM/YYYY")),
-                        SizedBox(width: 20.0),
+                        PlaceholderWidget(width: 20.0),
                         Expanded(
                             child: NewPaymentTextFieldWidget(
                                 title: "CVC", placeholder: "***")),

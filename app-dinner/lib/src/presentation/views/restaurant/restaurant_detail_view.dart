@@ -1,5 +1,5 @@
+import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/restaurant_detail/menu_list_widget.dart';
-import 'package:Lopy/src/presentation/widgets/restaurant_detail/restaurant_details_expanded_appbar_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -8,7 +8,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../domain/models/restaurant.dart';
 import '../../cubits/restaurant_info/restaurant_info_cubit.dart';
 import '../../widgets/common/appbar_widget.dart';
-import '../../widgets/restaurant_detail/menu_item_card_widget.dart';
+import '../../widgets/restaurant_detail/restaurant_info_widget.dart';
 
 @RoutePage()
 class RestaurantDetailView extends HookWidget with WidgetsBindingObserver {
@@ -18,11 +18,6 @@ class RestaurantDetailView extends HookWidget with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    var data = [
-      'One',
-    ];
-    var top = 0.0;
-    var min = 0.0;
     final remoteRestaurantInfoCubit =
         BlocProvider.of<RestaurantInfoCubit>(context);
 
@@ -31,6 +26,10 @@ class RestaurantDetailView extends HookWidget with WidgetsBindingObserver {
       remoteRestaurantInfoCubit.getRestaurantInfo(restaurantId);
       // return null;
     }, [restaurantId]);
+
+    if (context.mounted) {
+      print("mounted");
+    }
 
     return Scaffold(
       body: BlocBuilder<RestaurantInfoCubit, RestaurantInfoState>(
@@ -48,7 +47,7 @@ class RestaurantDetailView extends HookWidget with WidgetsBindingObserver {
             case RestaurantInfoSuccess:
               return _RestaurantDetailListView(restaurant: state.restaurant);
             default:
-              return const SizedBox();
+              return const PlaceholderWidget();
           }
         },
       ),
@@ -80,6 +79,41 @@ class _RestaurantDetailListView extends StatelessWidget {
               return FlexibleSpaceBar(
                 centerTitle: true,
                 collapseMode: CollapseMode.parallax,
+                title: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 300),
+                    //opacity: top == MediaQuery.of(context).padding.top + kToolbarHeight ? 1.0 : 0.0,
+                    opacity: 1.0,
+                    child: (top <= min)
+                        ? GradientAppBar(
+                            title: restaurant.name,
+                            subtitle: 'Open until 10pm',
+                            actionIcon: Icon(Icons.shopping_cart),
+                            showBackButton: true,
+                            onBackButtonPressed: () {
+                              context.router.pop();
+                            },
+                          )
+                        : SizedBox(
+                            child: Text(
+                              restaurant.name!,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                                fontFamily: 'Montserrat',
+                              ),
+                            ),
+                          )),
+                background: Image.network(
+                  // restaurant.imageUrl,
+                  "http://api-lopy.wanioco.com/static/restaurant/image.png",
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
+              );
+              return FlexibleSpaceBar(
+                centerTitle: true,
+                collapseMode: CollapseMode.parallax,
                 title:
                     // Text("resturant detail", textScaleFactor: 1.0,),
                     AnimatedOpacity(
@@ -89,9 +123,9 @@ class _RestaurantDetailListView extends StatelessWidget {
                         child: (top <= min)
                             ? GradientAppBar(
                                 title: restaurant.name,
+                                subtitle: 'Open until 10pm',
                               )
                             : SizedBox(
-                                // height: 50,
                                 child: Text(
                                   restaurant.name!,
                                   style: const TextStyle(
@@ -103,7 +137,8 @@ class _RestaurantDetailListView extends StatelessWidget {
                                 ),
                               )),
                 background: Image.network(
-                  'https://img.delicious.com.au/j95dyjBJ/del/2022/10/australian-capital-territory-kingleys-chicken-176385-3.png',
+                  // restaurant.imageUrl,
+                  "http://api-lopy.wanioco.com/static/restaurant/image.png",
                   fit: BoxFit.cover,
                   width: double.infinity,
                 ),
@@ -113,9 +148,15 @@ class _RestaurantDetailListView extends StatelessWidget {
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               return Container(
-                alignment: Alignment.center,
-                child: const MenuListWidget(),
-              );
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: <Widget>[
+                      const PlaceholderWidget(height: 10),
+                      RestaurantInfoWidget(restaurant: restaurant),
+                      const PlaceholderWidget(height: 10),
+                      const MenuListWidget(),
+                    ],
+                  ));
             },
             childCount: 1,
           ),

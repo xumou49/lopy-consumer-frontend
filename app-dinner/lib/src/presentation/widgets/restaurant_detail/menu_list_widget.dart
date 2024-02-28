@@ -1,5 +1,4 @@
-import 'dart:math';
-
+import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'menu_item_card_widget.dart';
@@ -53,7 +52,6 @@ class _MenuListState extends State<MenuListWidget> {
                     itemBuilder: (BuildContext context, int index) {
                       return Column(
                         children: [
-                          const Divider(),
                           InkWell(
                             onTap: () {
                               setState(() {
@@ -76,24 +74,18 @@ class _MenuListState extends State<MenuListWidget> {
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Opacity(
-                                  opacity: 1,
-                                  child: Text(
-                                    primaryMenu[index],
-                                    style: TextStyle(
-                                      color: (selectedIndex == index)
-                                          ? Colors.black
-                                          : Colors.black54,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 12,
-                                      fontFamily: 'Montserrat',
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    maxLines: 1,
-                                  ),
-                                ),
+                                    opacity: 1,
+                                    child: TextWidget(
+                                        text: primaryMenu[index],
+                                        textColor: (selectedIndex == index)
+                                            ? Colors.black
+                                            : Colors.black54,
+                                        textOverflow: TextOverflow.ellipsis,
+                                        fontWeight: FontWeight.w400)),
                               ),
                             ),
                           ),
+                          const Divider(height: 0.1, thickness: 0.3, ),
                         ],
                       );
                     },
@@ -107,19 +99,11 @@ class _MenuListState extends State<MenuListWidget> {
                     Align(
                       alignment: Alignment.center,
                       child: Opacity(
-                        opacity: 1,
-                        child: Text(
-                          primaryMenu[selectedIndex],
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.normal,
+                          opacity: 1,
+                          child: TextWidget(
+                            text: primaryMenu[selectedIndex],
                             fontSize: 20,
-                            fontFamily: 'Montserrat',
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          maxLines: 1,
-                        ),
-                      ),
+                          )),
                     ),
                     MediaQuery.removePadding(
                       context: context,

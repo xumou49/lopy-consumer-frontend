@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:flutter/material.dart';
 
 class NewPaymentTextFieldWidget extends StatelessWidget {
@@ -21,7 +22,7 @@ class NewPaymentTextFieldWidget extends StatelessWidget {
           style: const TextStyle(
               fontSize: 12.0, color: Colors.black54, fontFamily: 'Montserrat'),
         ),
-        const SizedBox(height: 10),
+        const PlaceholderWidget(height: 10),
         SizedBox(
           height: 100.0,
           child: TextField(
