@@ -2,12 +2,10 @@ import 'package:Lopy/src/config/routers/app_router.dart';
 import 'package:Lopy/src/domain/repositories/api_repository.dart';
 import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
 import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
-
 import 'package:Lopy/src/presentation/cubits/order/order_item_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
-
+import 'package:Lopy/src/presentation/cubits/payment/payment_method_selector_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_info/restaurant_info_cubit.dart';
-
 import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +42,9 @@ class LopyApp extends StatelessWidget {
             create: (context) => OrderListCubit(locator<ApiRepository>())),
         BlocProvider(
             create: (context) => OrderItemListCubit(locator<ApiRepository>())),
+        BlocProvider(
+            create: (context) =>
+                PaymentMethodSelectorCubit(locator<ApiRepository>())),
         BlocProvider(
           create: (context) => RestaurantInfoCubit(
             locator<ApiRepository>(),

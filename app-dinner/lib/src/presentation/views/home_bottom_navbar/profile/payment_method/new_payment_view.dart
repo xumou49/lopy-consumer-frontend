@@ -1,15 +1,15 @@
-import 'package:Lopy/src/config/routers/app_router.gr.dart';
 import 'package:Lopy/src/presentation/widgets/common/button_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/new_payment_textfield_widget.dart';
-import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../widgets/common/appbar_widget.dart';
 
 @RoutePage()
 class NewPaymentMethodView extends StatelessWidget {
-  const NewPaymentMethodView({super.key});
+  final String type;
+  const NewPaymentMethodView({super.key, required this.type});
 
   @override
   Widget build(BuildContext context) {

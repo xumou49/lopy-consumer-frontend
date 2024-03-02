@@ -9,7 +9,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i36;
-import 'package:flutter/cupertino.dart' as _i37;
+import 'package:flutter/cupertino.dart' as _i38;
+import 'package:flutter/material.dart' as _i37;
 import 'package:Lopy/src/presentation/views/cart/cart_item_view.dart' as _i1;
 import 'package:Lopy/src/presentation/views/cart/cart_list_view.dart' as _i2;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/discover/discover_view.dart'
@@ -149,9 +150,13 @@ abstract class $AppRouter extends _i36.RootStackRouter {
       );
     },
     NewPaymentMethodView.name: (routeData) {
+      final args = routeData.argsAs<NewPaymentMethodViewArgs>();
       return _i36.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i12.NewPaymentMethodView(),
+        child: _i12.NewPaymentMethodView(
+          key: args.key,
+          type: args.type,
+        ),
       );
     },
     OrderNavigationView.name: (routeData) {
@@ -460,16 +465,41 @@ class LoginView extends _i36.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i12.NewPaymentMethodView]
-class NewPaymentMethodView extends _i36.PageRouteInfo<void> {
-  const NewPaymentMethodView({List<_i36.PageRouteInfo>? children})
-      : super(
+class NewPaymentMethodView
+    extends _i36.PageRouteInfo<NewPaymentMethodViewArgs> {
+  NewPaymentMethodView({
+    _i37.Key? key,
+    required String type,
+    List<_i36.PageRouteInfo>? children,
+  }) : super(
           NewPaymentMethodView.name,
+          args: NewPaymentMethodViewArgs(
+            key: key,
+            type: type,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'NewPaymentMethodView';
 
-  static const _i36.PageInfo<void> page = _i36.PageInfo<void>(name);
+  static const _i36.PageInfo<NewPaymentMethodViewArgs> page =
+      _i36.PageInfo<NewPaymentMethodViewArgs>(name);
+}
+
+class NewPaymentMethodViewArgs {
+  const NewPaymentMethodViewArgs({
+    this.key,
+    required this.type,
+  });
+
+  final _i37.Key? key;
+
+  final String type;
+
+  @override
+  String toString() {
+    return 'NewPaymentMethodViewArgs{key: $key, type: $type}';
+  }
 }
 
 /// generated route for
@@ -617,7 +647,7 @@ class ProfileView extends _i36.PageRouteInfo<void> {
 class RestaurantDetailView
     extends _i36.PageRouteInfo<RestaurantDetailViewArgs> {
   RestaurantDetailView({
-    _i37.Key? key,
+    _i38.Key? key,
     required int restaurantId,
     List<_i36.PageRouteInfo>? children,
   }) : super(
@@ -641,7 +671,7 @@ class RestaurantDetailViewArgs {
     required this.restaurantId,
   });
 
-  final _i37.Key? key;
+  final _i38.Key? key;
 
   final int restaurantId;
 
@@ -655,7 +685,7 @@ class RestaurantDetailViewArgs {
 /// [_i24.RestaurantListView]
 class RestaurantListView extends _i36.PageRouteInfo<RestaurantListViewArgs> {
   RestaurantListView({
-    _i37.Key? key,
+    _i38.Key? key,
     String cuisine = "",
     List<_i36.PageRouteInfo>? children,
   }) : super(
@@ -679,7 +709,7 @@ class RestaurantListViewArgs {
     this.cuisine = "",
   });
 
-  final _i37.Key? key;
+  final _i38.Key? key;
 
   final String cuisine;
 
