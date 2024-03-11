@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
-=======
 import 'package:auto_route/auto_route.dart';
->>>>>>> 3f5ea0c (Cart related implementation)
 import 'package:flutter/material.dart';
 
 import '../../../config/routers/app_router.gr.dart';
