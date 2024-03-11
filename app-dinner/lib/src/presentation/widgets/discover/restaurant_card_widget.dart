@@ -1,8 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import '../../../config/routers/app_router.gr.dart';
-
+import 'package:Lopy/src/presentation/views/cart/cart_list_view.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oktoast/oktoast.dart';
+import '../../../domain/models/cart.dart';
 import '../../../domain/models/restaurant.dart';
+import '../../cubits/cart/cart_list_cubit.dart';
 
 enum RestaurantCardType { small, big }
 
@@ -20,7 +25,7 @@ class RestaurantCard extends StatelessWidget {
       case RestaurantCardType.small:
         return buildSmallCard(restaurant);
       case RestaurantCardType.big:
-        return buildBigCard(restaurant);
+        return buildBigCard(context, restaurant);
       default:
         return Container();
     }
@@ -79,7 +84,8 @@ class RestaurantCard extends StatelessWidget {
     );
   }
 
-  Widget buildBigCard(Restaurant restaurant) {
+  Widget buildBigCard(BuildContext context, Restaurant restaurant) {
+    final localACartCubit = BlocProvider.of<CartListCubit>(context);
     return SizedBox(
       width: 360,
       height: 200,
@@ -125,6 +131,15 @@ class RestaurantCard extends StatelessWidget {
                         color: Colors.pink.shade300,
                         size: 15,
                       ),
+                      // Icon(Icons.favorite_border, color: Colors.pink.shade300, size: 15,),
+                      FloatingActionButton(
+                        onPressed: () {
+                          Cart car = buildCart();
+                          localACartCubit.saveCart(cartItem: car);
+                          showToast('Article Saved Successfully');
+                        },
+                        child: Icon(Icons.favorite_border, color: Colors.pink.shade300, size: 15,),
+                      ),
                     ],
                   ),
                 ],
@@ -135,6 +150,15 @@ class RestaurantCard extends StatelessWidget {
       ),
     );
   }
+
+  Cart buildCart() {
+    Cart c = const Cart(
+        name: "hello", price: 10, quantity: 1,
+        userId: 100, restaurantId: 101, restaurantMenuItemId: 102
+    );
+    return c;
+  }
+
 }
 
 // 'https://welcon.kocca.kr/cmm/getImage.do?atchFileId=FILE_046d5e61-7fce-4dcb-86c4-f71f90e1a662&amp;fileSn=1&amp;thumb='

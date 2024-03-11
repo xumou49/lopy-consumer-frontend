@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
+=======
+import 'package:auto_route/auto_route.dart';
+>>>>>>> 3f5ea0c (Cart related implementation)
 import 'package:flutter/material.dart';
+
+import '../../../config/routers/app_router.gr.dart';
 
 class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
@@ -8,6 +14,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Icon? actionIcon;
   final Function()? onTapAction;
   final bool showBackButton;
+  final bool showCartIcon;
   final VoidCallback? onBackButtonPressed;
   final List<Widget>? actions;
   final Function()? onTap;
@@ -16,6 +23,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     this.title,
     this.showBackButton = false,
+    this.showCartIcon = false,
     this.onBackButtonPressed,
     this.onTap,
     this.actions,
@@ -34,6 +42,43 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
             actionIcon: actionIcon,
           )
         : const AppBarSearchFieldWidget();
+    //     ? Text(title!)
+    //     : TextField(
+    //     decoration: InputDecoration(
+    //     hintText: 'Search restaurant...',
+    //     prefixIcon: Icon(Icons.search, color: Colors.pink.shade100),
+    //     // border: const OutlineInputBorder(),
+    //     enabledBorder: OutlineInputBorder(
+    //       borderRadius: BorderRadius.circular(15),
+    //       borderSide: BorderSide(color: Colors.pink.shade100),
+    //     ),
+    //     focusedBorder: OutlineInputBorder(
+    //       borderRadius: BorderRadius.circular(15),
+    //       borderSide: BorderSide(color: Colors.pink.shade200),
+    //     ),
+    //     filled: true,
+    //     fillColor: Colors.white,
+    //     contentPadding: const EdgeInsets.all(8),
+    //   ),
+    // );
+    // List<Widget> appBarActions = [
+    //   // if (showBackButton)
+    //   //   IconButton(
+    //   //     icon: const Icon(Icons.arrow_back_ios),
+    //   //     onPressed: onBackButtonPressed ??
+    //   //             () {
+    //   //           Navigator.maybePop(context);
+    //   //         },
+    //   //   ),
+    //   if (showCartIcon)
+    //     IconButton(
+    //       icon: const Icon(Icons.shopping_cart),
+    //       onPressed: () {
+    //         context.router.push(const CartNavigationView());
+    //
+    //       },
+    //     ),
+    // ];
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -51,7 +96,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading: showBackButton
             ? IconButton(
                 icon: const Icon(
-                  Icons.arrow_back,
+                  Icons.arrow_back_ios,
                   color: Color.fromRGBO(169, 92, 92, 1),
                 ),
                 onPressed: onBackButtonPressed ??
@@ -60,7 +105,8 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
                     },
               )
             : null,
-        actions: actions ?? [],
+        // actions: actions ?? [],
+        // actions: appBarActions,
       ),
     );
   }

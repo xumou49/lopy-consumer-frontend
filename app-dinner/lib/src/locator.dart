@@ -12,9 +12,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 
 import '../firebase_options.dart';
+import 'data/data_sources/local/app_database.dart';
 import 'data/data_sources/remote/restaurants_api.dart';
 import 'data/repositories/api_repository_impl.dart';
+import 'data/repositories/database_repository_impl.dart';
 import 'domain/repositories/api_repository.dart';
+import 'domain/repositories/database_repository.dart';
 
 final locator = GetIt.instance;
 
@@ -24,6 +27,9 @@ Future<void> initializeDependencies() async {
 
   locator.registerSingleton(AppRouter());
   locator.registerSingleton<Dio>(dio);
+
+  final db = await $FloorAppDatabase.databaseBuilder("app_database.db").build();
+  locator.registerSingleton<AppDatabase>(db);
 
   // register apis here
   locator.registerSingleton<LoginApi>(
@@ -54,6 +60,10 @@ Future<void> initializeDependencies() async {
         locator<OrdersApi>(),
         locator<OrderItemsApi>(),
         locator<RestaurantInfoApi>()),
+  );
+
+  locator.registerSingleton<DatabaseRepository>(
+    DatabaseRepositoryImpl(locator<AppDatabase>()),
   );
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

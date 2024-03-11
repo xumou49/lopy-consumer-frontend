@@ -40,7 +40,7 @@ class DiscoverView extends HookWidget {
     }, const []);
 
     return Scaffold(
-      appBar: const GradientAppBar(),
+      appBar: GradientAppBar(),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: <Widget>[

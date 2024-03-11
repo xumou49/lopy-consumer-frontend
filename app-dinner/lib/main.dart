@@ -1,12 +1,16 @@
 import 'package:Lopy/src/config/routers/app_router.dart';
 import 'package:Lopy/src/domain/repositories/api_repository.dart';
+import 'package:Lopy/src/domain/repositories/database_repository.dart';
 import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
+import 'package:Lopy/src/presentation/cubits/cart/cart_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_item_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/payment/payment_method_selector_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_info/restaurant_info_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_cuisine_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_list_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_promo_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -50,6 +54,26 @@ class LopyApp extends StatelessWidget {
             locator<ApiRepository>(),
           ),
         ),
+        BlocProvider(
+          create: (context) =>
+          RestaurantPromoCubit(
+            locator<ApiRepository>(),
+          )
+            ..getRestaurantList(),),
+        BlocProvider(
+          create: (context) =>
+          RestaurantCuisineCubit(
+            locator<ApiRepository>(),
+          )
+            ..getRestaurantList(),
+        ),
+        BlocProvider(
+          create: (context) =>
+          CartListCubit(
+            locator<DatabaseRepository>(),
+          )
+            ..getAllSavedCarts(),
+        )
       ],
       child: OKToast(
         child: MaterialApp.router(

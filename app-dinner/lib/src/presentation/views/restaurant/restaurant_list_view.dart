@@ -32,7 +32,13 @@ class RestaurantListView extends HookWidget {
     }, const []);
 
     return Scaffold(
-      appBar: const GradientAppBar(title:"Restaurants",),
+      appBar: GradientAppBar(
+        title:"Restaurants",
+        showBackButton: true,
+        showCartIcon: true,
+        onBackButtonPressed:() {
+        context.router.pop();
+      },),
       body: BlocBuilder<RestaurantCuisineCubit, RestaurantCuisineState>(
         builder: (_, state) {
           switch (state.runtimeType) {
