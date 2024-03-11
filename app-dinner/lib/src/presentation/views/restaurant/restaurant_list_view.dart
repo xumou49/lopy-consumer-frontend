@@ -6,6 +6,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../../../config/routers/app_router.gr.dart';
 import '../../../domain/models/restaurant.dart';
 import '../../../domain/repositories/api_repository.dart';
 import '../../../locator.dart';
@@ -36,6 +37,8 @@ class RestaurantListView extends HookWidget {
         title:"Restaurants",
         showBackButton: true,
         showCartIcon: true,
+        actionIcon: const Icon(Icons.shopping_cart),
+        onTapAction: () {context.router.push(const CartNavigationView());},
         onBackButtonPressed:() {
         context.router.pop();
       },),

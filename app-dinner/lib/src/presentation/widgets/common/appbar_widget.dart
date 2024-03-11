@@ -72,7 +72,6 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
     //       icon: const Icon(Icons.shopping_cart),
     //       onPressed: () {
     //         context.router.push(const CartNavigationView());
-    //
     //       },
     //     ),
     // ];
@@ -155,11 +154,8 @@ class AppBarTitleWidget extends StatelessWidget {
         ),
         actionIcon != null
             ? IconButton(
-                onPressed: onTapAction != null
-                    ? () {
-                        onTapAction!();
-                      }
-                    : () {},
+                onPressed: onTapAction == null
+                    ? () {context.router.push(const CartNavigationView());} : () {},
                 icon: actionIcon!)
             : const PlaceholderWidget()
       ],
@@ -171,6 +167,9 @@ class AppBarTitleWidget extends StatelessWidget {
       textColor: const Color.fromRGBO(169, 92, 92, 1),
     );
   }
+  void hello() {
+    print("hello");
+  }
 }
 
 class AppBarSearchFieldWidget extends StatelessWidget {
@@ -179,6 +178,9 @@ class AppBarSearchFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onTap: () {
+        showOverlay(context);
+      },
       decoration: InputDecoration(
         hintText: 'Search restaurant...',
         prefixIcon: Icon(Icons.search, color: Colors.pink.shade100),
@@ -197,4 +199,44 @@ class AppBarSearchFieldWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+
+class Abc extends StatelessWidget {
+  final VoidCallback onClose;
+
+  const Abc({Key? key, required this.onClose}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: GradientAppBar(
+        showBackButton: true,
+        onBackButtonPressed: onClose,
+      ),
+      body: Center(
+        child: Text("Your overlay content goes here"),
+      ),
+    );
+  }
+}
+
+void showOverlay(BuildContext context) {
+  OverlayEntry? overlayEntry;
+
+  overlayEntry = OverlayEntry(
+    builder: (context) => Positioned(
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      child: Abc(
+        onClose: () {
+          overlayEntry?.remove();
+        },
+      ),
+    ),
+  );
+
+  Overlay.of(context)?.insert(overlayEntry!);
 }
