@@ -1,3 +1,4 @@
+import 'package:Lopy/env.dart';
 import 'package:Lopy/src/config/routers/app_router.dart';
 import 'package:Lopy/src/domain/repositories/api_repository.dart';
 import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
@@ -7,8 +8,10 @@ import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/payment/payment_method_selector_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_info/restaurant_info_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_list_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/user_card/user_card_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get_it/get_it.dart';
 import 'package:oktoast/oktoast.dart';
 
@@ -16,7 +19,7 @@ import 'src/locator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  Stripe.publishableKey = publishableKey;
   await initializeDependencies();
 
   runApp(const LopyApp());
@@ -47,6 +50,11 @@ class LopyApp extends StatelessWidget {
                 PaymentMethodSelectorCubit(locator<ApiRepository>())),
         BlocProvider(
           create: (context) => RestaurantInfoCubit(
+            locator<ApiRepository>(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => UserCardCubit(
             locator<ApiRepository>(),
           ),
         ),
