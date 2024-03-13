@@ -1,10 +1,13 @@
+import 'package:Lopy/src/domain/models/menu_item.dart';
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:Lopy/src/presentation/widgets/restaurant_detail/menu_item_dialog_widget.dart';
 import 'package:flutter/material.dart';
 
 class MenuItemCard extends StatelessWidget {
-  const MenuItemCard({Key? key}) : super(key: key);
+  final MenuItem menuItem;
+
+  const MenuItemCard({Key? key, required this.menuItem}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,7 @@ class MenuItemCard extends StatelessWidget {
               showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return const MenuItemDialogWidget();
+                    return MenuItemDialogWidget(menuItem: menuItem);
                   });
             },
             child: Column(
@@ -37,7 +40,7 @@ class MenuItemCard extends StatelessWidget {
                                 bottomLeft: Radius.zero,
                                 bottomRight: Radius.zero),
                             child: Image.network(
-                              'https://img.delicious.com.au/j95dyjBJ/del/2022/10/australian-capital-territory-kingleys-chicken-176385-3.png',
+                              menuItem.imageUrl,
                               fit: BoxFit.cover,
                               height: 150,
                               width: double.infinity,
@@ -53,26 +56,25 @@ class MenuItemCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const Padding(
-                        padding: EdgeInsets.all(10.0),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
                         child: Column(
                           children: <Widget>[
                             Row(
                               children: <Widget>[
                                 Expanded(
                                     child: TextWidget(
-                                        text: 'MenuItem Name',
+                                        text: menuItem.itemName,
                                         textAlign: TextAlign.end,
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 14)
-                                    ),
+                                        fontSize: 14)),
                               ],
                             ),
                             Row(
                               children: <Widget>[
                                 Expanded(
                                     child: TextWidget(
-                                        text: 'S\$10.00',
+                                        text: 'S\$${menuItem.price}',
                                         textAlign: TextAlign.end)),
                               ],
                             ),

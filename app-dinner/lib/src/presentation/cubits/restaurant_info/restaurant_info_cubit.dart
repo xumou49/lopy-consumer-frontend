@@ -1,11 +1,10 @@
-import 'package:Lopy/src/domain/models/requests/RestaurantInfoRequest.dart';
+import 'package:Lopy/src/domain/models/requests/restaurant_info_request.dart';
 import 'package:Lopy/src/presentation/cubits/base/base_cubit.dart';
 import 'package:Lopy/src/utils/resources/data_state.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../domain/models/restaurant.dart';
-import '../../../domain/models/requests/restaurants_request.dart';
 import '../../../domain/repositories/api_repository.dart';
 
 part 'restaurant_info_state.dart';

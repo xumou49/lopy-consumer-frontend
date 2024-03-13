@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 class RestaurantInfoRequest {
   final int id;

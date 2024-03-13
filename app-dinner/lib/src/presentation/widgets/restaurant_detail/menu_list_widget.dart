@@ -1,10 +1,14 @@
+import 'package:Lopy/src/domain/models/menu_category.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'menu_item_card_widget.dart';
 
 class MenuListWidget extends StatefulWidget {
-  const MenuListWidget({Key? key}) : super(key: key);
+  final MenuCategory menuCategory;
+
+  const MenuListWidget({Key? key, required this.menuCategory})
+      : super(key: key);
 
   @override
   State<MenuListWidget> createState() => _MenuListState();
@@ -16,22 +20,10 @@ class _MenuListState extends State<MenuListWidget> {
     super.initState();
   }
 
-  List<String> primaryMenu = [
-    "Menu Cat.1",
-    "Menu Cat.2",
-    "Menu Cat.3",
-    "Menu Cat.4",
-    "Menu Cat.5"
-  ];
-
-  List<String> secondaryMenu = [];
-
   int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    print("List Length: $selectedIndex");
-
     return Column(
       children: <Widget>[
         Row(
@@ -47,7 +39,7 @@ class _MenuListState extends State<MenuListWidget> {
                   child: ListView.builder(
                     physics: const ClampingScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: primaryMenu.length,
+                    itemCount: widget.menuCategory.menuList.length,
                     // The number of restaurant cards
                     itemBuilder: (BuildContext context, int index) {
                       return Column(
@@ -76,7 +68,8 @@ class _MenuListState extends State<MenuListWidget> {
                                 child: Opacity(
                                     opacity: 1,
                                     child: TextWidget(
-                                        text: primaryMenu[index],
+                                        text: widget.menuCategory
+                                            .menuList[index].menuName,
                                         textColor: (selectedIndex == index)
                                             ? Colors.black
                                             : Colors.black54,
@@ -85,7 +78,10 @@ class _MenuListState extends State<MenuListWidget> {
                               ),
                             ),
                           ),
-                          const Divider(height: 0.1, thickness: 0.3, ),
+                          const Divider(
+                            height: 0.1,
+                            thickness: 0.3,
+                          ),
                         ],
                       );
                     },
@@ -101,7 +97,8 @@ class _MenuListState extends State<MenuListWidget> {
                       child: Opacity(
                           opacity: 1,
                           child: TextWidget(
-                            text: primaryMenu[selectedIndex],
+                            text: widget
+                                .menuCategory.menuList[selectedIndex].menuName,
                             fontSize: 20,
                           )),
                     ),
@@ -109,12 +106,15 @@ class _MenuListState extends State<MenuListWidget> {
                       context: context,
                       removeTop: true,
                       child: ListView.builder(
-                        physics: ClampingScrollPhysics(),
+                        physics: const ClampingScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: selectedIndex + 1,
+                        itemCount: widget.menuCategory.menuList[selectedIndex]
+                            .menuItemList.length,
                         // The number of restaurant cards
                         itemBuilder: (BuildContext context, int index) {
-                          return const MenuItemCard();
+                          return MenuItemCard(
+                              menuItem: widget.menuCategory
+                                  .menuList[selectedIndex].menuItemList[index]);
                         },
                       ),
                     )

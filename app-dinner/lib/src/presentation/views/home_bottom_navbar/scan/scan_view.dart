@@ -33,7 +33,7 @@ class ScanView extends HookWidget {
 
     useEffect(() {
       //test
-      context.router.push(RestaurantDetailView(restaurantId: 2));
+      context.router.push(RestaurantDetailView(restaurantId: 1));
     }, const []);
 
     if (context.mounted) {
