@@ -16,7 +16,7 @@ class ProfileView extends StatelessWidget {
         //   backgroundColor: const Color.fromRGBO(243, 129, 129, 1),
         //   title: const Text("Profile"),
         // ),
-        appBar: const GradientAppBar(title:"Profile",),
+        appBar: GradientAppBar(title:"Profile",),
         body: Container(
           color: Colors.white,
           child: ListView(

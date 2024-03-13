@@ -6,7 +6,8 @@ abstract class RestaurantInfoState extends Equatable {
   final DioError? error;
 
   const RestaurantInfoState({
-    this.restaurant = const Restaurant(name: '', imageUrl: '', rating: ''),
+    this.restaurant = const Restaurant(
+        name: '', imageUrl: '', rating: ''),
     this.isData = true,
     this.error,
   });

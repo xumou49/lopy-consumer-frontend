@@ -1,12 +1,16 @@
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../../../domain/models/menu_item.dart';
 import '../common/button_widget.dart';
 import '../common/text_widget.dart';
 import 'number_counter_widget.dart';
 
 class MenuItemDialogWidget extends StatelessWidget {
-  const MenuItemDialogWidget({Key? key}) : super(key: key);
+  final MenuItem menuItem;
+
+  const MenuItemDialogWidget({Key? key, required this.menuItem})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,7 @@ class MenuItemDialogWidget extends StatelessWidget {
       surfaceTintColor: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       child: SizedBox(
-        height: 470,
+        height: 420,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -30,7 +34,7 @@ class MenuItemDialogWidget extends StatelessWidget {
                           bottomLeft: Radius.zero,
                           bottomRight: Radius.zero),
                       child: Image.network(
-                        'https://img.delicious.com.au/j95dyjBJ/del/2022/10/australian-capital-territory-kingleys-chicken-176385-3.png',
+                        menuItem.imageUrl,
                         fit: BoxFit.cover,
                         height: 180,
                         width: double.infinity,
@@ -56,20 +60,19 @@ class MenuItemDialogWidget extends StatelessWidget {
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               child: Column(
                 children: <Widget>[
-                  const Row(
+                  Row(
                     children: <Widget>[
                       Expanded(
                           child: TextWidget(
-                        text: 'MenuItem Name',
+                        text: menuItem.itemName,
                         fontSize: 14,
                       )),
                       Expanded(
                           child: TextWidget(
-                        text: 'S\$10.00',
-                        textAlign: TextAlign.end,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500
-                      )),
+                              text: 'S\$${menuItem.price}',
+                              textAlign: TextAlign.end,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500)),
                     ],
                   ),
                   const Divider(thickness: 0.3),
@@ -82,13 +85,11 @@ class MenuItemDialogWidget extends StatelessWidget {
                     ],
                   ),
                   const PlaceholderWidget(height: 5.0),
-                  const Row(
+                  Row(
                     children: <Widget>[
                       Expanded(
                           child: TextWidget(
-                              text:
-                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vulputate ut magna at lacinia. Etiam a ligula nec lectus vulputate cursus. Morbi vitae commodo magna. ',
-                              fontSize: 14)),
+                              text: menuItem.description, fontSize: 14)),
                     ],
                   ),
                   const PlaceholderWidget(height: 10.0),

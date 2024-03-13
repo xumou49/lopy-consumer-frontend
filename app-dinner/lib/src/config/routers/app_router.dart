@@ -1,6 +1,5 @@
 // routers
 import 'package:auto_route/auto_route.dart';
-
 import 'app_router.gr.dart';
 
 @AutoRouterConfig()
@@ -83,6 +82,7 @@ class AppRouter extends $AppRouter {
                 page: OrderNavigationView.page,
                 children: [
                   AutoRoute(page: OrdersView.page, initial: true),
+                  // AutoRoute(page: OrderDetailView.page),
                 ],
               ),
               AutoRoute(

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'restaurants_api.dart';
+part of 'user_card_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,12 +8,12 @@ part of 'restaurants_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _RestaurantsApi implements RestaurantsApi {
-  _RestaurantsApi(
+class _UserCardApi implements UserCardApi {
+  _UserCardApi(
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://api-lopy.wanioco.com/api/v1';
+    baseUrl ??= 'http://127.0.0.1:8080/api/v1';
   }
 
   final Dio _dio;
@@ -21,7 +21,7 @@ class _RestaurantsApi implements RestaurantsApi {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<RestaurantsResponse>> getRestaurants(
+  Future<HttpResponse<UserCardResponse>> saveUserCard(
     request, {
     contentType = 'application/json',
   }) async {
@@ -32,20 +32,20 @@ class _RestaurantsApi implements RestaurantsApi {
     final _data = <String, dynamic>{};
     _data.addAll(request?.toMap() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<RestaurantsResponse>>(Options(
-      method: 'POST',
+        _setStreamType<HttpResponse<UserCardResponse>>(Options(
+      method: 'PUT',
       headers: _headers,
       extra: _extra,
       contentType: contentType,
     )
             .compose(
               _dio.options,
-              '/restaurant/list',
+              '/user-card/save',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RestaurantsResponse.fromMap(_result.data!);
+    final value = UserCardResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
