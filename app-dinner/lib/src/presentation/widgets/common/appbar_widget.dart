@@ -2,6 +2,7 @@ import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:Lopy/src/presentation/views/search/search_view.dart';
 
 import '../../../config/routers/app_router.gr.dart';
 
@@ -28,7 +29,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actionIcon,
     this.onTapAction,
   }) : assert(!showBackButton || onBackButtonPressed != null,
-            'onBackButtonPressed must be provided if showBackButton is true');
+  'onBackButtonPressed must be provided if showBackButton is true');
 
   @override
   Widget build(BuildContext context) {
@@ -124,10 +125,10 @@ class AppBarTitleWidget extends StatelessWidget {
 
   const AppBarTitleWidget(
       {super.key,
-      required this.title,
-      this.subtitle,
-      this.actionIcon,
-      this.onTapAction});
+        required this.title,
+        this.subtitle,
+        this.actionIcon,
+        this.onTapAction});
 
   @override
   Widget build(BuildContext context) {
@@ -146,9 +147,9 @@ class AppBarTitleWidget extends StatelessWidget {
             ),
             subtitle != null
                 ? TextWidget(
-                    text: subtitle!,
-                    textColor: const Color.fromRGBO(169, 92, 92, 1),
-                  )
+              text: subtitle!,
+              textColor: const Color.fromRGBO(169, 92, 92, 1),
+            )
                 : const PlaceholderWidget()
           ],
         ),
@@ -157,6 +158,7 @@ class AppBarTitleWidget extends StatelessWidget {
                 onPressed: onTapAction == null
                     ? () {context.router.push(const CartNavigationView());} : () {},
                 icon: actionIcon!)
+
             : const PlaceholderWidget()
       ],
     );
@@ -178,11 +180,9 @@ class AppBarSearchFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      onTap: () {
-        showOverlay(context);
-      },
+      onTap: () {showOverlay(context);},
       decoration: InputDecoration(
-        hintText: 'Search restaurant...',
+        hintText: 'Search restaurant....',
         prefixIcon: Icon(Icons.search, color: Colors.pink.shade100),
         // border: const OutlineInputBorder(),
         enabledBorder: OutlineInputBorder(
@@ -202,10 +202,9 @@ class AppBarSearchFieldWidget extends StatelessWidget {
 }
 
 
-class Abc extends StatelessWidget {
+class SearchPopUp extends StatelessWidget {
   final VoidCallback onClose;
-
-  const Abc({Key? key, required this.onClose}) : super(key: key);
+  const SearchPopUp({Key? key, required this.onClose}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -224,19 +223,210 @@ class Abc extends StatelessWidget {
 void showOverlay(BuildContext context) {
   OverlayEntry? overlayEntry;
 
+//   overlayEntry = OverlayEntry(
+//     builder: (context) => Positioned(
+//       top: 0,
+//       left: 0,
+//       right: 0,
+//       bottom: 0,
+//       child: Abc(
+//         onClose: () {
+//           overlayEntry?.remove();
+//         },
+//       ),
+//     ),
+//   );
+//
+//   Overlay.of(context)?.insert(overlayEntry!);
+// }
   overlayEntry = OverlayEntry(
-    builder: (context) => Positioned(
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      child: Abc(
-        onClose: () {
-          overlayEntry?.remove();
-        },
+      builder: (context) =>
+          Positioned(
+            top: 0, bottom: 0, left: 0, right: 0,
+            child: SearchPopUp(
+              onClose: () {
+                overlayEntry?.remove();
+              },
+            ),
+          )
+  );
+  Overlay.of(context)?.insert(overlayEntry!);
+}
+
+class AutocompleteSearchList extends StatefulWidget {
+  const AutocompleteSearchList({super.key});
+
+  @override
+  _AutocompleteSearchListState createState() => _AutocompleteSearchListState();
+}
+
+class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
+  String _currentInput = '';
+  static const List<String> _searchHistorylist = <String>[
+    'vegan'
+    'vegetable',
+    'fruits'
+    'pizza',
+    'hotpot',
+    'italian',
+  ];
+  final double itemHeight = 48;
+  final int maxItems = 5;
+  @override
+  Widget build(BuildContext context) {
+    return Autocomplete<String>(
+      optionsBuilder: (TextEditingValue textEditingValue) {
+        _currentInput = textEditingValue.text;
+        if (_currentInput == '') {
+          return const Iterable<String>.empty();
+        }
+        return _searchHistorylist.where((String option) {
+          return option.toLowerCase().startsWith(_currentInput.toLowerCase());
+        });
+      },
+      onSelected: (String selection) {
+        debugPrint('You just selected $selection');
+      },
+      optionsViewBuilder: (
+          BuildContext context,
+          AutocompleteOnSelected<String> onSelected,
+          Iterable<String> options,
+          ) {
+        final int itemCount = options.length <= maxItems ? options.length : maxItems;
+        return Align(
+          alignment: Alignment.topLeft,
+          child: Material(
+            elevation: 4.0,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 360, // Adjust as needed
+                height: itemHeight * itemCount,
+                child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  itemCount: options.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final String option = options.elementAt(index);
+                    final int matchStartIndex = option.toLowerCase().indexOf(_currentInput.toLowerCase());
+                    final TextSpan matchText = TextSpan(
+                      text: option.substring(matchStartIndex, matchStartIndex + _currentInput.length),
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    );
+                    final TextSpan remainingText = TextSpan(
+                      text: option.substring(matchStartIndex + _currentInput.length),
+                      style: TextStyle(fontWeight: FontWeight.normal),
+                    );
+
+                    return GestureDetector(
+                      onTap: () => onSelected(option),
+                      child: ListTile(
+                        title: RichText(
+                          text: TextSpan(
+                            children: [
+                              matchStartIndex > 0
+                                  ? TextSpan(text: option.substring(0, matchStartIndex), style: TextStyle(fontWeight: FontWeight.normal))
+                                  : TextSpan(),
+                              matchText,
+                              remainingText,
+                            ],
+                            style: DefaultTextStyle.of(context).style,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              _suggestionSearch()
+            ],)
+          ),
+        );
+      },
+
+      fieldViewBuilder: (BuildContext context, TextEditingController textEditingController, FocusNode focusNode, VoidCallback onFieldSubmitted) {
+        return TextField(
+          controller: textEditingController,
+          focusNode: focusNode,
+          decoration: InputDecoration(
+            hintText: 'Search restaurant....',
+            prefixIcon: Icon(Icons.search, color: Colors.pink.shade100),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: Colors.pink.shade100),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: Colors.pink.shade200),
+            ),
+            filled: true,
+            fillColor: Colors.white,
+            contentPadding: const EdgeInsets.all(8),
+          ),
+        );
+      },
+    );
+  }
+}
+
+Widget _suggestionSearch(){
+  return Container(
+    // color: Colors.blue,
+    height: 100, // Adjust the height to accommodate the search items
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Popular Search',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 14,
+            fontFamily: 'Montserrat',
+            fontWeight: FontWeight.w600,
+            height: 0,
+          ),
+        ),
+        SizedBox(
+          height: 30,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildSearchItem('vegan'),
+              _buildSearchItem('vegetable'),
+              _buildSearchItem('fruits'),
+              _buildSearchItem('pizza'),
+              _buildSearchItem('Fruits'),
+              // Add more search items here
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _buildSearchItem(String itemName) {
+  return Container(
+    margin: EdgeInsets.only(top: 4, left: 4, right: 4, bottom: 4),
+    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+    decoration: BoxDecoration(
+      color: const Color(0x4CC4C4C4),
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child:
+    Text(
+      itemName,
+      style: const TextStyle(
+        color: Colors.black,
+        fontSize: 10,
+        fontFamily: 'Montserrat',
+        fontWeight: FontWeight.w400,
+        height: 1,
       ),
     ),
   );
-
-  Overlay.of(context)?.insert(overlayEntry!);
 }
