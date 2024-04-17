@@ -2,7 +2,6 @@ import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:Lopy/src/presentation/views/search/search_view.dart';
 
 import '../../../config/routers/app_router.gr.dart';
 
@@ -29,7 +28,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actionIcon,
     this.onTapAction,
   }) : assert(!showBackButton || onBackButtonPressed != null,
-  'onBackButtonPressed must be provided if showBackButton is true');
+            'onBackButtonPressed must be provided if showBackButton is true');
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
             subtitle: subtitle,
             actionIcon: actionIcon,
           )
-        : const AppBarSearchFieldWidget();
+        : const AutocompleteSearchList();
     //     ? Text(title!)
     //     : TextField(
     //     decoration: InputDecoration(
@@ -125,10 +124,10 @@ class AppBarTitleWidget extends StatelessWidget {
 
   const AppBarTitleWidget(
       {super.key,
-        required this.title,
-        this.subtitle,
-        this.actionIcon,
-        this.onTapAction});
+      required this.title,
+      this.subtitle,
+      this.actionIcon,
+      this.onTapAction});
 
   @override
   Widget build(BuildContext context) {
@@ -147,18 +146,20 @@ class AppBarTitleWidget extends StatelessWidget {
             ),
             subtitle != null
                 ? TextWidget(
-              text: subtitle!,
-              textColor: const Color.fromRGBO(169, 92, 92, 1),
-            )
+                    text: subtitle!,
+                    textColor: const Color.fromRGBO(169, 92, 92, 1),
+                  )
                 : const PlaceholderWidget()
           ],
         ),
         actionIcon != null
             ? IconButton(
                 onPressed: onTapAction == null
-                    ? () {context.router.push(const CartNavigationView());} : () {},
+                    ? () {
+                        context.router.push(const CartNavigationView());
+                      }
+                    : () {},
                 icon: actionIcon!)
-
             : const PlaceholderWidget()
       ],
     );
@@ -169,6 +170,7 @@ class AppBarTitleWidget extends StatelessWidget {
       textColor: const Color.fromRGBO(169, 92, 92, 1),
     );
   }
+
   void hello() {
     print("hello");
   }
@@ -180,7 +182,9 @@ class AppBarSearchFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      onTap: () {showOverlay(context);},
+      onTap: () {
+        showOverlay(context);
+      },
       decoration: InputDecoration(
         hintText: 'Search restaurant....',
         prefixIcon: Icon(Icons.search, color: Colors.pink.shade100),
@@ -200,7 +204,6 @@ class AppBarSearchFieldWidget extends StatelessWidget {
     );
   }
 }
-
 
 class SearchPopUp extends StatelessWidget {
   final VoidCallback onClose;
@@ -240,16 +243,17 @@ void showOverlay(BuildContext context) {
 //   Overlay.of(context)?.insert(overlayEntry!);
 // }
   overlayEntry = OverlayEntry(
-      builder: (context) =>
-          Positioned(
-            top: 0, bottom: 0, left: 0, right: 0,
+      builder: (context) => Positioned(
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
             child: SearchPopUp(
               onClose: () {
                 overlayEntry?.remove();
               },
             ),
-          )
-  );
+          ));
   Overlay.of(context)?.insert(overlayEntry!);
 }
 
@@ -264,9 +268,9 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
   String _currentInput = '';
   static const List<String> _searchHistorylist = <String>[
     'vegan'
-    'vegetable',
+        'vegetable',
     'fruits'
-    'pizza',
+        'pizza',
     'hotpot',
     'italian',
   ];
@@ -288,63 +292,74 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
         debugPrint('You just selected $selection');
       },
       optionsViewBuilder: (
-          BuildContext context,
-          AutocompleteOnSelected<String> onSelected,
-          Iterable<String> options,
-          ) {
-        final int itemCount = options.length <= maxItems ? options.length : maxItems;
+        BuildContext context,
+        AutocompleteOnSelected<String> onSelected,
+        Iterable<String> options,
+      ) {
+        final int itemCount =
+            options.length <= maxItems ? options.length : maxItems;
         return Align(
           alignment: Alignment.topLeft,
           child: Material(
-            elevation: 4.0,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 360, // Adjust as needed
-                height: itemHeight * itemCount,
-                child: ListView.builder(
-                  padding: EdgeInsets.zero,
-                  itemCount: options.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final String option = options.elementAt(index);
-                    final int matchStartIndex = option.toLowerCase().indexOf(_currentInput.toLowerCase());
-                    final TextSpan matchText = TextSpan(
-                      text: option.substring(matchStartIndex, matchStartIndex + _currentInput.length),
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    );
-                    final TextSpan remainingText = TextSpan(
-                      text: option.substring(matchStartIndex + _currentInput.length),
-                      style: TextStyle(fontWeight: FontWeight.normal),
-                    );
+              elevation: 4.0,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 360, // Adjust as needed
+                    height: itemHeight * itemCount,
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: options.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final String option = options.elementAt(index);
+                        final int matchStartIndex = option
+                            .toLowerCase()
+                            .indexOf(_currentInput.toLowerCase());
+                        final TextSpan matchText = TextSpan(
+                          text: option.substring(matchStartIndex,
+                              matchStartIndex + _currentInput.length),
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        );
+                        final TextSpan remainingText = TextSpan(
+                          text: option.substring(
+                              matchStartIndex + _currentInput.length),
+                          style: TextStyle(fontWeight: FontWeight.normal),
+                        );
 
-                    return GestureDetector(
-                      onTap: () => onSelected(option),
-                      child: ListTile(
-                        title: RichText(
-                          text: TextSpan(
-                            children: [
-                              matchStartIndex > 0
-                                  ? TextSpan(text: option.substring(0, matchStartIndex), style: TextStyle(fontWeight: FontWeight.normal))
-                                  : TextSpan(),
-                              matchText,
-                              remainingText,
-                            ],
-                            style: DefaultTextStyle.of(context).style,
+                        return GestureDetector(
+                          onTap: () => onSelected(option),
+                          child: ListTile(
+                            title: RichText(
+                              text: TextSpan(
+                                children: [
+                                  matchStartIndex > 0
+                                      ? TextSpan(
+                                          text: option.substring(
+                                              0, matchStartIndex),
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.normal))
+                                      : TextSpan(),
+                                  matchText,
+                                  remainingText,
+                                ],
+                                style: DefaultTextStyle.of(context).style,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              _suggestionSearch()
-            ],)
-          ),
+                        );
+                      },
+                    ),
+                  ),
+                  _suggestionSearch()
+                ],
+              )),
         );
       },
-
-      fieldViewBuilder: (BuildContext context, TextEditingController textEditingController, FocusNode focusNode, VoidCallback onFieldSubmitted) {
+      fieldViewBuilder: (BuildContext context,
+          TextEditingController textEditingController,
+          FocusNode focusNode,
+          VoidCallback onFieldSubmitted) {
         return TextField(
           controller: textEditingController,
           focusNode: focusNode,
@@ -369,7 +384,7 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
   }
 }
 
-Widget _suggestionSearch(){
+Widget _suggestionSearch() {
   return Container(
     // color: Colors.blue,
     height: 100, // Adjust the height to accommodate the search items
@@ -417,8 +432,7 @@ Widget _buildSearchItem(String itemName) {
       color: const Color(0x4CC4C4C4),
       borderRadius: BorderRadius.circular(20),
     ),
-    child:
-    Text(
+    child: Text(
       itemName,
       style: const TextStyle(
         color: Colors.black,
