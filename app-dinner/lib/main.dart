@@ -1,6 +1,7 @@
 import 'package:Lopy/env.dart';
 import 'package:Lopy/src/config/routers/app_router.dart';
 import 'package:Lopy/src/domain/repositories/api_repository.dart';
+import 'package:Lopy/src/domain/repositories/auth_repository.dart';
 import 'package:Lopy/src/domain/repositories/database_repository.dart';
 import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
 import 'package:Lopy/src/presentation/cubits/cart/cart_list_cubit.dart';
@@ -13,6 +14,7 @@ import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_cuisine_
 import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_promo_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/user_card/user_card_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/user_card/user_card_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -43,15 +45,17 @@ class LopyApp extends StatelessWidget {
           )..getRestaurantList(),
         ),
         BlocProvider(
-            create: (context) => LoginCubit(
-                locator<ApiRepository>(), locator<FirebaseRepository>())),
+            create: (context) => LoginCubit(locator<ApiRepository>(),
+                locator<FirebaseRepository>(), locator<AuthRepository>())),
         BlocProvider(
-            create: (context) => OrderListCubit(locator<ApiRepository>())),
+            create: (context) => OrderListCubit(
+                locator<ApiRepository>(), locator<AuthRepository>())),
         BlocProvider(
-            create: (context) => OrderItemListCubit(locator<ApiRepository>())),
+            create: (context) => OrderItemListCubit(
+                locator<ApiRepository>(), locator<AuthRepository>())),
         BlocProvider(
-            create: (context) =>
-                PaymentMethodSelectorCubit(locator<ApiRepository>())),
+            create: (context) => PaymentMethodSelectorCubit(
+                locator<ApiRepository>(), locator<AuthRepository>())),
         BlocProvider(
           create: (context) => RestaurantInfoCubit(
             locator<ApiRepository>(),
@@ -75,6 +79,13 @@ class LopyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => UserCardCubit(
             locator<ApiRepository>(),
+            locator<AuthRepository>(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => UserCardListCubit(
+            locator<ApiRepository>(),
+            locator<AuthRepository>(),
           ),
         ),
       ],

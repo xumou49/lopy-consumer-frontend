@@ -39,42 +39,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
             actionIcon: actionIcon,
           )
         : const AutocompleteSearchList();
-    //     ? Text(title!)
-    //     : TextField(
-    //     decoration: InputDecoration(
-    //     hintText: 'Search restaurant...',
-    //     prefixIcon: Icon(Icons.search, color: Colors.pink.shade100),
-    //     // border: const OutlineInputBorder(),
-    //     enabledBorder: OutlineInputBorder(
-    //       borderRadius: BorderRadius.circular(15),
-    //       borderSide: BorderSide(color: Colors.pink.shade100),
-    //     ),
-    //     focusedBorder: OutlineInputBorder(
-    //       borderRadius: BorderRadius.circular(15),
-    //       borderSide: BorderSide(color: Colors.pink.shade200),
-    //     ),
-    //     filled: true,
-    //     fillColor: Colors.white,
-    //     contentPadding: const EdgeInsets.all(8),
-    //   ),
-    // );
-    // List<Widget> appBarActions = [
-    //   // if (showBackButton)
-    //   //   IconButton(
-    //   //     icon: const Icon(Icons.arrow_back_ios),
-    //   //     onPressed: onBackButtonPressed ??
-    //   //             () {
-    //   //           Navigator.maybePop(context);
-    //   //         },
-    //   //   ),
-    //   if (showCartIcon)
-    //     IconButton(
-    //       icon: const Icon(Icons.shopping_cart),
-    //       onPressed: () {
-    //         context.router.push(const CartNavigationView());
-    //       },
-    //     ),
-    // ];
+
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -163,16 +128,6 @@ class AppBarTitleWidget extends StatelessWidget {
             : const PlaceholderWidget()
       ],
     );
-
-    return TextWidget(
-      text: title,
-      fontSize: 20,
-      textColor: const Color.fromRGBO(169, 92, 92, 1),
-    );
-  }
-
-  void hello() {
-    print("hello");
   }
 }
 
@@ -216,7 +171,7 @@ class SearchPopUp extends StatelessWidget {
         showBackButton: true,
         onBackButtonPressed: onClose,
       ),
-      body: Center(
+      body: const Center(
         child: Text("Your overlay content goes here"),
       ),
     );
@@ -225,23 +180,6 @@ class SearchPopUp extends StatelessWidget {
 
 void showOverlay(BuildContext context) {
   OverlayEntry? overlayEntry;
-
-//   overlayEntry = OverlayEntry(
-//     builder: (context) => Positioned(
-//       top: 0,
-//       left: 0,
-//       right: 0,
-//       bottom: 0,
-//       child: Abc(
-//         onClose: () {
-//           overlayEntry?.remove();
-//         },
-//       ),
-//     ),
-//   );
-//
-//   Overlay.of(context)?.insert(overlayEntry!);
-// }
   overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
             top: 0,

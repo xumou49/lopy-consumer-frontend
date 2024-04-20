@@ -7,22 +7,25 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../domain/repositories/api_repository.dart';
+import '../../../domain/repositories/auth_repository.dart';
 
 part 'order_item_list_state.dart';
 
 class OrderItemListCubit
     extends BaseCubit<OrderItemListState, List<OrderItem>> {
   final ApiRepository _apiRepository;
+  final AuthRepository _authRepository;
 
-  OrderItemListCubit(this._apiRepository)
+  OrderItemListCubit(this._apiRepository, this._authRepository)
       : super(const OrderItemListLoading(), []);
 
   Future<void> getOrderItemList(Order order) async {
     if (isBusy) return;
 
     await run(() async {
+      String? token = await _authRepository.getToken();
       final response = await _apiRepository.getOrderItemList(
-          request: OrderItemListRequest(orderId: order.id!));
+          token: token!, request: OrderItemListRequest(orderId: order.id!));
       if (response is DataSuccess) {
         final orders = response.data!.orderItems;
         emit(OrderItemListSuccess(
@@ -30,6 +33,7 @@ class OrderItemListCubit
       } else if (response is DataFailed) {
         emit(OrderItemListFailed(error: response.error));
       }
+      print("complete get order item list");
     });
   }
 }

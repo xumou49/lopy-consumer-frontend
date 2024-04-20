@@ -4,12 +4,15 @@ import 'package:Lopy/src/data/data_sources/remote/order_items_api.dart';
 import 'package:Lopy/src/data/data_sources/remote/orders_api.dart';
 import 'package:Lopy/src/data/data_sources/remote/restaurant_info_api.dart';
 import 'package:Lopy/src/data/data_sources/remote/user_card_api.dart';
+import 'package:Lopy/src/data/repositories/auth_repository_impl.dart';
 import 'package:Lopy/src/data/repositories/firebase_repository_impl.dart';
+import 'package:Lopy/src/domain/repositories/auth_repository.dart';
 import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
 import 'package:awesome_dio_interceptor/awesome_dio_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
 import '../firebase_options.dart';
@@ -26,8 +29,11 @@ Future<void> initializeDependencies() async {
   final dio = Dio();
   dio.interceptors.add(AwesomeDioInterceptor());
 
+  final secureStorage = const FlutterSecureStorage();
+
   locator.registerSingleton(AppRouter());
   locator.registerSingleton<Dio>(dio);
+  locator.registerSingleton(secureStorage);
 
   final db = await $FloorAppDatabase.databaseBuilder("app_database.db").build();
   locator.registerSingleton<AppDatabase>(db);
@@ -67,6 +73,10 @@ Future<void> initializeDependencies() async {
         locator<RestaurantInfoApi>(),
         locator<UserCardApi>()),
   );
+
+  // register auth repo (for token storage)
+  locator.registerSingleton<AuthRepository>(
+      AuthRepositoryImpl(locator<FlutterSecureStorage>()));
 
   locator.registerSingleton<DatabaseRepository>(
     DatabaseRepositoryImpl(locator<AppDatabase>()),

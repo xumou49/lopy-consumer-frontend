@@ -14,9 +14,14 @@ abstract class BaseCubit<S, T> extends Cubit<S> {
 
   @protected
   Future<void> run(Future<void> Function() process) async {
-    if (!_isBusy) {
-      _isBusy = true;
-      await process();
+    try {
+      if (!_isBusy) {
+        _isBusy = true;
+        await process();
+      }
+    } catch (e) {
+      print("exception raise when doing api call: $e");
+    } finally {
       _isBusy = false;
     }
   }

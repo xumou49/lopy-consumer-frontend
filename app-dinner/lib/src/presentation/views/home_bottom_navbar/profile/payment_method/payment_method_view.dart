@@ -1,4 +1,6 @@
 import 'package:Lopy/src/presentation/cubits/payment/payment_method_selector_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/user_card/user_card_list_cubit.dart';
+import 'package:Lopy/src/presentation/widgets/common/appbar_widget.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/method_board.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/method_selection_list.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/payment_price.dart';
@@ -14,10 +16,7 @@ class PaymentMethodView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(243, 129, 129, 1),
-          title: const Text("Payment method"),
-        ),
+        appBar: GradientAppBar(title: "Payment Methods"),
         body: SingleChildScrollView(
             child: Column(children: [
           MethodSelection(),
@@ -40,7 +39,8 @@ class MethodDataDisplayBoard extends StatelessWidget {
         builder: (_, state) {
       switch (state.runtimeType) {
         case CreditCardMethodSelector:
-          return ExistedCardDisplay(type: state.type);
+          context.read<UserCardListCubit>().getUserCardList(state.type);
+          return UserCardDisplay(type: state.type);
         case PaynowMethodSelector:
           return PaynowQRCode();
         case PaypalMethodSelector:

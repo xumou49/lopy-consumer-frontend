@@ -13,9 +13,11 @@ abstract class OrdersApi {
 
   @POST('/order/list')
   Future<HttpResponse<OrderListResponse>> getOrderList(
+      @Header(tokenName) String token,
       @Body() OrderListRequest orderListRequest);
 
   @POST('/order/page')
   Future<HttpResponse<OrderListResponse>> getOrderPage(
+      @Header(tokenName) String token,
       @Body() OrderListRequest orderListRequest);
 }

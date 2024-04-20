@@ -1,5 +1,6 @@
 import 'package:Lopy/src/domain/models/requests/login_request.dart';
 import 'package:Lopy/src/domain/repositories/api_repository.dart';
+import 'package:Lopy/src/domain/repositories/auth_repository.dart';
 import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
 import 'package:Lopy/src/presentation/cubits/base/base_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/login/login_state.dart';
@@ -9,8 +10,10 @@ import 'package:uuid/uuid.dart';
 class LoginCubit extends BaseCubit<LoginState, String> {
   final ApiRepository _apiRepository;
   final FirebaseRepository _firebaseRepository;
+  final AuthRepository _authRepository;
 
-  LoginCubit(this._apiRepository, this._firebaseRepository)
+  LoginCubit(
+      this._apiRepository, this._firebaseRepository, this._authRepository)
       : super(const LoginLoading(), "");
 
   Future<void> googleLogin() async {
@@ -28,6 +31,7 @@ class LoginCubit extends BaseCubit<LoginState, String> {
         final loginToken = response.data!.token;
         print("login token: $loginToken");
         emit(LoginSuccess(token: loginToken));
+        _saveToken(loginToken);
       } else if (response is DataFailed) {
         print("fail to send the request to remote server");
         emit(LoginFailed(error: response.error));
@@ -35,14 +39,22 @@ class LoginCubit extends BaseCubit<LoginState, String> {
     });
   }
 
+  void _saveToken(String token) {
+    _authRepository.saveToken(token);
+  }
+
   /// not implemented yet, simply emit the success event
   Future<void> appleLogin() async {
     var uuid = const Uuid();
-    emit(LoginSuccess(token: uuid.v1()));
+    String token = uuid.v1();
+    emit(LoginSuccess(token: token));
+    _saveToken(token);
   }
 
   Future<void> phoneLogin() async {
     var uuid = const Uuid();
+    String token = uuid.v1();
     emit(LoginSuccess(token: uuid.v1()));
+    _saveToken(token);
   }
 }

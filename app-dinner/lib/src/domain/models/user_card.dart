@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:Lopy/src/domain/models/menu_category.dart';
 import 'package:equatable/equatable.dart';
 import 'package:floor/floor.dart';
 
@@ -34,7 +31,17 @@ class UserCard extends Equatable {
   });
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [
+        id,
+        stripeId,
+        brand,
+        lastFour,
+        expMonth,
+        expYear,
+        country,
+        cvcCheck,
+        fingerprint
+      ];
 
   Map<String, dynamic> toMap() {
     return {

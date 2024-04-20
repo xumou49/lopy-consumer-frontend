@@ -8,27 +8,27 @@ import 'package:equatable/equatable.dart';
 
 import '../../../domain/repositories/api_repository.dart';
 
-part 'user_card_state.dart';
+part 'user_card_list_state.dart';
 
-class UserCardCubit extends BaseCubit<UserCardState, UserCard> {
+class UserCardListCubit extends BaseCubit<UserCardListState, UserCard> {
   final ApiRepository _apiRepository;
   final AuthRepository _authRepository;
 
-  UserCardCubit(this._apiRepository, this._authRepository)
-      : super(const UserCardLoading(), const UserCard());
+  UserCardListCubit(this._apiRepository, this._authRepository)
+      : super(const UserCardListLoading(), const UserCard());
 
-  Future<void> saveUserCard(String token) async {
+  Future<void> getUserCardList(String brand) async {
     if (isBusy) return;
 
     await run(() async {
       String? token = await _authRepository.getToken();
-      final response = await _apiRepository.saveUserCard(
-          token: token!, request: UserCardRequest());
+      final response = await _apiRepository.getUserCardList(
+          token: token!, request: UserCardListRequest(brand: brand));
       if (response is DataSuccess) {
-        final userCard = response.data!.userCard;
-        emit(UserCardSuccess(userCard: userCard, isData: true));
+        emit(UserCardListSuccess(
+            userCards: response.data!.userCards, isData: true));
       } else if (response is DataFailed) {
-        emit(UserCardFailed(error: response.error));
+        emit(UserCardListFailed(error: response.error));
       }
     });
   }

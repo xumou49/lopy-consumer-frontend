@@ -1,11 +1,21 @@
 class UserCardRequest {
-  final String token;
-
-  UserCardRequest({this.token = ""});
+  UserCardRequest();
 
   Map<String, dynamic> toMap() {
     return {
-      "token": token,
+      "": "",
+    };
+  }
+}
+
+class UserCardListRequest {
+  final String? brand;
+
+  UserCardListRequest({this.brand});
+
+  Map<String, dynamic> toMap() {
+    return {
+      "brand": brand,
     };
   }
 }

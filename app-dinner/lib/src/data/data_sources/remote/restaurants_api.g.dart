@@ -13,7 +13,7 @@ class _RestaurantsApi implements RestaurantsApi {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://api-lopy.wanioco.com/api/v1';
+    baseUrl ??= 'http://127.0.0.1:8080/api/v1';
   }
 
   final Dio _dio;

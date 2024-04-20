@@ -1,5 +1,8 @@
+import 'package:Lopy/src/domain/models/user_card.dart';
+import 'package:Lopy/src/presentation/cubits/user_card/user_card_list_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/payment_setting_btn.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EmptyCardLogo extends StatelessWidget {
   final String imagePath;
@@ -36,9 +39,9 @@ class EmptyCardLogoText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('No master card added',
-        style: TextStyle(
-          color: Color(0xFF31343D),
+    return Text(text,
+        style: const TextStyle(
+          color: Color(0x692D2D2D),
           fontSize: 14,
           fontFamily: 'Montserrat',
           fontWeight: FontWeight.w700,
@@ -47,7 +50,16 @@ class EmptyCardLogoText extends StatelessWidget {
 }
 
 class CardInfo extends StatelessWidget {
-  const CardInfo({Key? key}) : super(key: key);
+  final String? lastFour;
+  final int? expMonth;
+  final int? expYear;
+
+  const CardInfo(
+      {Key? key,
+      required this.lastFour,
+      required this.expYear,
+      required this.expMonth})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +71,14 @@ class CardInfo extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              const Positioned(
+              Positioned(
                   left: 20,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '**** **** **** 1234',
-                        style: TextStyle(
+                        '**** **** **** $lastFour',
+                        style: const TextStyle(
                           color: Color(0xFF31343D),
                           fontSize: 14,
                           fontFamily: 'Montserrat',
@@ -74,8 +86,8 @@ class CardInfo extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '02/24',
-                        style: TextStyle(
+                        '${expMonth.toString().padLeft(2, '0')}/$expYear',
+                        style: const TextStyle(
                           color: Color(0xFF31343D),
                           fontSize: 10,
                           fontFamily: 'Montserrat',
@@ -118,9 +130,44 @@ class PaynowQRCode extends StatelessWidget {
   }
 }
 
+class UserCardDisplay extends StatelessWidget {
+  final String type;
+  const UserCardDisplay({super.key, required this.type});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder(
+        bloc: BlocProvider.of<UserCardListCubit>(context),
+        builder: (BuildContext context, state) {
+          if (state is UserCardListSuccess && state.userCards.isNotEmpty) {
+            return ExistedCardDisplay(userCards: state.userCards, type: type);
+          }
+          return EmptyCardDisplay(type: type);
+        });
+  }
+}
+
 class ExistedCardDisplay extends StatelessWidget {
   final String type;
-  const ExistedCardDisplay({Key? key, required this.type}) : super(key: key);
+  final List<UserCard> userCards;
+  const ExistedCardDisplay(
+      {Key? key, required this.type, required this.userCards})
+      : super(key: key);
+
+  List<Widget> _getCardInfoWidgetList() {
+    List<Widget> elementList = [];
+    // add card info widget
+    for (var userCard in userCards) {
+      elementList.add(CardInfo(
+          lastFour: userCard.lastFour,
+          expMonth: userCard.expMonth,
+          expYear: userCard.expYear));
+    }
+    // spacing & new card button
+    elementList.add(const SizedBox(height: 20));
+    elementList.add(NewCardBtn(type: type));
+    return elementList;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,18 +175,7 @@ class ExistedCardDisplay extends StatelessWidget {
     return SingleChildScrollView(
         child: SizedBox(
       width: width,
-      child: Column(
-        children: [
-          CardInfo(),
-          CardInfo(),
-          CardInfo(),
-          CardInfo(),
-          CardInfo(),
-          CardInfo(),
-          const SizedBox(height: 20),
-          NewCardBtn(type: type),
-        ],
-      ),
+      child: Column(children: _getCardInfoWidgetList()),
     ));
   }
 }
@@ -162,7 +198,7 @@ class EmptyCardDisplay extends StatelessWidget {
             SizedBox(height: 28),
             EmptyCardLogoTitle("No card added"),
             SizedBox(height: 5),
-            EmptyCardLogoText("You can add a mastercard and save it for later"),
+            EmptyCardLogoText("You can add a card and save it for later"),
           ])),
       const SizedBox(height: 20),
       NewCardBtn(type: type),
