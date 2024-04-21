@@ -1,15 +1,14 @@
 import 'package:Lopy/src/presentation/cubits/user_card/user_card_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/button_widget.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/new_payment_textfield_widget.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:oktoast/oktoast.dart';
 
 import '../../../../widgets/common/appbar_widget.dart';
-
-import 'package:flutter/services.dart';
-import 'package:auto_route/auto_route.dart';
 
 enum CardType {
   Master,
@@ -33,7 +32,6 @@ class NewPaymentMethodView extends StatefulWidget {
 }
 
 class _NewPaymentMethodViewState extends State<NewPaymentMethodView> {
-
   @override
   void initState() {
     super.initState();
@@ -199,8 +197,8 @@ class UserCardFormState extends State<UserCardForm> {
             child: Row(
               children: <Widget>[
                 ButtonWidget(
-                    title: "ADD & MAKE PAYMENT",
-                    onTap: () async {
+                    text: "ADD & MAKE PAYMENT",
+                    onPressed: () async {
                       _formKey.currentState!.save();
                       if (_formKey.currentState!.validate()) {
                         showToast("All Clear!");

@@ -12,7 +12,6 @@ class Cart extends Equatable {
   final int restaurantId;
   final int restaurantMenuItemId;
 
-
   const Cart({
     this.itemId,
     required this.name,
@@ -24,38 +23,44 @@ class Cart extends Equatable {
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
-    itemId, name,
-    quantity, price,
-    userId, restaurantId,
-    restaurantMenuItemId
-  ];
+        itemId,
+        name,
+        quantity,
+        price,
+        userId,
+        restaurantId,
+        restaurantMenuItemId
+      ];
 
-  // Map<String, dynamic> toMap() {
-  //   return {
-  //     'id': itemId,
-  //     'name': name,
-  //     'quantity': quantity,
-  //     'price': price
-  //   };
-  // }
-  //
-  // factory Cart.fromMap(Map<String, dynamic> map) {
-  //   return Cart(
-  //     itemId: map['itemId'] as int,
-  //     name: map['name'] as String,
-  //     quantity: map['quantity'] as int,
-  //     price: map['quantity'] as double,
-  //   );
-  // }
-  //
-  // factory Cart.fromJson(Map<String, dynamic> json) {
-  //   return Cart(
-  //       itemId: json['itemId'],
-  //       name: json['name'],
-  //       quantity: json['quantity'],
-  //       price: json['price']
-  //   );
-  // }
+  Map<String, dynamic> toMap() {
+    return {'id': itemId, 'name': name, 'quantity': quantity, 'price': price};
+  }
+
+  Map<String, dynamic> toJson() {
+    return {'id': itemId, 'name': name, 'quantity': quantity, 'price': price};
+  }
+
+  factory Cart.fromMap(Map<String, dynamic> map) {
+    return Cart(
+        itemId: map['itemId'] as int,
+        name: map['name'] as String,
+        quantity: map['quantity'] as int,
+        price: map['quantity'] as double,
+        userId: map['userId'] as int,
+        restaurantId: map['restaurantId'] as int,
+        restaurantMenuItemId: map['restaurantMenuItemId'] as int);
+  }
+
+  factory Cart.fromJson(Map<String, dynamic> json) {
+    return Cart(
+      itemId: json['itemId'],
+      name: json['name'],
+      quantity: json['quantity'],
+      price: json['price'],
+      userId: json['userId'],
+      restaurantId: json['restaurantId'],
+      restaurantMenuItemId: json['restaurantMenuItemId'],
+    );
+  }
 }

@@ -104,9 +104,9 @@ class MenuItemDialogWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       ButtonWidget(
-                          title: 'Add to Cart',
+                          text: 'Add to Cart',
                           height: 40.0,
-                          onTap: () {
+                          onPressed: () {
                             print('Hello');
                           }),
                     ],

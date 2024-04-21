@@ -20,4 +20,9 @@ abstract class OrdersApi {
   Future<HttpResponse<OrderListResponse>> getOrderPage(
       @Header(tokenName) String token,
       @Body() OrderListRequest orderListRequest);
+
+  @PUT('/order/save')
+  Future<HttpResponse<String>> orderPlace(
+      @Header(tokenName) String token, @Body() OrderPlaceRequest request,
+      {@Header('Content-Type') String contentType = 'application/json'});
 }

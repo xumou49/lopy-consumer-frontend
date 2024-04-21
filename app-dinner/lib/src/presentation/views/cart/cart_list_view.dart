@@ -1,14 +1,12 @@
-import 'package:Lopy/src/config/routers/app_router.gr.dart';
 import 'package:Lopy/src/domain/models/cart.dart';
 import 'package:Lopy/src/presentation/cubits/cart/cart_list_cubit.dart';
-import 'package:Lopy/src/utils/constants/strings.dart';
+import 'package:Lopy/src/presentation/widgets/cart/cart_btn.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:oktoast/oktoast.dart';
 
 import '../../widgets/common/appbar_widget.dart';
 
@@ -20,11 +18,12 @@ class CartListView extends HookWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GradientAppBar(
-        title:"Cart",
+        title: "Cart",
         showBackButton: true,
-        onBackButtonPressed:() {
+        onBackButtonPressed: () {
           context.router.pop();
-        },),
+        },
+      ),
       body: Column(
         children: [
           BlocListener<CartListCubit, CartListState>(
@@ -44,24 +43,7 @@ class CartListView extends HookWidget {
               },
             ),
           ),
-          Container(
-            width: double.infinity, // Set to maximum width
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Handle place order logic
-                // You can navigate to a checkout page or perform other actions
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromRGBO(243, 129, 129, 1),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0), // Adjust the corner radius as needed
-                ),// Set desired button color
-              ),
-
-              child: Text('Place Order'),
-            ),
-          ),
+          PlaceOrderBtn()
         ],
       ),
     );
@@ -71,9 +53,9 @@ class CartListView extends HookWidget {
     if (cartItems.isEmpty) {
       return const Center(
           child: Text(
-            'No items added',
-            style: TextStyle(color: Colors.black),
-          ));
+        'No items added',
+        style: TextStyle(color: Colors.black),
+      ));
     }
     return Expanded(
       child: ListView.builder(
@@ -95,10 +77,10 @@ class CartListView extends HookWidget {
   }
 }
 
-
 class CartItemWidget extends HookWidget {
   final Cart item;
-  const CartItemWidget({Key? key,
+  const CartItemWidget({
+    Key? key,
     required this.item,
   }) : super(key: key);
 
@@ -106,18 +88,24 @@ class CartItemWidget extends HookWidget {
   Widget build(BuildContext context) {
     final localACartCubit = BlocProvider.of<CartListCubit>(context);
     return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8), // Adjust the padding as needed
+      padding: const EdgeInsets.only(
+          left: 15,
+          right: 15,
+          top: 8,
+          bottom: 8), // Adjust the padding as needed
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.grey,
             width: 0.5, // Adjust the width of the line as needed
           ),
-          borderRadius: const BorderRadius.all(Radius.circular(10.0)), // Optional: Add rounded corners
+          borderRadius: const BorderRadius.all(
+              Radius.circular(10.0)), // Optional: Add rounded corners
         ),
         child: ListTile(
           leading: const CircleAvatar(
-            backgroundImage: AssetImage('lib/src/assets/images/loopy_profile.png'), // You can set an actual image here
+            backgroundImage: AssetImage(
+                'lib/src/assets/images/loopy_profile.png'), // You can set an actual image here
           ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,10 +132,10 @@ class CartItemWidget extends HookWidget {
               ),
               // _buildRemovableArea()
               IconButton(
-                  icon: const Icon(Ionicons.trash_outline, color: Colors.red),
-                  onPressed: () {
-                    localACartCubit.removeCart(cartItem: item);
-                  },
+                icon: const Icon(Ionicons.trash_outline, color: Colors.red),
+                onPressed: () {
+                  localACartCubit.removeCart(cartItem: item);
+                },
               )
             ],
           ),

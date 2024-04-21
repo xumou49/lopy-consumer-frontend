@@ -1,4 +1,4 @@
-import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
+import 'package:Lopy/src/presentation/widgets/common/button_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +50,7 @@ class PayBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _Button(
+    return ButtonWidget(
       text: "PAY & CONFIRM",
       color: const Color(0xFFFFC5C5),
       onPressed: () {
@@ -65,48 +65,13 @@ class TrackOrderBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _Button(
+    return ButtonWidget(
         text: "TRACK ORDER",
-        color: const Color(0xFFF18484),
         onPressed: () {
           // call the api and redirect to the order page
           context.router.replace(const ProfileView());
           context.read<OrderListCubit>().getOrderList(1, 10);
           context.router.navigate(const OrderNavigationView());
         });
-  }
-}
-
-class _Button extends StatelessWidget {
-  final String text;
-  final Color color;
-  final Function() onPressed;
-
-  const _Button(
-      {super.key,
-      required this.text,
-      required this.color,
-      required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width - 30;
-    return SizedBox(
-      height: 50,
-      width: width,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: color,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15))),
-        onPressed: onPressed,
-        child: TextWidget(
-          text: text,
-          textColor: Colors.white,
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
   }
 }

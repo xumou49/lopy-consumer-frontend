@@ -26,6 +26,9 @@ abstract class ApiRepository {
     required OrderItemListRequest request,
   });
 
+  Future<DataState<String>> orderPlace(
+      {required OrderPlaceRequest request, required String token});
+
   Future<DataState<LoginResponse>> googleLogin({
     required LoginRequest request,
   });

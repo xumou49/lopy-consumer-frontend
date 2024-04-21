@@ -50,6 +50,13 @@ class ApiRepositoryImpl extends BaseApiRepository implements ApiRepository {
   }
 
   @override
+  Future<DataState<String>> orderPlace(
+      {required OrderPlaceRequest request, required String token}) {
+    return getStateOf<String>(
+        request: () => _ordersApi.orderPlace(token, request));
+  }
+
+  @override
   Future<DataState<OrderItemListResponse>> getOrderItemList(
       {required String token, required OrderItemListRequest request}) {
     return getStateOf<OrderItemListResponse>(

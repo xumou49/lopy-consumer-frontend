@@ -8,6 +8,7 @@ import 'package:Lopy/src/presentation/cubits/cart/cart_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_item_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/order/order_place_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/payment/payment_method_selector_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_info/restaurant_info_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_cuisine_cubit.dart';
@@ -52,6 +53,9 @@ class LopyApp extends StatelessWidget {
                 locator<ApiRepository>(), locator<AuthRepository>())),
         BlocProvider(
             create: (context) => OrderItemListCubit(
+                locator<ApiRepository>(), locator<AuthRepository>())),
+        BlocProvider(
+            create: (context) => OrderPlaceCubit(
                 locator<ApiRepository>(), locator<AuthRepository>())),
         BlocProvider(
             create: (context) => PaymentMethodSelectorCubit(
