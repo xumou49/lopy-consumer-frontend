@@ -16,7 +16,7 @@ class PaymentMethodView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: GradientAppBar(title: "Payment Methods"),
+        appBar: const GradientAppBar(title: "Payment Methods"),
         body: SingleChildScrollView(
             child: Column(children: [
           MethodSelection(),
