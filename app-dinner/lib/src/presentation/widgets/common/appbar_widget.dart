@@ -39,43 +39,8 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
             subtitle: subtitle,
             actionIcon: actionIcon,
           )
-        : const AppBarSearchFieldWidget();
-    //     ? Text(title!)
-    //     : TextField(
-    //     decoration: InputDecoration(
-    //     hintText: 'Search restaurant...',
-    //     prefixIcon: Icon(Icons.search, color: Colors.pink.shade100),
-    //     // border: const OutlineInputBorder(),
-    //     enabledBorder: OutlineInputBorder(
-    //       borderRadius: BorderRadius.circular(15),
-    //       borderSide: BorderSide(color: Colors.pink.shade100),
-    //     ),
-    //     focusedBorder: OutlineInputBorder(
-    //       borderRadius: BorderRadius.circular(15),
-    //       borderSide: BorderSide(color: Colors.pink.shade200),
-    //     ),
-    //     filled: true,
-    //     fillColor: Colors.white,
-    //     contentPadding: const EdgeInsets.all(8),
-    //   ),
-    // );
-    // List<Widget> appBarActions = [
-    //   // if (showBackButton)
-    //   //   IconButton(
-    //   //     icon: const Icon(Icons.arrow_back_ios),
-    //   //     onPressed: onBackButtonPressed ??
-    //   //             () {
-    //   //           Navigator.maybePop(context);
-    //   //         },
-    //   //   ),
-    //   if (showCartIcon)
-    //     IconButton(
-    //       icon: const Icon(Icons.shopping_cart),
-    //       onPressed: () {
-    //         context.router.push(const CartNavigationView());
-    //       },
-    //     ),
-    // ];
+        : const AutocompleteSearchList();
+
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -96,14 +61,13 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
                   Icons.arrow_back_ios,
                   color: Color.fromRGBO(169, 92, 92, 1),
                 ),
-                onPressed: onBackButtonPressed ??
-                    () {
-                      Navigator.maybePop(context);
-                    },
-              )
-            : null,
-        // actions: actions ?? [],
-        // actions: appBarActions,
+                onPressed: onBackButtonPressed ?? () => context.router.pop(),
+        ) : null,
+              //       () {
+              //         Navigator.maybePop(context);
+              //       },
+              // )
+            // : null,
       ),
     );
   }
@@ -169,9 +133,6 @@ class AppBarTitleWidget extends StatelessWidget {
       textColor: const Color.fromRGBO(169, 92, 92, 1),
     );
   }
-  void hello() {
-    print("hello");
-  }
 }
 
 class AppBarSearchFieldWidget extends StatelessWidget {
@@ -180,7 +141,6 @@ class AppBarSearchFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      onTap: () {showOverlay(context);},
       decoration: InputDecoration(
         hintText: 'Search restaurant....',
         prefixIcon: Icon(Icons.search, color: Colors.pink.shade100),
@@ -202,57 +162,6 @@ class AppBarSearchFieldWidget extends StatelessWidget {
 }
 
 
-class SearchPopUp extends StatelessWidget {
-  final VoidCallback onClose;
-  const SearchPopUp({Key? key, required this.onClose}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: GradientAppBar(
-        showBackButton: true,
-        onBackButtonPressed: onClose,
-      ),
-      body: Center(
-        child: Text("Your overlay content goes here"),
-      ),
-    );
-  }
-}
-
-void showOverlay(BuildContext context) {
-  OverlayEntry? overlayEntry;
-
-//   overlayEntry = OverlayEntry(
-//     builder: (context) => Positioned(
-//       top: 0,
-//       left: 0,
-//       right: 0,
-//       bottom: 0,
-//       child: Abc(
-//         onClose: () {
-//           overlayEntry?.remove();
-//         },
-//       ),
-//     ),
-//   );
-//
-//   Overlay.of(context)?.insert(overlayEntry!);
-// }
-  overlayEntry = OverlayEntry(
-      builder: (context) =>
-          Positioned(
-            top: 0, bottom: 0, left: 0, right: 0,
-            child: SearchPopUp(
-              onClose: () {
-                overlayEntry?.remove();
-              },
-            ),
-          )
-  );
-  Overlay.of(context)?.insert(overlayEntry!);
-}
-
 class AutocompleteSearchList extends StatefulWidget {
   const AutocompleteSearchList({super.key});
 
@@ -263,13 +172,14 @@ class AutocompleteSearchList extends StatefulWidget {
 class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
   String _currentInput = '';
   static const List<String> _searchHistorylist = <String>[
-    'vegan'
+    'vegan',
     'vegetable',
-    'fruits'
+    'fruits',
     'pizza',
     'hotpot',
     'italian',
   ];
+
   final double itemHeight = 48;
   final int maxItems = 5;
   @override
@@ -346,6 +256,13 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
 
       fieldViewBuilder: (BuildContext context, TextEditingController textEditingController, FocusNode focusNode, VoidCallback onFieldSubmitted) {
         return TextField(
+          onTap: () {
+            final router = AutoRouter.of(context);
+            // Check if the current route is already SearchView
+            if (router.current.name != "SearchView") {
+              router.push(SearchNavigationView());
+            }
+          },
           controller: textEditingController,
           focusNode: focusNode,
           decoration: InputDecoration(
