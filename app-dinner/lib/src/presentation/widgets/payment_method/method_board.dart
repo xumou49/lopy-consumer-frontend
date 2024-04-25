@@ -53,13 +53,15 @@ class CardInfo extends StatelessWidget {
   final String? lastFour;
   final int? expMonth;
   final int? expYear;
+  final Color backgroundColor;
 
-  const CardInfo(
-      {Key? key,
-      required this.lastFour,
-      required this.expYear,
-      required this.expMonth})
-      : super(key: key);
+  const CardInfo({
+    Key? key,
+    required this.lastFour,
+    required this.expYear,
+    required this.expMonth,
+    this.backgroundColor = const Color(0xFFF7F4F4),
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +69,7 @@ class CardInfo extends StatelessWidget {
         height: 80,
         width: double.infinity,
         child: Card(
-          color: const Color(0xFFF4F5F7),
+          color: backgroundColor,
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -107,7 +109,7 @@ class CardInfo extends StatelessWidget {
                       Icons.delete,
                       color: Colors.grey,
                     ),
-                  ))
+                  )),
             ],
           ),
         ));
@@ -156,6 +158,11 @@ class ExistedCardDisplay extends StatelessWidget {
 
   List<Widget> _getCardInfoWidgetList() {
     List<Widget> elementList = [];
+    elementList.add(CardInfo(
+        backgroundColor: Color(0xFFE1E5FF),
+        lastFour: "1234",
+        expMonth: 10,
+        expYear: 24));
     // add card info widget
     for (var userCard in userCards) {
       elementList.add(CardInfo(
