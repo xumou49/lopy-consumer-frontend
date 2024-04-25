@@ -60,14 +60,14 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
                   Icons.arrow_back_ios,
                   color: Color.fromRGBO(169, 92, 92, 1),
                 ),
-                onPressed: onBackButtonPressed ??
-                    () {
-                      Navigator.maybePop(context);
-                    },
+                onPressed: onBackButtonPressed ?? () => context.router.pop(),
               )
             : null,
-        // actions: actions ?? [],
-        // actions: appBarActions,
+        //       () {
+        //         Navigator.maybePop(context);
+        //       },
+        // )
+        // : null,
       ),
     );
   }
@@ -137,9 +137,6 @@ class AppBarSearchFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      onTap: () {
-        showOverlay(context);
-      },
       decoration: InputDecoration(
         hintText: 'Search restaurant....',
         prefixIcon: Icon(Icons.search, color: Colors.pink.shade100),
@@ -160,41 +157,6 @@ class AppBarSearchFieldWidget extends StatelessWidget {
   }
 }
 
-class SearchPopUp extends StatelessWidget {
-  final VoidCallback onClose;
-  const SearchPopUp({Key? key, required this.onClose}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: GradientAppBar(
-        showBackButton: true,
-        onBackButtonPressed: onClose,
-      ),
-      body: const Center(
-        child: Text("Your overlay content goes here"),
-      ),
-    );
-  }
-}
-
-void showOverlay(BuildContext context) {
-  OverlayEntry? overlayEntry;
-  overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: SearchPopUp(
-              onClose: () {
-                overlayEntry?.remove();
-              },
-            ),
-          ));
-  Overlay.of(context)?.insert(overlayEntry!);
-}
-
 class AutocompleteSearchList extends StatefulWidget {
   const AutocompleteSearchList({super.key});
 
@@ -205,13 +167,14 @@ class AutocompleteSearchList extends StatefulWidget {
 class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
   String _currentInput = '';
   static const List<String> _searchHistorylist = <String>[
-    'vegan'
-        'vegetable',
-    'fruits'
-        'pizza',
+    'vegan',
+    'vegetable',
+    'fruits',
+    'pizza',
     'hotpot',
     'italian',
   ];
+
   final double itemHeight = 48;
   final int maxItems = 5;
   @override
@@ -299,6 +262,13 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
           FocusNode focusNode,
           VoidCallback onFieldSubmitted) {
         return TextField(
+          onTap: () {
+            final router = AutoRouter.of(context);
+            // Check if the current route is already SearchView
+            if (router.current.name != "SearchView") {
+              router.push(SearchNavigationView());
+            }
+          },
           controller: textEditingController,
           focusNode: focusNode,
           decoration: InputDecoration(
