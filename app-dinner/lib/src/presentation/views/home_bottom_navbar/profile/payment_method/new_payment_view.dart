@@ -52,10 +52,10 @@ class _NewPaymentMethodViewState extends State<NewPaymentMethodView> {
           appBar: const GradientAppBar(title: "Add Card"),
           body: Container(
             alignment: Alignment.topLeft,
-            child: const Padding(
-              padding: EdgeInsets.only(
-                  left: 20.0, top: 20.0, right: 20.0, bottom: 30.0),
-              child: UserCardForm(),
+            child:
+            Container(
+              margin: const EdgeInsets.fromLTRB(20, 20, 20, 30),
+              child: const UserCardForm(),
             ),
           ),
         ));
@@ -204,7 +204,6 @@ class UserCardFormState extends State<UserCardForm> {
                         showToast("All Clear!");
                         print(
                             "$cardNumber $cardHolderName $expMonth $expYear $cvc");
-
                         await Stripe.instance
                             .dangerouslyUpdateCardDetails(CardDetails(
                           number: cardNumber,

@@ -103,12 +103,14 @@ class MenuItemDialogWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      ButtonWidget(
-                          text: 'Add to Cart',
-                          height: 40.0,
-                          onPressed: () {
-                            print('Hello');
-                          }),
+                      Expanded(
+                        child: ButtonWidget(
+                            text: 'Add to Cart',
+                            height: 40.0,
+                            onPressed: () {
+                              print('Hello');
+                            }),
+                      )
                     ],
                   ),
                 ],
