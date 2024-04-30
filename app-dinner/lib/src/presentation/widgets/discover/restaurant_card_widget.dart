@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
 
+import '../../../config/routers/app_router.gr.dart';
 import '../../../domain/models/cart.dart';
 import '../../../domain/models/restaurant.dart';
 import '../../cubits/cart/cart_list_cubit.dart';
@@ -20,7 +22,7 @@ class RestaurantCard extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (restaurantCardType) {
       case RestaurantCardType.small:
-        return buildSmallCard(restaurant);
+        return buildSmallCard(context, restaurant);
       case RestaurantCardType.big:
         return buildBigCard(context, restaurant);
       default:
@@ -28,26 +30,34 @@ class RestaurantCard extends StatelessWidget {
     }
   }
 
-  Widget buildSmallCard(Restaurant restaurant) {
+  Widget buildSmallCard(BuildContext context, Restaurant restaurant) {
     return SizedBox(
-      width: 166,
+      width: 180,
       height: 134,
       child: Card(
         color: Colors.white,
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+        margin:
+            const EdgeInsets.only(top: 3.0, left: 0, right: 15.0, bottom: 3.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
               child: InkWell(
                 onTap: () {
-                  // context.router.push(RestaurantsNavigationView(
-                  //     children: [RestaurantDetailView(restaurantId: 2)]));
+                  context.router
+                      .push(RestaurantDetailView(restaurantId: restaurant.id!));
                 },
-                child: Image.network(
-                  // 'https://welcon.kocca.kr/cmm/getImage.do?atchFileId=FILE_046d5e61-7fce-4dcb-86c4-f71f90e1a662&amp;fileSn=1&amp;thumb=',
-                  restaurant.imageUrl,
-                  fit: BoxFit.cover,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(8.0),
+                      topRight: Radius.circular(8.0),
+                      bottomLeft: Radius.zero,
+                      bottomRight: Radius.zero),
+                  child: Image.network(
+                    restaurant.imageUrl,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
                 ),
               ),
             ),
@@ -89,25 +99,22 @@ class RestaurantCard extends StatelessWidget {
       height: 200,
       child: Card(
         color: Colors.white,
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 3),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: Image.network(
-                restaurant.imageUrl,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                // child: InkWell(
-                //   onTap: () {
-                //     context.router.push(RestaurantsNavigationView(
-                //         children: [RestaurantDetailView(restaurantId: 1)]));
-                //   },
-                //   child: Image.network(
-                //     'https://welcon.kocca.kr/cmm/getImage.do?atchFileId=FILE_046d5e61-7fce-4dcb-86c4-f71f90e1a662&amp;fileSn=1&amp;thumb=',
-                //     width: double.infinity,
-                //     fit: BoxFit.cover,
-                //   ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(8.0),
+                    topRight: Radius.circular(8.0),
+                    bottomLeft: Radius.zero,
+                    bottomRight: Radius.zero),
+                child: Image.network(
+                  restaurant.imageUrl,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Padding(
@@ -128,19 +135,6 @@ class RestaurantCard extends StatelessWidget {
                         Icons.favorite_border,
                         color: Colors.pink.shade300,
                         size: 15,
-                      ),
-                      // Icon(Icons.favorite_border, color: Colors.pink.shade300, size: 15,),
-                      FloatingActionButton(
-                        onPressed: () {
-                          Cart car = buildCart();
-                          localACartCubit.saveCart(cartItem: car);
-                          showToast('Article Saved Successfully');
-                        },
-                        child: Icon(
-                          Icons.favorite_border,
-                          color: Colors.pink.shade300,
-                          size: 15,
-                        ),
                       ),
                     ],
                   ),
