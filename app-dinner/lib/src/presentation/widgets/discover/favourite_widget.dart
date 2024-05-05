@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:Lopy/src/config/routers/app_router.gr.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+
 enum CuisineType {
   italian,
   chinese,
@@ -11,12 +12,12 @@ enum CuisineType {
   thai,
   greek,
 }
+
 class FavouriteGridWidget extends StatelessWidget {
   const FavouriteGridWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return GridView.count(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -26,7 +27,8 @@ class FavouriteGridWidget extends StatelessWidget {
       crossAxisSpacing: 15,
       // No space between the items in a row.
       children: List.generate(8, (index) {
-        return _PizzaItemWidget(_cuisineTypeToString(_getCuisineType(index))); // Generates 8 CuisineItem widgets.
+        return _PizzaItemWidget(_cuisineTypeToString(
+            _getCuisineType(index))); // Generates 8 CuisineItem widgets.
       }),
     );
   }
@@ -57,7 +59,6 @@ class FavouriteGridWidget extends StatelessWidget {
         throw Exception("Invalid index for cuisine type");
     }
   }
-
 }
 
 class _PizzaItemWidget extends StatelessWidget {
@@ -74,9 +75,11 @@ class _PizzaItemWidget extends StatelessWidget {
         children: [
           Expanded(
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(10), // Sets the radius of the image
+              borderRadius:
+                  BorderRadius.circular(10), // Sets the radius of the image
               child: Image.network(
-                "https://storage.googleapis.com/sticker-prod/syc9Sa2sjYaI5rJYmS9O/cover-1.thumb256.png",
+                // "https://storage.googleapis.com/sticker-prod/syc9Sa2sjYaI5rJYmS9O/cover-1.thumb256.png",
+                "https://api-lopy.wanioco.com/static/cuisine/Pizza.png",
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: double.infinity,
@@ -94,6 +97,4 @@ class _PizzaItemWidget extends StatelessWidget {
         ? input[0].toUpperCase() + input.substring(1)
         : input;
   }
-
 }
-

@@ -158,14 +158,12 @@ class ExistedCardDisplay extends StatelessWidget {
 
   List<Widget> _getCardInfoWidgetList() {
     List<Widget> elementList = [];
-    elementList.add(CardInfo(
-        backgroundColor: Color(0xFFE1E5FF),
-        lastFour: "1234",
-        expMonth: 10,
-        expYear: 24));
     // add card info widget
     for (var userCard in userCards) {
       elementList.add(CardInfo(
+          backgroundColor: userCard.primaryFlag == 1
+              ? const Color(0xFFE1E5FF)
+              : const Color(0xFFF7F4F4),
           lastFour: userCard.lastFour,
           expMonth: userCard.expMonth,
           expYear: userCard.expYear));
