@@ -37,6 +37,15 @@ class HomeView extends StatelessWidget {
               }
               // highlight clicked btn
               tabRouter.setActiveIndex(value);
+              if (value == _discoverNavBtn) {
+                context.navigateTo(const DiscoverNavigationView());
+              } else if (value == _orderNavBtn) {
+                context.navigateTo(const OrderNavigationView());
+              } else if (value == _scanNavBtn) {
+                context.navigateTo(const ScanNavigationView());
+              } else if (value == _profileNavBtn) {
+                context.navigateTo(const ProfileNavigationView());
+              }
             },
             type: BottomNavigationBarType.fixed,
             selectedItemColor: const Color.fromRGBO(
