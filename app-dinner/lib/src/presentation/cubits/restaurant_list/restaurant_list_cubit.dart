@@ -23,7 +23,7 @@ class RestaurantListCubit
 
     await run(() async {
       final response = await _apiRepository.getRestaurantList(
-          request: RestaurantListRequest(page: _page, promotionSearch: isPromotion, cuisine: "chinese"));
+          request: RestaurantListRequest(page: _page, promotionSearch: isPromotion, cuisine: cuisine));
       if (response is DataSuccess) {
         final restaurants = response.data!.restaurants;
         final isData = restaurants.length < 4;

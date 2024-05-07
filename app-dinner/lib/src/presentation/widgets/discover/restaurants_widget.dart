@@ -9,33 +9,94 @@ class SlowScrollBehavior extends ScrollBehavior {
   }
 }
 
+// class RestaurantsWidget extends StatelessWidget {
+//   final List<Restaurant> restaurants;
+//
+//   const RestaurantsWidget(this.restaurants, {Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return ScrollConfiguration(
+//       behavior: SlowScrollBehavior(),
+//       child: SingleChildScrollView(
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.stretch,
+//           children: [
+//             ListView.builder(
+//               physics: const NeverScrollableScrollPhysics(),
+//               shrinkWrap: true,
+//               itemCount: restaurants.length, // The number of restaurant cards
+//               itemBuilder: (BuildContext context, int index) {
+//                 return RestaurantCard(
+//                   restaurant: restaurants[index],
+//                   restaurantCardType: RestaurantCardType.big,
+//                 );
+//               },
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 class RestaurantsWidget extends StatelessWidget {
   final List<Restaurant> restaurants;
+  final bool scrollEnabled;
 
-  const RestaurantsWidget(this.restaurants, {Key? key}) : super(key: key);
+  const RestaurantsWidget(
+      this.restaurants, {
+        Key? key,
+        this.scrollEnabled = true, // Default value for scrollEnabled
+      }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ScrollConfiguration(
+    Widget listView = ListView.builder(
+      physics: scrollEnabled ? null : const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: restaurants.length, // The number of restaurant cards
+      itemBuilder: (BuildContext context, int index) {
+        return RestaurantCard(
+          restaurant: restaurants[index],
+          restaurantCardType: RestaurantCardType.big,
+        );
+      },
+    );
+
+    return scrollEnabled
+        ? ScrollConfiguration(
       behavior: SlowScrollBehavior(),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: restaurants.length, // The number of restaurant cards
-              itemBuilder: (BuildContext context, int index) {
-                return RestaurantCard(
-                  restaurant: restaurants[index],
-                  restaurantCardType: RestaurantCardType.big,
-                );
-              },
-            ),
-          ],
+          children: [listView],
         ),
       ),
-    );
+    )
+        : listView;
   }
 }
+
+// class RestaurantsWidget extends StatelessWidget {
+//   final List<Restaurant> restaurants;
+//
+//   const RestaurantsWidget(this.restaurants, {Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return ScrollConfiguration(
+//       behavior: SlowScrollBehavior(),
+//       child: ListView.builder(
+//         physics: const AlwaysScrollableScrollPhysics(), // Allow scrolling
+//         itemCount: restaurants.length,
+//         itemBuilder: (BuildContext context, int index) {
+//           return RestaurantCard(
+//             restaurant: restaurants[index],
+//             restaurantCardType: RestaurantCardType.big,
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
