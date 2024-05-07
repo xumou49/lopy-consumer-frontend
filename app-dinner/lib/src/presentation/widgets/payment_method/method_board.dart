@@ -54,65 +54,70 @@ class CardInfo extends StatelessWidget {
   final int? expMonth;
   final int? expYear;
   final Color backgroundColor;
+  final VoidCallback onTap;
 
-  const CardInfo({
+  CardInfo({
     Key? key,
     required this.lastFour,
     required this.expYear,
     required this.expMonth,
+    required this.onTap,
     this.backgroundColor = const Color(0xFFF7F4F4),
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 80,
-        width: double.infinity,
-        child: Card(
-          color: backgroundColor,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Positioned(
-                  left: 20,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '**** **** **** $lastFour',
-                        style: const TextStyle(
-                          color: Color(0xFF31343D),
-                          fontSize: 14,
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w700,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+          height: 80,
+          width: double.infinity,
+          child: Card(
+            color: backgroundColor,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Positioned(
+                    left: 20,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '**** **** **** $lastFour',
+                          style: const TextStyle(
+                            color: Color(0xFF31343D),
+                            fontSize: 14,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-                      ),
-                      Text(
-                        '${expMonth.toString().padLeft(2, '0')}/$expYear',
-                        style: const TextStyle(
-                          color: Color(0xFF31343D),
-                          fontSize: 10,
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w400,
+                        Text(
+                          '${expMonth.toString().padLeft(2, '0')}/$expYear',
+                          style: const TextStyle(
+                            color: Color(0xFF31343D),
+                            fontSize: 10,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
+                      ],
+                    )),
+                Positioned(
+                    right: 20,
+                    child: IconButton(
+                      iconSize: 20,
+                      onPressed: () {
+                        print("card delete");
+                      },
+                      icon: const Icon(
+                        Icons.delete,
+                        color: Colors.grey,
                       ),
-                    ],
-                  )),
-              Positioned(
-                  right: 20,
-                  child: IconButton(
-                    iconSize: 20,
-                    onPressed: () {
-                      print("card delete");
-                    },
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Colors.grey,
-                    ),
-                  )),
-            ],
-          ),
-        ));
+                    )),
+              ],
+            ),
+          )),
+    );
   }
 }
 
@@ -149,28 +154,43 @@ class UserCardDisplay extends StatelessWidget {
   }
 }
 
-class ExistedCardDisplay extends StatelessWidget {
+class ExistedCardDisplay extends StatefulWidget {
   final String type;
   final List<UserCard> userCards;
+
   const ExistedCardDisplay(
       {Key? key, required this.type, required this.userCards})
       : super(key: key);
 
+  @override
+  State<ExistedCardDisplay> createState() => _ExistedCardDisplayState();
+}
+
+class _ExistedCardDisplayState extends State<ExistedCardDisplay> {
+  // primary card will always be the first card from data
+  int selectedCardIndex = 0;
+
   List<Widget> _getCardInfoWidgetList() {
     List<Widget> elementList = [];
     // add card info widget
-    for (var userCard in userCards) {
+    for (int i = 0; i < widget.userCards.length; i++) {
       elementList.add(CardInfo(
-          backgroundColor: userCard.primaryFlag == 1
-              ? const Color(0xFFE1E5FF)
-              : const Color(0xFFF7F4F4),
-          lastFour: userCard.lastFour,
-          expMonth: userCard.expMonth,
-          expYear: userCard.expYear));
+        backgroundColor: i == selectedCardIndex
+            ? const Color(0xFFE1E5FF)
+            : const Color(0xFFF7F4F4),
+        lastFour: widget.userCards[i].lastFour,
+        expMonth: widget.userCards[i].expMonth,
+        expYear: widget.userCards[i].expYear,
+        onTap: () {
+          setState(() {
+            selectedCardIndex = i;
+          });
+        },
+      ));
     }
     // spacing & new card button
     elementList.add(const SizedBox(height: 20));
-    elementList.add(NewCardBtn(type: type));
+    elementList.add(NewCardBtn(type: widget.type));
     return elementList;
   }
 
