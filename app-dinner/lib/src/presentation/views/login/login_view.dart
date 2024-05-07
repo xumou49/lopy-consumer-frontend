@@ -27,7 +27,7 @@ class _LoginViewState extends State<LoginView> {
     return BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
-            context.router.push(const HomeNavigationView());
+            context.router.replaceAll([const HomeNavigationView()]);
           } else {
             print("fail to login");
           }
