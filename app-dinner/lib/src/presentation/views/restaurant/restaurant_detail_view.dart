@@ -56,8 +56,15 @@ class _RestaurantDetailListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int? restaurantId = restaurant.id;
     double top = 0.0;
     double min = 0.0;
+
+    if (restaurantId == null) {
+      // Handle the case where restaurantId is null
+      // For example, show an error message or use a default value
+      return const Center(child: Text('Restaurant ID is null'));
+    }
 
     return Scaffold(
         body: CustomScrollView(
@@ -117,6 +124,7 @@ class _RestaurantDetailListView extends StatelessWidget {
                       const PlaceholderWidget(height: 10),
                       MenuListWidget(
                         menuCategory: restaurant.menuCategory!,
+                        restaurantId: restaurant.id ?? -1,
                       ),
                     ],
                   ));

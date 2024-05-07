@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 
 class MenuItemCard extends StatelessWidget {
   final MenuItem menuItem;
+  final int restaurantId;
 
-  const MenuItemCard({Key? key, required this.menuItem}) : super(key: key);
+  const MenuItemCard(
+      {Key? key, required this.menuItem, required this.restaurantId}
+      ) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,9 @@ class MenuItemCard extends StatelessWidget {
               showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return MenuItemDialogWidget(menuItem: menuItem);
+                    return MenuItemDialogWidget(
+                      menuItem: menuItem,
+                      restaurantId: restaurantId,);
                   });
             },
             child: Column(
