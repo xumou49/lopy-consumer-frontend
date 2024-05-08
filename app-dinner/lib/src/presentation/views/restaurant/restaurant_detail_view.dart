@@ -52,7 +52,7 @@ class RestaurantDetailView extends HookWidget with WidgetsBindingObserver {
 class _RestaurantDetailListView extends StatelessWidget {
   final Restaurant restaurant;
 
-  const _RestaurantDetailListView({super.key, required this.restaurant});
+  const _RestaurantDetailListView({required this.restaurant});
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +166,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                             )
                           : SizedBox(
                               child: Text(
-                                restaurant.name!,
+                                restaurant.name,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
@@ -208,7 +208,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                           )
                         : SizedBox(
                             child: Text(
-                              restaurant.name!,
+                              restaurant.name,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,

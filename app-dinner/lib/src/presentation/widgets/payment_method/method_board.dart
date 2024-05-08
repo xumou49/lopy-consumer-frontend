@@ -56,7 +56,7 @@ class CardInfo extends StatelessWidget {
   final Color backgroundColor;
   final VoidCallback onTap;
 
-  CardInfo({
+  const CardInfo({
     Key? key,
     required this.lastFour,
     required this.expYear,
@@ -69,7 +69,7 @@ class CardInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: Container(
+      child: SizedBox(
           height: 80,
           width: double.infinity,
           child: Card(

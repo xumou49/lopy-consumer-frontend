@@ -41,7 +41,7 @@ class _PaymentSuccessViewState extends State<PaymentSuccessView> {
       child: Column(children: [
         Container(
           alignment: Alignment.center,
-          margin: EdgeInsets.only(top: 220),
+          margin: const EdgeInsets.only(top: 220),
           child: Stack(children: [
             Positioned(
                 child: SizedBox(

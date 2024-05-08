@@ -29,7 +29,7 @@ Future<void> initializeDependencies() async {
   final dio = Dio();
   dio.interceptors.add(AwesomeDioInterceptor());
 
-  final secureStorage = const FlutterSecureStorage();
+  const secureStorage = FlutterSecureStorage();
 
   locator.registerSingleton(AppRouter());
   locator.registerSingleton<Dio>(dio);

@@ -42,7 +42,7 @@ class MethodDataDisplayBoard extends StatelessWidget {
           context.read<UserCardListCubit>().getUserCardList(state.type);
           return UserCardDisplay(type: state.type);
         case PaynowMethodSelector:
-          return PaynowQRCode();
+          return const PaynowQRCode();
         case PaypalMethodSelector:
           return EmptyCardDisplay(type: state.type);
         default:

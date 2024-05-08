@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../config/routers/app_router.gr.dart';
 import '../../../../domain/models/restaurant.dart';
 import '../../../cubits/restaurant_list/restaurant_list_cubit.dart';
 import '../../../cubits/restaurant_list/restaurant_promo_cubit.dart';
@@ -40,7 +39,7 @@ class DiscoverView extends HookWidget {
     }, const []);
 
     return Scaffold(
-      appBar: GradientAppBar(),
+      appBar: const GradientAppBar(),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: <Widget>[

@@ -95,8 +95,8 @@ class _CounterStepState extends State<CounterStep> {
   Widget buildReduceButton() {
     return InkWell(
       child: Container(
-        color: Color.fromRGBO(243, 129, 129, 1),
-        child: Icon(
+        color: const Color.fromRGBO(243, 129, 129, 1),
+        child: const Icon(
           Icons.remove,
           color: Colors.white,
         ),

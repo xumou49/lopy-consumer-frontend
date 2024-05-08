@@ -206,7 +206,7 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 360, // Adjust as needed
                     height: itemHeight * itemCount,
                     child: ListView.builder(
@@ -220,12 +220,12 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
                         final TextSpan matchText = TextSpan(
                           text: option.substring(matchStartIndex,
                               matchStartIndex + _currentInput.length),
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         );
                         final TextSpan remainingText = TextSpan(
                           text: option.substring(
                               matchStartIndex + _currentInput.length),
-                          style: TextStyle(fontWeight: FontWeight.normal),
+                          style: const TextStyle(fontWeight: FontWeight.normal),
                         );
 
                         return GestureDetector(
@@ -238,9 +238,9 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
                                       ? TextSpan(
                                           text: option.substring(
                                               0, matchStartIndex),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.normal))
-                                      : TextSpan(),
+                                      : const TextSpan(),
                                   matchText,
                                   remainingText,
                                 ],
@@ -266,7 +266,7 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
             final router = AutoRouter.of(context);
             // Check if the current route is already SearchView
             if (router.current.name != "SearchView") {
-              router.push(SearchNavigationView());
+              router.push(const SearchNavigationView());
             }
           },
           controller: textEditingController,
@@ -293,7 +293,7 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
 }
 
 Widget _suggestionSearch() {
-  return Container(
+  return SizedBox(
     // color: Colors.blue,
     height: 100, // Adjust the height to accommodate the search items
     child: Column(
@@ -334,8 +334,8 @@ Widget _suggestionSearch() {
 
 Widget _buildSearchItem(String itemName) {
   return Container(
-    margin: EdgeInsets.only(top: 4, left: 4, right: 4, bottom: 4),
-    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+    margin: const EdgeInsets.only(top: 4, left: 4, right: 4, bottom: 4),
+    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
     decoration: BoxDecoration(
       color: const Color(0x4CC4C4C4),
       borderRadius: BorderRadius.circular(20),
