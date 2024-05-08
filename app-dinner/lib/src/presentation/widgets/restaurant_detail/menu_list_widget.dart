@@ -6,15 +6,18 @@ import 'menu_item_card_widget.dart';
 
 class MenuListWidget extends StatefulWidget {
   final MenuCategory menuCategory;
+  final int restaurantId;
 
-  const MenuListWidget({Key? key, required this.menuCategory})
-      : super(key: key);
+  const MenuListWidget(
+      {Key? key, required this.menuCategory, required this.restaurantId}
+      ): super(key: key);
 
   @override
   State<MenuListWidget> createState() => _MenuListState();
 }
 
 class _MenuListState extends State<MenuListWidget> {
+
   @override
   void initState() {
     super.initState();
@@ -24,6 +27,7 @@ class _MenuListState extends State<MenuListWidget> {
 
   @override
   Widget build(BuildContext context) {
+    int restaurantId = widget.restaurantId;
     return Column(
       children: <Widget>[
         Row(
@@ -114,7 +118,7 @@ class _MenuListState extends State<MenuListWidget> {
                         itemBuilder: (BuildContext context, int index) {
                           return MenuItemCard(
                               menuItem: widget.menuCategory
-                                  .menuList[selectedIndex].menuItemList[index]);
+                                  .menuList[selectedIndex].menuItemList[index], restaurantId: restaurantId,);
                         },
                       ),
                     )

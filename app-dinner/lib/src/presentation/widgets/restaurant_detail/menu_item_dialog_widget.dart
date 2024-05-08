@@ -1,19 +1,30 @@
+import 'package:Lopy/src/domain/models/cart.dart';
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oktoast/oktoast.dart';
 
 import '../../../domain/models/menu_item.dart';
 import '../common/button_widget.dart';
 import '../common/text_widget.dart';
 import 'number_counter_widget.dart';
+import '../../cubits/cart/cart_list_cubit.dart';
 
 class MenuItemDialogWidget extends StatelessWidget {
   final MenuItem menuItem;
+  final int restaurantId;
 
-  const MenuItemDialogWidget({Key? key, required this.menuItem})
+  const MenuItemDialogWidget(
+      {
+        Key? key, required this.menuItem,
+        required this.restaurantId
+      })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final localACartCubit = BlocProvider.of<CartListCubit>(context);
+    int counter = 1;
     return Dialog(
       surfaceTintColor: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
@@ -96,7 +107,9 @@ class MenuItemDialogWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      CounterStep(min: 1, max: 10, valueChanged: (int value) {})
+                      CounterStep(min: 1, max: 10, valueChanged: (int value) {
+                        counter = value;
+                      })
                     ],
                   ),
                   const PlaceholderWidget(height: 20.0),
@@ -108,7 +121,19 @@ class MenuItemDialogWidget extends StatelessWidget {
                             text: 'Add to Cart',
                             height: 40.0,
                             onPressed: () {
-                              print('Hello');
+                              Cart c = Cart(
+                                  name: menuItem.itemName,
+                                  quantity: counter,
+                                  price: menuItem.price,
+                                  // userId: userId,
+                                  // restaurantId: restaurantId,
+                                  userId: 1,
+                                  restaurantId: restaurantId,
+                                  restaurantMenuItemId: menuItem.menuId);
+                              print(c);
+                              localACartCubit.saveCart(cartItem: c);
+                              showToast('Added Successfully');
+                              Navigator.pop(context);
                             }),
                       )
                     ],
