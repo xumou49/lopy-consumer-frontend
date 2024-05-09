@@ -58,7 +58,7 @@ class Restaurant extends Equatable {
 
   factory Restaurant.fromJson(Map<String, dynamic> json) {
     var menuCategoryJson = json['menuCategory'];
-    MenuCategory? menuCategory = null;
+    MenuCategory? menuCategory;
     if (menuCategoryJson != null) {
       menuCategory = MenuCategory.fromJson(menuCategoryJson);
     }

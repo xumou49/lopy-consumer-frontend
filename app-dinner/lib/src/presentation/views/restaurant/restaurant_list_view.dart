@@ -1,5 +1,3 @@
-import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_list_cubit.dart';
-import 'package:Lopy/src/utils/extensions/scroll_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -8,8 +6,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../config/routers/app_router.gr.dart';
 import '../../../domain/models/restaurant.dart';
-import '../../../domain/repositories/api_repository.dart';
-import '../../../locator.dart';
 import '../../cubits/restaurant_list/restaurant_cuisine_cubit.dart';
 import '../../widgets/common/appbar_widget.dart';
 import '../../widgets/discover/restaurants_widget.dart';
@@ -18,11 +14,13 @@ import '../../widgets/restaurant_widget.dart';
 @RoutePage()
 class RestaurantListView extends HookWidget {
   final String cuisine;
+
   const RestaurantListView({Key? key, this.cuisine = ""}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final remoteRestaurantCuisineCubit = BlocProvider.of<RestaurantCuisineCubit>(context);
+    final remoteRestaurantCuisineCubit =
+        BlocProvider.of<RestaurantCuisineCubit>(context);
     final scrollController = useScrollController();
     useEffect(() {
       remoteRestaurantCuisineCubit.getRestaurantList(cuisine: cuisine);
@@ -34,14 +32,17 @@ class RestaurantListView extends HookWidget {
 
     return Scaffold(
       appBar: GradientAppBar(
-        title:"Restaurants",
+        title: "Restaurants",
         showBackButton: true,
         showCartIcon: true,
         actionIcon: const Icon(Icons.shopping_cart),
-        onTapAction: () {context.router.push(const CartNavigationView());},
-        onBackButtonPressed:() {
-        context.router.pop();
-      },),
+        onTapAction: () {
+          context.router.push(const CartNavigationView());
+        },
+        onBackButtonPressed: () {
+          context.router.pop();
+        },
+      ),
       body: BlocBuilder<RestaurantCuisineCubit, RestaurantCuisineState>(
         builder: (_, state) {
           switch (state.runtimeType) {
@@ -54,7 +55,10 @@ class RestaurantListView extends HookWidget {
                 child: Icon(Icons.refresh),
               );
             case RestaurantCuisineSuccess:
-              return RestaurantsWidget(state.restaurants);
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                child: RestaurantsWidget(state.restaurants),
+              );
             default:
               return const SizedBox();
           }

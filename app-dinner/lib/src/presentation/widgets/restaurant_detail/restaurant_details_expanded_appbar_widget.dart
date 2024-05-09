@@ -1,7 +1,5 @@
-import 'package:Lopy/src/presentation/widgets/restaurant_detail/menu_item_card_widget.dart';
 import 'package:flutter/material.dart';
 
-import 'number_counter_widget.dart';
 
 class RestaurantDetailsExpandedAppbarWidget extends StatelessWidget {
   const RestaurantDetailsExpandedAppbarWidget({Key? key}) : super(key: key);

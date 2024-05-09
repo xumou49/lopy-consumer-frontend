@@ -43,7 +43,6 @@ class CartListView extends HookWidget {
               },
             ),
           ),
-          // PlaceOrderBtn()
         ],
       ),
     );

@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oktoast/oktoast.dart';
 
 import '../../../config/routers/app_router.gr.dart';
 import '../../../domain/models/cart.dart';
@@ -72,7 +71,7 @@ class RestaurantCard extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       const Icon(Icons.star, color: Colors.amber, size: 12.5),
-                      Text(restaurant.rating, style: TextStyle(fontSize: 10)),
+                      Text(restaurant.rating, style: const TextStyle(fontSize: 10)),
 
                       const Spacer(),
                       // Use spacer to push the heart icon to the end of the row
@@ -128,7 +127,7 @@ class RestaurantCard extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       const Icon(Icons.star, color: Colors.amber, size: 14.5),
-                      Text(restaurant.rating, style: TextStyle(fontSize: 12)),
+                      Text(restaurant.rating, style: const TextStyle(fontSize: 12)),
                       const Spacer(),
                       // Use spacer to push the heart icon to the end of the row
                       Icon(

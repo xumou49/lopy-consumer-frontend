@@ -23,7 +23,7 @@ class PlaceOrderBtn extends StatelessWidget {
   // mock data
   List<Cart> _getItemList() {
     return [
-      Cart(
+      const Cart(
           itemId: 1,
           name: "item-1",
           quantity: 1,
@@ -31,7 +31,7 @@ class PlaceOrderBtn extends StatelessWidget {
           userId: 0,
           restaurantId: 0,
           restaurantMenuItemId: 0),
-      Cart(
+      const Cart(
           itemId: 2,
           name: "item-2",
           quantity: 2,
@@ -39,7 +39,7 @@ class PlaceOrderBtn extends StatelessWidget {
           userId: 0,
           restaurantId: 0,
           restaurantMenuItemId: 0),
-      Cart(
+      const Cart(
           itemId: 3,
           name: "item-3",
           quantity: 3,
