@@ -1,18 +1,21 @@
 import 'package:Lopy/src/domain/models/cart.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_place_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/button_widget.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PlaceOrderBtn extends StatelessWidget {
-  const PlaceOrderBtn({super.key});
+  final List<Cart> carts;
+  const PlaceOrderBtn({super.key, required this.carts});
 
   @override
   Widget build(BuildContext context) {
     return ButtonWidget(
         text: "PLACE ORDER",
         onPressed: () {
-          context.read<OrderPlaceCubit>().orderPlace(1, _getItemList());
+          context.read<OrderPlaceCubit>().orderPlace(
+              carts.first.restaurantId, carts);
           // route to order place status page (success / loading / failed) here
         });
   }

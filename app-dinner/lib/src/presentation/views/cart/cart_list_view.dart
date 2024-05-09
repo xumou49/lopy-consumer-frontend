@@ -43,38 +43,78 @@ class CartListView extends HookWidget {
               },
             ),
           ),
-          PlaceOrderBtn()
+          // PlaceOrderBtn()
         ],
       ),
     );
   }
 
+  // Widget _buildCartItemsList(List<Cart> cartItems) {
+  //   if (cartItems.isEmpty) {
+  //     return const Center(
+  //         child: Text(
+  //       'No items added',
+  //       style: TextStyle(color: Colors.black),
+  //     ));
+  //   }
+  //   return Expanded(
+  //     child: ListView.builder(
+  //       itemCount: cartItems.length,
+  //       itemBuilder: (context, index) {
+  //         print("====");
+  //         print(cartItems[index].itemId);
+  //         print(cartItems[index].name);
+  //         print(cartItems[index].quantity);
+  //         print(cartItems[index].price);
+  //         print(cartItems[index].userId);
+  //         print(cartItems[index].restaurantId);
+  //         print(cartItems[index].restaurantMenuItemId);
+  //         print("====");
+  //         return CartItemWidget(item: cartItems[index]);
+  //       },
+  //     ),
+  //   );
+  // }
   Widget _buildCartItemsList(List<Cart> cartItems) {
     if (cartItems.isEmpty) {
       return const Center(
-          child: Text(
-        'No items added',
-        style: TextStyle(color: Colors.black),
-      ));
+        child: Text(
+          'No items added',
+          style: TextStyle(color: Colors.black),
+        ),
+      );
     }
     return Expanded(
-      child: ListView.builder(
-        itemCount: cartItems.length,
-        itemBuilder: (context, index) {
-          print("====");
-          print(cartItems[index].itemId);
-          print(cartItems[index].name);
-          print(cartItems[index].quantity);
-          print(cartItems[index].price);
-          print(cartItems[index].userId);
-          print(cartItems[index].restaurantId);
-          print(cartItems[index].restaurantMenuItemId);
-          print("====");
-          return CartItemWidget(item: cartItems[index]);
-        },
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: cartItems.length,
+              itemBuilder: (context, index) {
+                print("====");
+                print(cartItems[index].itemId);
+                print(cartItems[index].name);
+                print(cartItems[index].quantity);
+                print(cartItems[index].price);
+                print(cartItems[index].userId);
+                print(cartItems[index].restaurantId);
+                print(cartItems[index].restaurantMenuItemId);
+                print("====");
+                return CartItemWidget(item: cartItems[index]);
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: PlaceOrderBtn(carts: cartItems,)
+          ),
+        ],
       ),
     );
   }
+
+
+
 }
 
 class CartItemWidget extends HookWidget {
