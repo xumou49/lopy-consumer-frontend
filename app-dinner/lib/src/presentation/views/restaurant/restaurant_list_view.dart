@@ -18,11 +18,13 @@ import '../../widgets/restaurant_widget.dart';
 @RoutePage()
 class RestaurantListView extends HookWidget {
   final String cuisine;
+
   const RestaurantListView({Key? key, this.cuisine = ""}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final remoteRestaurantCuisineCubit = BlocProvider.of<RestaurantCuisineCubit>(context);
+    final remoteRestaurantCuisineCubit =
+        BlocProvider.of<RestaurantCuisineCubit>(context);
     final scrollController = useScrollController();
     useEffect(() {
       remoteRestaurantCuisineCubit.getRestaurantList(cuisine: cuisine);
@@ -34,14 +36,17 @@ class RestaurantListView extends HookWidget {
 
     return Scaffold(
       appBar: GradientAppBar(
-        title:"Restaurants",
+        title: "Restaurants",
         showBackButton: true,
         showCartIcon: true,
         actionIcon: const Icon(Icons.shopping_cart),
-        onTapAction: () {context.router.push(const CartNavigationView());},
-        onBackButtonPressed:() {
-        context.router.pop();
-      },),
+        onTapAction: () {
+          context.router.push(const CartNavigationView());
+        },
+        onBackButtonPressed: () {
+          context.router.pop();
+        },
+      ),
       body: BlocBuilder<RestaurantCuisineCubit, RestaurantCuisineState>(
         builder: (_, state) {
           switch (state.runtimeType) {
@@ -54,7 +59,10 @@ class RestaurantListView extends HookWidget {
                 child: Icon(Icons.refresh),
               );
             case RestaurantCuisineSuccess:
-              return RestaurantsWidget(state.restaurants);
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                child: RestaurantsWidget(state.restaurants),
+              );
             default:
               return const SizedBox();
           }
