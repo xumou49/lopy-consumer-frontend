@@ -45,35 +45,37 @@ class RestaurantsWidget extends StatelessWidget {
   final bool scrollEnabled;
 
   const RestaurantsWidget(
-      this.restaurants, {
-        Key? key,
-        this.scrollEnabled = true, // Default value for scrollEnabled
-      }) : super(key: key);
+    this.restaurants, {
+    Key? key,
+    this.scrollEnabled = true, // Default value for scrollEnabled
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Widget listView = ListView.builder(
-      physics: scrollEnabled ? null : const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: restaurants.length, // The number of restaurant cards
-      itemBuilder: (BuildContext context, int index) {
-        return RestaurantCard(
-          restaurant: restaurants[index],
-          restaurantCardType: RestaurantCardType.big,
-        );
-      },
-    );
+    Widget listView = ListView.separated(
+        physics: scrollEnabled ? null : const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: restaurants.length,
+        // The number of restaurant cards
+        itemBuilder: (BuildContext context, int index) {
+          return RestaurantCard(
+            restaurant: restaurants[index],
+            restaurantCardType: RestaurantCardType.big,
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) =>
+            const Divider(color: Colors.transparent));
 
     return scrollEnabled
         ? ScrollConfiguration(
-      behavior: SlowScrollBehavior(),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [listView],
-        ),
-      ),
-    )
+            behavior: SlowScrollBehavior(),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [listView],
+              ),
+            ),
+          )
         : listView;
   }
 }
