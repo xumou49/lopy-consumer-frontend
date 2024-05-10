@@ -11,22 +11,42 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class PaymentMethodView extends StatelessWidget {
-  const PaymentMethodView({super.key});
+  final bool isFromCheckout;
+  final double totalPrice;
+
+  const PaymentMethodView(
+      {super.key, this.isFromCheckout = false, this.totalPrice = 0.0});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: const GradientAppBar(title: "Payment Methods"),
-        body: SingleChildScrollView(
-            child: Column(children: [
+    final remoteUserCardListCubit = BlocProvider.of<UserCardListCubit>(context);
+    remoteUserCardListCubit.getUserCardList("mastercard");
+
+    List<Widget> getWidgets() {
+      if (isFromCheckout) {
+        return [
           MethodSelection(),
           const MethodDataDisplayBoard(),
           const SizedBox(height: 70),
-          const TotalPriceDisplay(96.0),
+          TotalPriceDisplay(totalPrice),
           const SizedBox(height: 15),
           const PayBtn(),
           const SizedBox(height: 15),
-        ])));
+        ];
+      } else {
+        return [
+          MethodSelection(),
+          const MethodDataDisplayBoard(),
+          const SizedBox(height: 70),
+        ];
+      }
+    }
+
+    return Scaffold(
+        appBar: const GradientAppBar(title: "Payment Methods"),
+        body: SingleChildScrollView(
+          child: Column(children: getWidgets()),
+        ));
   }
 }
 

@@ -20,10 +20,10 @@ class MethodSelection extends StatefulWidget {
 
 class _MethodSelectionState extends State<MethodSelection> {
   List<CardItem> items = [
-    const CardItem(
-        imagePath: "lib/src/assets/images/paynow.png",
-        title: "Paynow",
-        name: "paynow"),
+    // const CardItem(
+    //     imagePath: "lib/src/assets/images/paynow.png",
+    //     title: "Paynow",
+    //     name: "paynow"),
     const CardItem(
         imagePath: "lib/src/assets/images/mastercard.png",
         title: "Matercard",
@@ -32,10 +32,10 @@ class _MethodSelectionState extends State<MethodSelection> {
         imagePath: "lib/src/assets/images/visa.png",
         title: "Visa",
         name: "visa"),
-    const CardItem(
-        imagePath: "lib/src/assets/images/paypal.png",
-        title: "Paypal",
-        name: "paypal"),
+    // const CardItem(
+    //     imagePath: "lib/src/assets/images/paypal.png",
+    //     title: "Paypal",
+    //     name: "paypal"),
     const CardItem(
         imagePath: "lib/src/assets/images/amex.png",
         title: "Amex",
