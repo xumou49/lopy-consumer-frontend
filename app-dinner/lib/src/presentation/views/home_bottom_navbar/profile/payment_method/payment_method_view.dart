@@ -17,35 +17,32 @@ class PaymentMethodView extends StatelessWidget {
   const PaymentMethodView(
       {super.key, this.isFromCheckout = false, this.totalPrice = 0.0});
 
+  List<Widget> _getWidgets() {
+    if (isFromCheckout) {
+      return [
+        MethodSelection(),
+        const MethodDataDisplayBoard(),
+        const SizedBox(height: 70),
+        TotalPriceDisplay(totalPrice),
+        const SizedBox(height: 15),
+        const PayBtn(),
+        const SizedBox(height: 15),
+      ];
+    } else {
+      return [
+        MethodSelection(),
+        const MethodDataDisplayBoard(),
+        const SizedBox(height: 70),
+      ];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final remoteUserCardListCubit = BlocProvider.of<UserCardListCubit>(context);
-    remoteUserCardListCubit.getUserCardList("mastercard");
-
-    List<Widget> getWidgets() {
-      if (isFromCheckout) {
-        return [
-          MethodSelection(),
-          const MethodDataDisplayBoard(),
-          const SizedBox(height: 70),
-          TotalPriceDisplay(totalPrice),
-          const SizedBox(height: 15),
-          const PayBtn(),
-          const SizedBox(height: 15),
-        ];
-      } else {
-        return [
-          MethodSelection(),
-          const MethodDataDisplayBoard(),
-          const SizedBox(height: 70),
-        ];
-      }
-    }
-
     return Scaffold(
         appBar: const GradientAppBar(title: "Payment Methods"),
         body: SingleChildScrollView(
-          child: Column(children: getWidgets()),
+          child: Column(children: _getWidgets()),
         ));
   }
 }

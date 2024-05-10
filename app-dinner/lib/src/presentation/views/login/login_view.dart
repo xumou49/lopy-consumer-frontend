@@ -1,8 +1,10 @@
 import 'package:Lopy/src/config/routers/app_router.gr.dart';
 import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/login/login_state.dart';
+import 'package:Lopy/src/presentation/cubits/user_card/user_card_list_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/login/login_button.dart';
 import 'package:Lopy/src/presentation/widgets/login/login_method_divider.dart';
+import 'package:Lopy/src/utils/constants/strings.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +29,10 @@ class _LoginViewState extends State<LoginView> {
     return BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
+            // init users data after login
+            context
+                .read<UserCardListCubit>()
+                .getUserCardList(mastercardPayment);
             context.router.replaceAll([const HomeNavigationView()]);
           } else {
             showToast(
@@ -74,6 +80,9 @@ class _ViewState extends State<View> {
             child: SingleChildScrollView(
                 child: Column(children: [
       // image logo
+      SizedBox(
+        height: 30,
+      ),
       _getLogo(),
       // text info, welcome & description
       _getText("Welcome", const Color(0xFF1F2937), 24, FontWeight.w700),
@@ -83,7 +92,7 @@ class _ViewState extends State<View> {
           const Color(0xFF4B5563),
           12,
           FontWeight.w400),
-      const SizedBox(height: 130),
+      const SizedBox(height: 80),
       // login button
       LoginButton(
           "Sign in with Google", "lib/src/assets/images/google_login_logo.png",
@@ -96,9 +105,9 @@ class _ViewState extends State<View> {
           onTap: () {
         context.read<LoginCubit>().appleLogin();
       }, textColor: Colors.white, backgroundColor: Colors.black),
-      const SizedBox(height: 40),
+      const SizedBox(height: 20),
       const LoginMethodDivider(),
-      const SizedBox(height: 40),
+      const SizedBox(height: 20),
       LoginButton(
         "Sign in with Phone Number",
         "lib/src/assets/images/phone_login_logo.png",
