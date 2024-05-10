@@ -1,6 +1,7 @@
+import 'package:Lopy/src/presentation/widgets/common/EmptyResultDisplay.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -46,6 +47,12 @@ class RestaurantListView extends HookWidget {
       body: BlocBuilder<RestaurantCuisineCubit, RestaurantCuisineState>(
         builder: (_, state) {
           switch (state.runtimeType) {
+            case RestaurantCuisineEmpty:
+              return const Center(
+                  child: EmptyResultDisplay(
+                      title: "No Results",
+                      subtitle:
+                          "We cannot find the restaurants with given cuisine.\n Try different cuisine."));
             case RestaurantCuisineLoading:
               return const Center(
                 child: CupertinoActivityIndicator(),

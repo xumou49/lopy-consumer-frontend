@@ -62,8 +62,6 @@ class _CuisineItemWidget extends StatelessWidget {
                   BorderRadius.circular(10), // Sets the radius of the image
               child: Image.network(
                 imageUrl,
-                // "https://storage.googleapis.com/sticker-prod/syc9Sa2sjYaI5rJYmS9O/cover-1.thumb256.png",
-                // "https://api-lopy.wanioco.com/static/cuisine/Pizza.png",
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: double.infinity,
@@ -88,16 +86,16 @@ List<Cuisine> _getCuisineDataList() {
   return [
     const Cuisine(
         id: 1,
-        name: 'Western',
-        imagePath: 'https://api-lopy.wanioco.com/static/cuisine/Western.png'),
-    const Cuisine(
-        id: 2,
         name: 'Chinese',
         imagePath: 'https://api-lopy.wanioco.com/static/cuisine/Chinese.png'),
     const Cuisine(
-        id: 3,
+        id: 2,
         name: 'Japanese',
         imagePath: 'https://api-lopy.wanioco.com/static/cuisine/Japanese.png'),
+    const Cuisine(
+        id: 3,
+        name: 'Western',
+        imagePath: 'https://api-lopy.wanioco.com/static/cuisine/Western.png'),
     const Cuisine(
         id: 4,
         name: 'Korean',
