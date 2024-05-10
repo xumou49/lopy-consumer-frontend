@@ -15,6 +15,8 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onBackButtonPressed;
   final List<Widget>? actions;
   final Function()? onTap;
+  final Function(String)? onSubmitted;
+  final Function(String)? onChanged;
 
   const GradientAppBar({
     super.key,
@@ -27,6 +29,8 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.subtitle,
     this.actionIcon,
     this.onTapAction,
+    this.onSubmitted,
+    this.onChanged,
   }) : assert(!showBackButton || onBackButtonPressed != null,
             'onBackButtonPressed must be provided if showBackButton is true');
 
@@ -38,7 +42,10 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
             subtitle: subtitle,
             actionIcon: actionIcon,
           )
-        : const AutocompleteSearchList();
+        : AutocompleteSearchList(
+            onSubmitted: onSubmitted,
+            onChanged: onChanged,
+          );
 
     return Container(
       decoration: BoxDecoration(
@@ -158,7 +165,10 @@ class AppBarSearchFieldWidget extends StatelessWidget {
 }
 
 class AutocompleteSearchList extends StatefulWidget {
-  const AutocompleteSearchList({super.key});
+  Function(String)? onSubmitted = (v) {};
+  Function(String)? onChanged = (v) {};
+
+  AutocompleteSearchList({super.key, this.onSubmitted, this.onChanged});
 
   @override
   _AutocompleteSearchListState createState() => _AutocompleteSearchListState();
@@ -269,6 +279,8 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
               router.push(const SearchNavigationView());
             }
           },
+          onSubmitted: widget.onSubmitted,
+          onChanged: widget.onChanged,
           controller: textEditingController,
           focusNode: focusNode,
           decoration: InputDecoration(

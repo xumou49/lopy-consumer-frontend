@@ -7,11 +7,8 @@ import 'app_router.gr.dart';
 class AppRouter extends $AppRouter {
   static final searchRoute = [
     AutoRoute(
-      page: SearchNavigationView.page,
-      children: [
-        AutoRoute(page: SearchView.page, initial: true),
-      ],
-    ),
+        page: SearchNavigationView.page,
+        children: [AutoRoute(page: SearchView.page, initial: true)]),
   ];
 
   static final restaurantAndOrderingRoute = [
@@ -62,7 +59,6 @@ class AppRouter extends $AppRouter {
             children: [
               AutoRoute(page: StartAppAnimationView.page, initial: true),
             ]),
-
         AutoRoute(page: LoginNavigationView.page, children: [
           AutoRoute(page: LoginView.page, initial: true),
         ]),

@@ -11,6 +11,7 @@ import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_place_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/payment/payment_method_selector_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_info/restaurant_info_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/restaurant_info/restaurant_search_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_cuisine_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_promo_cubit.dart';
@@ -92,6 +93,9 @@ class LopyApp extends StatelessWidget {
             locator<AuthRepository>(),
           ),
         ),
+        BlocProvider(
+            create: (context) =>
+                RestaurantSearchCubit(locator<ApiRepository>())),
       ],
       child: OKToast(
         child: MaterialApp.router(
