@@ -1,4 +1,4 @@
-import 'package:Lopy/src/presentation/widgets/common/EmptyResultDisplay.dart';
+import 'package:Lopy/src/presentation/widgets/common/empty_result_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +49,7 @@ class RestaurantListView extends HookWidget {
           switch (state.runtimeType) {
             case RestaurantCuisineEmpty:
               return const Center(
-                  child: EmptyResultDisplay(
+                  child: EmptyResultWidget(
                       title: "No Results",
                       subtitle:
                           "We cannot find the restaurants with given cuisine.\n Try different cuisine."));

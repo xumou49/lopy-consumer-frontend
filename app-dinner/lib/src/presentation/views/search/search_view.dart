@@ -2,7 +2,7 @@ import 'package:Lopy/src/domain/models/cuisine.dart';
 import 'package:Lopy/src/domain/models/history_search.dart';
 import 'package:Lopy/src/domain/models/restaurant.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_info/restaurant_search_cubit.dart';
-import 'package:Lopy/src/presentation/widgets/common/EmptyResultDisplay.dart';
+import 'package:Lopy/src/presentation/widgets/common/empty_result_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:Lopy/src/presentation/widgets/discover/restaurants_widget.dart';
 import 'package:Lopy/src/presentation/widgets/search_view/browse_history.dart';
@@ -54,7 +54,7 @@ class RestaurantEmptyWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 40),
       alignment: Alignment.center,
-      child: const EmptyResultDisplay(
+      child: const EmptyResultWidget(
         title: "No Result",
         subtitle:
             "We cannot find the restaurant you are searching for.\n Try differnt keyword.",

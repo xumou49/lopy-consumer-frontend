@@ -1,10 +1,10 @@
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:flutter/material.dart';
 
-class EmptyResultDisplay extends StatelessWidget {
+class EmptyResultWidget extends StatelessWidget {
   final String title;
   final String subtitle;
-  const EmptyResultDisplay(
+  const EmptyResultWidget(
       {Key? key, required this.title, required this.subtitle})
       : super(key: key);
 
