@@ -1,4 +1,5 @@
 import 'package:Lopy/src/presentation/cubits/user_card/user_card_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/user_card/user_card_list_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/button_widget.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/new_payment_textfield_widget.dart';
 import 'package:auto_route/auto_route.dart';
@@ -41,11 +42,18 @@ class _NewPaymentMethodViewState extends State<NewPaymentMethodView> {
   Widget build(BuildContext context) {
     return BlocListener<UserCardCubit, UserCardState>(
         listener: (context, state) {
-          if (state is UserCardSuccess) {
-            context.router.pop();
-            showToast("Card Added!");
-          } else {
-            showToast("Fail to add card!");
+          switch (state.runtimeType) {
+            case UserCardSaveSuccess:
+              context.router.pop();
+              context.read<UserCardListCubit>().getUserCardList(widget.type);
+              showToast("Card Added!");
+              break;
+            case UserCardSaveFailed:
+              showToast(
+                  "Fail to add card! Please contact administrator for assistance");
+              break;
+            default:
+              break;
           }
         },
         child: Scaffold(

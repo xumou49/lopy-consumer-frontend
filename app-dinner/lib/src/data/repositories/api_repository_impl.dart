@@ -106,4 +106,12 @@ class ApiRepositoryImpl extends BaseApiRepository implements ApiRepository {
       request: () => _userCardApi.getUserCardList(token, request),
     );
   }
+
+  @override
+  Future<DataState<BaseResponse>> deleteUserCard(
+      {required String token, required num id}) {
+    return getStateOf<BaseResponse>(
+      request: () => _userCardApi.deleteUserCard(token, id),
+    );
+  }
 }

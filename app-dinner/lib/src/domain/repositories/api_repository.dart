@@ -51,4 +51,9 @@ abstract class ApiRepository {
     required String token,
     required UserCardRequest request,
   });
+
+  Future<DataState<BaseResponse>> deleteUserCard({
+    required String token,
+    required num id,
+  });
 }

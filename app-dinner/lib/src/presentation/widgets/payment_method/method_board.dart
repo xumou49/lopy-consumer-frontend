@@ -1,8 +1,11 @@
 import 'package:Lopy/src/domain/models/user_card.dart';
+import 'package:Lopy/src/presentation/cubits/user_card/user_card_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/user_card/user_card_list_cubit.dart';
+import 'package:Lopy/src/presentation/widgets/common/dialog_widget.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/payment_setting_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oktoast/oktoast.dart';
 
 class EmptyCardLogo extends StatelessWidget {
   final String imagePath;
@@ -50,6 +53,7 @@ class EmptyCardLogoText extends StatelessWidget {
 }
 
 class CardInfo extends StatelessWidget {
+  final num? id;
   final String? lastFour;
   final int? expMonth;
   final int? expYear;
@@ -58,6 +62,7 @@ class CardInfo extends StatelessWidget {
 
   const CardInfo({
     Key? key,
+    required this.id,
     required this.lastFour,
     required this.expYear,
     required this.expMonth,
@@ -107,7 +112,10 @@ class CardInfo extends StatelessWidget {
                     child: IconButton(
                       iconSize: 20,
                       onPressed: () {
-                        print("card delete");
+                        showConfirmationDialog(context, "Delete Card",
+                            "Are you sure you want to delete this card?", () {
+                          context.read<UserCardCubit>().deleteUserCard(id!);
+                        });
                       },
                       icon: const Icon(
                         Icons.delete,
@@ -175,6 +183,7 @@ class _ExistedCardDisplayState extends State<ExistedCardDisplay> {
     // add card info widget
     for (int i = 0; i < widget.userCards.length; i++) {
       elementList.add(CardInfo(
+        id: widget.userCards[i].id,
         backgroundColor: i == selectedCardIndex
             ? const Color(0xFFE1E5FF)
             : const Color(0xFFF7F4F4),
@@ -195,13 +204,28 @@ class _ExistedCardDisplayState extends State<ExistedCardDisplay> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext buildContext) {
     var width = MediaQuery.of(context).size.width - 30;
-    return SingleChildScrollView(
-        child: SizedBox(
-      width: width,
-      child: Column(children: _getCardInfoWidgetList()),
-    ));
+    return BlocListener<UserCardCubit, UserCardState>(
+        listener: (context, state) {
+          switch (state.runtimeType) {
+            case UserCardDeleteSuccess:
+              context.read<UserCardListCubit>().getUserCardList(widget.type);
+              showToast("Delete card successfully!");
+              break;
+            case UserCardDeleteFailed:
+              showToast(
+                  "Fail to delete card! Please contact administrator for assistance");
+              break;
+            default:
+              break;
+          }
+        },
+        child: SingleChildScrollView(
+            child: SizedBox(
+          width: width,
+          child: Column(children: _getCardInfoWidgetList()),
+        )));
   }
 }
 

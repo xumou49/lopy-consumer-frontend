@@ -25,9 +25,24 @@ class UserCardCubit extends BaseCubit<UserCardState, UserCard> {
       final response = await _apiRepository.saveUserCard(
           token: token!, request: UserCardRequest(cardToken: cardToken));
       if (response is DataSuccess) {
-        emit(UserCardSuccess(isData: true));
+        emit(UserCardSaveSuccess(isData: true));
       } else if (response is DataFailed) {
-        emit(UserCardFailed(error: response.error));
+        emit(UserCardSaveFailed(error: response.error));
+      }
+    });
+  }
+
+  Future<void> deleteUserCard(num id) async {
+    if (isBusy) return;
+
+    await run(() async {
+      String? token = await _authRepository.getToken();
+      final response =
+          await _apiRepository.deleteUserCard(token: token!, id: id);
+      if (response is DataSuccess) {
+        emit(const UserCardDeleteSuccess(isData: true));
+      } else if (response is DataFailed) {
+        emit(UserCardDeleteFailed(error: response.error));
       }
     });
   }

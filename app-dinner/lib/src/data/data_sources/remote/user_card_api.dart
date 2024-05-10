@@ -20,4 +20,8 @@ abstract class UserCardApi {
   Future<HttpResponse<BaseResponse>> saveUserCard(
       @Header(tokenName) String token, @Body() UserCardRequest request,
       {@Header('Content-Type') String contentType = 'application/json'});
+
+  @PUT('/user-card/delete')
+  Future<HttpResponse<BaseResponse>> deleteUserCard(
+      @Header(tokenName) String token, @Query("id") num id);
 }

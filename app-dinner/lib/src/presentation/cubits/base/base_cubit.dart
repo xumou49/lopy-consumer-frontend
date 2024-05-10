@@ -13,10 +13,13 @@ abstract class BaseCubit<S, T> extends Cubit<S> {
   bool get isBusy => _isBusy;
 
   @protected
-  Future<void> run(Future<void> Function() process) async {
+  Future<void> run(Future<void> Function() process, {S? loadingState}) async {
     try {
       if (!_isBusy) {
         _isBusy = true;
+        if (loadingState != null) {
+          emit(loadingState);
+        }
         await process();
       }
     } catch (e) {
