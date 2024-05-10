@@ -180,9 +180,15 @@ abstract class $AppRouter extends _i37.RootStackRouter {
       );
     },
     PaymentMethodView.name: (routeData) {
+      final args = routeData.argsAs<PaymentMethodViewArgs>(
+          orElse: () => const PaymentMethodViewArgs());
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i16.PaymentMethodView(),
+        child: _i16.PaymentMethodView(
+          key: args.key,
+          isFromCheckout: args.isFromCheckout,
+          totalPrice: args.totalPrice,
+        ),
       );
     },
     PaymentSuccessView.name: (routeData) {
@@ -559,16 +565,45 @@ class PaymentMethodNavigationView extends _i37.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i16.PaymentMethodView]
-class PaymentMethodView extends _i37.PageRouteInfo<void> {
-  const PaymentMethodView({List<_i37.PageRouteInfo>? children})
-      : super(
+class PaymentMethodView extends _i37.PageRouteInfo<PaymentMethodViewArgs> {
+  PaymentMethodView({
+    _i38.Key? key,
+    bool isFromCheckout = false,
+    double totalPrice = 0.0,
+    List<_i37.PageRouteInfo>? children,
+  }) : super(
           PaymentMethodView.name,
+          args: PaymentMethodViewArgs(
+            key: key,
+            isFromCheckout: isFromCheckout,
+            totalPrice: totalPrice,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'PaymentMethodView';
 
-  static const _i37.PageInfo<void> page = _i37.PageInfo<void>(name);
+  static const _i37.PageInfo<PaymentMethodViewArgs> page =
+      _i37.PageInfo<PaymentMethodViewArgs>(name);
+}
+
+class PaymentMethodViewArgs {
+  const PaymentMethodViewArgs({
+    this.key,
+    this.isFromCheckout = false,
+    this.totalPrice = 0.0,
+  });
+
+  final _i38.Key? key;
+
+  final bool isFromCheckout;
+
+  final double totalPrice;
+
+  @override
+  String toString() {
+    return 'PaymentMethodViewArgs{key: $key, isFromCheckout: $isFromCheckout, totalPrice: $totalPrice}';
+  }
 }
 
 /// generated route for

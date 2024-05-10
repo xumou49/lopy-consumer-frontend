@@ -6,6 +6,7 @@ import 'package:Lopy/src/domain/models/requests/restaurants_request.dart';
 import 'package:Lopy/src/domain/models/responses/login_response.dart';
 import 'package:Lopy/src/domain/models/responses/order_item_response.dart';
 import 'package:Lopy/src/domain/models/responses/order_response.dart';
+import 'package:Lopy/src/domain/models/responses/response.dart';
 import 'package:Lopy/src/domain/models/responses/restaurant_info_response.dart';
 import 'package:Lopy/src/domain/models/responses/restaurants_response.dart';
 import 'package:Lopy/src/domain/models/responses/user_card_response.dart';
@@ -46,7 +47,7 @@ abstract class ApiRepository {
     required UserCardListRequest request,
   });
 
-  Future<DataState<UserCardResponse>> saveUserCard({
+  Future<DataState<BaseResponse>> saveUserCard({
     required String token,
     required UserCardRequest request,
   });

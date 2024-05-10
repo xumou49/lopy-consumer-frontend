@@ -50,7 +50,7 @@ class _UserCardApi implements UserCardApi {
   }
 
   @override
-  Future<HttpResponse<UserCardResponse>> saveUserCard(
+  Future<HttpResponse<BaseResponse>> saveUserCard(
     token,
     request, {
     contentType = 'application/json',
@@ -65,7 +65,7 @@ class _UserCardApi implements UserCardApi {
     final _data = <String, dynamic>{};
     _data.addAll(request?.toMap() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<UserCardResponse>>(Options(
+        _setStreamType<HttpResponse<BaseResponse>>(Options(
       method: 'PUT',
       headers: _headers,
       extra: _extra,
@@ -78,7 +78,7 @@ class _UserCardApi implements UserCardApi {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UserCardResponse.fromMap(_result.data!);
+    final value = BaseResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

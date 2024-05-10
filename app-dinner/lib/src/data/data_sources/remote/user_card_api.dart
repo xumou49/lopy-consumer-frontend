@@ -1,3 +1,4 @@
+import 'package:Lopy/src/domain/models/responses/response.dart';
 import 'package:Lopy/src/domain/models/responses/user_card_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -16,7 +17,7 @@ abstract class UserCardApi {
       @Header(tokenName) String token, @Body() UserCardListRequest request);
 
   @PUT('/user-card/save')
-  Future<HttpResponse<UserCardResponse>> saveUserCard(
+  Future<HttpResponse<BaseResponse>> saveUserCard(
       @Header(tokenName) String token, @Body() UserCardRequest request,
       {@Header('Content-Type') String contentType = 'application/json'});
 }

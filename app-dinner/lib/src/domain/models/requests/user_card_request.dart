@@ -1,9 +1,11 @@
 class UserCardRequest {
-  UserCardRequest();
+  final String cardToken;
+
+  UserCardRequest({required this.cardToken});
 
   Map<String, dynamic> toMap() {
     return {
-      "": "",
+      "cardToken": cardToken,
     };
   }
 }

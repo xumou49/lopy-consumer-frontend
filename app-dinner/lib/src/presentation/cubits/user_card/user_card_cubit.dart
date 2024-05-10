@@ -17,16 +17,15 @@ class UserCardCubit extends BaseCubit<UserCardState, UserCard> {
   UserCardCubit(this._apiRepository, this._authRepository)
       : super(const UserCardLoading(), const UserCard());
 
-  Future<void> saveUserCard(String token) async {
+  Future<void> saveUserCard(String cardToken) async {
     if (isBusy) return;
 
     await run(() async {
       String? token = await _authRepository.getToken();
       final response = await _apiRepository.saveUserCard(
-          token: token!, request: UserCardRequest());
+          token: token!, request: UserCardRequest(cardToken: cardToken));
       if (response is DataSuccess) {
-        final userCard = response.data!.userCard;
-        emit(UserCardSuccess(userCard: userCard, isData: true));
+        emit(UserCardSuccess(isData: true));
       } else if (response is DataFailed) {
         emit(UserCardFailed(error: response.error));
       }

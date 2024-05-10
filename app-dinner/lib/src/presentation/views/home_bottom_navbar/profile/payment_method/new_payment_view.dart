@@ -52,8 +52,7 @@ class _NewPaymentMethodViewState extends State<NewPaymentMethodView> {
           appBar: const GradientAppBar(title: "Add Card"),
           body: Container(
             alignment: Alignment.topLeft,
-            child:
-            Container(
+            child: Container(
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 30),
               child: const UserCardForm(),
             ),

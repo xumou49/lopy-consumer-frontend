@@ -20,7 +20,9 @@ abstract class BaseCubit<S, T> extends Cubit<S> {
         await process();
       }
     } catch (e) {
+      print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
       print("exception raise when doing api call: $e");
+      print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
     } finally {
       _isBusy = false;
     }
