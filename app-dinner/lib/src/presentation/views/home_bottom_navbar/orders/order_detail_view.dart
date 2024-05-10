@@ -54,7 +54,7 @@ class _View extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const OrderDetailText("GST"),
-            OrderDetailText("\$${order.taxes}"),
+            OrderDetailText("\$${order.taxes?.toStringAsFixed(2)}"),
           ],
         ),
         const SizedBox(height: 15),

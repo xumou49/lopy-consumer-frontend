@@ -26,7 +26,7 @@ class BrowseHistoryWidget extends StatelessWidget {
         children: [
           const SizedBox(height: 25),
           const TextWidget(
-            text: "Your browser history",
+            text: "History Search",
             fontSize: 14,
             fontWeight: FontWeight.w600,
           ),

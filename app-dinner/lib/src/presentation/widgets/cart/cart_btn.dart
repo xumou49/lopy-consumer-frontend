@@ -1,9 +1,9 @@
 import 'package:Lopy/src/domain/models/cart.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_place_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/button_widget.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oktoast/oktoast.dart';
 
 class PlaceOrderBtn extends StatelessWidget {
   final List<Cart> carts;
@@ -14,8 +14,12 @@ class PlaceOrderBtn extends StatelessWidget {
     return ButtonWidget(
         text: "PLACE ORDER",
         onPressed: () {
-          context.read<OrderPlaceCubit>().orderPlace(
-              carts.first.restaurantId, carts);
+          context
+              .read<OrderPlaceCubit>()
+              .orderPlace(carts.first.restaurantId, carts);
+          Future.delayed(const Duration(milliseconds: 2000), () {
+            showToast("Order placed successfully");
+          });
           // route to order place status page (success / loading / failed) here
         });
   }

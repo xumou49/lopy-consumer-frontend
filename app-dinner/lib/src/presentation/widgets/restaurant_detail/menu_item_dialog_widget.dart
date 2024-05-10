@@ -5,20 +5,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
 
 import '../../../domain/models/menu_item.dart';
+import '../../cubits/cart/cart_list_cubit.dart';
 import '../common/button_widget.dart';
 import '../common/text_widget.dart';
 import 'number_counter_widget.dart';
-import '../../cubits/cart/cart_list_cubit.dart';
 
 class MenuItemDialogWidget extends StatelessWidget {
   final MenuItem menuItem;
   final int restaurantId;
 
   const MenuItemDialogWidget(
-      {
-        Key? key, required this.menuItem,
-        required this.restaurantId
-      })
+      {Key? key, required this.menuItem, required this.restaurantId})
       : super(key: key);
 
   @override
@@ -29,7 +26,7 @@ class MenuItemDialogWidget extends StatelessWidget {
       surfaceTintColor: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       child: SizedBox(
-        height: 420,
+        height: 435,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -107,9 +104,12 @@ class MenuItemDialogWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      CounterStep(min: 1, max: 10, valueChanged: (int value) {
-                        counter = value;
-                      })
+                      CounterStep(
+                          min: 1,
+                          max: 10,
+                          valueChanged: (int value) {
+                            counter = value;
+                          })
                     ],
                   ),
                   const PlaceholderWidget(height: 20.0),

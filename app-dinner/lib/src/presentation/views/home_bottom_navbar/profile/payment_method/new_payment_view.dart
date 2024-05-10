@@ -208,7 +208,6 @@ class UserCardFormState extends State<UserCardForm> {
                     onPressed: () async {
                       _formKey.currentState!.save();
                       if (_formKey.currentState!.validate()) {
-                        showToast("All Clear!");
                         print(
                             "$cardNumber $cardHolderName $expMonth $expYear $cvc");
                         await Stripe.instance
