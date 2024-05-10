@@ -1,12 +1,12 @@
 import 'package:Lopy/src/config/routers/app_router.gr.dart';
 import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/login/login_state.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-
 import 'package:Lopy/src/presentation/widgets/login/login_button.dart';
 import 'package:Lopy/src/presentation/widgets/login/login_method_divider.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oktoast/oktoast.dart';
 
 @RoutePage()
 class LoginView extends StatefulWidget {
@@ -29,7 +29,8 @@ class _LoginViewState extends State<LoginView> {
           if (state is LoginSuccess) {
             context.router.replaceAll([const HomeNavigationView()]);
           } else {
-            print("fail to login");
+            showToast(
+                'Fail to login, please contact the administrator for assistance');
           }
         },
         child: const View());
