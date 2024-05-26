@@ -1,6 +1,9 @@
+import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/login/login_state.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../config/routers/app_router.gr.dart';
 
@@ -20,8 +23,10 @@ class _StartAppAnimationViewState extends State<StartAppAnimationView> {
   }
 
   _navigateAfterDelay() {
-    Future.delayed(const Duration(seconds: 1), () {
-      bool isUserLoggedIn = false;
+    Future.delayed(const Duration(seconds: 2), () async {
+      bool isUserLoggedIn =
+          await context.read<LoginCubit>().checkIfUserHasLoggedIn();
+      print("_navigateAfterDelay: $isUserLoggedIn");
       if (mounted) {
         context.router.replaceAll([
           isUserLoggedIn
@@ -45,11 +50,6 @@ class _StartAppAnimationViewState extends State<StartAppAnimationView> {
                   textColor: Color(0xFFF18484),
                   fontSize: 60,
                   fontWeight: FontWeight.w700)),
-          // const SizedBox(height: 100),
-          // Image.asset(
-          //   "lib/src/assets/images/loading.png",
-          //   fit: BoxFit.contain,
-          // ),
         ],
       ),
     )));

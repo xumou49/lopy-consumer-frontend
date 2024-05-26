@@ -5,6 +5,7 @@ import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
 import 'package:Lopy/src/presentation/cubits/base/base_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/login/login_state.dart';
 import 'package:Lopy/src/utils/resources/data_state.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:uuid/uuid.dart';
 
 class LoginCubit extends BaseCubit<LoginState, String> {
@@ -12,9 +13,39 @@ class LoginCubit extends BaseCubit<LoginState, String> {
   final FirebaseRepository _firebaseRepository;
   final AuthRepository _authRepository;
 
+  bool login = false;
+
+  bool get isLogin => login;
+
   LoginCubit(
       this._apiRepository, this._firebaseRepository, this._authRepository)
       : super(const LoginLoading(), "");
+
+  Future<bool> checkIfUserHasLoggedIn() async {
+    final token = await _authRepository.getToken();
+    print("checkIfUserHasLoggedIn, token: $token");
+    if (token != null) {
+      // check if the token has expired
+      Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
+      print(decodedToken);
+      DateTime expirationDate = JwtDecoder.getExpirationDate(token);
+      print(expirationDate);
+      bool isTokenExpired = JwtDecoder.isExpired(token);
+      if (isTokenExpired) {
+        login = false;
+      } else {
+        login = true;
+      }
+      return Future.value(login);
+    }
+    return Future.value(false);
+  }
+
+  Future<void> logout() async {
+    await _authRepository.removeToken();
+    // reset the state to loading
+    emit(LoginLoading());
+  }
 
   Future<void> googleLogin() async {
     if (isBusy) return;

@@ -1,5 +1,8 @@
+import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
+import 'package:Lopy/src/presentation/widgets/common/dialog_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../../../config/routers/app_router.gr.dart';
@@ -126,10 +129,17 @@ class _LogoutWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const _ProfileSettingsItemWidget(
+    return _ProfileSettingsItemWidget(
       icon: Ionicons.log_out_outline,
       itemName: "Log out",
       itemDesc: "Tap here to log out of your account",
+      onTap: () {
+        showConfirmationDialog(
+            context, "Log out", "Are you sure you want to log out ?", () {
+          context.read<LoginCubit>().logout();
+          context.router.replace(const LoginNavigationView());
+        });
+      },
     );
   }
 }
@@ -164,16 +174,22 @@ class _ProfileSettingsItemWidget extends StatelessWidget {
   final String itemName;
   final String? itemDesc;
   final PageRouteInfo<dynamic>? toNavigate;
+  final Function()? onTap;
 
   const _ProfileSettingsItemWidget(
-      {required this.icon, required this.itemName, this.itemDesc, this.toNavigate});
+      {required this.icon,
+      required this.itemName,
+      this.itemDesc,
+      this.toNavigate,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          context.router.push(toNavigate!);
-        },
+        onTap: onTap ??
+            () {
+              context.router.push(toNavigate!);
+            },
         child: Row(
           children: <Widget>[
             const PlaceholderWidget(
