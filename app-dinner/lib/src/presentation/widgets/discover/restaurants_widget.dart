@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:Lopy/src/domain/models/restaurant.dart';
 import 'package:Lopy/src/presentation/widgets/discover/restaurant_card_widget.dart';
 
+import '../../../locator.dart';
+import '../../../utils/services/storage_service.dart';
+
 class SlowScrollBehavior extends ScrollBehavior {
   @override
   ScrollPhysics getScrollPhysics(BuildContext context) {
@@ -52,6 +55,8 @@ class RestaurantsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final storageService = locator<StorageService>();
+
     Widget listView = ListView.separated(
         physics: scrollEnabled ? null : const NeverScrollableScrollPhysics(),
         shrinkWrap: true,

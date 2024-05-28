@@ -8,6 +8,7 @@ import 'package:Lopy/src/data/repositories/auth_repository_impl.dart';
 import 'package:Lopy/src/data/repositories/firebase_repository_impl.dart';
 import 'package:Lopy/src/domain/repositories/auth_repository.dart';
 import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
+import 'package:Lopy/src/utils/services/storage_service.dart';
 import 'package:awesome_dio_interceptor/awesome_dio_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -81,6 +82,10 @@ Future<void> initializeDependencies() async {
   locator.registerSingleton<DatabaseRepository>(
     DatabaseRepositoryImpl(locator<AppDatabase>()),
   );
+
+  // register storage repo
+  locator.registerSingleton<StorageService>(
+      StorageService(locator<FlutterSecureStorage>()));
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 

@@ -1,3 +1,4 @@
+import 'package:Lopy/src/presentation/widgets/common/image_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/restaurant_detail/menu_list_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../domain/models/restaurant.dart';
 import '../../cubits/restaurant_info/restaurant_info_cubit.dart';
 import '../../widgets/common/appbar_widget.dart';
+import '../../widgets/common/empty_result_widget.dart';
 import '../../widgets/restaurant_detail/restaurant_info_widget.dart';
 
 @RoutePage()
@@ -36,8 +38,10 @@ class RestaurantDetailView extends HookWidget with WidgetsBindingObserver {
               );
             case RestaurantInfoFailed:
               return const Center(
-                child: Icon(Icons.refresh),
-              );
+                  child: EmptyResultWidget(
+                      title: "No Results",
+                      subtitle:
+                          "We cannot find any menu item with given restaurant.\n Try different restaurant."));
             case RestaurantInfoSuccess:
               return _RestaurantDetailListView(restaurant: state.restaurant);
             default:
@@ -105,11 +109,7 @@ class _RestaurantDetailListView extends StatelessWidget {
                               ),
                             ),
                           )),
-                background: Image.network(
-                  restaurant.imageUrl,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                ),
+                background: ImageWidget(imageUrl: restaurant.imageUrl),
               );
             })),
         SliverList(
@@ -183,11 +183,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                                 ),
                               ),
                             )),
-              background: Image.network(
-                restaurant.imageUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
+              background: ImageWidget(imageUrl: restaurant.imageUrl),
             );
           })),
     );
