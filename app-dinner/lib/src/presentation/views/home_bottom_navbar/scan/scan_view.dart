@@ -1,11 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../../../config/routers/app_router.gr.dart';
-import '../../../cubits/restaurant_info/restaurant_info_cubit.dart';
 
 @RoutePage()
 class ScanView extends HookWidget {
@@ -20,7 +18,7 @@ class ScanView extends HookWidget {
       width: 200,
       height: 200,
     );
-    final String overlayText = "Scan Your QR Code";
+    const String overlayText = "Scan Your QR Code";
 
     void onBarcodeDetect(BarcodeCapture barcodeCapture) {
       final barcode = barcodeCapture.barcodes.last;
@@ -29,15 +27,6 @@ class ScanView extends HookWidget {
       context.router.push(
           RestaurantDetailView(restaurantId: int.parse(barcode.rawValue!)));
       cameraController.start();
-    }
-
-    useEffect(() {
-      //test
-      context.router.push(RestaurantDetailView(restaurantId: 1));
-    }, const []);
-
-    if (context.mounted) {
-      print("mounted");
     }
 
     return Scaffold(
@@ -51,15 +40,15 @@ class ScanView extends HookWidget {
       CustomPaint(
         painter: ScannerOverlay(scanWindow),
       ),
-      Padding(
-        padding: const EdgeInsets.all(96.0),
+      const Padding(
+        padding: EdgeInsets.all(96.0),
         child: Align(
           alignment: Alignment.topCenter,
           child: Opacity(
             opacity: 1,
             child: Text(
               overlayText,
-              style: const TextStyle(
+              style: TextStyle(
                 backgroundColor: Colors.black26,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

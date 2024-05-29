@@ -1,5 +1,6 @@
 import 'package:Lopy/src/domain/models/requests/user_card_request.dart';
 import 'package:Lopy/src/domain/models/user_card.dart';
+import 'package:Lopy/src/domain/repositories/auth_repository.dart';
 import 'package:Lopy/src/presentation/cubits/base/base_cubit.dart';
 import 'package:Lopy/src/utils/resources/data_state.dart';
 import 'package:dio/dio.dart';
@@ -11,23 +12,37 @@ part 'user_card_state.dart';
 
 class UserCardCubit extends BaseCubit<UserCardState, UserCard> {
   final ApiRepository _apiRepository;
+  final AuthRepository _authRepository;
 
-  UserCardCubit(this._apiRepository)
+  UserCardCubit(this._apiRepository, this._authRepository)
       : super(const UserCardLoading(), const UserCard());
 
-  Future<void> saveUserCard(String token) async {
+  Future<void> saveUserCard(String cardToken) async {
     if (isBusy) return;
 
     await run(() async {
+      String? token = await _authRepository.getToken();
       final response = await _apiRepository.saveUserCard(
-          request: UserCardRequest(token: token));
-      print(response.toString());
+          token: token!, request: UserCardRequest(cardToken: cardToken));
       if (response is DataSuccess) {
-        final userCard = response.data!.userCard;
-        emit(UserCardSuccess(
-            userCard: userCard, isData: userCard != null));
+        emit(UserCardSaveSuccess(isData: true));
       } else if (response is DataFailed) {
-        emit(UserCardFailed(error: response.error));
+        emit(UserCardSaveFailed(error: response.error));
+      }
+    });
+  }
+
+  Future<void> deleteUserCard(num id) async {
+    if (isBusy) return;
+
+    await run(() async {
+      String? token = await _authRepository.getToken();
+      final response =
+          await _apiRepository.deleteUserCard(token: token!, id: id);
+      if (response is DataSuccess) {
+        emit(const UserCardDeleteSuccess(isData: true));
+      } else if (response is DataFailed) {
+        emit(UserCardDeleteFailed(error: response.error));
       }
     });
   }

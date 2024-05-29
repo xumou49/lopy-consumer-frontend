@@ -4,15 +4,16 @@ import 'package:Lopy/src/data/data_sources/remote/orders_api.dart';
 import 'package:Lopy/src/data/data_sources/remote/restaurant_info_api.dart';
 import 'package:Lopy/src/data/data_sources/remote/restaurants_api.dart';
 import 'package:Lopy/src/data/repositories/base/base_api_repository_impl.dart';
-import 'package:Lopy/src/domain/models/requests/restaurant_info_request.dart';
 import 'package:Lopy/src/domain/models/requests/login_request.dart';
 import 'package:Lopy/src/domain/models/requests/order_item_request.dart';
 import 'package:Lopy/src/domain/models/requests/order_request.dart';
+import 'package:Lopy/src/domain/models/requests/restaurant_info_request.dart';
 import 'package:Lopy/src/domain/models/requests/restaurants_request.dart';
 import 'package:Lopy/src/domain/models/requests/user_card_request.dart';
 import 'package:Lopy/src/domain/models/responses/login_response.dart';
 import 'package:Lopy/src/domain/models/responses/order_item_response.dart';
 import 'package:Lopy/src/domain/models/responses/order_response.dart';
+import 'package:Lopy/src/domain/models/responses/response.dart';
 import 'package:Lopy/src/domain/models/responses/restaurant_info_response.dart';
 import 'package:Lopy/src/domain/models/responses/restaurants_response.dart';
 import 'package:Lopy/src/domain/models/responses/user_card_response.dart';
@@ -43,17 +44,24 @@ class ApiRepositoryImpl extends BaseApiRepository implements ApiRepository {
 
   @override
   Future<DataState<OrderListResponse>> getOrderList(
-      {required OrderListRequest request}) {
+      {required String token, required OrderListRequest request}) {
     return getStateOf<OrderListResponse>(
-      request: () => _ordersApi.getOrderList(request),
+      request: () => _ordersApi.getOrderList(token, request),
     );
   }
 
   @override
+  Future<DataState<String>> orderPlace(
+      {required OrderPlaceRequest request, required String token}) {
+    return getStateOf<String>(
+        request: () => _ordersApi.orderPlace(token, request));
+  }
+
+  @override
   Future<DataState<OrderItemListResponse>> getOrderItemList(
-      {required OrderItemListRequest request}) {
+      {required String token, required OrderItemListRequest request}) {
     return getStateOf<OrderItemListResponse>(
-      request: () => _orderItemsApi.getOrderItemList(request),
+      request: () => _orderItemsApi.getOrderItemList(token, request),
     );
   }
 
@@ -80,11 +88,30 @@ class ApiRepositoryImpl extends BaseApiRepository implements ApiRepository {
   }
 
   @override
-  Future<DataState<UserCardResponse>> saveUserCard({
+  Future<DataState<BaseResponse>> saveUserCard({
+    required String token,
     required UserCardRequest request,
   }) {
-    return getStateOf<UserCardResponse>(
-      request: () => _userCardApi.saveUserCard(request),
+    return getStateOf<BaseResponse>(
+      request: () => _userCardApi.saveUserCard(token, request),
+    );
+  }
+
+  @override
+  Future<DataState<UserCardListResponse>> getUserCardList({
+    required String token,
+    required UserCardListRequest request,
+  }) {
+    return getStateOf<UserCardListResponse>(
+      request: () => _userCardApi.getUserCardList(token, request),
+    );
+  }
+
+  @override
+  Future<DataState<BaseResponse>> deleteUserCard(
+      {required String token, required num id}) {
+    return getStateOf<BaseResponse>(
+      request: () => _userCardApi.deleteUserCard(token, id),
     );
   }
 }

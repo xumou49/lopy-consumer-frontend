@@ -1,5 +1,8 @@
+import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
+import 'package:Lopy/src/presentation/widgets/common/dialog_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../../../config/routers/app_router.gr.dart';
@@ -20,7 +23,7 @@ class ProfileSettingsWidget extends StatelessWidget {
             child: FractionallySizedBox(
               widthFactor: 0.8,
               child: Container(
-                  height: 310,
+                  height: 365,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     // Container background color
@@ -36,9 +39,11 @@ class ProfileSettingsWidget extends StatelessWidget {
                     ],
                   ),
                   child: ListView(
+                    physics: const ClampingScrollPhysics(),
                     children: const <Widget>[
                       _SettingsWidget(),
                       _PaymentMethodsWidget(),
+                      _FavRestaurantsWidget(),
                       _PrivacyPolicyWidget(),
                       _LogoutWidget()
                     ],
@@ -68,6 +73,7 @@ class ProfileSettingsWidget extends StatelessWidget {
                     ],
                   ),
                   child: ListView(
+                    physics: const ClampingScrollPhysics(),
                     children: const <Widget>[
                       _HelpSupportWidget(),
                       _AboutAppWidget()
@@ -121,15 +127,36 @@ class _PrivacyPolicyWidget extends StatelessWidget {
   }
 }
 
+class _FavRestaurantsWidget extends StatelessWidget {
+  const _FavRestaurantsWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return const _ProfileSettingsItemWidget(
+      icon: Ionicons.heart_outline,
+      itemName: "Favorite Restaurants",
+      itemDesc: "View your favorite restaurants",
+      toNavigate: PrivacyPolicyNavigationView(),
+    );
+  }
+}
+
 class _LogoutWidget extends StatelessWidget {
   const _LogoutWidget();
 
   @override
   Widget build(BuildContext context) {
-    return const _ProfileSettingsItemWidget(
+    return _ProfileSettingsItemWidget(
       icon: Ionicons.log_out_outline,
       itemName: "Log out",
       itemDesc: "Tap here to log out of your account",
+      onTap: () {
+        showConfirmationDialog(
+            context, "Log out", "Are you sure you want to log out ?", () {
+          context.read<LoginCubit>().logout();
+          context.router.replace(const LoginNavigationView());
+        });
+      },
     );
   }
 }
@@ -164,16 +191,22 @@ class _ProfileSettingsItemWidget extends StatelessWidget {
   final String itemName;
   final String? itemDesc;
   final PageRouteInfo<dynamic>? toNavigate;
+  final Function()? onTap;
 
   const _ProfileSettingsItemWidget(
-      {required this.icon, required this.itemName, this.itemDesc, this.toNavigate});
+      {required this.icon,
+      required this.itemName,
+      this.itemDesc,
+      this.toNavigate,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          context.router.push(toNavigate!);
-        },
+        onTap: onTap ??
+            () {
+              context.router.push(toNavigate!);
+            },
         child: Row(
           children: <Widget>[
             const PlaceholderWidget(

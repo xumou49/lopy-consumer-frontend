@@ -16,7 +16,7 @@ class OrdersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: GradientAppBar(title: "My Orders"),
+        appBar: const GradientAppBar(title: "My Orders"),
         body: BlocBuilder(
             bloc: BlocProvider.of<OrderListCubit>(context),
             builder: (BuildContext context, state) {

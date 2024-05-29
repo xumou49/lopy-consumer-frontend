@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:Lopy/src/presentation/widgets/common/appbar_widget.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
@@ -10,9 +11,13 @@ class PrivacyPolicyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(243, 129, 129, 1),
-          title: const Text("privacy policy"),
+        appBar: GradientAppBar(
+          // backgroundColor: const Color.fromRGBO(243, 129, 129, 1),
+          title: "privacy policy",
+          showBackButton: true,
+          onBackButtonPressed: () {
+            context.router.pop();
+          },
         ),
         body: FutureBuilder(
           future: Future.delayed(const Duration(seconds: 1)).then((value) {

@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:Lopy/src/domain/models/menu_category.dart';
 import 'package:equatable/equatable.dart';
 import 'package:floor/floor.dart';
 
@@ -18,6 +15,7 @@ class UserCard extends Equatable {
   final String? country;
   final String? cvcCheck;
   final String? fingerprint;
+  final int? primaryFlag;
 
   const UserCard({
     this.id,
@@ -31,10 +29,21 @@ class UserCard extends Equatable {
     this.country,
     this.cvcCheck,
     this.fingerprint,
+    this.primaryFlag,
   });
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [
+        id,
+        stripeId,
+        brand,
+        lastFour,
+        expMonth,
+        expYear,
+        country,
+        cvcCheck,
+        fingerprint
+      ];
 
   Map<String, dynamic> toMap() {
     return {
@@ -48,7 +57,8 @@ class UserCard extends Equatable {
       'expYear': expYear,
       'country': country,
       'cvcCheck': cvcCheck,
-      'fingerprint': fingerprint
+      'fingerprint': fingerprint,
+      'primaryFlag': primaryFlag
     };
   }
 
@@ -65,22 +75,23 @@ class UserCard extends Equatable {
       country: map['country'] as String,
       cvcCheck: map['cvcCheck'] as String,
       fingerprint: map['fingerprint'] as String,
+      primaryFlag: map['primaryFlag'] as int,
     );
   }
 
   factory UserCard.fromJson(Map<String, dynamic> json) {
     return UserCard(
-      id: json['id'],
-      stripeId: json['stripeId'],
-      brand: json['brand'],
-      userId: json['userId'],
-      funding: json['funding'],
-      lastFour: json['lastFour'],
-      expMonth: json['expMonth'],
-      expYear: json['expYear'],
-      country: json['country'],
-      cvcCheck: json['cvcCheck'],
-      fingerprint: json['fingerprint'],
-    );
+        id: json['id'],
+        stripeId: json['stripeId'],
+        brand: json['brand'],
+        userId: json['userId'],
+        funding: json['funding'],
+        lastFour: json['lastFour'],
+        expMonth: json['expMonth'],
+        expYear: json['expYear'],
+        country: json['country'],
+        cvcCheck: json['cvcCheck'],
+        fingerprint: json['fingerprint'],
+        primaryFlag: json['primaryFlag']);
   }
 }

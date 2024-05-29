@@ -72,7 +72,7 @@ class _TableRow extends StatelessWidget {
 class OrderDetailText extends StatelessWidget {
   final String text;
   final double fontSize;
-  const OrderDetailText(this.text, {Key? key, this.fontSize = 12})
+  const OrderDetailText(this.text, {Key? key, this.fontSize = 10})
       : super(key: key);
 
   @override

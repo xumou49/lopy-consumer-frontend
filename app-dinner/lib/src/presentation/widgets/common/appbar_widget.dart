@@ -2,7 +2,6 @@ import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:Lopy/src/presentation/views/search/search_view.dart';
 
 import '../../../config/routers/app_router.gr.dart';
 
@@ -16,6 +15,8 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onBackButtonPressed;
   final List<Widget>? actions;
   final Function()? onTap;
+  final Function(String)? onSubmitted;
+  final Function(String)? onChanged;
 
   const GradientAppBar({
     super.key,
@@ -28,8 +29,10 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.subtitle,
     this.actionIcon,
     this.onTapAction,
+    this.onSubmitted,
+    this.onChanged,
   }) : assert(!showBackButton || onBackButtonPressed != null,
-  'onBackButtonPressed must be provided if showBackButton is true');
+            'onBackButtonPressed must be provided if showBackButton is true');
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,10 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
             subtitle: subtitle,
             actionIcon: actionIcon,
           )
-        : const AutocompleteSearchList();
+        : AutocompleteSearchList(
+            onSubmitted: onSubmitted,
+            onChanged: onChanged,
+          );
 
     return Container(
       decoration: BoxDecoration(
@@ -62,12 +68,13 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
                   color: Color.fromRGBO(169, 92, 92, 1),
                 ),
                 onPressed: onBackButtonPressed ?? () => context.router.pop(),
-        ) : null,
-              //       () {
-              //         Navigator.maybePop(context);
-              //       },
-              // )
-            // : null,
+              )
+            : null,
+        //       () {
+        //         Navigator.maybePop(context);
+        //       },
+        // )
+        // : null,
       ),
     );
   }
@@ -89,10 +96,10 @@ class AppBarTitleWidget extends StatelessWidget {
 
   const AppBarTitleWidget(
       {super.key,
-        required this.title,
-        this.subtitle,
-        this.actionIcon,
-        this.onTapAction});
+      required this.title,
+      this.subtitle,
+      this.actionIcon,
+      this.onTapAction});
 
   @override
   Widget build(BuildContext context) {
@@ -111,26 +118,22 @@ class AppBarTitleWidget extends StatelessWidget {
             ),
             subtitle != null
                 ? TextWidget(
-              text: subtitle!,
-              textColor: const Color.fromRGBO(169, 92, 92, 1),
-            )
+                    text: subtitle!,
+                    textColor: const Color.fromRGBO(169, 92, 92, 1),
+                  )
                 : const PlaceholderWidget()
           ],
         ),
         actionIcon != null
             ? IconButton(
                 onPressed: onTapAction == null
-                    ? () {context.router.push(const CartNavigationView());} : () {},
+                    ? () {
+                        context.router.push(const CartNavigationView());
+                      }
+                    : () {},
                 icon: actionIcon!)
-
             : const PlaceholderWidget()
       ],
-    );
-
-    return TextWidget(
-      text: title,
-      fontSize: 20,
-      textColor: const Color.fromRGBO(169, 92, 92, 1),
     );
   }
 }
@@ -161,9 +164,11 @@ class AppBarSearchFieldWidget extends StatelessWidget {
   }
 }
 
-
 class AutocompleteSearchList extends StatefulWidget {
-  const AutocompleteSearchList({super.key});
+  Function(String)? onSubmitted = (v) {};
+  Function(String)? onChanged = (v) {};
+
+  AutocompleteSearchList({super.key, this.onSubmitted, this.onChanged});
 
   @override
   _AutocompleteSearchListState createState() => _AutocompleteSearchListState();
@@ -198,71 +203,84 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
         debugPrint('You just selected $selection');
       },
       optionsViewBuilder: (
-          BuildContext context,
-          AutocompleteOnSelected<String> onSelected,
-          Iterable<String> options,
-          ) {
-        final int itemCount = options.length <= maxItems ? options.length : maxItems;
+        BuildContext context,
+        AutocompleteOnSelected<String> onSelected,
+        Iterable<String> options,
+      ) {
+        final int itemCount =
+            options.length <= maxItems ? options.length : maxItems;
         return Align(
           alignment: Alignment.topLeft,
           child: Material(
-            elevation: 4.0,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 360, // Adjust as needed
-                height: itemHeight * itemCount,
-                child: ListView.builder(
-                  padding: EdgeInsets.zero,
-                  itemCount: options.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final String option = options.elementAt(index);
-                    final int matchStartIndex = option.toLowerCase().indexOf(_currentInput.toLowerCase());
-                    final TextSpan matchText = TextSpan(
-                      text: option.substring(matchStartIndex, matchStartIndex + _currentInput.length),
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    );
-                    final TextSpan remainingText = TextSpan(
-                      text: option.substring(matchStartIndex + _currentInput.length),
-                      style: TextStyle(fontWeight: FontWeight.normal),
-                    );
+              elevation: 4.0,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: 360, // Adjust as needed
+                    height: itemHeight * itemCount,
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: options.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final String option = options.elementAt(index);
+                        final int matchStartIndex = option
+                            .toLowerCase()
+                            .indexOf(_currentInput.toLowerCase());
+                        final TextSpan matchText = TextSpan(
+                          text: option.substring(matchStartIndex,
+                              matchStartIndex + _currentInput.length),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        );
+                        final TextSpan remainingText = TextSpan(
+                          text: option.substring(
+                              matchStartIndex + _currentInput.length),
+                          style: const TextStyle(fontWeight: FontWeight.normal),
+                        );
 
-                    return GestureDetector(
-                      onTap: () => onSelected(option),
-                      child: ListTile(
-                        title: RichText(
-                          text: TextSpan(
-                            children: [
-                              matchStartIndex > 0
-                                  ? TextSpan(text: option.substring(0, matchStartIndex), style: TextStyle(fontWeight: FontWeight.normal))
-                                  : TextSpan(),
-                              matchText,
-                              remainingText,
-                            ],
-                            style: DefaultTextStyle.of(context).style,
+                        return GestureDetector(
+                          onTap: () => onSelected(option),
+                          child: ListTile(
+                            title: RichText(
+                              text: TextSpan(
+                                children: [
+                                  matchStartIndex > 0
+                                      ? TextSpan(
+                                          text: option.substring(
+                                              0, matchStartIndex),
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.normal))
+                                      : const TextSpan(),
+                                  matchText,
+                                  remainingText,
+                                ],
+                                style: DefaultTextStyle.of(context).style,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              _suggestionSearch()
-            ],)
-          ),
+                        );
+                      },
+                    ),
+                  ),
+                  _suggestionSearch()
+                ],
+              )),
         );
       },
-
-      fieldViewBuilder: (BuildContext context, TextEditingController textEditingController, FocusNode focusNode, VoidCallback onFieldSubmitted) {
+      fieldViewBuilder: (BuildContext context,
+          TextEditingController textEditingController,
+          FocusNode focusNode,
+          VoidCallback onFieldSubmitted) {
         return TextField(
           onTap: () {
             final router = AutoRouter.of(context);
             // Check if the current route is already SearchView
             if (router.current.name != "SearchView") {
-              router.push(SearchNavigationView());
+              router.push(const SearchNavigationView());
             }
           },
+          onSubmitted: widget.onSubmitted,
+          onChanged: widget.onChanged,
           controller: textEditingController,
           focusNode: focusNode,
           decoration: InputDecoration(
@@ -286,8 +304,8 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
   }
 }
 
-Widget _suggestionSearch(){
-  return Container(
+Widget _suggestionSearch() {
+  return SizedBox(
     // color: Colors.blue,
     height: 100, // Adjust the height to accommodate the search items
     child: Column(
@@ -328,14 +346,13 @@ Widget _suggestionSearch(){
 
 Widget _buildSearchItem(String itemName) {
   return Container(
-    margin: EdgeInsets.only(top: 4, left: 4, right: 4, bottom: 4),
-    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+    margin: const EdgeInsets.only(top: 4, left: 4, right: 4, bottom: 4),
+    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
     decoration: BoxDecoration(
       color: const Color(0x4CC4C4C4),
       borderRadius: BorderRadius.circular(20),
     ),
-    child:
-    Text(
+    child: Text(
       itemName,
       style: const TextStyle(
         color: Colors.black,

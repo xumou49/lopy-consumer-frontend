@@ -22,10 +22,13 @@ class _OrderItemsApi implements OrderItemsApi {
 
   @override
   Future<HttpResponse<OrderItemListResponse>> getOrderItemList(
-      orderListRequest) async {
+    token,
+    orderListRequest,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'lopy-token': token};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(orderListRequest?.toMap() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -48,10 +51,13 @@ class _OrderItemsApi implements OrderItemsApi {
 
   @override
   Future<HttpResponse<OrderItemListResponse>> getOrderItemPage(
-      orderListRequest) async {
+    token,
+    orderListRequest,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'lopy-token': token};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(orderListRequest?.toMap() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(

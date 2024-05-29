@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:Lopy/src/domain/models/menu_category.dart';
 import 'package:equatable/equatable.dart';
 import 'package:floor/floor.dart';
@@ -29,7 +27,7 @@ class Restaurant extends Equatable {
       this.menuCategory});
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [id, name];
 
   Map<String, dynamic> toMap() {
     return {
@@ -59,6 +57,11 @@ class Restaurant extends Equatable {
   }
 
   factory Restaurant.fromJson(Map<String, dynamic> json) {
+    var menuCategoryJson = json['menuCategory'];
+    MenuCategory? menuCategory;
+    if (menuCategoryJson != null) {
+      menuCategory = MenuCategory.fromJson(menuCategoryJson);
+    }
     return Restaurant(
         id: json['id'],
         labels: json['labels'],
@@ -68,6 +71,6 @@ class Restaurant extends Equatable {
         contactDetails: json['contactDetails'],
         imageUrl: json['imageUrl'],
         rating: json['rating'],
-        menuCategory: MenuCategory.fromJson(json['menuCategory']));
+        menuCategory: menuCategory);
   }
 }

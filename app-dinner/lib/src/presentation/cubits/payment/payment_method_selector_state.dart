@@ -1,12 +1,12 @@
 part of 'payment_method_selector_cubit.dart';
 
-abstract class PaymentMethodSelectorState extends Equatable {
+abstract class PaymentMethodSelectorState<T> extends Equatable {
   final String type;
-  final String data;
+  final T? data;
 
   const PaymentMethodSelectorState({
     this.type = "",
-    this.data = "",
+    this.data,
   });
 
   @override

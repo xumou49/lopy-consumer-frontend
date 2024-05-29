@@ -1,4 +1,5 @@
 import 'package:Lopy/src/domain/models/menu_item.dart';
+import 'package:Lopy/src/presentation/widgets/common/image_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:Lopy/src/presentation/widgets/restaurant_detail/menu_item_dialog_widget.dart';
@@ -6,8 +7,11 @@ import 'package:flutter/material.dart';
 
 class MenuItemCard extends StatelessWidget {
   final MenuItem menuItem;
+  final int restaurantId;
 
-  const MenuItemCard({Key? key, required this.menuItem}) : super(key: key);
+  const MenuItemCard(
+      {Key? key, required this.menuItem, required this.restaurantId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,10 @@ class MenuItemCard extends StatelessWidget {
               showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return MenuItemDialogWidget(menuItem: menuItem);
+                    return MenuItemDialogWidget(
+                      menuItem: menuItem,
+                      restaurantId: restaurantId,
+                    );
                   });
             },
             child: Column(
@@ -33,19 +40,22 @@ class MenuItemCard extends StatelessWidget {
                       Stack(
                         children: <Widget>[
                           ClipRRect(
-                            // borderRadius: BorderRadius.circular(8.0),
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(8.0),
-                                topRight: Radius.circular(8.0),
-                                bottomLeft: Radius.zero,
-                                bottomRight: Radius.zero),
-                            child: Image.network(
-                              menuItem.imageUrl,
-                              fit: BoxFit.cover,
-                              height: 150,
-                              width: double.infinity,
-                            ),
-                          ),
+                              // borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(8.0),
+                                  topRight: Radius.circular(8.0),
+                                  bottomLeft: Radius.zero,
+                                  bottomRight: Radius.zero),
+                              child: ImageWidget(
+                                  imageUrl: menuItem.imageUrl, height: 150.0)
+
+                              // Image.network(
+                              //   menuItem.imageUrl,
+                              //   fit: BoxFit.cover,
+                              //   height: 150,
+                              //   width: double.infinity,
+                              // ),
+                              ),
                           const Align(
                             alignment: Alignment(0.95, 0.5),
                             child: Icon(

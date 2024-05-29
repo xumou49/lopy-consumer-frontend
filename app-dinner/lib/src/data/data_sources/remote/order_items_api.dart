@@ -13,9 +13,11 @@ abstract class OrderItemsApi {
 
   @POST('/order-item/list')
   Future<HttpResponse<OrderItemListResponse>> getOrderItemList(
+      @Header(tokenName) String token,
       @Body() OrderItemListRequest orderListRequest);
 
   @POST('/order-item/page')
   Future<HttpResponse<OrderItemListResponse>> getOrderItemPage(
+      @Header(tokenName) String token,
       @Body() OrderItemListRequest orderListRequest);
 }

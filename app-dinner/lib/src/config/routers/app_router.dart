@@ -1,17 +1,15 @@
 // routers
 
 import 'package:auto_route/auto_route.dart';
+
 import 'app_router.gr.dart';
 
 @AutoRouterConfig()
 class AppRouter extends $AppRouter {
   static final searchRoute = [
     AutoRoute(
-      page: SearchNavigationView.page,
-      children: [
-        AutoRoute(page: SearchView.page, initial: true),
-      ],
-    ),
+        page: SearchNavigationView.page,
+        children: [AutoRoute(page: SearchView.page, initial: true)]),
   ];
 
   static final restaurantAndOrderingRoute = [
@@ -48,6 +46,7 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: PaymentMethodView.page, initial: true),
         AutoRoute(page: NewPaymentMethodView.page),
         AutoRoute(page: SetUpPaymentMethodView.page),
+        AutoRoute(page: PaymentSuccessView.page)
       ],
     ),
   ];
@@ -69,7 +68,6 @@ class AppRouter extends $AppRouter {
             children: [
               AutoRoute(page: StartAppAnimationView.page, initial: true),
             ]),
-
         AutoRoute(page: LoginNavigationView.page, children: [
           AutoRoute(page: LoginView.page, initial: true),
         ]),
@@ -93,7 +91,6 @@ class AppRouter extends $AppRouter {
                 page: OrderNavigationView.page,
                 children: [
                   AutoRoute(page: OrdersView.page, initial: true),
-                  // AutoRoute(page: OrderDetailView.page),
                 ],
               ),
               AutoRoute(

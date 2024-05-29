@@ -87,7 +87,6 @@ class _CounterStepState extends State<CounterStep> {
         CounterTextInputFormatter(min: widget.min, max: widget.max),
       ],
       onChanged: (value) {
-        // widget.valueChanged(int.parse(value));
       },
     );
   }
@@ -95,18 +94,22 @@ class _CounterStepState extends State<CounterStep> {
   Widget buildReduceButton() {
     return InkWell(
       child: Container(
-        color: Color.fromRGBO(243, 129, 129, 1),
-        child: Icon(
+        color: const Color.fromRGBO(243, 129, 129, 1),
+        child: const Icon(
           Icons.remove,
           color: Colors.white,
         ),
       ),
       onTap: () {
-        count = max(count - widget.step, widget.min);
-        String text = count.toString();
-        controller.value = TextEditingValue(
+        setState(() {
+          count = max(count - widget.step, widget.min);
+          String text = count.toString();
+          controller.value = TextEditingValue(
             text: text,
-            selection: TextSelection.collapsed(offset: text.length));
+            selection: TextSelection.collapsed(offset: text.length),
+          );
+          widget.valueChanged(count); // Call the callback here
+        });
       },
     );
   }
@@ -121,11 +124,15 @@ class _CounterStepState extends State<CounterStep> {
         ),
       ),
       onTap: () {
-        count = min(count + widget.step, widget.max);
-        String text = count.toString();
-        controller.value = TextEditingValue(
+        setState(() {
+          count = min(count + widget.step, widget.max);
+          String text = count.toString();
+          controller.value = TextEditingValue(
             text: text,
-            selection: TextSelection.collapsed(offset: text.length));
+            selection: TextSelection.collapsed(offset: text.length),
+          );
+          widget.valueChanged(count); // Call the callback here
+        });
       },
     );
   }

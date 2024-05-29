@@ -19,10 +19,22 @@ class UserCardLoading extends UserCardState {
   const UserCardLoading();
 }
 
-class UserCardSuccess extends UserCardState {
-  const UserCardSuccess({super.userCard, super.isData});
+class UserCardSaveSuccess extends UserCardState {
+  const UserCardSaveSuccess({super.userCard, super.isData});
 }
 
-class UserCardFailed extends UserCardState {
-  const UserCardFailed({super.error});
+class UserCardSaveFailed extends UserCardState {
+  const UserCardSaveFailed({super.error});
+}
+
+class UserCardDeleteLoading extends UserCardState {
+  const UserCardDeleteLoading({super.isData});
+}
+
+class UserCardDeleteSuccess extends UserCardState {
+  const UserCardDeleteSuccess({super.isData});
+}
+
+class UserCardDeleteFailed extends UserCardState {
+  const UserCardDeleteFailed({super.error});
 }

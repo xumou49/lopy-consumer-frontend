@@ -1,150 +1,169 @@
-import 'package:Lopy/src/config/routers/app_router.gr.dart';
-import 'package:flutter/material.dart';
+import 'package:Lopy/src/domain/models/cuisine.dart';
+import 'package:Lopy/src/domain/models/history_search.dart';
+import 'package:Lopy/src/domain/models/restaurant.dart';
+import 'package:Lopy/src/presentation/cubits/restaurant_info/restaurant_search_cubit.dart';
+import 'package:Lopy/src/presentation/widgets/common/empty_result_widget.dart';
+import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
+import 'package:Lopy/src/presentation/widgets/discover/restaurants_widget.dart';
+import 'package:Lopy/src/presentation/widgets/search_view/browse_history.dart';
+import 'package:Lopy/src/presentation/widgets/search_view/restaurant_cuisine.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../widgets/common/appbar_widget.dart';
 
 @RoutePage()
 class SearchView extends StatelessWidget {
-  const SearchView({super.key});
+  const SearchView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const GradientAppBar(),
-      body: ListView(
-            padding: const EdgeInsets.all(20.0),
-            children: <Widget>[
-              Container(
-                // color: Colors.blue,
-                height: 100, // Adjust the height to accommodate the search items
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Your browser history',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                        height: 0,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildSearchItem('Soup'),
-                          _buildSearchItem('Chips'),
-                          _buildSearchItem('Nuts'),
-                          _buildSearchItem('Vegetable'),
-                          _buildSearchItem('Fruits'),
-                          // Add more search items here
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                // color: Colors.blue,
-                height: 400,
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Browse by category',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Expanded(
-                      child: GridView.count(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 20,
-                        children: [
-                          _buildCategoryItem('Vegetables', 'https://storage.googleapis.com/sticker-prod/syc9Sa2sjYaI5rJYmS9O/cover-1.thumb256.png'),
-                          _buildCategoryItem('Bak Kwa', 'https://storage.googleapis.com/sticker-prod/syc9Sa2sjYaI5rJYmS9O/cover-1.thumb256.png'),
-                          _buildCategoryItem('Soup', 'https://storage.googleapis.com/sticker-prod/syc9Sa2sjYaI5rJYmS9O/cover-1.thumb256.png'),
-                          _buildCategoryItem('Finger Food', 'https://storage.googleapis.com/sticker-prod/syc9Sa2sjYaI5rJYmS9O/cover-1.thumb256.png'),
-                          _buildCategoryItem('Confectionery', 'https://storage.googleapis.com/sticker-prod/syc9Sa2sjYaI5rJYmS9O/cover-1.thumb256.png'),
-                          _buildCategoryItem('Snacks', 'https://storage.googleapis.com/sticker-prod/syc9Sa2sjYaI5rJYmS9O/cover-1.thumb256.png'),
-                          _buildCategoryItem('Candy & Sweet', 'https://storage.googleapis.com/sticker-prod/syc9Sa2sjYaI5rJYmS9O/cover-1.thumb256.png'),
-                          _buildCategoryItem('Nuts & Seeds', 'https://storage.googleapis.com/sticker-prod/syc9Sa2sjYaI5rJYmS9O/cover-1.thumb256.png'),
-                          _buildCategoryItem('Fruits', 'https://storage.googleapis.com/sticker-prod/syc9Sa2sjYaI5rJYmS9O/cover-1.thumb256.png'),
-                          // Add more category items here
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-    );
+        appBar: GradientAppBar(
+          onSubmitted: (keyword) => {
+            context
+                .read<RestaurantSearchCubit>()
+                .getRestaurantsByKeyword(keyword),
+          },
+          onChanged: (keyword) {
+            context.read<RestaurantSearchCubit>().getHistoryByKeyword(keyword);
+          },
+        ),
+        body: BlocBuilder<RestaurantSearchCubit, RestaurantSearchState>(
+            builder: (_, state) {
+          switch (state.runtimeType) {
+            case RestaurantResultDefaultState:
+              return const RestaurantCategoryWidget();
+            case RestaurantResultEmptyState:
+              return const RestaurantEmptyWidget();
+            case RestaurantResultAvailableState:
+              return RestaurantDataWidget(dataList: state.restaurants);
+            default:
+              return const RestaurantCategoryWidget();
+          }
+        }));
   }
-  Widget _buildSearchItem(String itemName) {
-    return Container(
-      margin: EdgeInsets.only(top: 4, left: 4, right: 4, bottom: 4),
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: const Color(0x4CC4C4C4),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child:
-      Text(
-        itemName,
-        style: const TextStyle(
-          color: Colors.black,
-          fontSize: 10,
-          fontFamily: 'Montserrat',
-          fontWeight: FontWeight.w400,
-          height: 1,
-        ),
-      ),
-    );
-  }
-  Widget _buildCategoryItem(String itemName, String imageUrl) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          width: 75,
-          height: 75,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(imageUrl),
-              fit: BoxFit.fill,
-            ),
-            borderRadius: BorderRadius.circular(4),
-          ),
-        ),
-        const SizedBox(height: 5),
-        Text(
-          itemName,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 11,
-            fontFamily: 'Montserrat',
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
+}
 
+class RestaurantEmptyWidget extends StatelessWidget {
+  const RestaurantEmptyWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 40),
+      alignment: Alignment.center,
+      child: const EmptyResultWidget(
+        title: "No Result",
+        subtitle:
+            "We cannot find the restaurant you are searching for.\n Try differnt keyword.",
+      ),
     );
   }
 }
 
+class RestaurantDataWidget extends StatelessWidget {
+  final List<Restaurant> dataList;
+
+  const RestaurantDataWidget({super.key, required this.dataList});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            BrowseHistoryWidget(dataList: _getHistoryDataList()),
+            const SizedBox(height: 15),
+            const TextWidget(
+              text: "Search Results",
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+            RestaurantsWidget(dataList, scrollEnabled: true)
+          ],
+        ));
+  }
+}
+
+class RestaurantCategoryWidget extends StatelessWidget {
+  const RestaurantCategoryWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+        child: Column(
+          children: [
+            BrowseHistoryWidget(dataList: _getHistoryDataList()),
+            const SizedBox(height: 15),
+            RestaurantCuisineWidget(dataList: _getCuisineDataList())
+          ],
+        ));
+  }
+}
+
+// mock cuisine data for now
+List<Cuisine> _getCuisineDataList() {
+  return [
+    const Cuisine(
+        id: 1,
+        name: 'Chicken Rice',
+        imagePath:
+            'https://api-lopy.wanioco.com/static/cuisine/chicken_rice.jpeg'),
+    const Cuisine(
+        id: 2,
+        name: 'Thai',
+        imagePath: 'https://api-lopy.wanioco.com/static/cuisine/thai.png'),
+    const Cuisine(
+        id: 3,
+        name: 'Sushi',
+        imagePath: 'https://api-lopy.wanioco.com/static/cuisine/sushi.png'),
+    const Cuisine(
+        id: 4,
+        name: 'Ramen',
+        imagePath: 'https://api-lopy.wanioco.com/static/cuisine/ramen.jpeg'),
+    const Cuisine(
+        id: 5,
+        name: 'Dim Sum',
+        imagePath: 'https://api-lopy.wanioco.com/static/cuisine/dim_sum.jpeg'),
+    const Cuisine(
+        id: 6,
+        name: 'Korean',
+        imagePath: 'https://api-lopy.wanioco.com/static/cuisine/korean.jpeg'),
+    const Cuisine(
+        id: 7,
+        name: 'BBQ',
+        imagePath: 'https://api-lopy.wanioco.com/static/cuisine/bbq.png'),
+    const Cuisine(
+        id: 8,
+        name: 'Bubble Tea',
+        imagePath:
+            'https://api-lopy.wanioco.com/static/cuisine/bubble_tea.jpeg'),
+    const Cuisine(
+        id: 9,
+        name: 'Fast Food',
+        imagePath:
+            'https://api-lopy.wanioco.com/static/cuisine/fast_food.jpeg'),
+  ];
+}
+
+// mock history data for now
+List<HistorySearch> _getHistoryDataList() {
+  return [
+    const HistorySearch(id: 1, name: 'korean'),
+    const HistorySearch(id: 2, name: 'mala'),
+    const HistorySearch(id: 3, name: 'fruit'),
+    const HistorySearch(id: 4, name: 'koi'),
+    const HistorySearch(id: 5, name: 'isteak'),
+    const HistorySearch(id: 6, name: 'mcd'),
+    const HistorySearch(id: 7, name: 'drink'),
+    const HistorySearch(id: 8, name: 'jpn'),
+    const HistorySearch(id: 9, name: 'dessert'),
+    const HistorySearch(id: 10, name: 'bread'),
+    const HistorySearch(id: 11, name: 'noddle'),
+  ];
+}

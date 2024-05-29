@@ -17,7 +17,6 @@ abstract class RestaurantCuisineState extends Equatable {
 
 class RestaurantCuisineLoading extends RestaurantCuisineState {
   const RestaurantCuisineLoading();
-
 }
 
 class RestaurantCuisineSuccess extends RestaurantCuisineState {
@@ -26,4 +25,8 @@ class RestaurantCuisineSuccess extends RestaurantCuisineState {
 
 class RestaurantCuisineFailed extends RestaurantCuisineState {
   const RestaurantCuisineFailed({super.error});
+}
+
+class RestaurantCuisineEmpty extends RestaurantCuisineState {
+  const RestaurantCuisineEmpty({super.error});
 }

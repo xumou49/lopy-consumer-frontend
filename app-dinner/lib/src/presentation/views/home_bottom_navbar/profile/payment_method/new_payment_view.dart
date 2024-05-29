@@ -1,15 +1,15 @@
 import 'package:Lopy/src/presentation/cubits/user_card/user_card_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/user_card/user_card_list_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/button_widget.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/new_payment_textfield_widget.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:oktoast/oktoast.dart';
 
 import '../../../../widgets/common/appbar_widget.dart';
-
-import 'package:flutter/services.dart';
-import 'package:auto_route/auto_route.dart';
 
 enum CardType {
   Master,
@@ -33,7 +33,6 @@ class NewPaymentMethodView extends StatefulWidget {
 }
 
 class _NewPaymentMethodViewState extends State<NewPaymentMethodView> {
-
   @override
   void initState() {
     super.initState();
@@ -43,21 +42,27 @@ class _NewPaymentMethodViewState extends State<NewPaymentMethodView> {
   Widget build(BuildContext context) {
     return BlocListener<UserCardCubit, UserCardState>(
         listener: (context, state) {
-          if (state is UserCardSuccess) {
-            context.router.pop();
-            showToast("Card Added!");
-          } else {
-            showToast("Fail to add card!");
+          switch (state.runtimeType) {
+            case UserCardSaveSuccess:
+              context.router.pop();
+              context.read<UserCardListCubit>().getUserCardList(widget.type);
+              showToast("Card Added!");
+              break;
+            case UserCardSaveFailed:
+              showToast(
+                  "Fail to add card! Please contact administrator for assistance");
+              break;
+            default:
+              break;
           }
         },
         child: Scaffold(
           appBar: const GradientAppBar(title: "Add Card"),
           body: Container(
             alignment: Alignment.topLeft,
-            child: const Padding(
-              padding: EdgeInsets.only(
-                  left: 20.0, top: 20.0, right: 20.0, bottom: 30.0),
-              child: UserCardForm(),
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(20, 20, 20, 30),
+              child: const UserCardForm(),
             ),
           ),
         ));
@@ -199,14 +204,12 @@ class UserCardFormState extends State<UserCardForm> {
             child: Row(
               children: <Widget>[
                 ButtonWidget(
-                    title: "ADD & MAKE PAYMENT",
-                    onTap: () async {
+                    text: "ADD & MAKE PAYMENT",
+                    onPressed: () async {
                       _formKey.currentState!.save();
                       if (_formKey.currentState!.validate()) {
-                        showToast("All Clear!");
                         print(
                             "$cardNumber $cardHolderName $expMonth $expYear $cvc");
-
                         await Stripe.instance
                             .dangerouslyUpdateCardDetails(CardDetails(
                           number: cardNumber,

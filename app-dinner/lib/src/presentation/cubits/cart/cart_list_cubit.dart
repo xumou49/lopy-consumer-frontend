@@ -1,13 +1,9 @@
 import 'package:Lopy/src/domain/models/cart.dart';
 import 'package:Lopy/src/domain/repositories/database_repository.dart';
 import 'package:Lopy/src/presentation/cubits/base/base_cubit.dart';
-import 'package:Lopy/src/utils/resources/data_state.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../domain/models/restaurant.dart';
-import '../../../domain/models/requests/restaurants_request.dart';
-import '../../../domain/repositories/api_repository.dart';
 
 part 'cart_list_state.dart';
 
@@ -18,7 +14,7 @@ class CartListCubit
   CartListCubit(this._databaseRepository)
       : super(const CartListLoading(), []);
 
-  int _page = 1;
+  final int _page = 1;
 
   Future<void> getAllSavedCarts() async {
     emit(await _getAllSavedCarts());

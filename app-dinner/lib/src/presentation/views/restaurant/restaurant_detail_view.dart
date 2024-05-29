@@ -1,3 +1,4 @@
+import 'package:Lopy/src/presentation/widgets/common/image_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/restaurant_detail/menu_list_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../domain/models/restaurant.dart';
 import '../../cubits/restaurant_info/restaurant_info_cubit.dart';
 import '../../widgets/common/appbar_widget.dart';
+import '../../widgets/common/empty_result_widget.dart';
 import '../../widgets/restaurant_detail/restaurant_info_widget.dart';
 
 @RoutePage()
@@ -36,8 +38,10 @@ class RestaurantDetailView extends HookWidget with WidgetsBindingObserver {
               );
             case RestaurantInfoFailed:
               return const Center(
-                child: Icon(Icons.refresh),
-              );
+                  child: EmptyResultWidget(
+                      title: "No Results",
+                      subtitle:
+                          "We cannot find any menu item with given restaurant.\n Try different restaurant."));
             case RestaurantInfoSuccess:
               return _RestaurantDetailListView(restaurant: state.restaurant);
             default:
@@ -52,12 +56,19 @@ class RestaurantDetailView extends HookWidget with WidgetsBindingObserver {
 class _RestaurantDetailListView extends StatelessWidget {
   final Restaurant restaurant;
 
-  const _RestaurantDetailListView({super.key, required this.restaurant});
+  const _RestaurantDetailListView({required this.restaurant});
 
   @override
   Widget build(BuildContext context) {
+    int? restaurantId = restaurant.id;
     double top = 0.0;
     double min = 0.0;
+
+    if (restaurantId == null) {
+      // Handle the case where restaurantId is null
+      // For example, show an error message or use a default value
+      return const Center(child: Text('Restaurant ID is null'));
+    }
 
     return Scaffold(
         body: CustomScrollView(
@@ -98,11 +109,7 @@ class _RestaurantDetailListView extends StatelessWidget {
                               ),
                             ),
                           )),
-                background: Image.network(
-                  restaurant.imageUrl,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                ),
+                background: ImageWidget(imageUrl: restaurant.imageUrl),
               );
             })),
         SliverList(
@@ -117,6 +124,7 @@ class _RestaurantDetailListView extends StatelessWidget {
                       const PlaceholderWidget(height: 10),
                       MenuListWidget(
                         menuCategory: restaurant.menuCategory!,
+                        restaurantId: restaurant.id ?? -1,
                       ),
                     ],
                   ));
@@ -166,7 +174,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                             )
                           : SizedBox(
                               child: Text(
-                                restaurant.name!,
+                                restaurant.name,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
@@ -175,11 +183,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                                 ),
                               ),
                             )),
-              background: Image.network(
-                restaurant.imageUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
+              background: ImageWidget(imageUrl: restaurant.imageUrl),
             );
           })),
     );
@@ -208,7 +212,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                           )
                         : SizedBox(
                             child: Text(
-                              restaurant.name!,
+                              restaurant.name,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,

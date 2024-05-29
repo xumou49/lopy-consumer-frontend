@@ -1,4 +1,6 @@
 import 'package:Lopy/src/presentation/cubits/payment/payment_method_selector_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/user_card/user_card_list_cubit.dart';
+import 'package:Lopy/src/presentation/widgets/common/appbar_widget.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/method_board.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/method_selection_list.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/payment_price.dart';
@@ -9,25 +11,39 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class PaymentMethodView extends StatelessWidget {
-  const PaymentMethodView({super.key});
+  final bool isFromCheckout;
+  final double totalPrice;
+
+  const PaymentMethodView(
+      {super.key, this.isFromCheckout = false, this.totalPrice = 0.0});
+
+  List<Widget> _getWidgets() {
+    if (isFromCheckout) {
+      return [
+        MethodSelection(),
+        const MethodDataDisplayBoard(),
+        const SizedBox(height: 70),
+        TotalPriceDisplay(totalPrice),
+        const SizedBox(height: 15),
+        const PayBtn(),
+        const SizedBox(height: 15),
+      ];
+    } else {
+      return [
+        MethodSelection(),
+        const MethodDataDisplayBoard(),
+        const SizedBox(height: 70),
+      ];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(243, 129, 129, 1),
-          title: const Text("Payment method"),
-        ),
+        appBar: const GradientAppBar(title: "Payment Methods"),
         body: SingleChildScrollView(
-            child: Column(children: [
-          MethodSelection(),
-          const MethodDataDisplayBoard(),
-          const SizedBox(height: 70),
-          const TotalPriceDisplay(96.0),
-          const SizedBox(height: 15),
-          const PayBtn(),
-          const SizedBox(height: 15),
-        ])));
+          child: Column(children: _getWidgets()),
+        ));
   }
 }
 
@@ -40,9 +56,10 @@ class MethodDataDisplayBoard extends StatelessWidget {
         builder: (_, state) {
       switch (state.runtimeType) {
         case CreditCardMethodSelector:
-          return ExistedCardDisplay(type: state.type);
+          context.read<UserCardListCubit>().getUserCardList(state.type);
+          return UserCardDisplay(type: state.type);
         case PaynowMethodSelector:
-          return PaynowQRCode();
+          return const PaynowQRCode();
         case PaypalMethodSelector:
           return EmptyCardDisplay(type: state.type);
         default:
