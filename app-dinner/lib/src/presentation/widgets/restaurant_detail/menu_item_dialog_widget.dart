@@ -1,4 +1,5 @@
 import 'package:Lopy/src/domain/models/cart.dart';
+import 'package:Lopy/src/presentation/widgets/common/image_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,12 +42,8 @@ class MenuItemDialogWidget extends StatelessWidget {
                           topRight: Radius.circular(8.0),
                           bottomLeft: Radius.zero,
                           bottomRight: Radius.zero),
-                      child: Image.network(
-                        menuItem.imageUrl,
-                        fit: BoxFit.cover,
-                        height: 180,
-                        width: double.infinity,
-                      ),
+                      child: ImageWidget(
+                          imageUrl: menuItem.imageUrl, height: 180.0),
                     )),
                 Align(
                     alignment: const Alignment(0.95, 0.5),

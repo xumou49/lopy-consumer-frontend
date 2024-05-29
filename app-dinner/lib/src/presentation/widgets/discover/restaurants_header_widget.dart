@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+
+import '../common/text_widget.dart';
 
 class RestaurantsHeaderWidget extends StatelessWidget {
   const RestaurantsHeaderWidget({super.key});
@@ -9,13 +10,10 @@ class RestaurantsHeaderWidget extends StatelessWidget {
     return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Text(
-          'All restaurants',
-          style: TextStyle(
+        TextWidget(
+            text: "All Restaurants",
             fontSize: 15.0,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+            fontWeight: FontWeight.w600)
       ],
     );
   }

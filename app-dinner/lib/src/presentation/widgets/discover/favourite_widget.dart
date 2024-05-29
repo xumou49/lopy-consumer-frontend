@@ -1,5 +1,7 @@
 import 'package:Lopy/src/config/routers/app_router.gr.dart';
 import 'package:Lopy/src/domain/models/cuisine.dart';
+import 'package:Lopy/src/presentation/widgets/common/image_widget.dart';
+import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +35,7 @@ class FavouriteGridWidget extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         crossAxisCount: 4,
-        childAspectRatio: 1.0,
+        childAspectRatio: 0.95,
         mainAxisSpacing: 15,
         crossAxisSpacing: 15,
         // No space between the items in a row.
@@ -44,6 +46,7 @@ class FavouriteGridWidget extends StatelessWidget {
 class _CuisineItemWidget extends StatelessWidget {
   final String cuisineType;
   final String imageUrl;
+
   const _CuisineItemWidget(
       {Key? key, required this.cuisineType, required this.imageUrl})
       : super(key: key);
@@ -60,15 +63,14 @@ class _CuisineItemWidget extends StatelessWidget {
             child: ClipRRect(
               borderRadius:
                   BorderRadius.circular(10), // Sets the radius of the image
-              child: Image.network(
-                imageUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
-              ),
+              child: ImageWidget(imageUrl: imageUrl),
             ),
           ),
-          Text(_capitalizeFirstLetter(cuisineType)), // Replace with your text.
+          Padding(
+              padding: const EdgeInsets.fromLTRB(0.0, 4.0, 0.0, 0.0),
+              child: TextWidget(
+                  text: _capitalizeFirstLetter(cuisineType),
+                  fontWeight: FontWeight.w600)),
         ],
       ),
     );

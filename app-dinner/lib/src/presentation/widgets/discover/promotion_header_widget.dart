@@ -1,3 +1,4 @@
+import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
@@ -11,24 +12,16 @@ class PromotionHeaderWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        const Text(
-          'Loopy promotion for today!',
-          style: TextStyle(
+        const TextWidget(
+            text: "Loopy Promotion for Today!",
             fontSize: 15.0,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+            fontWeight: FontWeight.w600),
         InkWell(
           onTap: () {
             context.router.push(RestaurantListView());
           },
-          child: const Text(
-            'View More',
-            style: TextStyle(
-              fontSize: 15.0,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          child: const TextWidget(
+              text: "View More", fontSize: 13.0, fontWeight: FontWeight.w500),
         ),
       ],
     );
