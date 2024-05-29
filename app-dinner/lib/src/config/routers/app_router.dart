@@ -1,4 +1,5 @@
 // routers
+
 import 'package:auto_route/auto_route.dart';
 import 'app_router.gr.dart';
 
@@ -50,6 +51,14 @@ class AppRouter extends $AppRouter {
       ],
     ),
   ];
+  static final favoriteRoute = [
+    AutoRoute(
+      page: FavoriteNavigationView.page,
+      children: [
+        AutoRoute(page: FavoriteView.page, initial: true),
+      ],
+    ),
+  ];
 
   @override
   List<AutoRoute> get routes => [
@@ -64,6 +73,7 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: LoginNavigationView.page, children: [
           AutoRoute(page: LoginView.page, initial: true),
         ]),
+        // AutoRoute(page: FavoriteNavigationView.page, initial: true),
         AutoRoute(page: HomeNavigationView.page, children: [
           AutoRoute(
             page: HomeView.page,
@@ -76,6 +86,7 @@ class AppRouter extends $AppRouter {
                   ...searchRoute,
                   ...restaurantAndOrderingRoute,
                   ...placeOrderRoute,
+                  ...favoriteRoute,
                 ],
               ),
               AutoRoute(

@@ -11,21 +11,38 @@ import '../../cubits/cart/cart_list_cubit.dart';
 
 enum RestaurantCardType { small, big }
 
-class RestaurantCard extends StatelessWidget {
+class RestaurantCard extends StatefulWidget {
   final Restaurant restaurant;
   final RestaurantCardType restaurantCardType;
 
-  const RestaurantCard(
-      {Key? key, required this.restaurant, required this.restaurantCardType})
-      : super(key: key);
+  const RestaurantCard({
+    Key? key,
+    required this.restaurant,
+    required this.restaurantCardType,
+  }) : super(key: key);
+
+  @override
+  _RestaurantCardState createState() => _RestaurantCardState();
+}
+
+class _RestaurantCardState extends State<RestaurantCard> {
+  bool isFavorite = false;
+
+  void toggleFavorite() {
+    setState(() {
+      isFavorite = !isFavorite;
+      FavoriteManager.toggleFavorite(widget.restaurant);
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    switch (restaurantCardType) {
+    switch (widget.restaurantCardType) {
       case RestaurantCardType.small:
-        return buildSmallCard(restaurant);
+        return buildSmallCard(widget.restaurant);
       case RestaurantCardType.big:
-        return buildBigCard(context, restaurant);
+        return buildBigCard(context, widget.restaurant);
       default:
         return Container();
     }
@@ -68,10 +85,13 @@ class RestaurantCard extends StatelessWidget {
 
                       const Spacer(),
                       // Use spacer to push the heart icon to the end of the row
-                      Icon(
-                        Icons.favorite_border,
-                        color: Colors.pink.shade300,
-                        size: 15,
+                      IconButton(
+                        icon: Icon(
+                          isFavorite ? Icons.favorite : Icons.favorite_border,
+                          color: Colors.pink.shade300,
+                          size: 15,
+                        ),
+                        onPressed: toggleFavorite,
                       ),
                     ],
                   ),
@@ -100,16 +120,6 @@ class RestaurantCard extends StatelessWidget {
                 restaurant.imageUrl,
                 width: double.infinity,
                 fit: BoxFit.cover,
-                // child: InkWell(
-                //   onTap: () {
-                //     context.router.push(RestaurantsNavigationView(
-                //         children: [RestaurantDetailView(restaurantId: 1)]));
-                //   },
-                //   child: Image.network(
-                //     'https://welcon.kocca.kr/cmm/getImage.do?atchFileId=FILE_046d5e61-7fce-4dcb-86c4-f71f90e1a662&amp;fileSn=1&amp;thumb=',
-                //     width: double.infinity,
-                //     fit: BoxFit.cover,
-                //   ),
               ),
             ),
             Padding(
@@ -126,19 +136,13 @@ class RestaurantCard extends StatelessWidget {
                       Text(restaurant.rating, style: TextStyle(fontSize: 12)),
                       const Spacer(),
                       // Use spacer to push the heart icon to the end of the row
-                      Icon(
-                        Icons.favorite_border,
-                        color: Colors.pink.shade300,
-                        size: 15,
-                      ),
-                      // Icon(Icons.favorite_border, color: Colors.pink.shade300, size: 15,),
-                      FloatingActionButton(
-                        onPressed: () {
-                          Cart car = buildCart();
-                          localACartCubit.saveCart(cartItem: car);
-                          showToast('Article Saved Successfully');
-                        },
-                        child: Icon(Icons.favorite_border, color: Colors.pink.shade300, size: 15,),
+                      IconButton(
+                        icon: Icon(
+                          isFavorite ? Icons.favorite : Icons.favorite_border,
+                          color: Colors.pink.shade300,
+                          size: 15,
+                        ),
+                        onPressed: toggleFavorite,
                       ),
                     ],
                   ),
@@ -150,7 +154,6 @@ class RestaurantCard extends StatelessWidget {
       ),
     );
   }
-
   Cart buildCart() {
     Cart c = const Cart(
         name: "hello", price: 10, quantity: 1,
@@ -158,7 +161,22 @@ class RestaurantCard extends StatelessWidget {
     );
     return c;
   }
-
 }
-
 // 'https://welcon.kocca.kr/cmm/getImage.do?atchFileId=FILE_046d5e61-7fce-4dcb-86c4-f71f90e1a662&amp;fileSn=1&amp;thumb='
+class FavoriteManager {
+  static final List<Restaurant> _favoriteRestaurants = [];
+
+  static List<Restaurant> get favoriteRestaurants => _favoriteRestaurants;
+
+  static void toggleFavorite(Restaurant restaurant) {
+    if (_favoriteRestaurants.contains(restaurant)) {
+      _favoriteRestaurants.remove(restaurant);
+    } else {
+      _favoriteRestaurants.add(restaurant);
+    }
+  }
+
+  static bool isFavorite(Restaurant restaurant) {
+    return _favoriteRestaurants.contains(restaurant);
+  }
+}
