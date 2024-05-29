@@ -23,7 +23,7 @@ class ProfileSettingsWidget extends StatelessWidget {
             child: FractionallySizedBox(
               widthFactor: 0.8,
               child: Container(
-                  height: 310,
+                  height: 365,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     // Container background color
@@ -39,9 +39,11 @@ class ProfileSettingsWidget extends StatelessWidget {
                     ],
                   ),
                   child: ListView(
+                    physics: const ClampingScrollPhysics(),
                     children: const <Widget>[
                       _SettingsWidget(),
                       _PaymentMethodsWidget(),
+                      _FavRestaurantsWidget(),
                       _PrivacyPolicyWidget(),
                       _LogoutWidget()
                     ],
@@ -71,6 +73,7 @@ class ProfileSettingsWidget extends StatelessWidget {
                     ],
                   ),
                   child: ListView(
+                    physics: const ClampingScrollPhysics(),
                     children: const <Widget>[
                       _HelpSupportWidget(),
                       _AboutAppWidget()
@@ -119,6 +122,20 @@ class _PrivacyPolicyWidget extends StatelessWidget {
       icon: Ionicons.shield_checkmark_outline,
       itemName: "Privacy Policy",
       itemDesc: "Read our privacy policy",
+      toNavigate: PrivacyPolicyNavigationView(),
+    );
+  }
+}
+
+class _FavRestaurantsWidget extends StatelessWidget {
+  const _FavRestaurantsWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return const _ProfileSettingsItemWidget(
+      icon: Ionicons.heart_outline,
+      itemName: "Favorite Restaurants",
+      itemDesc: "View your favorite restaurants",
       toNavigate: PrivacyPolicyNavigationView(),
     );
   }
