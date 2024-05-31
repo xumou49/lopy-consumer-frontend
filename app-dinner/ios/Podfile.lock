@@ -240,8 +240,8 @@ SPEC CHECKSUMS:
   FirebaseAuth: 12314b438fa76048540c8fb86d6cfc9e08595176
   FirebaseCore: 2322423314d92f946219c8791674d2f3345b598f
   FirebaseCoreInternal: bca337352024b18424a61e478460547d46c4c753
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_secure_storage: d33dac7ae2ea08509be337e775f6b59f1ff45f12
   FMDB: aa44149f6fb634b1ac54f64f47064bb0d0c5a032
   google_sign_in_ios: 8115e3fbe097e6509beb819ed602d47369d9011f
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
@@ -258,7 +258,7 @@ SPEC CHECKSUMS:
   MLKitVision: 8baa5f46ee3352614169b85250574fde38c36f49
   mobile_scanner: 38dcd8a49d7d485f632b7de65e4900010187aef2
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
-  path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
+  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
@@ -274,4 +274,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 3753abab26094d4651d1ea0dfcdc820612d6c964
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2

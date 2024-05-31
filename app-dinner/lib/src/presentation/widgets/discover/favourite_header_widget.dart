@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 
 import '../../../config/routers/app_router.gr.dart';
-
-import '../../views/favorite_list/favorite_view.dart';
 import '../common/text_widget.dart';
 
 
@@ -18,7 +16,7 @@ class FavouriteHeaderWidget extends StatelessWidget {
       children: <Widget>[
         InkWell(
           onTap: () {
-            context.router.push(FavoriteView());
+            context.router.push(const FavoriteView());
           },
           child: const Text(
             'Your favourite cuisines',

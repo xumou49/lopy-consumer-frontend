@@ -22,6 +22,7 @@ class LoginCubit extends BaseCubit<LoginState, String> {
       : super(const LoginLoading(), "");
 
   Future<bool> checkIfUserHasLoggedIn() async {
+    _authRepository.removeToken();
     final token = await _authRepository.getToken();
     print("checkIfUserHasLoggedIn, token: $token");
     if (token != null) {
