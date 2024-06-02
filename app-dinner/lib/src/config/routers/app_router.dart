@@ -108,6 +108,12 @@ class AppRouter extends $AppRouter {
                       ],
                     ),
                     AutoRoute(
+                      page: HistoryOrderNavigationView.page,
+                      children: [
+                        AutoRoute(page: HistoryOrderView.page, initial: true),
+                      ],
+                    ),
+                    AutoRoute(
                       page: HelpNavigationView.page,
                       children: [
                         AutoRoute(page: HelpView.page, initial: true),

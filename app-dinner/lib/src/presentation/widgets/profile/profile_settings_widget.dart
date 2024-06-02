@@ -1,5 +1,7 @@
 import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/dialog_widget.dart';
+import 'package:Lopy/src/utils/constants/nums.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +46,7 @@ class ProfileSettingsWidget extends StatelessWidget {
                       _SettingsWidget(),
                       _PaymentMethodsWidget(),
                       _FavRestaurantsWidget(),
+                      _HistoryOrderWidget(),
                       _PrivacyPolicyWidget(),
                       _LogoutWidget()
                     ],
@@ -137,6 +140,25 @@ class _FavRestaurantsWidget extends StatelessWidget {
       itemName: "Favorite Restaurants",
       itemDesc: "View your favorite restaurants",
       toNavigate: PrivacyPolicyNavigationView(),
+    );
+  }
+}
+
+class _HistoryOrderWidget extends StatelessWidget {
+  const _HistoryOrderWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return _ProfileSettingsItemWidget(
+      icon: Ionicons.receipt,
+      itemName: "History Orders",
+      itemDesc: "View your past orders",
+      onTap: () {
+        context
+            .read<OrderListCubit>()
+            .getOrderList(1, 10, type: orderTypeHisotry);
+        context.router.push(const HistoryOrderNavigationView());
+      },
     );
   }
 }
