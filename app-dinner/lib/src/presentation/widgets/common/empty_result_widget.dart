@@ -4,9 +4,18 @@ import 'package:flutter/material.dart';
 class EmptyResultWidget extends StatelessWidget {
   final String title;
   final String subtitle;
-  const EmptyResultWidget(
-      {Key? key, required this.title, required this.subtitle})
+  Icon? icon;
+  EmptyResultWidget(
+      {Key? key, required this.title, required this.subtitle, this.icon})
       : super(key: key);
+
+  Icon defaultIcon() {
+    return const Icon(
+      Icons.search_off,
+      size: 50,
+      color: Color.fromARGB(255, 132, 132, 132),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +27,7 @@ class EmptyResultWidget extends StatelessWidget {
           // decoration: const BoxDecoration(color: Color(0xFFF6F7F8)),
           padding: const EdgeInsets.only(top: 35),
           child: Column(children: [
-            const Icon(
-              Icons.search_off,
-              size: 50,
-              color: Color.fromARGB(255, 132, 132, 132),
-            ),
+            icon ?? defaultIcon(),
             const SizedBox(height: 28),
             TextWidget(
               text: title,

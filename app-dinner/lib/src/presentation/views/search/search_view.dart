@@ -54,7 +54,7 @@ class RestaurantEmptyWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 40),
       alignment: Alignment.center,
-      child: const EmptyResultWidget(
+      child: EmptyResultWidget(
         title: "No Result",
         subtitle:
             "We cannot find the restaurant you are searching for.\n Try differnt keyword.",

@@ -30,8 +30,9 @@ class _MenuListState extends State<MenuListWidget> {
     int restaurantId = widget.restaurantId;
 
     return Builder(builder: (context) {
-      if (widget.menuCategory.menuList == null || widget.menuCategory.menuList.isEmpty) {
-        return const Center(
+      if (widget.menuCategory.menuList == null ||
+          widget.menuCategory.menuList.isEmpty) {
+        return Center(
             child: EmptyResultWidget(
                 title: "No Results",
                 subtitle:

@@ -1,11 +1,12 @@
 import 'package:Lopy/src/presentation/widgets/common/image_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/restaurant_detail/menu_list_widget.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+
 import '../../../domain/models/restaurant.dart';
 import '../../cubits/restaurant_info/restaurant_info_cubit.dart';
 import '../../widgets/common/appbar_widget.dart';
@@ -37,7 +38,7 @@ class RestaurantDetailView extends HookWidget with WidgetsBindingObserver {
                 child: CupertinoActivityIndicator(),
               );
             case RestaurantInfoFailed:
-              return const Center(
+              return Center(
                   child: EmptyResultWidget(
                       title: "No Results",
                       subtitle:

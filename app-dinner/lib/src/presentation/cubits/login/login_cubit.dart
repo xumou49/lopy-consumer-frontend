@@ -47,7 +47,7 @@ class LoginCubit extends BaseCubit<LoginState, String> {
     } else {
       login = true;
     }
-    return Future.value(true);
+    return Future.value(login);
   }
 
   Future<void> logout() async {

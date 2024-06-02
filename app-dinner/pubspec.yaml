@@ -65,6 +65,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   mobile_scanner: ^4.0.0
   flutter_stripe: ^9.5.0+1
+  cached_network_image: ^3.3.1
 
 dev_dependencies:
   json_serializable: ^6.7.1

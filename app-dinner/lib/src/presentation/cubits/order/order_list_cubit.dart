@@ -18,13 +18,14 @@ class OrderListCubit extends BaseCubit<OrderListState, List<Order>> {
   OrderListCubit(this._apiRepository, this._authRepository)
       : super(const OrderListLoading(), []);
 
-  Future<void> getOrderList(int page, int pageSize) async {
+  Future<void> getOrderList(int page, int pageSize, {int type = 0}) async {
     if (isBusy) return;
 
     await run(() async {
       String? token = await _authRepository.getToken();
       final response = await _apiRepository.getOrderList(
           request: OrderListRequest(
+              type: type,
               searchPage: PageRequest(page: page, pageSize: pageSize)),
           token: token!);
       if (response is DataSuccess) {
