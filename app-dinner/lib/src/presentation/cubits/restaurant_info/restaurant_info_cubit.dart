@@ -13,21 +13,23 @@ class RestaurantInfoCubit extends BaseCubit<RestaurantInfoState, Restaurant> {
   final ApiRepository _apiRepository;
 
   RestaurantInfoCubit(this._apiRepository)
-      : super(const RestaurantInfoLoading(), const Restaurant(name: '', imageUrl: '', rating: ''));
+      : super(const RestaurantInfoLoading(),
+            const Restaurant(name: '', imageUrl: '', rating: ''));
 
   Future<void> getRestaurantInfo(int restaurantId) async {
     if (isBusy) return;
-
+    emit(const RestaurantInfoLoading());
     await run(() async {
       final response = await _apiRepository.getRestaurantInfo(
           request: RestaurantInfoRequest(id: restaurantId));
-      print(response.toString());
       if (response is DataSuccess) {
         final restaurant = response.data!.restaurant;
         emit(RestaurantInfoSuccess(
             restaurant: restaurant, isData: restaurant != null));
       } else if (response is DataFailed) {
         emit(RestaurantInfoFailed(error: response.error));
+      } else if (response is DataNotSet) {
+        emit(const RestaurantInfoLoading());
       }
     });
   }
