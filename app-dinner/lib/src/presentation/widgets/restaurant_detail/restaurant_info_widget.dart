@@ -35,8 +35,7 @@ class RestaurantInfoWidget extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      const Icon(Icons.star, color: Colors.yellow, size: 16),
-                      Text("${restaurant.rating} - ${restaurant.labels}",
+                      Text(restaurant.labels!,
                           style: const TextStyle(
                             fontSize: 12,
                             fontFamily: 'Montserrat',
