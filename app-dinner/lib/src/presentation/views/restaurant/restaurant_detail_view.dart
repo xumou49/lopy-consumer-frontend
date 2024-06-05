@@ -1,11 +1,15 @@
+import 'dart:ui';
+
 import 'package:Lopy/src/presentation/widgets/common/image_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
+import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:Lopy/src/presentation/widgets/restaurant_detail/menu_list_widget.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+
 import '../../../domain/models/restaurant.dart';
 import '../../cubits/restaurant_info/restaurant_info_cubit.dart';
 import '../../widgets/common/appbar_widget.dart';
@@ -20,24 +24,18 @@ class RestaurantDetailView extends HookWidget with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    final remoteRestaurantInfoCubit =
-        BlocProvider.of<RestaurantInfoCubit>(context);
-
-    useEffect(() {
-      remoteRestaurantInfoCubit.getRestaurantInfo(restaurantId);
-      return null;
-    }, [restaurantId]);
-
+    context.read<RestaurantInfoCubit>().getRestaurantInfo(restaurantId);
     return Scaffold(
       body: BlocBuilder<RestaurantInfoCubit, RestaurantInfoState>(
+        bloc: BlocProvider.of<RestaurantInfoCubit>(context),
         builder: (_, state) {
           switch (state.runtimeType) {
             case RestaurantInfoLoading:
               return const Center(
-                child: CupertinoActivityIndicator(),
+                child: CircularProgressIndicator(),
               );
             case RestaurantInfoFailed:
-              return const Center(
+              return Center(
                   child: EmptyResultWidget(
                       title: "No Results",
                       subtitle:
@@ -60,21 +58,15 @@ class _RestaurantDetailListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int? restaurantId = restaurant.id;
     double top = 0.0;
     double min = 0.0;
 
-    if (restaurantId == null) {
-      // Handle the case where restaurantId is null
-      // For example, show an error message or use a default value
-      return const Center(child: Text('Restaurant ID is null'));
-    }
-
     return Scaffold(
         body: CustomScrollView(
+      physics: const ClampingScrollPhysics(),
       slivers: <Widget>[
         SliverAppBar(
-            expandedHeight: 200.0,
+            expandedHeight: 320.0,
             floating: false,
             pinned: true,
             flexibleSpace: LayoutBuilder(
@@ -82,8 +74,47 @@ class _RestaurantDetailListView extends StatelessWidget {
               min = MediaQuery.of(context).padding.top + kToolbarHeight;
               top = constraints.biggest.height;
               return FlexibleSpaceBar(
-                centerTitle: true,
                 collapseMode: CollapseMode.parallax,
+                background: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 100.0),
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    fit: StackFit.expand,
+                    children: [
+                      ColorFiltered(
+                        colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(0.4),
+                          BlendMode.colorBurn,
+                        ),
+                        child: ImageWidget(imageUrl: restaurant.imageUrl),
+                      ),
+                      BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                        child: Container(
+                          color: Colors.black
+                              .withOpacity(0.1), // Optional: adds a tint
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 80,
+                        left: 32,
+                        right: 32,
+                        child: TextWidget(
+                            text: restaurant.name,
+                            textColor: Colors.white,
+                            fontSize: 28,
+                            textAlign: TextAlign.center,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      Positioned(
+                        bottom: -100,
+                        left: 32,
+                        right: 32,
+                        child: RestaurantInfoWidget(restaurant: restaurant),
+                      ),
+                    ],
+                  ),
+                ),
                 title: AnimatedOpacity(
                     duration: const Duration(milliseconds: 300),
                     //opacity: top == MediaQuery.of(context).padding.top + kToolbarHeight ? 1.0 : 0.0,
@@ -98,18 +129,7 @@ class _RestaurantDetailListView extends StatelessWidget {
                               context.router.pop();
                             },
                           )
-                        : SizedBox(
-                            child: Text(
-                              restaurant.name,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 20,
-                                fontFamily: 'Montserrat',
-                              ),
-                            ),
-                          )),
-                background: ImageWidget(imageUrl: restaurant.imageUrl),
+                        : Container()),
               );
             })),
         SliverList(
@@ -120,10 +140,8 @@ class _RestaurantDetailListView extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       const PlaceholderWidget(height: 10),
-                      RestaurantInfoWidget(restaurant: restaurant),
-                      const PlaceholderWidget(height: 10),
                       MenuListWidget(
-                        menuCategory: restaurant.menuCategory!,
+                        menuCategory: restaurant.menuCategory,
                         restaurantId: restaurant.id ?? -1,
                       ),
                     ],
@@ -187,89 +205,6 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
             );
           })),
     );
-
-    return SliverAppBar(
-        expandedHeight: 200.0,
-        floating: false,
-        pinned: true,
-        flexibleSpace: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-          min = MediaQuery.of(context).padding.top + kToolbarHeight;
-          top = constraints.biggest.height;
-          return FlexibleSpaceBar(
-            centerTitle: true,
-            collapseMode: CollapseMode.parallax,
-            title:
-                // Text("resturant detail", textScaleFactor: 1.0,),
-                AnimatedOpacity(
-                    duration: const Duration(milliseconds: 300),
-                    //opacity: top == MediaQuery.of(context).padding.top + kToolbarHeight ? 1.0 : 0.0,
-                    opacity: 1.0,
-                    child: (top <= min)
-                        ? GradientAppBar(
-                            title: restaurant.name,
-                            subtitle: 'Open until 10pm',
-                          )
-                        : SizedBox(
-                            child: Text(
-                              restaurant.name,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 20,
-                                fontFamily: 'Montserrat',
-                              ),
-                            ),
-                          )),
-            background: Image.network(
-              // restaurant.imageUrl,
-              "http://api-lopy.wanioco.com/static/restaurant/image.png",
-              fit: BoxFit.cover,
-              width: double.infinity,
-            ),
-          );
-        }));
-    // return Stack(
-    //   fit: StackFit.expand,
-    //   clipBehavior: Clip.none,
-    //   children: [
-    //     Image.network(
-    //       "http://api-lopy.wanioco.com/static/restaurant/image.png",
-    //       fit: BoxFit.cover,
-    //     ),
-    //     Center(
-    //       child: Opacity(
-    //         opacity: shrinkOffset / expandedHeight,
-    //         child: const Text(
-    //           "MySliverAppBar",
-    //           style: TextStyle(
-    //             color: Colors.white,
-    //             fontWeight: FontWeight.w700,
-    //             fontSize: 23,
-    //           ),
-    //         ),
-    //       ),
-    //     ),
-    //     Positioned(
-    //       top: expandedHeight / 2 - shrinkOffset,
-    //       left: MediaQuery
-    //           .of(context)
-    //           .size
-    //           .width / 8,
-    //       child: Opacity(
-    //         opacity: (1 - shrinkOffset / expandedHeight),
-    //         child: SizedBox(
-    //           // height: expandedHeight,
-    //           width: MediaQuery
-    //               .of(context)
-    //               .size
-    //               .width / 1.35,
-    //           child: RestaurantInfoWidget(restaurant: restaurant),
-    //         ),
-    //       ),
-    //     ),
-    //   ],
-    // );
   }
 
   @override

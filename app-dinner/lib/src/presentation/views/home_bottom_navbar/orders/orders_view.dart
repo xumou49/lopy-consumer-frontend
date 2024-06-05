@@ -1,12 +1,13 @@
 import 'package:Lopy/src/domain/models/order.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_item_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
-import 'package:Lopy/src/presentation/widgets/common/appbar_widget.dart';
 import 'package:Lopy/src/presentation/widgets/order/order_card.dart';
+import 'package:Lopy/src/presentation/widgets/order/order_group.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../widgets/common/appbar_widget.dart';
 import 'order_detail_view.dart';
 
 @RoutePage()
@@ -54,12 +55,12 @@ class _OrdersViewState extends State<_OrdersView> {
 
   @override
   Widget build(BuildContext context) {
-    var len = MediaQuery.of(context).size.width - 20;
-    print("len: $len");
     // build widget from data sets
-    List<Widget> orderCards = [];
+    List<Widget> widgets = [];
+    List<Widget> orders = [];
+    // widget.orders
     for (var e in widget.orders) {
-      orderCards.add(OrderCard(
+      orders.add(OrderCard(
           restaurantId: e.restaurantId,
           restaurantName: e.restaurantName,
           totalPrice: e.totalCost,
@@ -71,13 +72,14 @@ class _OrdersViewState extends State<_OrdersView> {
             showOrderItemDetailDialog().call();
           }));
     }
+    widgets.add(OrderGroup(title: "Ongoing Orders", children: orders));
     return Align(
         alignment: Alignment.center,
         child: Container(
             width: MediaQuery.of(context).size.width - 20,
             margin: const EdgeInsets.only(top: 20),
             child: ListView(
-              children: orderCards,
+              children: widgets,
             )));
   }
 }

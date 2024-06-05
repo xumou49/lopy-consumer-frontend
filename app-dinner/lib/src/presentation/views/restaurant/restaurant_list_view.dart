@@ -48,7 +48,7 @@ class RestaurantListView extends HookWidget {
         builder: (_, state) {
           switch (state.runtimeType) {
             case RestaurantCuisineEmpty:
-              return const Center(
+              return Center(
                   child: EmptyResultWidget(
                       title: "No Results",
                       subtitle:

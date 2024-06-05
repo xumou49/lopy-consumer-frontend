@@ -24,22 +24,31 @@ class LoginCubit extends BaseCubit<LoginState, String> {
   Future<bool> checkIfUserHasLoggedIn() async {
     _authRepository.removeToken();
     final token = await _authRepository.getToken();
-    print("checkIfUserHasLoggedIn, token: $token");
-    if (token != null) {
-      // check if the token has expired
-      Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
-      print(decodedToken);
-      DateTime expirationDate = JwtDecoder.getExpirationDate(token);
-      print(expirationDate);
-      bool isTokenExpired = JwtDecoder.isExpired(token);
-      if (isTokenExpired) {
-        login = false;
-      } else {
-        login = true;
-      }
-      return Future.value(login);
+    if (token == null || token == "") {
+      return Future.value(false);
     }
-    return Future.value(false);
+    print("checkIfUserHasLoggedIn, token: $token");
+    // check if the token has expired
+    Map<String, dynamic> decodedToken;
+    try {
+      decodedToken = JwtDecoder.decode(token);
+      print(decodedToken);
+    } catch (e) {
+      print("error: $e");
+      return Future.value(false);
+    }
+    if (decodedToken.isEmpty) {
+      return Future.value(false);
+    }
+    DateTime expirationDate = JwtDecoder.getExpirationDate(token);
+    print(expirationDate);
+    bool isTokenExpired = JwtDecoder.isExpired(token);
+    if (isTokenExpired) {
+      login = false;
+    } else {
+      login = true;
+    }
+    return Future.value(login);
   }
 
   Future<void> logout() async {

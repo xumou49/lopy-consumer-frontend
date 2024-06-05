@@ -1,3 +1,4 @@
+import 'package:Lopy/src/presentation/cubits/restaurant_info/restaurant_info_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/image_widget.dart';
 import 'package:Lopy/src/utils/providers/storage_notifier.dart';
 import 'package:auto_route/auto_route.dart';
@@ -118,26 +119,32 @@ class RestaurantCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(8.0),
-                    topRight: Radius.circular(8.0),
-                    bottomLeft: Radius.zero,
-                    bottomRight: Radius.zero),
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  imageUrl: restaurant.imageUrl,
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      Center(
-                    child: SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                            color: Colors.grey.shade300,
-                            value: downloadProgress.progress)),
+              child: InkWell(
+                onTap: () {
+                  context.router
+                      .push(RestaurantDetailView(restaurantId: restaurant.id!));
+                },
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(8.0),
+                      topRight: Radius.circular(8.0),
+                      bottomLeft: Radius.zero,
+                      bottomRight: Radius.zero),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    imageUrl: restaurant.imageUrl,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Center(
+                      child: SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                              color: Colors.grey.shade300,
+                              value: downloadProgress.progress)),
+                    ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
             ),

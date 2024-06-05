@@ -1,4 +1,5 @@
 import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
+import 'package:Lopy/src/utils/constants/nums.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +34,9 @@ class HomeView extends StatelessWidget {
             onTap: (value) {
               // if order button is clicked, send the event to inform bloc to get the the latest order data
               if (value == _orderNavBtn) {
-                context.read<OrderListCubit>().getOrderList(1, 10);
+                context
+                    .read<OrderListCubit>()
+                    .getOrderList(1, 10, type: orderTypeOngoing);
               }
               // highlight clicked btn
               tabRouter.setActiveIndex(value);
