@@ -1,6 +1,7 @@
 import 'package:Lopy/src/domain/models/cart.dart';
 import 'package:Lopy/src/presentation/widgets/common/image_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
@@ -114,24 +115,121 @@ class MenuItemDialogWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Expanded(
-                        child: ButtonWidget(
-                            text: 'Add to Cart',
-                            height: 40.0,
-                            onPressed: () {
-                              Cart c = Cart(
-                                  name: menuItem.itemName,
-                                  quantity: counter,
-                                  price: menuItem.price,
-                                  // userId: userId,
-                                  // restaurantId: restaurantId,
-                                  userId: 1,
-                                  restaurantId: restaurantId,
-                                  restaurantMenuItemId: menuItem.menuId);
-                              print(c);
-                              localACartCubit.saveCart(cartItem: c);
-                              showToast('Added Successfully');
-                              Navigator.pop(context);
-                            }),
+                        // child: ButtonWidget(
+                        //     text: 'Add to Cart',
+                        //     height: 40.0,
+                        //     onPressed: () {
+                        //       Cart c = Cart(
+                        //           name: menuItem.itemName,
+                        //           quantity: counter,
+                        //           price: menuItem.price,
+                        //           // userId: userId,
+                        //           // restaurantId: restaurantId,
+                        //           userId: 1,
+                        //           restaurantId: restaurantId,
+                        //           restaurantMenuItemId: menuItem.menuId);
+                        //       print(c);
+                        //       localACartCubit.saveCart(cartItem: c);
+                        //       showToast('Added Successfully');
+                        //       Navigator.pop(context);
+                        //     }
+                        //     ),
+                        child: BlocBuilder<CartListCubit, CartListState>(
+                          builder: (_, state) {
+                            switch (state.runtimeType) {
+                              case CartListLoading:
+                                return const Center(child: CupertinoActivityIndicator());
+                              case CartListSuccess:
+                                return ButtonWidget(
+                                  text: 'Add to Cart',
+                                  height: 40.0,
+                                  onPressed: () {
+                                    Cart c = Cart(
+                                      name: menuItem.itemName,
+                                      quantity: counter,
+                                      price: menuItem.price,
+                                      userId: 1,
+                                      restaurantId: restaurantId,
+                                      // restaurantId: 10,
+                                      restaurantMenuItemId:
+                                      menuItem.menuId,
+                                    );
+                                    if (state.cartItems.isNotEmpty) {
+                                      if (state.cartItems[0].restaurantId != restaurantId) {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: const Text('Warning'),
+                                              content: const Text('Multiple restaurants: Do you want clear the existing items in cart?'),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  child: Text('Yes'),
+                                                  onPressed: () {
+                                                    localACartCubit.clearCart(state.cartItems[0].restaurantId);
+                                                    print(c);
+                                                    print("addddd");
+                                                    localACartCubit.saveCart(cartItem: c);
+                                                    showToast('Added Successfully');
+                                                    Navigator.pop(context);
+                                                    Navigator.pop(context);
+                                                  },
+                                                ),
+                                                TextButton(
+                                                  child: Text('No'),
+                                                  onPressed: () {
+                                                    Navigator.pop(context); // Close the dialog
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                        // showModalBottomSheet(
+                                        //   context: context,
+                                        //   builder: (BuildContext context) {
+                                        //     return Container(
+                                        //       height: 200,
+                                        //       child: Center(
+                                        //         child: Column(
+                                        //           mainAxisAlignment: MainAxisAlignment.center,
+                                        //           children: <Widget>[
+                                        //             const Text(
+                                        //               'This is a Popup!',
+                                        //               style: TextStyle(fontSize: 20),
+                                        //             ),
+                                        //             SizedBox(height: 20),
+                                        //             ElevatedButton(
+                                        //               onPressed: () {
+                                        //                 Navigator.pop(context); // Close the popup
+                                        //               },
+                                        //               child: Text('Close'),
+                                        //             ),
+                                        //           ],
+                                        //         ),
+                                        //       ),
+                                        //     );
+                                        //   },
+                                        // );
+                                        // localACartCubit.clearCart(state.cartItems[0].restaurantId);
+                                      }
+                                    } else {
+                                      print(c);
+                                      localACartCubit.saveCart(cartItem: c);
+                                      showToast('Added Successfully');
+                                      Navigator.pop(context);
+                                    }
+                                    // print(c);
+                                    // localACartCubit.saveCart(cartItem: c);
+                                    // showToast('Added Successfully');
+                                    // Navigator.pop(context);
+                                  },
+                                );
+                              default:
+                                return const SizedBox();
+                            }
+                          },
+                        ),
                       )
                     ],
                   ),
@@ -143,4 +241,6 @@ class MenuItemDialogWidget extends StatelessWidget {
       ),
     );
   }
+
 }
+

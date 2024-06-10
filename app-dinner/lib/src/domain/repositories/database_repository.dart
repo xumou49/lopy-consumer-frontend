@@ -11,5 +11,5 @@ abstract class DatabaseRepository {
 
   Future<void> decrementCartItemQuantity(int itemId);
 
-  Future<void> clearCart(int userId, int restaurantId);
+  Future<void> clearCart(int restaurantId);
 }

@@ -13,7 +13,7 @@ class PaymentMethodSelectorCubit
   final AuthRepository _authRepository;
 
   PaymentMethodSelectorCubit(this._apiRepository, this._authRepository)
-      : super(const EmptyMethodSelector(), []);
+      : super(const CreditCardMethodSelector(), []);
 
   Future<void> displaySelectedMethodInfo(String type) async {
     if (isBusy) return;

@@ -9,6 +9,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../domain/models/cart.dart';
+
 @RoutePage()
 class PaymentMethodView extends StatelessWidget {
   final bool isFromCheckout;
@@ -21,7 +23,7 @@ class PaymentMethodView extends StatelessWidget {
     if (isFromCheckout) {
       return [
         MethodSelection(),
-        const MethodDataDisplayBoard(),
+        const MethodDataDisplayBoard(carts: [],),
         const SizedBox(height: 70),
         TotalPriceDisplay(totalPrice),
         const SizedBox(height: 15),
@@ -48,7 +50,14 @@ class PaymentMethodView extends StatelessWidget {
 }
 
 class MethodDataDisplayBoard extends StatelessWidget {
-  const MethodDataDisplayBoard({Key? key}) : super(key: key);
+  final bool isPay;
+  final List<Cart> carts;
+
+  const MethodDataDisplayBoard({
+    Key? key,
+    this.isPay = false,
+    this.carts = const [],
+  }): super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +65,11 @@ class MethodDataDisplayBoard extends StatelessWidget {
         builder: (_, state) {
       switch (state.runtimeType) {
         case CreditCardMethodSelector:
-          context.read<UserCardListCubit>().getUserCardList(state.type);
-          return UserCardDisplay(type: state.type);
+          String type = !isPay ? state.type : "";
+          // context.read<UserCardListCubit>().getUserCardList(state.type);
+          context.read<UserCardListCubit>().getUserCardList(type);
+          // return UserCardDisplay(type: state.type);
+          return UserCardDisplay(type: type, isPay: isPay, carts: carts,);
         case PaynowMethodSelector:
           return const PaynowQRCode();
         case PaypalMethodSelector:

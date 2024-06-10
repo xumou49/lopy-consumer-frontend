@@ -17,7 +17,7 @@ class OrderPlaceCubit extends BaseCubit<OrderPlaceState, String> {
   OrderPlaceCubit(this._apiRepository, this._authRepository)
       : super(const OrderPlaceLoading(), "");
 
-  Future<void> orderPlace(num restaurantId, List<Cart> itemList) async {
+  Future<void> orderPlace(num restaurantId, num cardId, List<Cart> itemList) async {
     if (isBusy) return;
 
     await run(() async {
@@ -25,7 +25,7 @@ class OrderPlaceCubit extends BaseCubit<OrderPlaceState, String> {
       final response = await _apiRepository.orderPlace(
           token: token!,
           request: OrderPlaceRequest(
-              restaurantId: restaurantId, itemList: itemList));
+              restaurantId: restaurantId, cardId: cardId, itemList: itemList));
       if (response is DataSuccess) {
         final uid = response.data!;
         emit(OrderPlaceSuccess(uid: uid, isData: true));
