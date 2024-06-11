@@ -15,8 +15,11 @@ import '../../widgets/restaurant_widget.dart';
 @RoutePage()
 class RestaurantListView extends HookWidget {
   final String cuisine;
+  final List<int> idList;
 
-  const RestaurantListView({Key? key, this.cuisine = ""}) : super(key: key);
+  const RestaurantListView(
+      {Key? key, this.cuisine = "", this.idList = const []})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +27,8 @@ class RestaurantListView extends HookWidget {
         BlocProvider.of<RestaurantCuisineCubit>(context);
     final scrollController = useScrollController();
     useEffect(() {
-      remoteRestaurantCuisineCubit.getRestaurantList(cuisine: cuisine);
-      // scrollController.onScrollEndsListener(() {
-      //   remoteRestaurantCuisineCubit.getRestaurantList();
-      // });
+      remoteRestaurantCuisineCubit.getRestaurantList(
+          cuisine: cuisine, idList: idList);
       return scrollController.dispose;
     }, const []);
 

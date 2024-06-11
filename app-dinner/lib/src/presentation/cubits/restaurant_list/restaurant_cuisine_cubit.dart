@@ -18,12 +18,13 @@ class RestaurantCuisineCubit
 
   int _page = 1;
 
-  Future<void> getRestaurantList({String cuisine = ""}) async {
+  Future<void> getRestaurantList(
+      {String cuisine = "", List<int> idList = const []}) async {
     if (isBusy) return;
 
     await run(() async {
       final response = await _apiRepository.getRestaurantList(
-          request: RestaurantListRequest(page: _page, cuisine: cuisine));
+          request: RestaurantListRequest(page: _page, cuisine: cuisine, idList: idList));
       if (response is DataSuccess) {
         if (response.data!.restaurants.isEmpty) {
           emit(RestaurantCuisineEmpty());

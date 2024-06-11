@@ -4,6 +4,7 @@ class RestaurantListRequest {
   final bool promotionSearch;
   final String cuisine;
   final String name;
+  final List<int> idList;
 
   RestaurantListRequest({
     this.page = 1,
@@ -11,6 +12,7 @@ class RestaurantListRequest {
     this.promotionSearch = false,
     this.cuisine = "",
     this.name = "",
+    this.idList = const [],
   });
 
   Map<String, dynamic> toJson() {
@@ -19,6 +21,7 @@ class RestaurantListRequest {
       'promotionSearch': promotionSearch,
       'cuisine': cuisine,
       'name': name,
+      'idList': idList
     };
   }
 
@@ -29,6 +32,7 @@ class RestaurantListRequest {
       'promotionSearch': promotionSearch,
       'cuisine': cuisine,
       'name': name,
+      'idList': idList
     };
   }
 }
