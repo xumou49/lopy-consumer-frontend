@@ -1,18 +1,27 @@
-import 'package:Lopy/src/domain/models/history_search.dart';
+import 'package:Lopy/src/presentation/cubits/history/history_keyword_list_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BrowseHistoryWidget extends StatelessWidget {
-  final List<HistorySearch> dataList;
+  final Function(String) onKeywordClick;
 
-  const BrowseHistoryWidget({super.key, required this.dataList});
+  const BrowseHistoryWidget({super.key, required this.onKeywordClick});
 
-  List<Widget> _buildBrowseHistoryItem() {
+  Widget _buildBrowseHistoryItem(List<String> dataList) {
+    // build the item widget
     List<Widget> widgetList = [];
-    for (var element in dataList) {
-      widgetList.add(BrowseHistoryItem(name: element.name!));
+    for (var keyword in dataList) {
+      widgetList.add(
+          BrowseHistoryItem(name: keyword, onKeywordClick: onKeywordClick));
     }
-    return widgetList;
+    // build the widget
+    return SizedBox(
+        height: 30,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: widgetList,
+        ));
   }
 
   @override
@@ -31,12 +40,21 @@ class BrowseHistoryWidget extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
           const SizedBox(height: 10),
-          SizedBox(
-              height: 30,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: _buildBrowseHistoryItem(),
-              )),
+          BlocBuilder<HistoryKeywordListCubit, HistoryKeywordListState>(
+            builder: (_, state) {
+              switch (state.runtimeType) {
+                case HistoryKeywordListLoading:
+                  return Center(child: CircularProgressIndicator());
+                case HistoryKeywordListSuccess:
+                  return _buildBrowseHistoryItem(state.historyKeywords);
+                case HistoryKeywordListFailed:
+                  print("Failed to get the history keyword list");
+                  return const CircularProgressIndicator();
+                default:
+                  return const CircularProgressIndicator();
+              }
+            },
+          )
         ],
       ),
     );
@@ -44,23 +62,31 @@ class BrowseHistoryWidget extends StatelessWidget {
 }
 
 class BrowseHistoryItem extends StatelessWidget {
+  final Function(String) onKeywordClick;
   final String name;
 
-  const BrowseHistoryItem({super.key, required this.name});
+  const BrowseHistoryItem(
+      {super.key, required this.name, required this.onKeywordClick});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      margin: const EdgeInsets.only(right: 8),
-      decoration: BoxDecoration(
-        color: const Color(0x4CC4C4C4),
-        borderRadius: BorderRadius.circular(20),
+    return InkWell(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        margin: const EdgeInsets.only(right: 8),
+        decoration: BoxDecoration(
+          color: const Color(0x4CC4C4C4),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: TextWidget(
+          text: name,
+          fontSize: 12,
+        ),
       ),
-      child: TextWidget(
-        text: name,
-        fontSize: 12,
-      ),
+      onTap: () {
+        onKeywordClick(name);
+        print("onKeywordClick");
+      },
     );
   }
 }

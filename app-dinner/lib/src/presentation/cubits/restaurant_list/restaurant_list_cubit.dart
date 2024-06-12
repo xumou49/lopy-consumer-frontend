@@ -1,3 +1,4 @@
+import 'package:Lopy/src/domain/repositories/auth_repository.dart';
 import 'package:Lopy/src/presentation/cubits/base/base_cubit.dart';
 import 'package:Lopy/src/utils/resources/data_state.dart';
 import 'package:dio/dio.dart';
@@ -12,8 +13,9 @@ part 'restaurant_list_state.dart';
 class RestaurantListCubit
     extends BaseCubit<RestaurantListState, List<Restaurant>> {
   final ApiRepository _apiRepository;
+  final AuthRepository _authRepository;
 
-  RestaurantListCubit(this._apiRepository)
+  RestaurantListCubit(this._apiRepository, this._authRepository)
       : super(const RestaurantListLoading(), []);
 
   int _page = 1;
@@ -23,7 +25,10 @@ class RestaurantListCubit
     if (isBusy) return;
 
     await run(() async {
+      String? token = await _authRepository.getToken();
+      token ??= "";
       final response = await _apiRepository.getRestaurantList(
+          token: token,
           request: RestaurantListRequest(
               page: _page,
               promotionSearch: isPromotion,

@@ -1,4 +1,3 @@
-import 'package:Lopy/src/presentation/cubits/restaurant_info/restaurant_info_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/image_widget.dart';
 import 'package:Lopy/src/utils/providers/storage_notifier.dart';
 import 'package:auto_route/auto_route.dart';
@@ -143,7 +142,7 @@ class RestaurantCard extends StatelessWidget {
                               color: Colors.grey.shade300,
                               value: downloadProgress.progress)),
                     ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
                   ),
                 ),
               ),

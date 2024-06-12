@@ -1,3 +1,4 @@
+import 'package:Lopy/src/data/data_sources/remote/history_keyword_api.dart';
 import 'package:Lopy/src/data/data_sources/remote/login_api.dart';
 import 'package:Lopy/src/data/data_sources/remote/order_items_api.dart';
 import 'package:Lopy/src/data/data_sources/remote/orders_api.dart';
@@ -10,6 +11,7 @@ import 'package:Lopy/src/domain/models/requests/order_request.dart';
 import 'package:Lopy/src/domain/models/requests/restaurant_info_request.dart';
 import 'package:Lopy/src/domain/models/requests/restaurants_request.dart';
 import 'package:Lopy/src/domain/models/requests/user_card_request.dart';
+import 'package:Lopy/src/domain/models/responses/history_keyword_response.dart';
 import 'package:Lopy/src/domain/models/responses/login_response.dart';
 import 'package:Lopy/src/domain/models/responses/order_item_response.dart';
 import 'package:Lopy/src/domain/models/responses/order_response.dart';
@@ -29,16 +31,24 @@ class ApiRepositoryImpl extends BaseApiRepository implements ApiRepository {
   final LoginApi _loginApi;
   final RestaurantInfoApi _restaurantInfoApi;
   final UserCardApi _userCardApi;
+  final HistoryKeywordApi _historyKeywordApi;
 
-  ApiRepositoryImpl(this._loginApi, this._restaurantsApi, this._ordersApi,
-      this._orderItemsApi, this._restaurantInfoApi, this._userCardApi);
+  ApiRepositoryImpl(
+      this._loginApi,
+      this._restaurantsApi,
+      this._ordersApi,
+      this._orderItemsApi,
+      this._restaurantInfoApi,
+      this._userCardApi,
+      this._historyKeywordApi);
 
   @override
   Future<DataState<RestaurantsResponse>> getRestaurantList({
+    required String token,
     required RestaurantListRequest request,
   }) {
     return getStateOf<RestaurantsResponse>(
-      request: () => _restaurantsApi.getRestaurants(request),
+      request: () => _restaurantsApi.getRestaurants(token, request),
     );
   }
 
@@ -112,6 +122,14 @@ class ApiRepositoryImpl extends BaseApiRepository implements ApiRepository {
       {required String token, required num id}) {
     return getStateOf<BaseResponse>(
       request: () => _userCardApi.deleteUserCard(token, id),
+    );
+  }
+
+  @override
+  Future<DataState<HistoryKeywordResponse>> getHistoryKeywordList(
+      {required String token}) {
+    return getStateOf<HistoryKeywordResponse>(
+      request: () => _historyKeywordApi.getHistoryKeywordList(token),
     );
   }
 }

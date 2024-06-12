@@ -1,17 +1,11 @@
 import 'package:Lopy/src/presentation/widgets/discover/favourite_header_widget.dart';
 import 'package:Lopy/src/presentation/widgets/discover/promotion_widget.dart';
-import 'package:Lopy/src/utils/extensions/scroll_controller.dart';
-import 'package:Lopy/src/utils/services/storage_service.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../../../../config/routers/app_router.gr.dart';
-import '../../../../domain/models/restaurant.dart';
-import '../../../../locator.dart';
 import '../../../cubits/restaurant_list/restaurant_list_cubit.dart';
 import '../../../cubits/restaurant_list/restaurant_promo_cubit.dart';
 import '../../../widgets/common/appbar_widget.dart';
@@ -109,7 +103,7 @@ class DiscoverView extends HookWidget {
     BlocProvider.of<RestaurantListCubit>(context);
 
     return Scaffold(
-      appBar: GradientAppBar(),
+      appBar: const GradientAppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),

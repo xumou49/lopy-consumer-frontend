@@ -1,4 +1,5 @@
 import 'package:Lopy/src/config/routers/app_router.dart';
+import 'package:Lopy/src/data/data_sources/remote/history_keyword_api.dart';
 import 'package:Lopy/src/data/data_sources/remote/login_api.dart';
 import 'package:Lopy/src/data/data_sources/remote/order_items_api.dart';
 import 'package:Lopy/src/data/data_sources/remote/orders_api.dart';
@@ -64,6 +65,10 @@ Future<void> initializeDependencies() async {
     UserCardApi(locator<Dio>()),
   );
 
+  locator.registerSingleton<HistoryKeywordApi>(
+    HistoryKeywordApi(locator<Dio>()),
+  );
+
   // register api repo here (must be called after all apis has initialised)
   locator.registerSingleton<ApiRepository>(
     ApiRepositoryImpl(
@@ -72,7 +77,8 @@ Future<void> initializeDependencies() async {
         locator<OrdersApi>(),
         locator<OrderItemsApi>(),
         locator<RestaurantInfoApi>(),
-        locator<UserCardApi>()),
+        locator<UserCardApi>(),
+        locator<HistoryKeywordApi>()),
   );
 
   // register auth repo (for token storage)

@@ -1,6 +1,7 @@
 import 'package:Lopy/src/domain/models/requests/restaurants_request.dart';
 import 'package:Lopy/src/domain/models/restaurant.dart';
 import 'package:Lopy/src/domain/repositories/api_repository.dart';
+import 'package:Lopy/src/domain/repositories/auth_repository.dart';
 import 'package:Lopy/src/presentation/cubits/base/base_cubit.dart';
 import 'package:Lopy/src/utils/resources/data_state.dart';
 import 'package:equatable/equatable.dart';
@@ -10,8 +11,9 @@ part 'restaurant_search_state.dart';
 class RestaurantSearchCubit
     extends BaseCubit<RestaurantSearchState, List<Restaurant>> {
   final ApiRepository _apiRepository;
+  final AuthRepository _authRepository;
 
-  RestaurantSearchCubit(this._apiRepository)
+  RestaurantSearchCubit(this._apiRepository, this._authRepository)
       : super(const RestaurantResultDefaultState(), []);
 
   Future<void> getHistoryByKeyword(String keyword) async {
@@ -39,7 +41,11 @@ class RestaurantSearchCubit
         return;
       }
 
+      String? token = await _authRepository.getToken();
+      token ??= "";
+
       final response = await _apiRepository.getRestaurantList(
+          token: token,
           request: RestaurantListRequest(
               page: _page, promotionSearch: false, cuisine: "", name: keyword));
       if (response is DataSuccess) {
@@ -53,7 +59,7 @@ class RestaurantSearchCubit
         emit(RestaurantResultAvailableState(restaurants: restaurants));
         return;
       }
-      emit(RestaurantResultEmptyState(restaurants: []));
+      emit(const RestaurantResultEmptyState(restaurants: []));
     });
   }
 }

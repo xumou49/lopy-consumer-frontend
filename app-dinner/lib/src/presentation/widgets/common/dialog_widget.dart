@@ -52,7 +52,7 @@ showLoaderDialog(BuildContext context) {
     barrierDismissible: false,
     context: context,
     builder: (BuildContext context) {
-      return CircularProgressIndicator();
+      return const CircularProgressIndicator();
     },
   );
 }

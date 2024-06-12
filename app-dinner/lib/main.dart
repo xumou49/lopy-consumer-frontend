@@ -5,6 +5,7 @@ import 'package:Lopy/src/domain/repositories/auth_repository.dart';
 import 'package:Lopy/src/domain/repositories/database_repository.dart';
 import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
 import 'package:Lopy/src/presentation/cubits/cart/cart_list_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/history/history_keyword_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_item_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
@@ -44,6 +45,7 @@ class LopyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => RestaurantListCubit(
             locator<ApiRepository>(),
+            locator<AuthRepository>(),
           )..getRestaurantList(),
         ),
         BlocProvider(
@@ -51,8 +53,8 @@ class LopyApp extends StatelessWidget {
                 locator<FirebaseRepository>(), locator<AuthRepository>())),
         BlocProvider(
             create: (context) => OrderListCubit(
-                locator<ApiRepository>(), locator<AuthRepository>()
-            )..getOrderList(1, 20)),
+                locator<ApiRepository>(), locator<AuthRepository>())
+              ..getOrderList(1, 20)),
         BlocProvider(
             create: (context) => OrderItemListCubit(
                 locator<ApiRepository>(), locator<AuthRepository>())),
@@ -70,11 +72,13 @@ class LopyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => RestaurantPromoCubit(
             locator<ApiRepository>(),
+            locator<AuthRepository>(),
           )..getRestaurantList(),
         ),
         BlocProvider(
           create: (context) => RestaurantCuisineCubit(
             locator<ApiRepository>(),
+            locator<AuthRepository>(),
           )..getRestaurantList(),
         ),
         BlocProvider(
@@ -89,14 +93,20 @@ class LopyApp extends StatelessWidget {
           ),
         ),
         BlocProvider(
+          create: (context) => HistoryKeywordListCubit(
+            locator<ApiRepository>(),
+            locator<AuthRepository>(),
+          )..getHistoryKeywordList(),
+        ),
+        BlocProvider(
           create: (context) => UserCardListCubit(
             locator<ApiRepository>(),
             locator<AuthRepository>(),
           ),
         ),
         BlocProvider(
-            create: (context) =>
-                RestaurantSearchCubit(locator<ApiRepository>())),
+            create: (context) => RestaurantSearchCubit(
+                locator<ApiRepository>(), locator<AuthRepository>())),
       ],
       child: OKToast(
         child: MaterialApp.router(

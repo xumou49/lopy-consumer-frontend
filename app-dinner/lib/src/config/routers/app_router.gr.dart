@@ -821,7 +821,7 @@ class ProfileView extends _i41.PageRouteInfo<void> {
 class RestaurantDetailView
     extends _i41.PageRouteInfo<RestaurantDetailViewArgs> {
   RestaurantDetailView({
-    _i43.Key? key,
+    _i42.Key? key,
     required int restaurantId,
     List<_i41.PageRouteInfo>? children,
   }) : super(
@@ -845,7 +845,7 @@ class RestaurantDetailViewArgs {
     required this.restaurantId,
   });
 
-  final _i43.Key? key;
+  final _i42.Key? key;
 
   final int restaurantId;
 

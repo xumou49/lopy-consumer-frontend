@@ -1,13 +1,9 @@
 import 'package:Lopy/src/domain/models/cart.dart';
-import 'package:Lopy/src/presentation/cubits/order/order_place_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/button_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oktoast/oktoast.dart';
 
 import '../../views/home_bottom_navbar/profile/payment_method/payment_method_view.dart';
 import '../common/placeholder_widget.dart';
-import '../payment_method/method_board.dart';
 
 // class PlaceOrderBtn extends StatelessWidget {
 //   final List<Cart> carts;
