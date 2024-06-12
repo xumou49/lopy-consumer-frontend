@@ -66,28 +66,28 @@ class ScanView extends HookWidget {
           alignment: Alignment.bottomCenter,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ValueListenableBuilder<TorchState>(
-                valueListenable: cameraController.torchState,
-                builder: (context, value, child) {
-                  final Color iconColor;
-                  switch (value) {
-                    case TorchState.off:
-                      iconColor = Colors.black;
-                    case TorchState.on:
-                      iconColor = Colors.yellow;
-                  }
-
-                  return IconButton(
-                    onPressed: () => cameraController.toggleTorch(),
-                    icon: Icon(
-                      Icons.flashlight_on_outlined,
-                      color: iconColor,
-                    ),
-                  );
-                },
-              ),
-            ],
+            // children: [
+            //   ValueListenableBuilder<TorchState>(
+            //     valueListenable: cameraController.torchState,
+            //     builder: (context, value, child) {
+            //       final Color iconColor;
+            //       switch (value) {
+            //         case TorchState.off:
+            //           iconColor = Colors.black;
+            //         case TorchState.on:
+            //           iconColor = Colors.yellow;
+            //       }
+            //
+            //       return IconButton(
+            //         onPressed: () => cameraController.toggleTorch(),
+            //         icon: Icon(
+            //           Icons.flashlight_on_outlined,
+            //           color: iconColor,
+            //         ),
+            //       );
+            //     },
+            //   ),
+            // ],
           ),
         ),
       ),
