@@ -7,6 +7,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../cubits/order/order_place_cubit.dart';
 import '../../../widgets/common/appbar_widget.dart';
 import 'order_detail_view.dart';
 
@@ -16,6 +17,8 @@ class OrdersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final r = BlocProvider.of<OrderListCubit>(context);
+    r.getOrderList(1, 10);
     return Scaffold(
         appBar: const GradientAppBar(title: "My Orders"),
         body: BlocBuilder(

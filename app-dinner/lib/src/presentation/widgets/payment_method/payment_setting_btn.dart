@@ -22,6 +22,7 @@ class NewCardBtn extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10))),
           onPressed: () {
+            Navigator.pop(context);
             context.router.push(NewPaymentMethodView(type: type));
           },
           child:

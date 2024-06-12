@@ -33,8 +33,8 @@ class DatabaseRepositoryImpl implements DatabaseRepository {
   }
 
   @override
-  Future<void> clearCart(int userId, int restaurantId) async {
-    return _appDatabase.cartDao.clearCart(userId, restaurantId);
+  Future<void> clearCart(int restaurantId) async {
+    return _appDatabase.cartDao.clearCart(restaurantId);
   }
 
 }

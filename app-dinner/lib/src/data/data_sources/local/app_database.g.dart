@@ -168,13 +168,10 @@ class _$CartDao extends CartDao {
   }
 
   @override
-  Future<void> clearCart(
-    int userId,
-    int restaurantId,
-  ) async {
+  Future<void> clearCart(int restaurantId) async {
     await _queryAdapter.queryNoReturn(
-        'DELETE FROM cartTable WHERE userId = ?1 AND restaurantId = ?2',
-        arguments: [userId, restaurantId]);
+        'DELETE FROM cartTable WHERE restaurantId = ?1',
+        arguments: [restaurantId]);
   }
 
   @override

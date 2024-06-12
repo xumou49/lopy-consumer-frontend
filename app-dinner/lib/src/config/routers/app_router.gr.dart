@@ -24,7 +24,13 @@ import 'package:Lopy/src/presentation/views/home_bottom_navbar/orders/history_or
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/orders/orders_view.dart'
     as _i18;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/help/help_view.dart'
+<<<<<<< HEAD
     as _i9;
+=======
+    as _i7;
+import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/home_support/home_support_view.dart'
+    as _i12;
+>>>>>>> main
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/payment_method/new_payment_view.dart'
     as _i16;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/payment_method/payment_method_view.dart'
@@ -54,8 +60,13 @@ import 'package:Lopy/src/presentation/views/navigation/help_navigation_view.dart
     as _i8;
 import 'package:Lopy/src/presentation/views/navigation/history_order_navigation_view.dart'
     as _i10;
+<<<<<<< HEAD
 import 'package:Lopy/src/presentation/views/navigation/home_navigation_view.dart'
     as _i12;
+=======
+import 'package:Lopy/src/presentation/views/navigation/home_support_navigation_view.dart'
+    as _i11;
+>>>>>>> main
 import 'package:Lopy/src/presentation/views/navigation/login_navigation_view.dart'
     as _i14;
 import 'package:Lopy/src/presentation/views/navigation/order_navigation_view.dart'
@@ -123,7 +134,11 @@ abstract class $AppRouter extends _i41.RootStackRouter {
         child: const _i5.DiscoverView(),
       );
     },
+<<<<<<< HEAD
     FavoriteNavigationView.name: (routeData) {
+=======
+    HelpNavigationView.name: (routeData) {
+>>>>>>> main
       return _i41.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i6.FavoriteNavigationView(),
@@ -165,9 +180,27 @@ abstract class $AppRouter extends _i41.RootStackRouter {
         child: const _i12.HomeNavigationView(),
       );
     },
+<<<<<<< HEAD
     HomeView.name: (routeData) {
       return _i41.AutoRoutePage<dynamic>(
         routeData: routeData,
+=======
+    HomeSupportNavigationView.name: (routeData) {
+      return _i41.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i11.HomeSupportNavigationView(),
+      );
+    },
+    HomeSupportView.name: (routeData) {
+      return _i41.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i12.HomeSupportView(),
+      );
+    },
+    HomeView.name: (routeData) {
+      return _i41.AutoRoutePage<dynamic>(
+        routeData: routeData,
+>>>>>>> main
         child: const _i13.HomeView(),
       );
     },
@@ -431,6 +464,7 @@ class DiscoverView extends _i41.PageRouteInfo<void> {
 }
 
 /// generated route for
+<<<<<<< HEAD
 /// [_i6.FavoriteNavigationView]
 class FavoriteNavigationView extends _i41.PageRouteInfo<void> {
   const FavoriteNavigationView({List<_i41.PageRouteInfo>? children})
@@ -460,6 +494,9 @@ class FavoriteView extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.HelpNavigationView]
+=======
+/// [_i6.HelpNavigationView]
+>>>>>>> main
 class HelpNavigationView extends _i41.PageRouteInfo<void> {
   const HelpNavigationView({List<_i41.PageRouteInfo>? children})
       : super(
@@ -473,7 +510,11 @@ class HelpNavigationView extends _i41.PageRouteInfo<void> {
 }
 
 /// generated route for
+<<<<<<< HEAD
 /// [_i9.HelpView]
+=======
+/// [_i7.HelpView]
+>>>>>>> main
 class HelpView extends _i41.PageRouteInfo<void> {
   const HelpView({List<_i41.PageRouteInfo>? children})
       : super(
@@ -487,7 +528,11 @@ class HelpView extends _i41.PageRouteInfo<void> {
 }
 
 /// generated route for
+<<<<<<< HEAD
 /// [_i10.HistoryOrderNavigationView]
+=======
+/// [_i8.HistoryOrderNavigationView]
+>>>>>>> main
 class HistoryOrderNavigationView extends _i41.PageRouteInfo<void> {
   const HistoryOrderNavigationView({List<_i41.PageRouteInfo>? children})
       : super(
@@ -501,7 +546,11 @@ class HistoryOrderNavigationView extends _i41.PageRouteInfo<void> {
 }
 
 /// generated route for
+<<<<<<< HEAD
 /// [_i11.HistoryOrderView]
+=======
+/// [_i9.HistoryOrderView]
+>>>>>>> main
 class HistoryOrderView extends _i41.PageRouteInfo<void> {
   const HistoryOrderView({List<_i41.PageRouteInfo>? children})
       : super(
@@ -515,7 +564,11 @@ class HistoryOrderView extends _i41.PageRouteInfo<void> {
 }
 
 /// generated route for
+<<<<<<< HEAD
 /// [_i12.HomeNavigationView]
+=======
+/// [_i10.HomeNavigationView]
+>>>>>>> main
 class HomeNavigationView extends _i41.PageRouteInfo<void> {
   const HomeNavigationView({List<_i41.PageRouteInfo>? children})
       : super(
@@ -529,6 +582,37 @@ class HomeNavigationView extends _i41.PageRouteInfo<void> {
 }
 
 /// generated route for
+<<<<<<< HEAD
+=======
+/// [_i11.HomeSupportNavigationView]
+class HomeSupportNavigationView extends _i41.PageRouteInfo<void> {
+  const HomeSupportNavigationView({List<_i41.PageRouteInfo>? children})
+      : super(
+          HomeSupportNavigationView.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeSupportNavigationView';
+
+  static const _i41.PageInfo<void> page = _i41.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i12.HomeSupportView]
+class HomeSupportView extends _i41.PageRouteInfo<void> {
+  const HomeSupportView({List<_i41.PageRouteInfo>? children})
+      : super(
+          HomeSupportView.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeSupportView';
+
+  static const _i41.PageInfo<void> page = _i41.PageInfo<void>(name);
+}
+
+/// generated route for
+>>>>>>> main
 /// [_i13.HomeView]
 class HomeView extends _i41.PageRouteInfo<void> {
   const HomeView({List<_i41.PageRouteInfo>? children})

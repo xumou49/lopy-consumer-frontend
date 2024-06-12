@@ -20,6 +20,6 @@ abstract class CartDao {
   @Query('UPDATE $cartTable SET quantity = quantity - 1 WHERE itemId = :itemId AND quantity > 0')
   Future<void> decrementCartItemQuantity(int itemId);
 
-  @Query('DELETE FROM $cartTable WHERE userId = :userId AND restaurantId = :restaurantId')
-  Future<void> clearCart(int userId, int restaurantId);
+  @Query('DELETE FROM $cartTable WHERE restaurantId = :restaurantId')
+  Future<void> clearCart(int restaurantId);
 }

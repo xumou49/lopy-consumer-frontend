@@ -53,8 +53,8 @@ class CartListCubit
     return CartListSuccess(cartItems: cartItems);
   }
 
-  Future<void> clearCart({required int userId, required int restaurantId}) async {
-    await _databaseRepository.clearCart(userId, restaurantId);
+  Future<void> clearCart(int restaurantId) async {
+    await _databaseRepository.clearCart(restaurantId);
     emit(await _getAllSavedCarts());
   }
 

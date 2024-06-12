@@ -15,11 +15,12 @@ class OrderListRequest {
 
 class OrderPlaceRequest {
   final num restaurantId;
+  final num cardId;
   final List<Cart> itemList;
 
-  OrderPlaceRequest({required this.restaurantId, required this.itemList});
+  OrderPlaceRequest({required this.restaurantId, required this.cardId, required this.itemList});
 
   Map<String, dynamic> toMap() {
-    return {"restaurantId": restaurantId, "itemList": itemList};
+    return {"restaurantId": restaurantId, "cardId": cardId, "itemList": itemList};
   }
 }

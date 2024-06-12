@@ -5,23 +5,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
 
+import '../../views/home_bottom_navbar/profile/payment_method/payment_method_view.dart';
+import '../common/placeholder_widget.dart';
+import '../payment_method/method_board.dart';
+
+// class PlaceOrderBtn extends StatelessWidget {
+//   final List<Cart> carts;
+//   const PlaceOrderBtn({super.key, required this.carts});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return ButtonWidget(
+//         text: "PLACE ORDER",
+//         onPressed: () {
+//           // context
+//           //     .read<OrderPlaceCubit>()
+//           //     .orderPlace(carts.first.restaurantId, carts);
+//           Future.delayed(const Duration(milliseconds: 2000), () {
+//             showToast("Order placed successfully");
+//           });
+//           // route to order place status page (success / loading / failed) here
+//         });
+//   }
+
 class PlaceOrderBtn extends StatelessWidget {
   final List<Cart> carts;
   const PlaceOrderBtn({super.key, required this.carts});
 
   @override
   Widget build(BuildContext context) {
-    return ButtonWidget(
-        text: "PLACE ORDER",
-        onPressed: () {
-          context
-              .read<OrderPlaceCubit>()
-              .orderPlace(carts.first.restaurantId, carts);
-          Future.delayed(const Duration(milliseconds: 2000), () {
-            showToast("Order placed successfully");
-          });
-          // route to order place status page (success / loading / failed) here
-        });
+    return ChoosePaymentModal(carts: carts,);
   }
 
   // mock data
@@ -52,5 +65,67 @@ class PlaceOrderBtn extends StatelessWidget {
           restaurantId: 0,
           restaurantMenuItemId: 0),
     ];
+  }
+}
+
+class ChoosePaymentModal extends StatelessWidget {
+  final List<Cart> carts;
+  const ChoosePaymentModal({super.key, required this.carts});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ButtonWidget(
+        text: "PLACE ORDER",
+        onPressed: () {
+          showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                height: 350,
+                color: Colors.white,
+                child: SingleChildScrollView(
+                  child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const PlaceholderWidget(height: 30,),
+                      MethodDataDisplayBoard(isPay: true, carts: carts),
+                      // const UserCardDisplay(type: 'visa',),
+                      const PlaceholderWidget(height: 30,),
+                      // Center(
+                      //   child: Row(
+                      //     children: [
+                      //       const PlaceholderWidget(width: 60,),
+                      //
+                      //       ElevatedButton(
+                      //         style: style,
+                      //         child: const Text('Back'),
+                      //         onPressed: () => Navigator.pop(context),
+                      //       ),
+                      //       const PlaceholderWidget(width: 120,),
+                      //       ElevatedButton(
+                      //         style: style,
+                      //         child: const Text('Pay'),
+                      //         onPressed: () => Navigator.pop(context),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+
+                      // ElevatedButton(
+                      //   child: const Text('Close Bottom'),
+                      //   onPressed: () => Navigator.pop(context),
+                      // ),
+                    ],
+                  ),
+                ),
+              ));
+            },
+          );
+        },
+      ),
+    );
   }
 }

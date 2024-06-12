@@ -34,6 +34,7 @@ class AppRouter extends $AppRouter {
       page: PlaceOrderNavigationView.page,
       children: [
         AutoRoute(page: PlaceOrderView.page, initial: true),
+        AutoRoute(page: NewPaymentMethodView.page)
       ],
     ),
   ];
@@ -75,6 +76,8 @@ class AppRouter extends $AppRouter {
                   ...searchRoute,
                   ...restaurantAndOrderingRoute,
                   ...placeOrderRoute,
+                  ...paymentMethodRoute,
+                  ...[AutoRoute(page: OrdersView.page)]
                 ],
               ),
               AutoRoute(
@@ -100,6 +103,13 @@ class AppRouter extends $AppRouter {
                       page: SettingNavigationView.page,
                       children: [
                         AutoRoute(page: SettingView.page, initial: true),
+                      ],
+                    ),
+
+                    AutoRoute(
+                      page: HomeSupportNavigationView.page,
+                      children: [
+                        AutoRoute(page: HomeSupportView.page, initial: true),
                       ],
                     ),
                     AutoRoute(
