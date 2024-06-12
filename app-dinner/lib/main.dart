@@ -51,7 +51,8 @@ class LopyApp extends StatelessWidget {
                 locator<FirebaseRepository>(), locator<AuthRepository>())),
         BlocProvider(
             create: (context) => OrderListCubit(
-                locator<ApiRepository>(), locator<AuthRepository>())),
+                locator<ApiRepository>(), locator<AuthRepository>()
+            )..getOrderList(1, 20)),
         BlocProvider(
             create: (context) => OrderItemListCubit(
                 locator<ApiRepository>(), locator<AuthRepository>())),

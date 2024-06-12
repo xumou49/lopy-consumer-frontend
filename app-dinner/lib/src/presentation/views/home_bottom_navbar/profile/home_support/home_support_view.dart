@@ -1,19 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:Lopy/src/presentation/widgets/common/appbar_widget.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 @RoutePage()
-class HelpView extends StatelessWidget {
-  const HelpView({super.key});
+class HomeSupportView extends StatelessWidget {
+  const HomeSupportView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: GradientAppBar(
           // backgroundColor: const Color.fromRGBO(243, 129, 129, 1),
-          title: "home & support",
+          title: "privacy policy",
           showBackButton: true,
           onBackButtonPressed: () {
             context.router.pop();

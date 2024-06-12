@@ -99,6 +99,7 @@ flutter:
   assets:
     - lib/src/assets/images/
     - lib/src/assets/static/privacy_policy.md
+    - lib/src/assets/static/home_support.md
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

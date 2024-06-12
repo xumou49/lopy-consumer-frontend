@@ -21,9 +21,9 @@ class ProfileView extends StatelessWidget {
           color: Colors.white,
           child: ListView(
             children: const <Widget>[
-              PlaceholderWidget(height: 20,),
+              PlaceholderWidget(height: 5,),
               AvatarWidget(),
-              PlaceholderWidget(height: 20,),
+              PlaceholderWidget(height: 5,),
               ProfileSettingsWidget(),
             ],
           ),

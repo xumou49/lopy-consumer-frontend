@@ -325,9 +325,9 @@ class _ExistedCardDisplayState extends State<ExistedCardDisplay> {
                 style: style,
                 child: const Text('Pay'),
                 onPressed: () {
-                  // context
-                  //     .read<OrderPlaceCubit>()
-                  //     .orderPlace(widget.carts.first.restaurantId, cardId, widget.carts);
+                  context
+                      .read<OrderPlaceCubit>()
+                      .orderPlace(widget.carts.first.restaurantId, cardId, widget.carts);
                   Center(
                     child: ShowLoadingForTwoSeconds(),
                   );
