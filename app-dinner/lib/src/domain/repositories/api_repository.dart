@@ -13,9 +13,11 @@ import 'package:Lopy/src/domain/models/responses/user_card_response.dart';
 import 'package:Lopy/src/utils/resources/data_state.dart';
 
 import '../models/requests/user_card_request.dart';
+import '../models/responses/history_keyword_response.dart';
 
 abstract class ApiRepository {
   Future<DataState<RestaurantsResponse>> getRestaurantList({
+    required String token,
     required RestaurantListRequest request,
   });
 
@@ -55,5 +57,9 @@ abstract class ApiRepository {
   Future<DataState<BaseResponse>> deleteUserCard({
     required String token,
     required num id,
+  });
+
+  Future<DataState<HistoryKeywordResponse>> getHistoryKeywordList({
+    required String token,
   });
 }

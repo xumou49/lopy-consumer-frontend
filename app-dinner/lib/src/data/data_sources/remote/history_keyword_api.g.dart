@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'restaurants_api.dart';
+part of 'history_keyword_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'restaurants_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _RestaurantsApi implements RestaurantsApi {
-  _RestaurantsApi(
+class _HistoryKeywordApi implements HistoryKeywordApi {
+  _HistoryKeywordApi(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,35 +21,27 @@ class _RestaurantsApi implements RestaurantsApi {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<RestaurantsResponse>> getRestaurants(
-    token,
-    request, {
-    contentType = 'application/json',
-  }) async {
+  Future<HttpResponse<HistoryKeywordResponse>> getHistoryKeywordList(
+      token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{
-      r'lopy-token': token,
-      r'Content-Type': contentType,
-    };
+    final _headers = <String, dynamic>{r'lopy-token': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    _data.addAll(request?.toMap() ?? <String, dynamic>{});
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<RestaurantsResponse>>(Options(
-      method: 'POST',
+        _setStreamType<HttpResponse<HistoryKeywordResponse>>(Options(
+      method: 'GET',
       headers: _headers,
       extra: _extra,
-      contentType: contentType,
     )
             .compose(
               _dio.options,
-              '/restaurant/list',
+              '/history-keyword/latest-keywords',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RestaurantsResponse.fromMap(_result.data!);
+    final value = HistoryKeywordResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

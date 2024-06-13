@@ -1,6 +1,6 @@
 import 'package:Lopy/src/domain/models/cuisine.dart';
-import 'package:Lopy/src/domain/models/history_search.dart';
 import 'package:Lopy/src/domain/models/restaurant.dart';
+import 'package:Lopy/src/presentation/cubits/history/history_keyword_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/restaurant_info/restaurant_search_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/empty_result_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
@@ -14,17 +14,33 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../widgets/common/appbar_widget.dart';
 
 @RoutePage()
-class SearchView extends StatelessWidget {
+class SearchView extends StatefulWidget {
   const SearchView({Key? key}) : super(key: key);
+
+  @override
+  _SearchViewState createState() => _SearchViewState();
+}
+
+class _SearchViewState extends State<SearchView> {
+  TextEditingController _controller = TextEditingController();
+
+  void updateSearchBar(String keyword) {
+    setState(() {
+      _controller.text = keyword;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: GradientAppBar(
-          onSubmitted: (keyword) => {
-            context
+          customTextEditingController: _controller,
+          onSubmitted: (keyword) async {
+            // explicitly force the api should be called first
+            await context
                 .read<RestaurantSearchCubit>()
-                .getRestaurantsByKeyword(keyword),
+                .getRestaurantsByKeyword(keyword);
+            context.read<HistoryKeywordListCubit>().getHistoryKeywordList();
           },
           onChanged: (keyword) {
             context.read<RestaurantSearchCubit>().getHistoryByKeyword(keyword);
@@ -34,13 +50,14 @@ class SearchView extends StatelessWidget {
             builder: (_, state) {
           switch (state.runtimeType) {
             case RestaurantResultDefaultState:
-              return const RestaurantCategoryWidget();
+              return RestaurantCategoryWidget(onKeywordClick: updateSearchBar);
             case RestaurantResultEmptyState:
               return const RestaurantEmptyWidget();
             case RestaurantResultAvailableState:
-              return RestaurantDataWidget(dataList: state.restaurants);
+              return RestaurantDataWidget(
+                  dataList: state.restaurants, onKeywordClick: updateSearchBar);
             default:
-              return const RestaurantCategoryWidget();
+              return RestaurantCategoryWidget(onKeywordClick: updateSearchBar);
           }
         }));
   }
@@ -65,8 +82,10 @@ class RestaurantEmptyWidget extends StatelessWidget {
 
 class RestaurantDataWidget extends StatelessWidget {
   final List<Restaurant> dataList;
+  final Function(String) onKeywordClick;
 
-  const RestaurantDataWidget({super.key, required this.dataList});
+  const RestaurantDataWidget(
+      {super.key, required this.dataList, required this.onKeywordClick});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +95,7 @@ class RestaurantDataWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BrowseHistoryWidget(dataList: _getHistoryDataList()),
+            BrowseHistoryWidget(onKeywordClick: onKeywordClick),
             const SizedBox(height: 15),
             const TextWidget(
               text: "Search Results",
@@ -90,7 +109,9 @@ class RestaurantDataWidget extends StatelessWidget {
 }
 
 class RestaurantCategoryWidget extends StatelessWidget {
-  const RestaurantCategoryWidget({super.key});
+  final Function(String) onKeywordClick;
+
+  const RestaurantCategoryWidget({super.key, required this.onKeywordClick});
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +119,7 @@ class RestaurantCategoryWidget extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
         child: Column(
           children: [
-            BrowseHistoryWidget(dataList: _getHistoryDataList()),
+            BrowseHistoryWidget(onKeywordClick: onKeywordClick),
             const SizedBox(height: 15),
             RestaurantCuisineWidget(dataList: _getCuisineDataList())
           ],
@@ -148,22 +169,5 @@ List<Cuisine> _getCuisineDataList() {
         name: 'Fast Food',
         imagePath:
             'https://api-lopy.wanioco.com/static/cuisine/fast_food.jpeg'),
-  ];
-}
-
-// mock history data for now
-List<HistorySearch> _getHistoryDataList() {
-  return [
-    const HistorySearch(id: 1, name: 'korean'),
-    const HistorySearch(id: 2, name: 'mala'),
-    const HistorySearch(id: 3, name: 'fruit'),
-    const HistorySearch(id: 4, name: 'koi'),
-    const HistorySearch(id: 5, name: 'isteak'),
-    const HistorySearch(id: 6, name: 'mcd'),
-    const HistorySearch(id: 7, name: 'drink'),
-    const HistorySearch(id: 8, name: 'jpn'),
-    const HistorySearch(id: 9, name: 'dessert'),
-    const HistorySearch(id: 10, name: 'bread'),
-    const HistorySearch(id: 11, name: 'noddle'),
   ];
 }

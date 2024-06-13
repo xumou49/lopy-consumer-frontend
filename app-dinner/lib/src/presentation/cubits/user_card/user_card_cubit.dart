@@ -25,7 +25,7 @@ class UserCardCubit extends BaseCubit<UserCardState, UserCard> {
       final response = await _apiRepository.saveUserCard(
           token: token!, request: UserCardRequest(cardToken: cardToken));
       if (response is DataSuccess) {
-        emit(UserCardSaveSuccess(isData: true));
+        emit(const UserCardSaveSuccess(isData: true));
       } else if (response is DataFailed) {
         emit(UserCardSaveFailed(error: response.error));
       }

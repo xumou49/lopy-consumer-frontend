@@ -1,7 +1,6 @@
 import 'package:Lopy/src/presentation/widgets/discover/restaurant_card_widget.dart';
 import 'package:Lopy/src/utils/services/storage_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../../domain/models/restaurant.dart';
 import '../../../locator.dart';

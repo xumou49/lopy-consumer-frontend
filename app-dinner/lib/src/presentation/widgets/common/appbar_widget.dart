@@ -17,21 +17,23 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function()? onTap;
   final Function(String)? onSubmitted;
   final Function(String)? onChanged;
+  final TextEditingController? customTextEditingController;
 
-  const GradientAppBar({
-    super.key,
-    this.title,
-    this.showBackButton = false,
-    this.showCartIcon = false,
-    this.onBackButtonPressed,
-    this.onTap,
-    this.actions,
-    this.subtitle,
-    this.actionIcon,
-    this.onTapAction,
-    this.onSubmitted,
-    this.onChanged,
-  }) : assert(!showBackButton || onBackButtonPressed != null,
+  const GradientAppBar(
+      {super.key,
+      this.title,
+      this.showBackButton = false,
+      this.showCartIcon = false,
+      this.onBackButtonPressed,
+      this.onTap,
+      this.actions,
+      this.subtitle,
+      this.actionIcon,
+      this.onTapAction,
+      this.onSubmitted,
+      this.onChanged,
+      this.customTextEditingController})
+      : assert(!showBackButton || onBackButtonPressed != null,
             'onBackButtonPressed must be provided if showBackButton is true');
 
   @override
@@ -45,6 +47,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
         : AutocompleteSearchList(
             onSubmitted: onSubmitted,
             onChanged: onChanged,
+            customTextEditingController: customTextEditingController,
           );
 
     return Container(
@@ -167,8 +170,14 @@ class AppBarSearchFieldWidget extends StatelessWidget {
 class AutocompleteSearchList extends StatefulWidget {
   Function(String)? onSubmitted = (v) {};
   Function(String)? onChanged = (v) {};
+  TextEditingController? customTextEditingController;
 
-  AutocompleteSearchList({super.key, this.onSubmitted, this.onChanged});
+  AutocompleteSearchList({
+    super.key,
+    this.onSubmitted,
+    this.onChanged,
+    this.customTextEditingController,
+  });
 
   @override
   _AutocompleteSearchListState createState() => _AutocompleteSearchListState();
@@ -281,7 +290,8 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
           },
           onSubmitted: widget.onSubmitted,
           onChanged: widget.onChanged,
-          controller: textEditingController,
+          controller:
+              widget.customTextEditingController ?? textEditingController,
           focusNode: focusNode,
           decoration: InputDecoration(
             hintText: 'Search restaurant....',

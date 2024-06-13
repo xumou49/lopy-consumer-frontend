@@ -5,7 +5,6 @@ import 'package:Lopy/src/presentation/widgets/common/dialog_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/payment_setting_btn.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
@@ -328,7 +327,7 @@ class _ExistedCardDisplayState extends State<ExistedCardDisplay> {
                   context
                       .read<OrderPlaceCubit>()
                       .orderPlace(widget.carts.first.restaurantId, cardId, widget.carts);
-                  Center(
+                  const Center(
                     child: ShowLoadingForTwoSeconds(),
                   );
                   Future.delayed(const Duration(milliseconds: 2000), () {
@@ -404,6 +403,8 @@ class EmptyCardDisplay extends StatelessWidget {
 
 
 class ShowLoadingForTwoSeconds extends StatefulWidget {
+  const ShowLoadingForTwoSeconds({super.key});
+
   @override
   _ShowLoadingForTwoSecondsState createState() => _ShowLoadingForTwoSecondsState();
 }
@@ -415,7 +416,7 @@ class _ShowLoadingForTwoSecondsState extends State<ShowLoadingForTwoSeconds> {
   void initState() {
     super.initState();
     // Delay for 2 seconds
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         _showLoading = false;
       });
@@ -425,7 +426,7 @@ class _ShowLoadingForTwoSecondsState extends State<ShowLoadingForTwoSeconds> {
   @override
   Widget build(BuildContext context) {
     return _showLoading
-        ? CircularProgressIndicator() // Show loading indicator
-        : Text('Loading Complete'); // Replace with your desired widget after 2 seconds
+        ? const CircularProgressIndicator() // Show loading indicator
+        : const Text('Loading Complete'); // Replace with your desired widget after 2 seconds
   }
 }

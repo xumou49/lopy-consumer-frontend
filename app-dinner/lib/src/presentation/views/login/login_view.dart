@@ -80,7 +80,7 @@ class _ViewState extends State<View> {
             child: SingleChildScrollView(
                 child: Column(children: [
       // image logo
-      SizedBox(
+      const SizedBox(
         height: 30,
       ),
       _getLogo(),

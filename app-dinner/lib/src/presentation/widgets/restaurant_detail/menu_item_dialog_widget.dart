@@ -164,7 +164,7 @@ class MenuItemDialogWidget extends StatelessWidget {
                                               content: const Text('Multiple restaurants: Do you want clear the existing items in cart?'),
                                               actions: <Widget>[
                                                 TextButton(
-                                                  child: Text('Yes'),
+                                                  child: const Text('Yes'),
                                                   onPressed: () {
                                                     localACartCubit.clearCart(state.cartItems[0].restaurantId);
                                                     print(c);
@@ -176,7 +176,7 @@ class MenuItemDialogWidget extends StatelessWidget {
                                                   },
                                                 ),
                                                 TextButton(
-                                                  child: Text('No'),
+                                                  child: const Text('No'),
                                                   onPressed: () {
                                                     Navigator.pop(context); // Close the dialog
                                                   },

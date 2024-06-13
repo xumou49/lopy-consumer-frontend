@@ -54,7 +54,7 @@ class LoginCubit extends BaseCubit<LoginState, String> {
   Future<void> logout() async {
     await _authRepository.removeToken();
     // reset the state to loading
-    emit(LoginLoading());
+    emit(const LoginLoading());
   }
 
   Future<void> googleLogin() async {

@@ -1,5 +1,4 @@
 import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
-import 'package:Lopy/src/presentation/cubits/login/login_state.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';

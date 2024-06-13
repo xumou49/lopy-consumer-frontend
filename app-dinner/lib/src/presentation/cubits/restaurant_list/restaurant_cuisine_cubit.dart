@@ -1,3 +1,4 @@
+import 'package:Lopy/src/domain/repositories/auth_repository.dart';
 import 'package:Lopy/src/presentation/cubits/base/base_cubit.dart';
 import 'package:Lopy/src/utils/resources/data_state.dart';
 import 'package:dio/dio.dart';
@@ -12,8 +13,9 @@ part 'restaurant_cuisine_state.dart';
 class RestaurantCuisineCubit
     extends BaseCubit<RestaurantCuisineState, List<Restaurant>> {
   final ApiRepository _apiRepository;
+  final AuthRepository _authRepository;
 
-  RestaurantCuisineCubit(this._apiRepository)
+  RestaurantCuisineCubit(this._apiRepository, this._authRepository)
       : super(const RestaurantCuisineLoading(), []);
 
   int _page = 1;
@@ -22,11 +24,14 @@ class RestaurantCuisineCubit
     if (isBusy) return;
 
     await run(() async {
+      String? token = await _authRepository.getToken();
+      token ??= "";
       final response = await _apiRepository.getRestaurantList(
+          token: token,
           request: RestaurantListRequest(page: _page, cuisine: cuisine));
       if (response is DataSuccess) {
         if (response.data!.restaurants.isEmpty) {
-          emit(RestaurantCuisineEmpty());
+          emit(const RestaurantCuisineEmpty());
           return;
         }
 

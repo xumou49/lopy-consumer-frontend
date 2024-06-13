@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+
 import '../../../domain/models/requests/restaurants_request.dart';
-import '../../../utils/constants/strings.dart';
 import '../../../domain/models/responses/restaurants_response.dart';
+import '../../../utils/constants/strings.dart';
 
 part 'restaurants_api.g.dart';
 
@@ -12,7 +13,6 @@ abstract class RestaurantsApi {
 
   @POST('/restaurant/list')
   Future<HttpResponse<RestaurantsResponse>> getRestaurants(
-    @Body() RestaurantListRequest request,
-      {@Header('Content-Type') String contentType = 'application/json'}
-  );
+      @Header(tokenName) String token, @Body() RestaurantListRequest request,
+      {@Header('Content-Type') String contentType = 'application/json'});
 }
