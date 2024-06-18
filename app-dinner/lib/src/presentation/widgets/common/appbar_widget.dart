@@ -1,9 +1,11 @@
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
+import 'package:Lopy/src/utils/services/storage_service.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../config/routers/app_router.gr.dart';
+import '../../../locator.dart';
 
 class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
@@ -184,6 +186,7 @@ class AutocompleteSearchList extends StatefulWidget {
 }
 
 class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
+  final _storageService = locator<StorageService>();
   String _currentInput = '';
   static const List<String> _searchHistorylist = <String>[
     'vegan',
@@ -196,6 +199,7 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
 
   final double itemHeight = 48;
   final int maxItems = 5;
+
   @override
   Widget build(BuildContext context) {
     return Autocomplete<String>(
@@ -280,34 +284,49 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
           TextEditingController textEditingController,
           FocusNode focusNode,
           VoidCallback onFieldSubmitted) {
-        return TextField(
-          onTap: () {
-            final router = AutoRouter.of(context);
-            // Check if the current route is already SearchView
-            if (router.current.name != "SearchView") {
-              router.push(const SearchNavigationView());
-            }
-          },
-          onSubmitted: widget.onSubmitted,
-          onChanged: widget.onChanged,
-          controller:
-              widget.customTextEditingController ?? textEditingController,
-          focusNode: focusNode,
-          decoration: InputDecoration(
-            hintText: 'Search restaurant....',
-            prefixIcon: Icon(Icons.search, color: Colors.pink.shade100),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.pink.shade100),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.pink.shade200),
-            ),
-            filled: true,
-            fillColor: Colors.white,
-            contentPadding: const EdgeInsets.all(8),
-          ),
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+                child: TextField(
+              onTap: () {
+                final router = AutoRouter.of(context);
+                // Check if the current route is already SearchView
+                if (router.current.name != "SearchView") {
+                  router.push(const SearchNavigationView());
+                }
+              },
+              onSubmitted: widget.onSubmitted,
+              onChanged: widget.onChanged,
+              controller:
+                  widget.customTextEditingController ?? textEditingController,
+              focusNode: focusNode,
+              decoration: InputDecoration(
+                hintText: 'Search restaurant....',
+                prefixIcon: Icon(Icons.search, color: Colors.pink.shade100),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Colors.pink.shade100),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Colors.pink.shade200),
+                ),
+                filled: true,
+                fillColor: Colors.white,
+                contentPadding: const EdgeInsets.all(8),
+              ),
+            )),
+            IconButton(
+                onPressed: () async {
+                  await _storageService.getFavRestaurants().then((value) =>
+                      context.router.push(RestaurantListView(idList: value)));
+                },
+                icon: Icon(
+                  Icons.favorite,
+                  color: Colors.pink.shade300,
+                )),
+          ],
         );
       },
     );
