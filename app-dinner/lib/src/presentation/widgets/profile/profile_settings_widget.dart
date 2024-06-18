@@ -45,7 +45,6 @@ class ProfileSettingsWidget extends StatelessWidget {
                     children: const <Widget>[
                       _SettingsWidget(),
                       _PaymentMethodsWidget(),
-                      _FavRestaurantsWidget(),
                       _HistoryOrderWidget(),
                       _PrivacyPolicyWidget(),
                       _LogoutWidget()
@@ -130,19 +129,19 @@ class _PrivacyPolicyWidget extends StatelessWidget {
   }
 }
 
-class _FavRestaurantsWidget extends StatelessWidget {
-  const _FavRestaurantsWidget();
-
-  @override
-  Widget build(BuildContext context) {
-    return const _ProfileSettingsItemWidget(
-      icon: Ionicons.heart_outline,
-      itemName: "Favorite Restaurants",
-      itemDesc: "View your favorite restaurants",
-      toNavigate: PrivacyPolicyNavigationView(),
-    );
-  }
-}
+// class _FavRestaurantsWidget extends StatelessWidget {
+//   const _FavRestaurantsWidget();
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return const _ProfileSettingsItemWidget(
+//       icon: Ionicons.heart_outline,
+//       itemName: "Favorite Restaurants",
+//       itemDesc: "View your favorite restaurants",
+//       toNavigate: RestaurantsNavigationView(),
+//     );
+//   }
+// }
 
 class _HistoryOrderWidget extends StatelessWidget {
   const _HistoryOrderWidget();
