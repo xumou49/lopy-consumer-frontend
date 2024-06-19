@@ -1,9 +1,6 @@
 // routers
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 import 'package:auto_route/auto_route.dart';
+
 import 'app_router.gr.dart';
 
 @AutoRouterConfig()
@@ -63,10 +60,6 @@ class AppRouter extends $AppRouter {
         children: [
           AutoRoute(page: StartAppAnimationView.page, initial: true),
         ]),
-<<<<<<< Updated upstream
-        // AutoRoute(page: FavoriteNavigationView.page, initial: true),
-        AutoRoute(page: HomeNavigationView.page, children: [
-=======
     AutoRoute(page: LoginNavigationView.page, children: [
       AutoRoute(page: LoginView.page, initial: true),
     ]),
@@ -75,7 +68,6 @@ class AppRouter extends $AppRouter {
         page: HomeView.page,
         initial: true,
         children: [
->>>>>>> Stashed changes
           AutoRoute(
             page: DiscoverNavigationView.page,
             children: [
@@ -86,13 +78,6 @@ class AppRouter extends $AppRouter {
               ...paymentMethodRoute,
               ...[AutoRoute(page: OrdersView.page)]
             ],
-<<<<<<< Updated upstream
-          )
-        ]),
-      ];
-}
-
-=======
           ),
           AutoRoute(
             page: OrderNavigationView.page,
@@ -158,4 +143,3 @@ class AppRouter extends $AppRouter {
     ]),
   ];
 }
->>>>>>> Stashed changes

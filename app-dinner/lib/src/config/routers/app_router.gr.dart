@@ -8,320 +8,247 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-<<<<<<< Updated upstream
-import 'package:auto_route/auto_route.dart' as _i41;
-import 'package:flutter/cupertino.dart' as _i43;
-import 'package:flutter/material.dart' as _i42;
-import 'package:Lopy/src/presentation/views/cart/cart_item_view.dart' as _i1;
-import 'package:Lopy/src/presentation/views/cart/cart_list_view.dart' as _i2;
-import 'package:Lopy/src/presentation/views/favorite_list/favorite_view.dart'
-    as _i7;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/discover/discover_view.dart'
-    as _i5;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/home_view.dart'
-    as _i13;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/orders/history_order_view.dart'
-    as _i11;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/orders/orders_view.dart'
-    as _i18;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/help/help_view.dart'
-<<<<<<< HEAD
-    as _i9;
-=======
-    as _i7;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/home_support/home_support_view.dart'
-    as _i12;
->>>>>>> main
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/payment_method/new_payment_view.dart'
-    as _i16;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/payment_method/payment_method_view.dart'
-    as _i20;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/payment_method/payment_success_view.dart'
-    as _i21;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/payment_method/set_up_payment_view.dart'
-    as _i36;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/privacy_policy/privacy_policy_view.dart'
-    as _i25;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/profile_view.dart'
-    as _i27;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/setting/setting_view.dart'
-    as _i38;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/scan/scan_view.dart'
-    as _i33;
-import 'package:Lopy/src/presentation/views/login/login_view.dart' as _i15;
-import 'package:Lopy/src/presentation/views/login/start_app_animation_view.dart'
-    as _i39;
-import 'package:Lopy/src/presentation/views/navigation/cart_navigation_view.dart'
-    as _i3;
-import 'package:Lopy/src/presentation/views/navigation/discover_navigation_view.dart'
-    as _i4;
-import 'package:Lopy/src/presentation/views/navigation/favorite_navigation_view.dart'
-    as _i6;
-import 'package:Lopy/src/presentation/views/navigation/help_navigation_view.dart'
-    as _i8;
-import 'package:Lopy/src/presentation/views/navigation/history_order_navigation_view.dart'
-    as _i10;
-<<<<<<< HEAD
-import 'package:Lopy/src/presentation/views/navigation/home_navigation_view.dart'
-    as _i12;
-=======
-import 'package:Lopy/src/presentation/views/navigation/home_support_navigation_view.dart'
-    as _i11;
->>>>>>> main
-import 'package:Lopy/src/presentation/views/navigation/login_navigation_view.dart'
-=======
-import 'package:auto_route/auto_route.dart' as _i43;
-import 'package:flutter/cupertino.dart' as _i45;
-import 'package:flutter/material.dart' as _i44;
+import 'package:auto_route/auto_route.dart' as _i45;
+import 'package:flutter/cupertino.dart' as _i47;
+import 'package:flutter/material.dart' as _i46;
 import 'package:Lopy/src/presentation/views/cart/cart_item_view.dart' as _i3;
 import 'package:Lopy/src/presentation/views/cart/cart_list_view.dart' as _i4;
+import 'package:Lopy/src/presentation/views/favorite_list/favorite_view.dart'
+    as _i9;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/discover/discover_view.dart'
     as _i7;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/home_view.dart'
-    as _i15;
+    as _i17;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/orders/history_order_view.dart'
-    as _i11;
+    as _i13;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/orders/orders_view.dart'
-    as _i20;
+    as _i22;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/about_app/about_app_view.dart'
     as _i2;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/help/help_view.dart'
-    as _i9;
+    as _i11;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/home_support/home_support_view.dart'
->>>>>>> Stashed changes
-    as _i14;
+    as _i16;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/payment_method/new_payment_view.dart'
-    as _i18;
+    as _i20;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/payment_method/payment_method_view.dart'
-    as _i22;
+    as _i24;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/payment_method/payment_success_view.dart'
-    as _i23;
+    as _i25;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/payment_method/set_up_payment_view.dart'
-    as _i38;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/privacy_policy/privacy_policy_view.dart'
-    as _i27;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/profile_view.dart'
-    as _i29;
-import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/setting/setting_view.dart'
     as _i40;
+import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/privacy_policy/privacy_policy_view.dart'
+    as _i29;
+import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/profile_view.dart'
+    as _i31;
+import 'package:Lopy/src/presentation/views/home_bottom_navbar/profile/setting/setting_view.dart'
+    as _i42;
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/scan/scan_view.dart'
-    as _i35;
-import 'package:Lopy/src/presentation/views/login/login_view.dart' as _i17;
+    as _i37;
+import 'package:Lopy/src/presentation/views/login/login_view.dart' as _i19;
 import 'package:Lopy/src/presentation/views/login/start_app_animation_view.dart'
-    as _i41;
+    as _i43;
 import 'package:Lopy/src/presentation/views/navigation/about_app_navigation.dart'
     as _i1;
 import 'package:Lopy/src/presentation/views/navigation/cart_navigation_view.dart'
     as _i5;
 import 'package:Lopy/src/presentation/views/navigation/discover_navigation_view.dart'
     as _i6;
-import 'package:Lopy/src/presentation/views/navigation/help_navigation_view.dart'
+import 'package:Lopy/src/presentation/views/navigation/favorite_navigation_view.dart'
     as _i8;
-import 'package:Lopy/src/presentation/views/navigation/history_order_navigation_view.dart'
+import 'package:Lopy/src/presentation/views/navigation/help_navigation_view.dart'
     as _i10;
-import 'package:Lopy/src/presentation/views/navigation/home_navigation_view.dart'
+import 'package:Lopy/src/presentation/views/navigation/history_order_navigation_view.dart'
     as _i12;
+import 'package:Lopy/src/presentation/views/navigation/home_navigation_view.dart'
+    as _i14;
 import 'package:Lopy/src/presentation/views/navigation/home_support_navigation_view.dart'
-    as _i13;
+    as _i15;
 import 'package:Lopy/src/presentation/views/navigation/login_navigation_view.dart'
-    as _i16;
+    as _i18;
 import 'package:Lopy/src/presentation/views/navigation/order_navigation_view.dart'
-    as _i19;
-import 'package:Lopy/src/presentation/views/navigation/payment_method_navigation_view.dart'
     as _i21;
+import 'package:Lopy/src/presentation/views/navigation/payment_method_navigation_view.dart'
+    as _i23;
 import 'package:Lopy/src/presentation/views/navigation/place_order_navigation.dart'
-    as _i24;
-import 'package:Lopy/src/presentation/views/navigation/privacy_policy_navigation_view.dart'
     as _i26;
-import 'package:Lopy/src/presentation/views/navigation/profile_navigation_view.dart'
+import 'package:Lopy/src/presentation/views/navigation/privacy_policy_navigation_view.dart'
     as _i28;
-import 'package:Lopy/src/presentation/views/navigation/restaurants_navigation_view.dart'
-    as _i33;
-import 'package:Lopy/src/presentation/views/navigation/scan_navigation_view.dart'
-    as _i34;
-import 'package:Lopy/src/presentation/views/navigation/search_navigation_view.dart'
-    as _i36;
-import 'package:Lopy/src/presentation/views/navigation/setting_navigation_view.dart'
-    as _i39;
-import 'package:Lopy/src/presentation/views/navigation/start_app_animation_navigation_view.dart'
-    as _i42;
-import 'package:Lopy/src/presentation/views/place_order/place_order.dart'
-    as _i25;
-import 'package:Lopy/src/presentation/views/restaurant/restaurant_detail_view.dart'
+import 'package:Lopy/src/presentation/views/navigation/profile_navigation_view.dart'
     as _i30;
-import 'package:Lopy/src/presentation/views/restaurant/restaurant_list_view.dart'
-    as _i31;
-import 'package:Lopy/src/presentation/views/restaurant/restaurant_menu_item_view.dart'
+import 'package:Lopy/src/presentation/views/navigation/restaurants_navigation_view.dart'
+    as _i35;
+import 'package:Lopy/src/presentation/views/navigation/scan_navigation_view.dart'
+    as _i36;
+import 'package:Lopy/src/presentation/views/navigation/search_navigation_view.dart'
+    as _i38;
+import 'package:Lopy/src/presentation/views/navigation/setting_navigation_view.dart'
+    as _i41;
+import 'package:Lopy/src/presentation/views/navigation/start_app_animation_navigation_view.dart'
+    as _i44;
+import 'package:Lopy/src/presentation/views/place_order/place_order.dart'
+    as _i27;
+import 'package:Lopy/src/presentation/views/restaurant/restaurant_detail_view.dart'
     as _i32;
-import 'package:Lopy/src/presentation/views/search/search_view.dart' as _i37;
+import 'package:Lopy/src/presentation/views/restaurant/restaurant_list_view.dart'
+    as _i33;
+import 'package:Lopy/src/presentation/views/restaurant/restaurant_menu_item_view.dart'
+    as _i34;
+import 'package:Lopy/src/presentation/views/search/search_view.dart' as _i39;
 
-abstract class $AppRouter extends _i43.RootStackRouter {
+abstract class $AppRouter extends _i45.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i43.PageFactory> pagesMap = {
+  final Map<String, _i45.PageFactory> pagesMap = {
     AboutAppNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i1.AboutAppNavigationView(),
       );
     },
     AboutAppView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i2.AboutAppView(),
       );
     },
     CartItemView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i3.CartItemView(),
       );
     },
     CartListView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i4.CartListView(),
       );
     },
     CartNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i5.CartNavigationView(),
       );
     },
     DiscoverNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i6.DiscoverNavigationView(),
       );
     },
     DiscoverView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i7.DiscoverView(),
       );
     },
-<<<<<<< HEAD
     FavoriteNavigationView.name: (routeData) {
-=======
-    HelpNavigationView.name: (routeData) {
->>>>>>> main
-      return _i41.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.FavoriteNavigationView(),
+        child: const _i8.FavoriteNavigationView(),
       );
     },
     FavoriteView.name: (routeData) {
-      return _i41.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.FavoriteView(),
+        child: const _i9.FavoriteView(),
       );
     },
     HelpNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.HelpNavigationView(),
+        child: const _i10.HelpNavigationView(),
       );
     },
     HelpView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i9.HelpView(),
+        child: const _i11.HelpView(),
       );
     },
     HistoryOrderNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i10.HistoryOrderNavigationView(),
+        child: const _i12.HistoryOrderNavigationView(),
       );
     },
     HistoryOrderView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i11.HistoryOrderView(),
+        child: const _i13.HistoryOrderView(),
       );
     },
     HomeNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i12.HomeNavigationView(),
+        child: const _i14.HomeNavigationView(),
       );
     },
-<<<<<<< HEAD
-    HomeView.name: (routeData) {
-      return _i41.AutoRoutePage<dynamic>(
-        routeData: routeData,
-=======
     HomeSupportNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i13.HomeSupportNavigationView(),
+        child: const _i15.HomeSupportNavigationView(),
       );
     },
     HomeSupportView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i14.HomeSupportView(),
+        child: const _i16.HomeSupportView(),
       );
     },
     HomeView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-<<<<<<< Updated upstream
->>>>>>> main
-        child: const _i13.HomeView(),
-=======
-        child: const _i15.HomeView(),
->>>>>>> Stashed changes
+        child: const _i17.HomeView(),
       );
     },
     LoginNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i16.LoginNavigationView(),
+        child: const _i18.LoginNavigationView(),
       );
     },
     LoginView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i17.LoginView(),
+        child: const _i19.LoginView(),
       );
     },
     NewPaymentMethodView.name: (routeData) {
       final args = routeData.argsAs<NewPaymentMethodViewArgs>();
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i18.NewPaymentMethodView(
+        child: _i20.NewPaymentMethodView(
           key: args.key,
           type: args.type,
         ),
       );
     },
     OrderNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i19.OrderNavigationView(),
+        child: const _i21.OrderNavigationView(),
       );
     },
     OrdersView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i20.OrdersView(),
+        child: const _i22.OrdersView(),
       );
     },
     PaymentMethodNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i21.PaymentMethodNavigationView(),
+        child: const _i23.PaymentMethodNavigationView(),
       );
     },
     PaymentMethodView.name: (routeData) {
       final args = routeData.argsAs<PaymentMethodViewArgs>(
           orElse: () => const PaymentMethodViewArgs());
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i22.PaymentMethodView(
+        child: _i24.PaymentMethodView(
           key: args.key,
           isFromCheckout: args.isFromCheckout,
           totalPrice: args.totalPrice,
@@ -331,55 +258,55 @@ abstract class $AppRouter extends _i43.RootStackRouter {
     PaymentSuccessView.name: (routeData) {
       final args = routeData.argsAs<PaymentSuccessViewArgs>(
           orElse: () => const PaymentSuccessViewArgs());
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i23.PaymentSuccessView(
+        child: _i25.PaymentSuccessView(
           key: args.key,
           showTrackOrderBtn: args.showTrackOrderBtn,
         ),
       );
     },
     PlaceOrderNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i24.PlaceOrderNavigationView(),
+        child: const _i26.PlaceOrderNavigationView(),
       );
     },
     PlaceOrderView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i25.PlaceOrderView(),
+        child: const _i27.PlaceOrderView(),
       );
     },
     PrivacyPolicyNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i26.PrivacyPolicyNavigationView(),
+        child: const _i28.PrivacyPolicyNavigationView(),
       );
     },
     PrivacyPolicyView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i27.PrivacyPolicyView(),
+        child: const _i29.PrivacyPolicyView(),
       );
     },
     ProfileNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i28.ProfileNavigationView(),
+        child: const _i30.ProfileNavigationView(),
       );
     },
     ProfileView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i29.ProfileView(),
+        child: const _i31.ProfileView(),
       );
     },
     RestaurantDetailView.name: (routeData) {
       final args = routeData.argsAs<RestaurantDetailViewArgs>();
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i30.RestaurantDetailView(
+        child: _i32.RestaurantDetailView(
           key: args.key,
           restaurantId: args.restaurantId,
         ),
@@ -388,78 +315,79 @@ abstract class $AppRouter extends _i43.RootStackRouter {
     RestaurantListView.name: (routeData) {
       final args = routeData.argsAs<RestaurantListViewArgs>(
           orElse: () => const RestaurantListViewArgs());
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i31.RestaurantListView(
+        child: _i33.RestaurantListView(
           key: args.key,
           cuisine: args.cuisine,
+          idList: args.idList,
         ),
       );
     },
     RestaurantMenuItemView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i32.RestaurantMenuItemView(),
+        child: const _i34.RestaurantMenuItemView(),
       );
     },
     RestaurantsNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i33.RestaurantsNavigationView(),
+        child: const _i35.RestaurantsNavigationView(),
       );
     },
     ScanNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i34.ScanNavigationView(),
+        child: const _i36.ScanNavigationView(),
       );
     },
     ScanView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i35.ScanView(),
+        child: const _i37.ScanView(),
       );
     },
     SearchNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i36.SearchNavigationView(),
+        child: const _i38.SearchNavigationView(),
       );
     },
     SearchView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i37.SearchView(),
+        child: const _i39.SearchView(),
       );
     },
     SetUpPaymentMethodView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i38.SetUpPaymentMethodView(),
+        child: const _i40.SetUpPaymentMethodView(),
       );
     },
     SettingNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i39.SettingNavigationView(),
+        child: const _i41.SettingNavigationView(),
       );
     },
     SettingView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i40.SettingView(),
+        child: const _i42.SettingView(),
       );
     },
     StartAppAnimationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i41.StartAppAnimationView(),
+        child: const _i43.StartAppAnimationView(),
       );
     },
     StartAppNavigationNavigationView.name: (routeData) {
-      return _i43.AutoRoutePage<dynamic>(
+      return _i45.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i42.StartAppNavigationNavigationView(),
+        child: const _i44.StartAppNavigationNavigationView(),
       );
     },
   };
@@ -467,8 +395,8 @@ abstract class $AppRouter extends _i43.RootStackRouter {
 
 /// generated route for
 /// [_i1.AboutAppNavigationView]
-class AboutAppNavigationView extends _i43.PageRouteInfo<void> {
-  const AboutAppNavigationView({List<_i43.PageRouteInfo>? children})
+class AboutAppNavigationView extends _i45.PageRouteInfo<void> {
+  const AboutAppNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           AboutAppNavigationView.name,
           initialChildren: children,
@@ -476,13 +404,13 @@ class AboutAppNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'AboutAppNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i2.AboutAppView]
-class AboutAppView extends _i43.PageRouteInfo<void> {
-  const AboutAppView({List<_i43.PageRouteInfo>? children})
+class AboutAppView extends _i45.PageRouteInfo<void> {
+  const AboutAppView({List<_i45.PageRouteInfo>? children})
       : super(
           AboutAppView.name,
           initialChildren: children,
@@ -490,13 +418,13 @@ class AboutAppView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'AboutAppView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i3.CartItemView]
-class CartItemView extends _i43.PageRouteInfo<void> {
-  const CartItemView({List<_i43.PageRouteInfo>? children})
+class CartItemView extends _i45.PageRouteInfo<void> {
+  const CartItemView({List<_i45.PageRouteInfo>? children})
       : super(
           CartItemView.name,
           initialChildren: children,
@@ -504,13 +432,13 @@ class CartItemView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'CartItemView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i4.CartListView]
-class CartListView extends _i43.PageRouteInfo<void> {
-  const CartListView({List<_i43.PageRouteInfo>? children})
+class CartListView extends _i45.PageRouteInfo<void> {
+  const CartListView({List<_i45.PageRouteInfo>? children})
       : super(
           CartListView.name,
           initialChildren: children,
@@ -518,13 +446,13 @@ class CartListView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'CartListView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i5.CartNavigationView]
-class CartNavigationView extends _i43.PageRouteInfo<void> {
-  const CartNavigationView({List<_i43.PageRouteInfo>? children})
+class CartNavigationView extends _i45.PageRouteInfo<void> {
+  const CartNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           CartNavigationView.name,
           initialChildren: children,
@@ -532,13 +460,13 @@ class CartNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'CartNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i6.DiscoverNavigationView]
-class DiscoverNavigationView extends _i43.PageRouteInfo<void> {
-  const DiscoverNavigationView({List<_i43.PageRouteInfo>? children})
+class DiscoverNavigationView extends _i45.PageRouteInfo<void> {
+  const DiscoverNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           DiscoverNavigationView.name,
           initialChildren: children,
@@ -546,13 +474,13 @@ class DiscoverNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'DiscoverNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i7.DiscoverView]
-class DiscoverView extends _i43.PageRouteInfo<void> {
-  const DiscoverView({List<_i43.PageRouteInfo>? children})
+class DiscoverView extends _i45.PageRouteInfo<void> {
+  const DiscoverView({List<_i45.PageRouteInfo>? children})
       : super(
           DiscoverView.name,
           initialChildren: children,
@@ -560,15 +488,13 @@ class DiscoverView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'DiscoverView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-/// [_i6.FavoriteNavigationView]
-class FavoriteNavigationView extends _i41.PageRouteInfo<void> {
-  const FavoriteNavigationView({List<_i41.PageRouteInfo>? children})
+/// [_i8.FavoriteNavigationView]
+class FavoriteNavigationView extends _i45.PageRouteInfo<void> {
+  const FavoriteNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           FavoriteNavigationView.name,
           initialChildren: children,
@@ -576,13 +502,13 @@ class FavoriteNavigationView extends _i41.PageRouteInfo<void> {
 
   static const String name = 'FavoriteNavigationView';
 
-  static const _i41.PageInfo<void> page = _i41.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i7.FavoriteView]
-class FavoriteView extends _i41.PageRouteInfo<void> {
-  const FavoriteView({List<_i41.PageRouteInfo>? children})
+/// [_i9.FavoriteView]
+class FavoriteView extends _i45.PageRouteInfo<void> {
+  const FavoriteView({List<_i45.PageRouteInfo>? children})
       : super(
           FavoriteView.name,
           initialChildren: children,
@@ -590,21 +516,13 @@ class FavoriteView extends _i41.PageRouteInfo<void> {
 
   static const String name = 'FavoriteView';
 
-  static const _i41.PageInfo<void> page = _i41.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i8.HelpNavigationView]
-=======
-/// [_i6.HelpNavigationView]
->>>>>>> main
-class HelpNavigationView extends _i41.PageRouteInfo<void> {
-  const HelpNavigationView({List<_i41.PageRouteInfo>? children})
-=======
-/// [_i8.HelpNavigationView]
-class HelpNavigationView extends _i43.PageRouteInfo<void> {
-  const HelpNavigationView({List<_i43.PageRouteInfo>? children})
->>>>>>> Stashed changes
+/// [_i10.HelpNavigationView]
+class HelpNavigationView extends _i45.PageRouteInfo<void> {
+  const HelpNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           HelpNavigationView.name,
           initialChildren: children,
@@ -612,23 +530,13 @@ class HelpNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'HelpNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-/// [_i9.HelpView]
-=======
-/// [_i7.HelpView]
->>>>>>> main
-class HelpView extends _i41.PageRouteInfo<void> {
-  const HelpView({List<_i41.PageRouteInfo>? children})
-=======
-/// [_i9.HelpView]
-class HelpView extends _i43.PageRouteInfo<void> {
-  const HelpView({List<_i43.PageRouteInfo>? children})
->>>>>>> Stashed changes
+/// [_i11.HelpView]
+class HelpView extends _i45.PageRouteInfo<void> {
+  const HelpView({List<_i45.PageRouteInfo>? children})
       : super(
           HelpView.name,
           initialChildren: children,
@@ -636,23 +544,13 @@ class HelpView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'HelpView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-/// [_i10.HistoryOrderNavigationView]
-=======
-/// [_i8.HistoryOrderNavigationView]
->>>>>>> main
-class HistoryOrderNavigationView extends _i41.PageRouteInfo<void> {
-  const HistoryOrderNavigationView({List<_i41.PageRouteInfo>? children})
-=======
-/// [_i10.HistoryOrderNavigationView]
-class HistoryOrderNavigationView extends _i43.PageRouteInfo<void> {
-  const HistoryOrderNavigationView({List<_i43.PageRouteInfo>? children})
->>>>>>> Stashed changes
+/// [_i12.HistoryOrderNavigationView]
+class HistoryOrderNavigationView extends _i45.PageRouteInfo<void> {
+  const HistoryOrderNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           HistoryOrderNavigationView.name,
           initialChildren: children,
@@ -660,23 +558,13 @@ class HistoryOrderNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'HistoryOrderNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-/// [_i11.HistoryOrderView]
-=======
-/// [_i9.HistoryOrderView]
->>>>>>> main
-class HistoryOrderView extends _i41.PageRouteInfo<void> {
-  const HistoryOrderView({List<_i41.PageRouteInfo>? children})
-=======
-/// [_i11.HistoryOrderView]
-class HistoryOrderView extends _i43.PageRouteInfo<void> {
-  const HistoryOrderView({List<_i43.PageRouteInfo>? children})
->>>>>>> Stashed changes
+/// [_i13.HistoryOrderView]
+class HistoryOrderView extends _i45.PageRouteInfo<void> {
+  const HistoryOrderView({List<_i45.PageRouteInfo>? children})
       : super(
           HistoryOrderView.name,
           initialChildren: children,
@@ -684,23 +572,13 @@ class HistoryOrderView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'HistoryOrderView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-/// [_i12.HomeNavigationView]
-=======
-/// [_i10.HomeNavigationView]
->>>>>>> main
-class HomeNavigationView extends _i41.PageRouteInfo<void> {
-  const HomeNavigationView({List<_i41.PageRouteInfo>? children})
-=======
-/// [_i12.HomeNavigationView]
-class HomeNavigationView extends _i43.PageRouteInfo<void> {
-  const HomeNavigationView({List<_i43.PageRouteInfo>? children})
->>>>>>> Stashed changes
+/// [_i14.HomeNavigationView]
+class HomeNavigationView extends _i45.PageRouteInfo<void> {
+  const HomeNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           HomeNavigationView.name,
           initialChildren: children,
@@ -708,21 +586,13 @@ class HomeNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'HomeNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
-/// [_i11.HomeSupportNavigationView]
-class HomeSupportNavigationView extends _i41.PageRouteInfo<void> {
-  const HomeSupportNavigationView({List<_i41.PageRouteInfo>? children})
-=======
-/// [_i13.HomeSupportNavigationView]
-class HomeSupportNavigationView extends _i43.PageRouteInfo<void> {
-  const HomeSupportNavigationView({List<_i43.PageRouteInfo>? children})
->>>>>>> Stashed changes
+/// [_i15.HomeSupportNavigationView]
+class HomeSupportNavigationView extends _i45.PageRouteInfo<void> {
+  const HomeSupportNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           HomeSupportNavigationView.name,
           initialChildren: children,
@@ -730,13 +600,13 @@ class HomeSupportNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'HomeSupportNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i14.HomeSupportView]
-class HomeSupportView extends _i43.PageRouteInfo<void> {
-  const HomeSupportView({List<_i43.PageRouteInfo>? children})
+/// [_i16.HomeSupportView]
+class HomeSupportView extends _i45.PageRouteInfo<void> {
+  const HomeSupportView({List<_i45.PageRouteInfo>? children})
       : super(
           HomeSupportView.name,
           initialChildren: children,
@@ -744,20 +614,13 @@ class HomeSupportView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'HomeSupportView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-<<<<<<< Updated upstream
->>>>>>> main
-/// [_i13.HomeView]
-class HomeView extends _i41.PageRouteInfo<void> {
-  const HomeView({List<_i41.PageRouteInfo>? children})
-=======
-/// [_i15.HomeView]
-class HomeView extends _i43.PageRouteInfo<void> {
-  const HomeView({List<_i43.PageRouteInfo>? children})
->>>>>>> Stashed changes
+/// [_i17.HomeView]
+class HomeView extends _i45.PageRouteInfo<void> {
+  const HomeView({List<_i45.PageRouteInfo>? children})
       : super(
           HomeView.name,
           initialChildren: children,
@@ -765,13 +628,13 @@ class HomeView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'HomeView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i16.LoginNavigationView]
-class LoginNavigationView extends _i43.PageRouteInfo<void> {
-  const LoginNavigationView({List<_i43.PageRouteInfo>? children})
+/// [_i18.LoginNavigationView]
+class LoginNavigationView extends _i45.PageRouteInfo<void> {
+  const LoginNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           LoginNavigationView.name,
           initialChildren: children,
@@ -779,13 +642,13 @@ class LoginNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'LoginNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i17.LoginView]
-class LoginView extends _i43.PageRouteInfo<void> {
-  const LoginView({List<_i43.PageRouteInfo>? children})
+/// [_i19.LoginView]
+class LoginView extends _i45.PageRouteInfo<void> {
+  const LoginView({List<_i45.PageRouteInfo>? children})
       : super(
           LoginView.name,
           initialChildren: children,
@@ -793,17 +656,17 @@ class LoginView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'LoginView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i18.NewPaymentMethodView]
+/// [_i20.NewPaymentMethodView]
 class NewPaymentMethodView
-    extends _i43.PageRouteInfo<NewPaymentMethodViewArgs> {
+    extends _i45.PageRouteInfo<NewPaymentMethodViewArgs> {
   NewPaymentMethodView({
-    _i44.Key? key,
+    _i46.Key? key,
     required String type,
-    List<_i43.PageRouteInfo>? children,
+    List<_i45.PageRouteInfo>? children,
   }) : super(
           NewPaymentMethodView.name,
           args: NewPaymentMethodViewArgs(
@@ -815,8 +678,8 @@ class NewPaymentMethodView
 
   static const String name = 'NewPaymentMethodView';
 
-  static const _i43.PageInfo<NewPaymentMethodViewArgs> page =
-      _i43.PageInfo<NewPaymentMethodViewArgs>(name);
+  static const _i45.PageInfo<NewPaymentMethodViewArgs> page =
+      _i45.PageInfo<NewPaymentMethodViewArgs>(name);
 }
 
 class NewPaymentMethodViewArgs {
@@ -825,7 +688,7 @@ class NewPaymentMethodViewArgs {
     required this.type,
   });
 
-  final _i44.Key? key;
+  final _i46.Key? key;
 
   final String type;
 
@@ -836,9 +699,9 @@ class NewPaymentMethodViewArgs {
 }
 
 /// generated route for
-/// [_i19.OrderNavigationView]
-class OrderNavigationView extends _i43.PageRouteInfo<void> {
-  const OrderNavigationView({List<_i43.PageRouteInfo>? children})
+/// [_i21.OrderNavigationView]
+class OrderNavigationView extends _i45.PageRouteInfo<void> {
+  const OrderNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           OrderNavigationView.name,
           initialChildren: children,
@@ -846,13 +709,13 @@ class OrderNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'OrderNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i20.OrdersView]
-class OrdersView extends _i43.PageRouteInfo<void> {
-  const OrdersView({List<_i43.PageRouteInfo>? children})
+/// [_i22.OrdersView]
+class OrdersView extends _i45.PageRouteInfo<void> {
+  const OrdersView({List<_i45.PageRouteInfo>? children})
       : super(
           OrdersView.name,
           initialChildren: children,
@@ -860,13 +723,13 @@ class OrdersView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'OrdersView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i21.PaymentMethodNavigationView]
-class PaymentMethodNavigationView extends _i43.PageRouteInfo<void> {
-  const PaymentMethodNavigationView({List<_i43.PageRouteInfo>? children})
+/// [_i23.PaymentMethodNavigationView]
+class PaymentMethodNavigationView extends _i45.PageRouteInfo<void> {
+  const PaymentMethodNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           PaymentMethodNavigationView.name,
           initialChildren: children,
@@ -874,17 +737,17 @@ class PaymentMethodNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'PaymentMethodNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i22.PaymentMethodView]
-class PaymentMethodView extends _i43.PageRouteInfo<PaymentMethodViewArgs> {
+/// [_i24.PaymentMethodView]
+class PaymentMethodView extends _i45.PageRouteInfo<PaymentMethodViewArgs> {
   PaymentMethodView({
-    _i44.Key? key,
+    _i46.Key? key,
     bool isFromCheckout = false,
     double totalPrice = 0.0,
-    List<_i43.PageRouteInfo>? children,
+    List<_i45.PageRouteInfo>? children,
   }) : super(
           PaymentMethodView.name,
           args: PaymentMethodViewArgs(
@@ -897,8 +760,8 @@ class PaymentMethodView extends _i43.PageRouteInfo<PaymentMethodViewArgs> {
 
   static const String name = 'PaymentMethodView';
 
-  static const _i43.PageInfo<PaymentMethodViewArgs> page =
-      _i43.PageInfo<PaymentMethodViewArgs>(name);
+  static const _i45.PageInfo<PaymentMethodViewArgs> page =
+      _i45.PageInfo<PaymentMethodViewArgs>(name);
 }
 
 class PaymentMethodViewArgs {
@@ -908,7 +771,7 @@ class PaymentMethodViewArgs {
     this.totalPrice = 0.0,
   });
 
-  final _i44.Key? key;
+  final _i46.Key? key;
 
   final bool isFromCheckout;
 
@@ -921,12 +784,12 @@ class PaymentMethodViewArgs {
 }
 
 /// generated route for
-/// [_i23.PaymentSuccessView]
-class PaymentSuccessView extends _i43.PageRouteInfo<PaymentSuccessViewArgs> {
+/// [_i25.PaymentSuccessView]
+class PaymentSuccessView extends _i45.PageRouteInfo<PaymentSuccessViewArgs> {
   PaymentSuccessView({
-    _i44.Key? key,
+    _i46.Key? key,
     bool showTrackOrderBtn = true,
-    List<_i43.PageRouteInfo>? children,
+    List<_i45.PageRouteInfo>? children,
   }) : super(
           PaymentSuccessView.name,
           args: PaymentSuccessViewArgs(
@@ -938,8 +801,8 @@ class PaymentSuccessView extends _i43.PageRouteInfo<PaymentSuccessViewArgs> {
 
   static const String name = 'PaymentSuccessView';
 
-  static const _i43.PageInfo<PaymentSuccessViewArgs> page =
-      _i43.PageInfo<PaymentSuccessViewArgs>(name);
+  static const _i45.PageInfo<PaymentSuccessViewArgs> page =
+      _i45.PageInfo<PaymentSuccessViewArgs>(name);
 }
 
 class PaymentSuccessViewArgs {
@@ -948,7 +811,7 @@ class PaymentSuccessViewArgs {
     this.showTrackOrderBtn = true,
   });
 
-  final _i44.Key? key;
+  final _i46.Key? key;
 
   final bool showTrackOrderBtn;
 
@@ -959,9 +822,9 @@ class PaymentSuccessViewArgs {
 }
 
 /// generated route for
-/// [_i24.PlaceOrderNavigationView]
-class PlaceOrderNavigationView extends _i43.PageRouteInfo<void> {
-  const PlaceOrderNavigationView({List<_i43.PageRouteInfo>? children})
+/// [_i26.PlaceOrderNavigationView]
+class PlaceOrderNavigationView extends _i45.PageRouteInfo<void> {
+  const PlaceOrderNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           PlaceOrderNavigationView.name,
           initialChildren: children,
@@ -969,13 +832,13 @@ class PlaceOrderNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'PlaceOrderNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i25.PlaceOrderView]
-class PlaceOrderView extends _i43.PageRouteInfo<void> {
-  const PlaceOrderView({List<_i43.PageRouteInfo>? children})
+/// [_i27.PlaceOrderView]
+class PlaceOrderView extends _i45.PageRouteInfo<void> {
+  const PlaceOrderView({List<_i45.PageRouteInfo>? children})
       : super(
           PlaceOrderView.name,
           initialChildren: children,
@@ -983,13 +846,13 @@ class PlaceOrderView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'PlaceOrderView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i26.PrivacyPolicyNavigationView]
-class PrivacyPolicyNavigationView extends _i43.PageRouteInfo<void> {
-  const PrivacyPolicyNavigationView({List<_i43.PageRouteInfo>? children})
+/// [_i28.PrivacyPolicyNavigationView]
+class PrivacyPolicyNavigationView extends _i45.PageRouteInfo<void> {
+  const PrivacyPolicyNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           PrivacyPolicyNavigationView.name,
           initialChildren: children,
@@ -997,13 +860,13 @@ class PrivacyPolicyNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'PrivacyPolicyNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i27.PrivacyPolicyView]
-class PrivacyPolicyView extends _i43.PageRouteInfo<void> {
-  const PrivacyPolicyView({List<_i43.PageRouteInfo>? children})
+/// [_i29.PrivacyPolicyView]
+class PrivacyPolicyView extends _i45.PageRouteInfo<void> {
+  const PrivacyPolicyView({List<_i45.PageRouteInfo>? children})
       : super(
           PrivacyPolicyView.name,
           initialChildren: children,
@@ -1011,13 +874,13 @@ class PrivacyPolicyView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'PrivacyPolicyView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i28.ProfileNavigationView]
-class ProfileNavigationView extends _i43.PageRouteInfo<void> {
-  const ProfileNavigationView({List<_i43.PageRouteInfo>? children})
+/// [_i30.ProfileNavigationView]
+class ProfileNavigationView extends _i45.PageRouteInfo<void> {
+  const ProfileNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           ProfileNavigationView.name,
           initialChildren: children,
@@ -1025,13 +888,13 @@ class ProfileNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'ProfileNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i29.ProfileView]
-class ProfileView extends _i43.PageRouteInfo<void> {
-  const ProfileView({List<_i43.PageRouteInfo>? children})
+/// [_i31.ProfileView]
+class ProfileView extends _i45.PageRouteInfo<void> {
+  const ProfileView({List<_i45.PageRouteInfo>? children})
       : super(
           ProfileView.name,
           initialChildren: children,
@@ -1039,17 +902,17 @@ class ProfileView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'ProfileView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i30.RestaurantDetailView]
+/// [_i32.RestaurantDetailView]
 class RestaurantDetailView
-    extends _i43.PageRouteInfo<RestaurantDetailViewArgs> {
+    extends _i45.PageRouteInfo<RestaurantDetailViewArgs> {
   RestaurantDetailView({
-    _i44.Key? key,
+    _i46.Key? key,
     required int restaurantId,
-    List<_i43.PageRouteInfo>? children,
+    List<_i45.PageRouteInfo>? children,
   }) : super(
           RestaurantDetailView.name,
           args: RestaurantDetailViewArgs(
@@ -1061,8 +924,8 @@ class RestaurantDetailView
 
   static const String name = 'RestaurantDetailView';
 
-  static const _i43.PageInfo<RestaurantDetailViewArgs> page =
-      _i43.PageInfo<RestaurantDetailViewArgs>(name);
+  static const _i45.PageInfo<RestaurantDetailViewArgs> page =
+      _i45.PageInfo<RestaurantDetailViewArgs>(name);
 }
 
 class RestaurantDetailViewArgs {
@@ -1071,7 +934,7 @@ class RestaurantDetailViewArgs {
     required this.restaurantId,
   });
 
-  final _i44.Key? key;
+  final _i46.Key? key;
 
   final int restaurantId;
 
@@ -1082,47 +945,52 @@ class RestaurantDetailViewArgs {
 }
 
 /// generated route for
-/// [_i31.RestaurantListView]
-class RestaurantListView extends _i43.PageRouteInfo<RestaurantListViewArgs> {
+/// [_i33.RestaurantListView]
+class RestaurantListView extends _i45.PageRouteInfo<RestaurantListViewArgs> {
   RestaurantListView({
-    _i45.Key? key,
+    _i47.Key? key,
     String cuisine = "",
-    List<_i43.PageRouteInfo>? children,
+    List<int> idList = const [],
+    List<_i45.PageRouteInfo>? children,
   }) : super(
           RestaurantListView.name,
           args: RestaurantListViewArgs(
             key: key,
             cuisine: cuisine,
+            idList: idList,
           ),
           initialChildren: children,
         );
 
   static const String name = 'RestaurantListView';
 
-  static const _i43.PageInfo<RestaurantListViewArgs> page =
-      _i43.PageInfo<RestaurantListViewArgs>(name);
+  static const _i45.PageInfo<RestaurantListViewArgs> page =
+      _i45.PageInfo<RestaurantListViewArgs>(name);
 }
 
 class RestaurantListViewArgs {
   const RestaurantListViewArgs({
     this.key,
     this.cuisine = "",
+    this.idList = const [],
   });
 
-  final _i45.Key? key;
+  final _i47.Key? key;
 
   final String cuisine;
 
+  final List<int> idList;
+
   @override
   String toString() {
-    return 'RestaurantListViewArgs{key: $key, cuisine: $cuisine}';
+    return 'RestaurantListViewArgs{key: $key, cuisine: $cuisine, idList: $idList}';
   }
 }
 
 /// generated route for
-/// [_i32.RestaurantMenuItemView]
-class RestaurantMenuItemView extends _i43.PageRouteInfo<void> {
-  const RestaurantMenuItemView({List<_i43.PageRouteInfo>? children})
+/// [_i34.RestaurantMenuItemView]
+class RestaurantMenuItemView extends _i45.PageRouteInfo<void> {
+  const RestaurantMenuItemView({List<_i45.PageRouteInfo>? children})
       : super(
           RestaurantMenuItemView.name,
           initialChildren: children,
@@ -1130,13 +998,13 @@ class RestaurantMenuItemView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'RestaurantMenuItemView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i33.RestaurantsNavigationView]
-class RestaurantsNavigationView extends _i43.PageRouteInfo<void> {
-  const RestaurantsNavigationView({List<_i43.PageRouteInfo>? children})
+/// [_i35.RestaurantsNavigationView]
+class RestaurantsNavigationView extends _i45.PageRouteInfo<void> {
+  const RestaurantsNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           RestaurantsNavigationView.name,
           initialChildren: children,
@@ -1144,13 +1012,13 @@ class RestaurantsNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'RestaurantsNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i34.ScanNavigationView]
-class ScanNavigationView extends _i43.PageRouteInfo<void> {
-  const ScanNavigationView({List<_i43.PageRouteInfo>? children})
+/// [_i36.ScanNavigationView]
+class ScanNavigationView extends _i45.PageRouteInfo<void> {
+  const ScanNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           ScanNavigationView.name,
           initialChildren: children,
@@ -1158,13 +1026,13 @@ class ScanNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'ScanNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i35.ScanView]
-class ScanView extends _i43.PageRouteInfo<void> {
-  const ScanView({List<_i43.PageRouteInfo>? children})
+/// [_i37.ScanView]
+class ScanView extends _i45.PageRouteInfo<void> {
+  const ScanView({List<_i45.PageRouteInfo>? children})
       : super(
           ScanView.name,
           initialChildren: children,
@@ -1172,13 +1040,13 @@ class ScanView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'ScanView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i36.SearchNavigationView]
-class SearchNavigationView extends _i43.PageRouteInfo<void> {
-  const SearchNavigationView({List<_i43.PageRouteInfo>? children})
+/// [_i38.SearchNavigationView]
+class SearchNavigationView extends _i45.PageRouteInfo<void> {
+  const SearchNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           SearchNavigationView.name,
           initialChildren: children,
@@ -1186,13 +1054,13 @@ class SearchNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'SearchNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i37.SearchView]
-class SearchView extends _i43.PageRouteInfo<void> {
-  const SearchView({List<_i43.PageRouteInfo>? children})
+/// [_i39.SearchView]
+class SearchView extends _i45.PageRouteInfo<void> {
+  const SearchView({List<_i45.PageRouteInfo>? children})
       : super(
           SearchView.name,
           initialChildren: children,
@@ -1200,13 +1068,13 @@ class SearchView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'SearchView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i38.SetUpPaymentMethodView]
-class SetUpPaymentMethodView extends _i43.PageRouteInfo<void> {
-  const SetUpPaymentMethodView({List<_i43.PageRouteInfo>? children})
+/// [_i40.SetUpPaymentMethodView]
+class SetUpPaymentMethodView extends _i45.PageRouteInfo<void> {
+  const SetUpPaymentMethodView({List<_i45.PageRouteInfo>? children})
       : super(
           SetUpPaymentMethodView.name,
           initialChildren: children,
@@ -1214,13 +1082,13 @@ class SetUpPaymentMethodView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'SetUpPaymentMethodView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i39.SettingNavigationView]
-class SettingNavigationView extends _i43.PageRouteInfo<void> {
-  const SettingNavigationView({List<_i43.PageRouteInfo>? children})
+/// [_i41.SettingNavigationView]
+class SettingNavigationView extends _i45.PageRouteInfo<void> {
+  const SettingNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           SettingNavigationView.name,
           initialChildren: children,
@@ -1228,13 +1096,13 @@ class SettingNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'SettingNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i40.SettingView]
-class SettingView extends _i43.PageRouteInfo<void> {
-  const SettingView({List<_i43.PageRouteInfo>? children})
+/// [_i42.SettingView]
+class SettingView extends _i45.PageRouteInfo<void> {
+  const SettingView({List<_i45.PageRouteInfo>? children})
       : super(
           SettingView.name,
           initialChildren: children,
@@ -1242,13 +1110,13 @@ class SettingView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'SettingView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i41.StartAppAnimationView]
-class StartAppAnimationView extends _i43.PageRouteInfo<void> {
-  const StartAppAnimationView({List<_i43.PageRouteInfo>? children})
+/// [_i43.StartAppAnimationView]
+class StartAppAnimationView extends _i45.PageRouteInfo<void> {
+  const StartAppAnimationView({List<_i45.PageRouteInfo>? children})
       : super(
           StartAppAnimationView.name,
           initialChildren: children,
@@ -1256,13 +1124,13 @@ class StartAppAnimationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'StartAppAnimationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i42.StartAppNavigationNavigationView]
-class StartAppNavigationNavigationView extends _i43.PageRouteInfo<void> {
-  const StartAppNavigationNavigationView({List<_i43.PageRouteInfo>? children})
+/// [_i44.StartAppNavigationNavigationView]
+class StartAppNavigationNavigationView extends _i45.PageRouteInfo<void> {
+  const StartAppNavigationNavigationView({List<_i45.PageRouteInfo>? children})
       : super(
           StartAppNavigationNavigationView.name,
           initialChildren: children,
@@ -1270,5 +1138,5 @@ class StartAppNavigationNavigationView extends _i43.PageRouteInfo<void> {
 
   static const String name = 'StartAppNavigationNavigationView';
 
-  static const _i43.PageInfo<void> page = _i43.PageInfo<void>(name);
+  static const _i45.PageInfo<void> page = _i45.PageInfo<void>(name);
 }
