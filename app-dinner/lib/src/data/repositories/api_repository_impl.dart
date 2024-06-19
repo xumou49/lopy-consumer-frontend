@@ -90,10 +90,11 @@ class ApiRepositoryImpl extends BaseApiRepository implements ApiRepository {
 
   @override
   Future<DataState<RestaurantInfoResponse>> getRestaurantInfo({
+    required String token,
     required RestaurantInfoRequest request,
   }) {
     return getStateOf<RestaurantInfoResponse>(
-      request: () => _restaurantInfoApi.getRestaurantInfo(request.id),
+      request: () => _restaurantInfoApi.getRestaurantInfo(token, request.id),
     );
   }
 

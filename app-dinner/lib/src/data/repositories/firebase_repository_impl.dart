@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -7,11 +9,13 @@ class FirebaseRepositoryImpl implements FirebaseRepository {
 
   final String iosPlatformClientId =
       "296683188665-v76n9m79o953rp2gppa7qm9c7gc0jd29.apps.googleusercontent.com";
+  final String androidPlatformClientId =
+      "296683188665-g6rk2r25radibpiv8k3bov9volvjiqnn.apps.googleusercontent.com";
 
   late final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
     "email",
     "https://www.googleapis.com/auth/contacts.readonly",
-  ], clientId: iosPlatformClientId);
+  ], clientId: Platform.isAndroid ? androidPlatformClientId : iosPlatformClientId);
 
   FirebaseRepositoryImpl(this._auth);
 

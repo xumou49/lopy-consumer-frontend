@@ -1,4 +1,3 @@
-
 import 'package:Lopy/src/domain/models/responses/restaurant_info_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -12,6 +11,7 @@ abstract class RestaurantInfoApi {
 
   @GET('/restaurant/info')
   Future<HttpResponse<RestaurantInfoResponse>> getRestaurantInfo(
+    @Header(tokenName) String token,
     @Query("id") int id,
   );
 }

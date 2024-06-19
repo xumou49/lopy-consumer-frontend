@@ -1,4 +1,5 @@
 import 'package:Lopy/src/domain/models/cuisine.dart';
+import 'package:Lopy/src/presentation/widgets/common/image_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -58,18 +59,11 @@ class RestaurantCuisineItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-              flex: 8,
-              child: Container(
-                // width: double.infinity,
-                // height: 80,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(imageUrl),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              )),
+            flex: 8,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(4.0),
+                child: ImageWidget(imageUrl: imageUrl)),
+          ),
           Expanded(
               flex: 2,
               child: Container(

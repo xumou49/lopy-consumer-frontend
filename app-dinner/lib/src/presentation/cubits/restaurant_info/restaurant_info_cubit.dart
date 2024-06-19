@@ -6,22 +6,28 @@ import 'package:equatable/equatable.dart';
 
 import '../../../domain/models/restaurant.dart';
 import '../../../domain/repositories/api_repository.dart';
+import '../../../domain/repositories/auth_repository.dart';
 
 part 'restaurant_info_state.dart';
 
 class RestaurantInfoCubit extends BaseCubit<RestaurantInfoState, Restaurant> {
   final ApiRepository _apiRepository;
+  final AuthRepository _authRepository;
 
-  RestaurantInfoCubit(this._apiRepository)
+  RestaurantInfoCubit(this._apiRepository, this._authRepository)
       : super(const RestaurantInfoLoading(),
             const Restaurant(name: '', imageUrl: '', rating: ''));
 
   Future<void> getRestaurantInfo(int restaurantId) async {
     if (isBusy) return;
     emit(const RestaurantInfoLoading());
+
     await run(() async {
+      String? token = await _authRepository.getToken();
+      token ??= "";
       final response = await _apiRepository.getRestaurantInfo(
-          request: RestaurantInfoRequest(id: restaurantId));
+          token: token, request: RestaurantInfoRequest(id: restaurantId));
+
       if (response is DataSuccess) {
         final restaurant = response.data!.restaurant;
         emit(RestaurantInfoSuccess(

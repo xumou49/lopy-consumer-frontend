@@ -183,11 +183,11 @@ class RestaurantCard extends StatelessWidget {
                             storageNotifier.toggleFavRestaurant(restaurant.id!);
                           },
                           icon: Icon(
-                            isFavorite
-                                ? Icons.favorite
-                                : Icons.favorite_outline,
-                            color: Colors.pink.shade300,
-                          ));
+                              isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_outline,
+                              color: Colors.pink.shade300,
+                              size: 20.0));
                     },
                   ),
                 ],

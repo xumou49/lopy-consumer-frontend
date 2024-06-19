@@ -41,6 +41,7 @@ abstract class ApiRepository {
   });
 
   Future<DataState<RestaurantInfoResponse>> getRestaurantInfo({
+    required String token,
     required RestaurantInfoRequest request,
   });
 
