@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "296683188665-5a0k5ik8u64agugqfruf7p148mfndb2r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lopy.food",
+            "certificate_hash": "7a6183d16e461a47320e628f4c117d4af680c29f"
+          }
+        },
+        {
           "client_id": "296683188665-5edn1lc3d2cj8k7vq37co2slitnog0ra.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

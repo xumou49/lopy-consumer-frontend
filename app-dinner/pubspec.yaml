@@ -48,7 +48,7 @@ dependencies:
   equatable: ^2.0.5
   oktoast: ^3.3.1
   awesome_dio_interceptor: ^0.0.2+4
-  auto_route: ^7.2.0
+  auto_route: 7.8.4
   flutter_markdown: ^0.6.18
   flutter_secure_storage: ^9.0.0
   jwt_decoder: ^2.0.1
@@ -63,7 +63,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  mobile_scanner: ^4.0.0
+  mobile_scanner: 3.5.5
   flutter_stripe: ^9.5.0+1
   cached_network_image: ^3.3.1
 
@@ -137,3 +137,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+
+dependency_overrides:
+  stripe_android: "9.5.0+1"

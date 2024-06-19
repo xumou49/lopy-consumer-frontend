@@ -67,6 +67,7 @@ class LopyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => RestaurantInfoCubit(
             locator<ApiRepository>(),
+            locator<AuthRepository>(),
           ),
         ),
         BlocProvider(
