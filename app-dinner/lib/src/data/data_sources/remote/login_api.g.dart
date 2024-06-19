@@ -21,8 +21,9 @@ class _LoginApi implements LoginApi {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<LoginResponse>> googleLogin(loginRequest) async {
-    const _extra = <String, dynamic>{};
+  Future<HttpResponse<LoginResponse>> googleLogin(
+      LoginRequest loginRequest) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -39,15 +40,20 @@ class _LoginApi implements LoginApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LoginResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<LoginResponse>> appleLogin(loginRequest) async {
-    const _extra = <String, dynamic>{};
+  Future<HttpResponse<LoginResponse>> appleLogin(
+      LoginRequest loginRequest) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -64,15 +70,20 @@ class _LoginApi implements LoginApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LoginResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<LoginResponse>> phoneLogin(loginRequest) async {
-    const _extra = <String, dynamic>{};
+  Future<HttpResponse<LoginResponse>> phoneLogin(
+      LoginRequest loginRequest) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -89,7 +100,11 @@ class _LoginApi implements LoginApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LoginResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
@@ -106,5 +121,22 @@ class _LoginApi implements LoginApi {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

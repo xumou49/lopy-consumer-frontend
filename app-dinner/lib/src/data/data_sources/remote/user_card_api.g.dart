@@ -22,10 +22,10 @@ class _UserCardApi implements UserCardApi {
 
   @override
   Future<HttpResponse<UserCardListResponse>> getUserCardList(
-    token,
-    request,
+    String token,
+    UserCardListRequest request,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'lopy-token': token};
     _headers.removeWhere((k, v) => v == null);
@@ -43,7 +43,11 @@ class _UserCardApi implements UserCardApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = UserCardListResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
@@ -51,11 +55,11 @@ class _UserCardApi implements UserCardApi {
 
   @override
   Future<HttpResponse<BaseResponse>> saveUserCard(
-    token,
-    request, {
-    contentType = 'application/json',
+    String token,
+    UserCardRequest request, {
+    String contentType = 'application/json',
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'lopy-token': token,
@@ -77,7 +81,11 @@ class _UserCardApi implements UserCardApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = BaseResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
@@ -85,14 +93,14 @@ class _UserCardApi implements UserCardApi {
 
   @override
   Future<HttpResponse<BaseResponse>> deleteUserCard(
-    token,
-    id,
+    String token,
+    num id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': id};
     final _headers = <String, dynamic>{r'lopy-token': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<BaseResponse>>(Options(
       method: 'PUT',
@@ -105,7 +113,11 @@ class _UserCardApi implements UserCardApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = BaseResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
@@ -122,5 +134,22 @@ class _UserCardApi implements UserCardApi {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

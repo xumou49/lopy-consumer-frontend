@@ -22,10 +22,10 @@ class _OrderItemsApi implements OrderItemsApi {
 
   @override
   Future<HttpResponse<OrderItemListResponse>> getOrderItemList(
-    token,
-    orderListRequest,
+    String token,
+    OrderItemListRequest orderListRequest,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'lopy-token': token};
     _headers.removeWhere((k, v) => v == null);
@@ -43,7 +43,11 @@ class _OrderItemsApi implements OrderItemsApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = OrderItemListResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
@@ -51,10 +55,10 @@ class _OrderItemsApi implements OrderItemsApi {
 
   @override
   Future<HttpResponse<OrderItemListResponse>> getOrderItemPage(
-    token,
-    orderListRequest,
+    String token,
+    OrderItemListRequest orderListRequest,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'lopy-token': token};
     _headers.removeWhere((k, v) => v == null);
@@ -72,7 +76,11 @@ class _OrderItemsApi implements OrderItemsApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = OrderItemListResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
@@ -89,5 +97,22 @@ class _OrderItemsApi implements OrderItemsApi {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

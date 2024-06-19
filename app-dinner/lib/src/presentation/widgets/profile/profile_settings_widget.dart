@@ -203,6 +203,7 @@ class _AboutAppWidget extends StatelessWidget {
     return const _ProfileSettingsItemWidget(
       icon: Ionicons.heart_outline,
       itemName: "About App",
+      toNavigate: AboutAppNavigationView(),
     );
   }
 }
