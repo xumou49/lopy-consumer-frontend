@@ -21,10 +21,14 @@ class _RestaurantInfoApi implements RestaurantInfoApi {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<RestaurantInfoResponse>> getRestaurantInfo(id) async {
+  Future<HttpResponse<RestaurantInfoResponse>> getRestaurantInfo(
+    token,
+    id,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': id};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'lopy-token': token};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<RestaurantInfoResponse>>(Options(

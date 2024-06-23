@@ -212,6 +212,11 @@ class MenuItemDialogWidget extends StatelessWidget {
                                         //   },
                                         // );
                                         // localACartCubit.clearCart(state.cartItems[0].restaurantId);
+                                      } else {
+                                        print(c);
+                                        localACartCubit.saveCart(cartItem: c);
+                                        showToast('Added Successfully');
+                                        Navigator.pop(context);
                                       }
                                     } else {
                                       print(c);
