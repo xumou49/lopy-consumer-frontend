@@ -7,6 +7,7 @@ import 'package:Lopy/src/domain/repositories/firebase_repository.dart';
 import 'package:Lopy/src/presentation/cubits/cart/cart_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/history/history_keyword_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/order/order_history_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_item_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_place_cubit.dart';
@@ -55,6 +56,12 @@ class LopyApp extends StatelessWidget {
             create: (context) => OrderListCubit(
                 locator<ApiRepository>(), locator<AuthRepository>())
               ..getOrderList(1, 20)),
+        BlocProvider(
+          create: (context) => OrderHistoryListCubit(
+            locator<ApiRepository>(),
+            locator<AuthRepository>(),
+          ),
+        ),
         BlocProvider(
             create: (context) => OrderItemListCubit(
                 locator<ApiRepository>(), locator<AuthRepository>())),

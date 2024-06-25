@@ -1,4 +1,5 @@
 import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/order/order_history_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/dialog_widget.dart';
 import 'package:Lopy/src/utils/constants/nums.dart';
@@ -154,8 +155,8 @@ class _HistoryOrderWidget extends StatelessWidget {
       itemDesc: "View your past orders",
       onTap: () {
         context
-            .read<OrderListCubit>()
-            .getOrderList(1, 10, type: orderTypeHisotry);
+            .read<OrderHistoryListCubit>()
+            .getOrderList(1, 10);
         context.router.push(const HistoryOrderNavigationView());
       },
     );
