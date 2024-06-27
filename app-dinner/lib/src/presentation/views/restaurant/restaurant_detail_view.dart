@@ -73,6 +73,7 @@ class _RestaurantDetailListView extends StatelessWidget {
               min = MediaQuery.of(context).padding.top + kToolbarHeight;
               top = constraints.biggest.height;
               return FlexibleSpaceBar(
+                centerTitle: true,
                 collapseMode: CollapseMode.parallax,
                 background: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 100.0),
