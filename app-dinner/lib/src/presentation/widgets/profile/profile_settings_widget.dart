@@ -1,8 +1,6 @@
 import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_history_list_cubit.dart';
-import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/dialog_widget.dart';
-import 'package:Lopy/src/utils/constants/nums.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -154,9 +152,7 @@ class _HistoryOrderWidget extends StatelessWidget {
       itemName: "History Orders",
       itemDesc: "View your past orders",
       onTap: () {
-        context
-            .read<OrderHistoryListCubit>()
-            .getOrderList(1, 10);
+        context.read<OrderHistoryListCubit>().getOrderList(1, 10);
         context.router.push(const HistoryOrderNavigationView());
       },
     );
@@ -204,6 +200,7 @@ class _AboutAppWidget extends StatelessWidget {
     return const _ProfileSettingsItemWidget(
       icon: Ionicons.heart_outline,
       itemName: "About App",
+      toNavigate: AboutAppNavigationView(),
     );
   }
 }

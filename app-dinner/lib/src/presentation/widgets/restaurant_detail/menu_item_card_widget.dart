@@ -58,11 +58,7 @@ class MenuItemCard extends StatelessWidget {
                               ),
                           const Align(
                             alignment: Alignment(0.95, 0.5),
-                            child: Icon(
-                              Icons.favorite_outlined,
-                              color: Colors.white,
-                              size: 25,
-                            ),
+                            child: LikeButton(),
                           ),
                         ],
                       ),
@@ -97,5 +93,34 @@ class MenuItemCard extends StatelessWidget {
                 const PlaceholderWidget(height: 5)
               ],
             )));
+  }
+}
+
+class LikeButton extends StatefulWidget {
+  const LikeButton({super.key});
+
+  @override
+  _LikeButtonState createState() => _LikeButtonState();
+}
+
+class _LikeButtonState extends State<LikeButton> {
+  bool isLiked = false;
+
+  void toggleLikeStatus() {
+    setState(() {
+      isLiked = !isLiked;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        isLiked ? Icons.favorite : Icons.favorite_border,
+        color: Colors.pink.shade300,
+        size: 25,
+      ),
+      onPressed: toggleLikeStatus,
+    );
   }
 }

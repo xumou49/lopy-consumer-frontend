@@ -104,11 +104,16 @@ class AppRouter extends $AppRouter {
                         AutoRoute(page: SettingView.page, initial: true),
                       ],
                     ),
-
                     AutoRoute(
                       page: HomeSupportNavigationView.page,
                       children: [
                         AutoRoute(page: HomeSupportView.page, initial: true),
+                      ],
+                    ),
+                    AutoRoute(
+                      page: AboutAppNavigationView.page,
+                      children: [
+                        AutoRoute(page: AboutAppView.page, initial: true),
                       ],
                     ),
                     AutoRoute(
