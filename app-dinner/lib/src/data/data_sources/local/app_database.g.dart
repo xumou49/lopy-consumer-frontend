@@ -141,8 +141,8 @@ class _$CartDao extends CartDao {
   final DeletionAdapter<Cart> _cartDeletionAdapter;
 
   @override
-  Future<List<Cart>> getCartItems() async {
-    return _queryAdapter.queryList('SELECT * FROM cartTable',
+  Future<List<Cart>> getCartItems(int userId) async {
+    return _queryAdapter.queryList('SELECT * FROM cartTable WHERE userId = ?1',
         mapper: (Map<String, Object?> row) => Cart(
             itemId: row['itemId'] as int?,
             name: row['name'] as String,
@@ -150,7 +150,8 @@ class _$CartDao extends CartDao {
             price: row['price'] as double,
             userId: row['userId'] as int,
             restaurantId: row['restaurantId'] as int,
-            restaurantMenuItemId: row['restaurantMenuItemId'] as int));
+            restaurantMenuItemId: row['restaurantMenuItemId'] as int),
+        arguments: [userId]);
   }
 
   @override
@@ -168,10 +169,13 @@ class _$CartDao extends CartDao {
   }
 
   @override
-  Future<void> clearCart(int restaurantId) async {
+  Future<void> clearCart(
+    int restaurantId,
+    int userId,
+  ) async {
     await _queryAdapter.queryNoReturn(
-        'DELETE FROM cartTable WHERE restaurantId = ?1',
-        arguments: [restaurantId]);
+        'DELETE FROM cartTable WHERE restaurantId = ?1 AND userId = ?2',
+        arguments: [restaurantId, userId]);
   }
 
   @override

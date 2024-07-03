@@ -7,7 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
 
 import '../../../domain/models/menu_item.dart';
+import '../../../domain/repositories/auth_repository.dart';
 import '../../cubits/cart/cart_list_cubit.dart';
+import '../../cubits/login/login_cubit.dart';
 import '../common/button_widget.dart';
 import '../common/text_widget.dart';
 import 'number_counter_widget.dart';
@@ -23,6 +25,7 @@ class MenuItemDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localACartCubit = BlocProvider.of<CartListCubit>(context);
+
     int counter = 1;
     return Dialog(
       surfaceTintColor: Colors.white,
@@ -152,8 +155,20 @@ class MenuItemDialogWidget extends StatelessWidget {
                                       restaurantId: restaurantId,
                                       // restaurantId: 10,
                                       restaurantMenuItemId:
-                                      menuItem.menuId,
+                                      menuItem.id!,
                                     );
+                                    // bool isItemExists = state.cartItems.any(
+                                    //         (item) => item.restaurantMenuItemId == menuItem.menuId,
+                                    // );
+                                    bool isItemExists = false;
+                                    int itemId = 0;
+                                    for (var item in state.cartItems) {
+                                      if (item.restaurantMenuItemId == menuItem.id) {
+                                        // Do something with the item
+                                        isItemExists = true;
+                                        itemId = item.itemId!;
+                                      }
+                                    }
                                     if (state.cartItems.isNotEmpty) {
                                       if (state.cartItems[0].restaurantId != restaurantId) {
                                         showDialog(
@@ -214,7 +229,23 @@ class MenuItemDialogWidget extends StatelessWidget {
                                         // localACartCubit.clearCart(state.cartItems[0].restaurantId);
                                       } else {
                                         print(c);
-                                        localACartCubit.saveCart(cartItem: c);
+                                        // localACartCubit.saveCart(cartItem: c);
+                                        if (isItemExists) {
+                                          Cart cd = Cart(
+                                            itemId: itemId,
+                                            name: menuItem.itemName,
+                                            quantity: counter,
+                                            price: menuItem.price,
+                                            userId: 1,
+                                            restaurantId: restaurantId,
+                                            // restaurantId: 10,
+                                            restaurantMenuItemId:
+                                            menuItem.menuId,
+                                          );
+                                          localACartCubit.incrementCartItemQuantity(cartItem: cd);
+                                        } else {
+                                          localACartCubit.saveCart(cartItem: c);
+                                        }
                                         showToast('Added Successfully');
                                         Navigator.pop(context);
                                       }

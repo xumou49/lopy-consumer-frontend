@@ -8,8 +8,8 @@ class DatabaseRepositoryImpl implements DatabaseRepository {
   DatabaseRepositoryImpl(this._appDatabase);
 
   @override
-  Future<List<Cart>> getCartItems() async {
-    return _appDatabase.cartDao.getCartItems();
+  Future<List<Cart>> getCartItems(int userId) async {
+    return _appDatabase.cartDao.getCartItems(userId);
   }
 
   @override
@@ -33,8 +33,8 @@ class DatabaseRepositoryImpl implements DatabaseRepository {
   }
 
   @override
-  Future<void> clearCart(int restaurantId) async {
-    return _appDatabase.cartDao.clearCart(restaurantId);
+  Future<void> clearCart(int restaurantId, int userId) async {
+    return _appDatabase.cartDao.clearCart(restaurantId, userId);
   }
 
 }

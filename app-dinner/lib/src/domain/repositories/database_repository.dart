@@ -1,7 +1,7 @@
 import '../../domain/models/cart.dart';
 
 abstract class DatabaseRepository {
-  Future<List<Cart>> getCartItems();
+  Future<List<Cart>> getCartItems(int userID);
 
   Future<void> insertCartItem(Cart cart);
 
@@ -11,5 +11,5 @@ abstract class DatabaseRepository {
 
   Future<void> decrementCartItemQuantity(int itemId);
 
-  Future<void> clearCart(int restaurantId);
+  Future<void> clearCart(int restaurantId, int userId);
 }

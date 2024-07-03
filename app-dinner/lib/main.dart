@@ -92,6 +92,7 @@ class LopyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => CartListCubit(
             locator<DatabaseRepository>(),
+            locator<AuthRepository>(),
           )..getAllSavedCarts(),
         ),
         BlocProvider(

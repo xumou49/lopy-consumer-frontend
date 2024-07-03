@@ -3,6 +3,9 @@ import 'package:Lopy/src/domain/repositories/database_repository.dart';
 import 'package:Lopy/src/presentation/cubits/base/base_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+
+import '../../../domain/repositories/auth_repository.dart';
 
 
 part 'cart_list_state.dart';
@@ -10,8 +13,9 @@ part 'cart_list_state.dart';
 class CartListCubit
     extends BaseCubit<CartListState, List<Cart>> {
   final DatabaseRepository _databaseRepository;
+  final AuthRepository _authRepository;
 
-  CartListCubit(this._databaseRepository)
+  CartListCubit(this._databaseRepository, this._authRepository)
       : super(const CartListLoading(), []);
 
   final int _page = 1;
@@ -26,7 +30,21 @@ class CartListCubit
   }
 
   Future<void> saveCart({required Cart cartItem}) async {
-    await _databaseRepository.insertCartItem(cartItem);
+    String? token = await _authRepository.getToken();
+    print(token);
+    Map<String, dynamic> decodedToken;
+    decodedToken = JwtDecoder.decode(token!);
+    print(decodedToken);
+    Cart c = Cart(
+      name: cartItem.name,
+      quantity: cartItem.quantity,
+      price: cartItem.price,
+      userId: int.tryParse(decodedToken['id'])!,
+      restaurantId: cartItem.restaurantId,
+      // restaurantId: 10,
+      restaurantMenuItemId:cartItem.restaurantMenuItemId,
+    );
+    await _databaseRepository.insertCartItem(c);
     emit(await _getAllSavedCarts());
   }
 
@@ -49,12 +67,20 @@ class CartListCubit
   }
 
   Future<CartListState> _getAllSavedCarts() async {
-    final cartItems = await _databaseRepository.getCartItems();
+    String? token = await _authRepository.getToken();
+    print(token);
+    Map<String, dynamic> decodedToken;
+    decodedToken = JwtDecoder.decode(token!);
+    final cartItems = await _databaseRepository.getCartItems(int.tryParse(decodedToken['id'])!);
     return CartListSuccess(cartItems: cartItems);
   }
 
   Future<void> clearCart(int restaurantId) async {
-    await _databaseRepository.clearCart(restaurantId);
+    String? token = await _authRepository.getToken();
+    print(token);
+    Map<String, dynamic> decodedToken;
+    decodedToken = JwtDecoder.decode(token!);
+    await _databaseRepository.clearCart(restaurantId, int.tryParse(decodedToken['id'])!);
     emit(await _getAllSavedCarts());
   }
 
