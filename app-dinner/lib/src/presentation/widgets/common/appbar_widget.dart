@@ -294,6 +294,7 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
                 // Check if the current route is already SearchView
                 if (router.current.name != "SearchView") {
                   router.push(const SearchNavigationView());
+                  focusNode.unfocus(disposition: UnfocusDisposition.scope);
                 }
               },
               onSubmitted: widget.onSubmitted,
