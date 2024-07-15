@@ -12,10 +12,13 @@ class FirebaseRepositoryImpl implements FirebaseRepository {
   final String androidPlatformClientId =
       "296683188665-g6rk2r25radibpiv8k3bov9volvjiqnn.apps.googleusercontent.com";
 
-  late final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
-    "email",
-    "https://www.googleapis.com/auth/contacts.readonly",
-  ], clientId: Platform.isAndroid ? androidPlatformClientId : iosPlatformClientId);
+  late final GoogleSignIn _googleSignIn = GoogleSignIn(
+      scopes: [
+        "email",
+        "https://www.googleapis.com/auth/contacts.readonly",
+      ],
+      clientId:
+          Platform.isAndroid ? androidPlatformClientId : iosPlatformClientId);
 
   FirebaseRepositoryImpl(this._auth);
 
@@ -68,5 +71,12 @@ class FirebaseRepositoryImpl implements FirebaseRepository {
     // });
     print(authCredential.accessToken);
     print(idTokenResult.token);
+  }
+
+  @override
+  Future<void> logout() {
+    _googleSignIn.signOut();
+    _auth.signOut();
+    return Future.value();
   }
 }

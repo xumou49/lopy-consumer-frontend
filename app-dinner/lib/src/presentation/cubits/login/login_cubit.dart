@@ -52,6 +52,7 @@ class LoginCubit extends BaseCubit<LoginState, String> {
 
   Future<void> logout() async {
     await _authRepository.removeToken();
+    await _firebaseRepository.logout();
     // reset the state to loading
     emit(const LoginLoading());
   }
