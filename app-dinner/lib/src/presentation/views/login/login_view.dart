@@ -3,7 +3,6 @@ import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/login/login_state.dart';
 import 'package:Lopy/src/presentation/cubits/user_card/user_card_list_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/login/login_button.dart';
-import 'package:Lopy/src/presentation/widgets/login/login_method_divider.dart';
 import 'package:Lopy/src/utils/constants/strings.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -99,22 +98,22 @@ class _ViewState extends State<View> {
           onTap: () {
         context.read<LoginCubit>().googleLogin();
       }),
-      const SizedBox(height: 24),
-      LoginButton(
-          "Sign in with Apple", "lib/src/assets/images/apple_login_logo.png",
-          onTap: () {
-        context.read<LoginCubit>().appleLogin();
-      }, textColor: Colors.white, backgroundColor: Colors.black),
-      const SizedBox(height: 20),
-      const LoginMethodDivider(),
-      const SizedBox(height: 20),
-      LoginButton(
-        "Sign in with Phone Number",
-        "lib/src/assets/images/phone_login_logo.png",
-        onTap: () {
-          context.read<LoginCubit>().phoneLogin();
-        },
-      ),
+      // const SizedBox(height: 24),
+      // LoginButton(
+      //     "Sign in with Apple", "lib/src/assets/images/apple_login_logo.png",
+      //     onTap: () {
+      //   context.read<LoginCubit>().appleLogin();
+      // }, textColor: Colors.white, backgroundColor: Colors.black),
+      // const SizedBox(height: 20),
+      // const LoginMethodDivider(),
+      // const SizedBox(height: 20),
+      // LoginButton(
+      //   "Sign in with Phone Number",
+      //   "lib/src/assets/images/phone_login_logo.png",
+      //   onTap: () {
+      //     context.read<LoginCubit>().phoneLogin();
+      //   },
+      // ),
     ]))));
   }
 }
