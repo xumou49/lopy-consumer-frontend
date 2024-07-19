@@ -32,8 +32,13 @@ class RestaurantCuisineCubit
       final response = await _apiRepository.getRestaurantList(
           token: token,
           request: RestaurantListRequest(
-              page: _page, cuisine: cuisine, idList: idList));
+              page: _page, cuisine: cuisine, idList: idList, action: action));
       if (response is DataSuccess) {
+        if (action == "fav-list" && response.data!.restaurants.isEmpty) {
+          emit(const RestaurantFavEmpty());
+          return;
+        }
+
         if (response.data!.restaurants.isEmpty) {
           emit(const RestaurantCuisineEmpty());
           return;

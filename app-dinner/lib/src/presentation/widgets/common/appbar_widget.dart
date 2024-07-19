@@ -321,7 +321,8 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
             IconButton(
                 onPressed: () async {
                   await _storageService.getFavRestaurants().then((value) =>
-                      context.router.push(RestaurantListView(idList: value)));
+                      context.router.push(RestaurantListView(
+                          idList: value, action: "fav-list")));
                 },
                 icon: Icon(
                   Icons.favorite,

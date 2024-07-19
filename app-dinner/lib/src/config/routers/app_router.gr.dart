@@ -304,6 +304,7 @@ abstract class $AppRouter extends _i43.RootStackRouter {
         child: _i31.RestaurantListView(
           key: args.key,
           cuisine: args.cuisine,
+          action: args.action,
           idList: args.idList,
         ),
       );
@@ -906,6 +907,7 @@ class RestaurantListView extends _i43.PageRouteInfo<RestaurantListViewArgs> {
   RestaurantListView({
     _i45.Key? key,
     String cuisine = "",
+    String action = "",
     List<int> idList = const [],
     List<_i43.PageRouteInfo>? children,
   }) : super(
@@ -913,6 +915,7 @@ class RestaurantListView extends _i43.PageRouteInfo<RestaurantListViewArgs> {
           args: RestaurantListViewArgs(
             key: key,
             cuisine: cuisine,
+            action: action,
             idList: idList,
           ),
           initialChildren: children,
@@ -928,6 +931,7 @@ class RestaurantListViewArgs {
   const RestaurantListViewArgs({
     this.key,
     this.cuisine = "",
+    this.action = "",
     this.idList = const [],
   });
 
@@ -935,11 +939,13 @@ class RestaurantListViewArgs {
 
   final String cuisine;
 
+  final String action;
+
   final List<int> idList;
 
   @override
   String toString() {
-    return 'RestaurantListViewArgs{key: $key, cuisine: $cuisine, idList: $idList}';
+    return 'RestaurantListViewArgs{key: $key, cuisine: $cuisine, action: $action, idList: $idList}';
   }
 }
 
