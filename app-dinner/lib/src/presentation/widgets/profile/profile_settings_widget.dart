@@ -24,7 +24,7 @@ class ProfileSettingsWidget extends StatelessWidget {
             child: FractionallySizedBox(
               widthFactor: 0.8,
               child: Container(
-                  height: 365,
+                  height: 290,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     // Container background color
@@ -42,7 +42,7 @@ class ProfileSettingsWidget extends StatelessWidget {
                   child: ListView(
                     physics: const ClampingScrollPhysics(),
                     children: const <Widget>[
-                      _SettingsWidget(),
+                      // _SettingsWidget(),
                       _PaymentMethodsWidget(),
                       _HistoryOrderWidget(),
                       _PrivacyPolicyWidget(),

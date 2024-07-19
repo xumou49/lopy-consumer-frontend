@@ -16,9 +16,10 @@ import '../../widgets/restaurant_widget.dart';
 class RestaurantListView extends HookWidget {
   final String cuisine;
   final List<int> idList;
+  final String action;
 
   const RestaurantListView(
-      {Key? key, this.cuisine = "", this.idList = const []})
+      {Key? key, this.cuisine = "", this.action = "", this.idList = const []})
       : super(key: key);
 
   @override

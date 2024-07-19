@@ -6,8 +6,8 @@ Description: Lopy is an innovative order system designed for restaurants. It all
 
 Developer: Lopy team
 
-Contact:
+Contact: lopy-support@mail.com
 
 Version: 1.0.0
 
-Release Date:
+Release Date: 2024-07-20
