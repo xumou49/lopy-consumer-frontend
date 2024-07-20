@@ -716,10 +716,10 @@ packages:
     dependency: "direct main"
     description:
       name: mobile_scanner
-      sha256: "619ed5fd43ca9007a151f00c3dc43feedeaf235fe5647735d0237c38849d49dc"
+      sha256: "827765afbd4792ff3fd105ad593821ac0f6d8a7d352689013b07ee85be336312"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.0"
+    version: "4.0.1"
   nested:
     dependency: transitive
     description:
@@ -1030,13 +1030,13 @@ packages:
     source: hosted
     version: "0.2.2"
   stripe_android:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: stripe_android
-      sha256: "1de36b35c50f33e538c8e4bd6173f0ab8d7d8e6b9e05388488775e439c29b7d2"
+      sha256: c3a4398a777e4378bbc528e7244a73bcd3e6c6d807fce5bb8bcabc21d31abe8c
       url: "https://pub.dev"
     source: hosted
-    version: "9.6.0+2"
+    version: "9.5.0+1"
   stripe_ios:
     dependency: transitive
     description:

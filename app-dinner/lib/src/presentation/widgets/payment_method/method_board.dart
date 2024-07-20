@@ -4,12 +4,10 @@ import 'package:Lopy/src/presentation/cubits/user_card/user_card_list_cubit.dart
 import 'package:Lopy/src/presentation/widgets/common/dialog_widget.dart';
 import 'package:Lopy/src/presentation/widgets/common/placeholder_widget.dart';
 import 'package:Lopy/src/presentation/widgets/payment_method/payment_setting_btn.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
 
-import '../../../config/routers/app_router.gr.dart';
 import '../../../domain/models/cart.dart';
 import '../../cubits/cart/cart_list_cubit.dart';
 import '../../cubits/order/order_place_cubit.dart';
@@ -118,8 +116,8 @@ class CardInfo extends StatelessWidget {
             onPressed: () {
               showConfirmationDialog(context, "Delete Card",
                   "Are you sure you want to delete this card?", () {
-                    context.read<UserCardCubit>().deleteUserCard(id!);
-                  });
+                context.read<UserCardCubit>().deleteUserCard(id!);
+              });
             },
             icon: const Icon(
               Icons.delete,
@@ -135,15 +133,14 @@ class CardInfo extends StatelessWidget {
     if (isPay) {
       cardDetails = [
         ...[
-          Positioned(left: 10,
-              child: Image.asset(
-                  cardImageMap[brand]!, fit: BoxFit.cover)),
-        ], ...cardDetails];
-    } else {
-      cardDetails = [
-        ...cardDetails,
-        ...deleteCard
+          Positioned(
+              left: 10,
+              child: Image.asset(cardImageMap[brand]!, fit: BoxFit.cover)),
+        ],
+        ...cardDetails
       ];
+    } else {
+      cardDetails = [...cardDetails, ...deleteCard];
     }
 
     return InkWell(
@@ -155,9 +152,7 @@ class CardInfo extends StatelessWidget {
             color: backgroundColor,
             child: Stack(
               alignment: Alignment.center,
-              children: [
-                ...cardDetails
-              ],
+              children: [...cardDetails],
             ),
           )),
     );
@@ -218,11 +213,10 @@ class UserCardDisplay extends StatelessWidget {
               );
             } else {
               return ExistedCardDisplay(
-                userCards: state.userCards,
-                type: type,
-                isPay: isPay,
-                carts: carts
-              );
+                  userCards: state.userCards,
+                  type: type,
+                  isPay: isPay,
+                  carts: carts);
             }
           }
           return EmptyCardDisplay(type: type, isPay: isPay);
@@ -236,15 +230,14 @@ class ExistedCardDisplay extends StatefulWidget {
   final bool isPay;
   final List<Cart> carts;
 
-  const ExistedCardDisplay(
-      {Key? key, required this.type,
-        required this.userCards,
-        this.isPay = false,
-        List<Cart>? carts,
-      })
-      : carts = isPay ? (carts ?? const []) : const [],
+  const ExistedCardDisplay({
+    Key? key,
+    required this.type,
+    required this.userCards,
+    this.isPay = false,
+    List<Cart>? carts,
+  })  : carts = isPay ? (carts ?? const []) : const [],
         super(key: key);
-
 
   @override
   State<ExistedCardDisplay> createState() => _ExistedCardDisplayState();
@@ -256,8 +249,8 @@ class _ExistedCardDisplayState extends State<ExistedCardDisplay> {
   int cardId = 0;
 
   double getTotalPrice() {
-    return widget.carts.fold(
-        0, (total, item) => total + (item.quantity * item.price));
+    return widget.carts
+        .fold(0, (total, item) => total + (item.quantity * item.price));
   }
 
   String getTotalPriceString() {
@@ -269,13 +262,11 @@ class _ExistedCardDisplayState extends State<ExistedCardDisplay> {
     cardId = widget.userCards[0].id!;
     // add card info widget
     if (widget.isPay) {
-      elementList.add(
-          Center(
-              child: Text(
-                'Total price: ${getTotalPriceString()}',
-                style: const TextStyle(fontSize: 24.0),)
-          )
-      );
+      elementList.add(Center(
+          child: Text(
+        'Total price: ${getTotalPriceString()}',
+        style: const TextStyle(fontSize: 24.0),
+      )));
     }
     elementList.add(const SizedBox(height: 15));
     for (int i = 0; i < widget.userCards.length; i++) {
@@ -300,24 +291,24 @@ class _ExistedCardDisplayState extends State<ExistedCardDisplay> {
     // spacing & new card button
     elementList.add(const SizedBox(height: 20));
     final ButtonStyle style =
-    ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
     if (widget.isPay) {
       final localACartCubit = BlocProvider.of<CartListCubit>(context);
-      elementList.add(
-          Row(
-
-            // alignment: Alignment.center,
-            children: [
-              const PlaceholderWidget(width: 40,),
-              Positioned(
-                left: 20,
-                child: ElevatedButton(
-                  style: style,
-                  child: const Text('Back'),
-                  onPressed: () => Navigator.pop(context),
-                ),
-              ),
-              const PlaceholderWidget(
+      elementList.add(Row(
+        // alignment: Alignment.center,
+        children: [
+          const PlaceholderWidget(
+            width: 40,
+          ),
+          Positioned(
+            left: 20,
+            child: ElevatedButton(
+              style: style,
+              child: const Text('Back'),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ),
+          const PlaceholderWidget(
             width: 140,
           ),
           Positioned(
@@ -326,23 +317,20 @@ class _ExistedCardDisplayState extends State<ExistedCardDisplay> {
                 style: style,
                 child: const Text('Pay'),
                 onPressed: () {
-                  context
-                      .read<OrderPlaceCubit>()
-                      .orderPlace(widget.carts.first.restaurantId, cardId, widget.carts);
+                  context.read<OrderPlaceCubit>().orderPlace(
+                      widget.carts.first.restaurantId, cardId, widget.carts);
                   const Center(
                     child: ShowLoadingForTwoSeconds(),
                   );
                   Future.delayed(const Duration(milliseconds: 2000), () {
-
                     showToast("Order placed successfully");
                     localACartCubit.clearCart(widget.carts.first.restaurantId);
-                    context.navigateTo(const OrderNavigationView());
+                    // context.navigateTo(const OrderNavigationView());
                   });
                 },
-                  )),
-            ],
-          )
-      );
+              )),
+        ],
+      ));
     } else {
       elementList.add(NewCardBtn(type: widget.type));
     }
@@ -380,7 +368,8 @@ class _ExistedCardDisplayState extends State<ExistedCardDisplay> {
 class EmptyCardDisplay extends StatelessWidget {
   final String type;
   final bool isPay;
-  const EmptyCardDisplay({Key? key, this.isPay = false, required this.type}) : super(key: key);
+  const EmptyCardDisplay({Key? key, this.isPay = false, required this.type})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -419,16 +408,15 @@ class EmptyCardDisplay extends StatelessWidget {
         NewCardBtn(type: type),
       ]);
     }
-
   }
 }
-
 
 class ShowLoadingForTwoSeconds extends StatefulWidget {
   const ShowLoadingForTwoSeconds({super.key});
 
   @override
-  _ShowLoadingForTwoSecondsState createState() => _ShowLoadingForTwoSecondsState();
+  _ShowLoadingForTwoSecondsState createState() =>
+      _ShowLoadingForTwoSecondsState();
 }
 
 class _ShowLoadingForTwoSecondsState extends State<ShowLoadingForTwoSeconds> {
@@ -449,6 +437,7 @@ class _ShowLoadingForTwoSecondsState extends State<ShowLoadingForTwoSeconds> {
   Widget build(BuildContext context) {
     return _showLoading
         ? const CircularProgressIndicator() // Show loading indicator
-        : const Text('Loading Complete'); // Replace with your desired widget after 2 seconds
+        : const Text(
+            'Loading Complete'); // Replace with your desired widget after 2 seconds
   }
 }

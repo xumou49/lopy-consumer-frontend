@@ -1,8 +1,10 @@
 import 'package:Lopy/src/domain/models/order.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_item_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
+import 'package:Lopy/src/presentation/widgets/common/empty_result_widget.dart';
 import 'package:Lopy/src/presentation/widgets/order/order_card.dart';
 import 'package:Lopy/src/presentation/widgets/order/order_group.dart';
+import 'package:Lopy/src/utils/constants/nums.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +19,7 @@ class OrdersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final r = BlocProvider.of<OrderListCubit>(context);
-    r.getOrderList(1, 10);
+    r.getOrderList(1, 10, type: orderTypeOngoing);
     return Scaffold(
         appBar: const GradientAppBar(title: "My Orders"),
         body: BlocBuilder(
@@ -26,7 +28,9 @@ class OrdersView extends StatelessWidget {
               if (state is OrderListSuccess && state.orders.isNotEmpty) {
                 return _OrdersView(orders: state.orders);
               }
-              return const Text("Order Data Is Empty");
+              return EmptyResultWidget(
+                  title: "Order is empty",
+                  subtitle: "You haven't made any orders yet");
             }));
   }
 }

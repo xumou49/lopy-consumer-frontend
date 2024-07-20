@@ -19,6 +19,7 @@ import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_list_cub
 import 'package:Lopy/src/presentation/cubits/restaurant_list/restaurant_promo_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/user_card/user_card_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/user_card/user_card_list_cubit.dart';
+import 'package:Lopy/src/utils/constants/nums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -55,7 +56,7 @@ class LopyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => OrderListCubit(
                 locator<ApiRepository>(), locator<AuthRepository>())
-              ..getOrderList(1, 20)),
+              ..getOrderList(1, 20, type: orderTypeOngoing)),
         BlocProvider(
           create: (context) => OrderHistoryListCubit(
             locator<ApiRepository>(),
