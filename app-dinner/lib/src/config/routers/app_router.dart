@@ -8,7 +8,11 @@ class AppRouter extends $AppRouter {
   static final searchRoute = [
     AutoRoute(
         page: SearchNavigationView.page,
-        children: [AutoRoute(page: SearchView.page, initial: true)]),
+        children: [
+          AutoRoute(page: SearchView.page, initial: true),
+          AutoRoute(page: RestaurantListView.page),
+        ]
+    ),
   ];
 
   static final restaurantAndOrderingRoute = [
