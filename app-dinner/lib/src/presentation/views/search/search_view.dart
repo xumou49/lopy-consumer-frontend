@@ -121,7 +121,7 @@ class RestaurantCategoryWidget extends StatelessWidget {
           children: [
             BrowseHistoryWidget(onKeywordClick: onKeywordClick),
             const SizedBox(height: 15),
-            RestaurantCuisineWidget(dataList: _getCuisineDataList())
+            // RestaurantCuisineWidget(dataList: _getCuisineDataList())
           ],
         ));
   }

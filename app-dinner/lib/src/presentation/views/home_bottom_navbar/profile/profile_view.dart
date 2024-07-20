@@ -23,7 +23,7 @@ class ProfileView extends StatelessWidget {
             children: const <Widget>[
               PlaceholderWidget(height: 5,),
               AvatarWidget(),
-              PlaceholderWidget(height: 5,),
+              PlaceholderWidget(height: 15,),
               ProfileSettingsWidget(),
             ],
           ),

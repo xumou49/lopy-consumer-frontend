@@ -51,7 +51,7 @@ class ProfileSettingsWidget extends StatelessWidget {
                   )),
             )),
         const PlaceholderWidget(
-          height: 25,
+          height: 50,
         ),
         Align(
             alignment: Alignment.center,
