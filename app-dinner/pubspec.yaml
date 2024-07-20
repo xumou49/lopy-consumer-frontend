@@ -35,37 +35,36 @@ dependencies:
   ionicons: ^0.2.2
 
   #Networking
-  retrofit: ^4.1.0
-  dio: ^5.4.3+1
+  retrofit: ^3.3.0
+  dio: ^4.0.6
 
   # State Management (separation of biz logic from presentation layer)
   flutter_bloc: ^8.1.2
 
   # Others
-  flutter_hooks: ^0.20.5
+  flutter_hooks: ^0.18.5+1
   get_it: ^7.2.0
   floor: ^1.4.1
   equatable: ^2.0.5
   oktoast: ^3.3.1
-  awesome_dio_interceptor: ^1.2.0
-  auto_route: ^8.2.0
-  flutter_markdown: ^0.7.2
-
+  awesome_dio_interceptor: ^0.0.2+4
+  auto_route: 7.8.4
+  flutter_markdown: ^0.6.18
   flutter_secure_storage: ^9.0.0
   jwt_decoder: ^2.0.1
   uuid: ^4.2.2
 
   # 3rd party login
-  firebase_auth: ^5.1.0
-  firebase_core: ^3.1.0
+  firebase_auth: ^4.16.0
+  firebase_core: ^2.24.2
   google_sign_in: ^6.1.6
   json_annotation: ^4.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  mobile_scanner: ^5.1.1
-  flutter_stripe: ^10.1.1
+  mobile_scanner: ^4.0.0
+  flutter_stripe: ^9.5.0+1
   cached_network_image: ^3.3.1
 
 dev_dependencies:
@@ -79,9 +78,9 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
-  auto_route_generator: ^8.0.0
-  retrofit_generator: ^8.1.0
+  flutter_lints: ^2.0.0
+  auto_route_generator: ^7.1.1
+  retrofit_generator: ^4.1.2
   floor_generator: ^1.4.1
   build_runner: ^2.3.3
 
@@ -101,6 +100,7 @@ flutter:
     - lib/src/assets/images/
     - lib/src/assets/static/privacy_policy.md
     - lib/src/assets/static/home_support.md
+    - lib/src/assets/static/about_app.md
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,7 +1,6 @@
 import 'package:Lopy/src/presentation/cubits/login/login_cubit.dart';
-import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
+import 'package:Lopy/src/presentation/cubits/order/order_history_list_cubit.dart';
 import 'package:Lopy/src/presentation/widgets/common/dialog_widget.dart';
-import 'package:Lopy/src/utils/constants/nums.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +24,7 @@ class ProfileSettingsWidget extends StatelessWidget {
             child: FractionallySizedBox(
               widthFactor: 0.8,
               child: Container(
-                  height: 365,
+                  height: 290,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     // Container background color
@@ -43,7 +42,7 @@ class ProfileSettingsWidget extends StatelessWidget {
                   child: ListView(
                     physics: const ClampingScrollPhysics(),
                     children: const <Widget>[
-                      _SettingsWidget(),
+                      // _SettingsWidget(),
                       _PaymentMethodsWidget(),
                       _HistoryOrderWidget(),
                       _PrivacyPolicyWidget(),
@@ -153,9 +152,7 @@ class _HistoryOrderWidget extends StatelessWidget {
       itemName: "History Orders",
       itemDesc: "View your past orders",
       onTap: () {
-        context
-            .read<OrderListCubit>()
-            .getOrderList(1, 10, type: orderTypeHisotry);
+        context.read<OrderHistoryListCubit>().getOrderList(1, 10);
         context.router.push(const HistoryOrderNavigationView());
       },
     );

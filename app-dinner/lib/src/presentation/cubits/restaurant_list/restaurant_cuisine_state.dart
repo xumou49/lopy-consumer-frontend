@@ -30,3 +30,7 @@ class RestaurantCuisineFailed extends RestaurantCuisineState {
 class RestaurantCuisineEmpty extends RestaurantCuisineState {
   const RestaurantCuisineEmpty({super.error});
 }
+
+class RestaurantFavEmpty extends RestaurantCuisineState {
+  const RestaurantFavEmpty({super.error});
+}

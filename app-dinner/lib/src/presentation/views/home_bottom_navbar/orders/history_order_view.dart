@@ -1,4 +1,5 @@
 import 'package:Lopy/src/domain/models/order.dart';
+import 'package:Lopy/src/presentation/cubits/order/order_history_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_item_list_cubit.dart';
 import 'package:Lopy/src/presentation/cubits/order/order_list_cubit.dart';
 import 'package:Lopy/src/presentation/views/home_bottom_navbar/orders/order_detail_view.dart';
@@ -18,12 +19,13 @@ class HistoryOrderView extends StatelessWidget {
     return Scaffold(
         appBar: const GradientAppBar(title: "History Orders"),
         body: BlocBuilder(
-            bloc: BlocProvider.of<OrderListCubit>(context),
+            bloc: BlocProvider.of<OrderHistoryListCubit>(context),
             builder: (BuildContext context, state) {
-              if (state is OrderListSuccess && state.orders.isNotEmpty) {
+              if (state is OrderHistoryListSuccess) {
                 return _OrderHistoryOrderView(orders: state.orders);
+              } else {
+                return const Center( child: CircularProgressIndicator());
               }
-              return const Text("Order Data Is Empty");
             }));
   }
 }
@@ -112,7 +114,7 @@ class _OrderHistoryOrderViewState extends State<_OrderHistoryOrderView> {
   Widget build(BuildContext context) {
     List<Order> orders = getOrderData();
     return Padding(
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         child: Column(children: [
           Container(
             margin: const EdgeInsets.fromLTRB(0, 16, 0, 16),

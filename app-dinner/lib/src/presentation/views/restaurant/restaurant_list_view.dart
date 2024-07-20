@@ -16,9 +16,10 @@ import '../../widgets/restaurant_widget.dart';
 class RestaurantListView extends HookWidget {
   final String cuisine;
   final List<int> idList;
+  final String action;
 
   const RestaurantListView(
-      {Key? key, this.cuisine = "", this.idList = const []})
+      {Key? key, this.cuisine = "", this.action = "", this.idList = const []})
       : super(key: key);
 
   @override
@@ -28,7 +29,7 @@ class RestaurantListView extends HookWidget {
     final scrollController = useScrollController();
     useEffect(() {
       remoteRestaurantCuisineCubit.getRestaurantList(
-          cuisine: cuisine, idList: idList);
+          cuisine: cuisine, idList: idList, action: action);
       return scrollController.dispose;
     }, const []);
 
@@ -54,6 +55,12 @@ class RestaurantListView extends HookWidget {
                       title: "No Results",
                       subtitle:
                           "We cannot find the restaurants with given cuisine.\n Try different cuisine."));
+            case RestaurantFavEmpty:
+              return Center(
+                  child: EmptyResultWidget(
+                      title: "No Results",
+                      subtitle:
+                          "You have not added any restaurants to your favorite list."));
             case RestaurantCuisineLoading:
               return const Center(
                 child: CupertinoActivityIndicator(),

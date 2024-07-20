@@ -4,6 +4,7 @@ class RestaurantListRequest {
   final bool promotionSearch;
   final String cuisine;
   final String name;
+  final String action;
   final List<int> idList;
 
   RestaurantListRequest({
@@ -11,6 +12,7 @@ class RestaurantListRequest {
     this.pageSize = 4,
     this.promotionSearch = false,
     this.cuisine = "",
+    this.action = "",
     this.name = "",
     this.idList = const [],
   });
@@ -21,7 +23,8 @@ class RestaurantListRequest {
       'promotionSearch': promotionSearch,
       'cuisine': cuisine,
       'name': name,
-      'idList': idList
+      'idList': idList,
+      'action': action,
     };
   }
 
@@ -32,7 +35,8 @@ class RestaurantListRequest {
       'promotionSearch': promotionSearch,
       'cuisine': cuisine,
       'name': name,
-      'idList': idList
+      'idList': idList,
+      'action': action,
     };
   }
 }

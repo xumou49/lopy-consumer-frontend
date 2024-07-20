@@ -294,6 +294,7 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
                 // Check if the current route is already SearchView
                 if (router.current.name != "SearchView") {
                   router.push(const SearchNavigationView());
+                  focusNode.unfocus(disposition: UnfocusDisposition.scope);
                 }
               },
               onSubmitted: widget.onSubmitted,
@@ -320,7 +321,8 @@ class _AutocompleteSearchListState extends State<AutocompleteSearchList> {
             IconButton(
                 onPressed: () async {
                   await _storageService.getFavRestaurants().then((value) =>
-                      context.router.push(RestaurantListView(idList: value)));
+                      context.router.push(RestaurantListView(
+                          idList: value, action: "fav-list")));
                 },
                 icon: Icon(
                   Icons.favorite,
